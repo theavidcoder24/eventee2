@@ -1,0 +1,39 @@
+<h2>Help Document</h2>
+<h4>Manually Install Project</h4>
+Clone the repository onto the your local machine and start your web server, whether it be WAMP or MAMP.
+Create a new databse in your database software of choice e.g. MongoDB or MySQL phpmyadmin, name the database "eventee" then import the SQL file that contains all teh database tables and data.
+
+<h4>Turn on Web Server</h4>
+<p>In the terminal, run npm start to start the build server. To start the production server you must type in "npm run build" to the git bash command line. Follow the node instructions to set up system and server. 
+You can then follow it with "npm start"</p>
+
+<h4>Navigating the Application</h4>
+<p>There are 10 key functions within the app:</p>
+<ol>1. Register - The unregistered user will be able to input their details in the form that will show itself once the user clicks "Register"
+2. Login - by clicking the icon in the top right corner the user will be able to input their details and login
+3. Is Logged In - because of how this application is expected to be utilized the application can be utilized by both logged in and non-logged in users, although a few functions are limited to users who are logged in.
+4. Logout – located in modal that triggers from buttons in both the side nav and welcome modal post login
+5. View User Profile – located in modal that will trigger when user clicks on the "view Profile" link in the navigation side bar
+6. Update User Profile Details – located in modal that triggers from the user havig already opened the view user profile modal which will give them a chance to change their user details.
+7. Display User Events - once user is logged in the events they are signed up for will appear in table format when the "Display Events" button is pressed on the homepage
+8. Create Events - create user events and define the event category
+9. Delete Events - delete the user events thus removing them from attending
+10. Update Event Details - update the user's event details</ol>
+
+<h4>API Testing</h4>
+<p>In the root of the project directory there is a folder called "debug" which contains the script file that contains the necessary test scripts for all the API calls</p>
+
+<h4>Information about the Backend</h4>
+
+<h5>API</h5>
+For this application, I utilized the base case system to make the principle API of the system. This document is the ws.php record and is situated in the SRC organizer of the application information. This document contains the principle capacities for the activities of the application and is used by both the backend and the frontend of the interface to make usefulness. There are two valuable recorded to the ws.php document which is the db.php and the sessions.php documents the two of which are essential for usefulness. The DB document contains all the SQL demands that really cooperate with and adjust the database for the application.
+
+<h5>Security</h5>
+All clients on the framework that are enlisted clients use PHP encryption to hash the passwords in the information base and guarantee their security. 
+The administrator panel is ensured utilizing a type of IP whitelisting that will hide all open fields from show and will send the user back to the front finish of the application if their IP doesn't coordinate the IP coded into the framework. 
+If a user breaks through to the backend by utilizing a similar IP, they will be stopped from getting to the backend if they don't have the consent of the "administrator" alloted to the account within the database.
+
+<h4>Validation in Forms</h5>
+The form validation on the administrator panel is provided by the React Form Validation feature built-in. It utilized the set state function to test whether data sources meet the set regex rules and in the event that it doesn't the code won't run, and a blunder will show up.
+
+
