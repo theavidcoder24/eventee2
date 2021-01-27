@@ -1,0 +1,25 @@
+/* === Generic Styling === */
+:root {
+    --primary-color: #0d47a1;
+    --secondary-color: #311b92;
+    --third-color: #6a16d6;
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+/* === ID & Class Specifc Styling === */
+
+.brand-logo {
+    height: 2.4em;
+    width: 2.1em;
+}
+
+#menu_icon {
+    font-size: 3.2em;
+  padding-left: 0.1em;
+}
+
+.material-icons {
+    color: black;
+    font-size: 28px;
+}

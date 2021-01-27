@@ -1,0 +1,13 @@
+{
+    "name": "Eventee",
+    "short_name": "Eventee",
+    "description": "An event planning web app that allows the user to search for events nearby using the user’s location and import events from Facebook.",
+    "lang": "en",
+    "start_url": "index.html",
+    "display": "fullscreen",
+    "scope": "/",
+    "icons": [{
+        "src": "src/images/Eventee Calendar transparent no text.png",
+        "type": "image/png"
+    }]
+}
