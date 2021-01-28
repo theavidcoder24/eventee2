@@ -7,11 +7,26 @@
 }
 
 nav a.sidenav-trigger {
+    cursor: pointer;
     display: block;
+}
+
+a {
+    cursor: pointer;
 }
 
 
 /* === ID & Class Specifc Styling === */
+/* Alert Messages */
+#successmessage {
+    display: none;
+    background-color: #4caf50;
+}
+
+#errormessage {
+    display: none;
+    background-color: #ff0e0e;
+}
 
 .brand-logo {
     height: 2.4em;
@@ -19,6 +34,7 @@ nav a.sidenav-trigger {
 }
 
 #menu_icon {
+    cursor: pointer;
     font-size: 3.2em;
     padding-left: 0.1em;
 }
@@ -31,4 +47,8 @@ nav a.sidenav-trigger {
 .material-icons {
     color: black;
     font-size: 28px;
+}
+
+.menu_link {
+    display: none;
 }
