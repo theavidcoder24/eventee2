@@ -5,7 +5,6 @@ function preventDefault() {
   return false;
 }
 
-
 /* == Preloader == */
 function loadPage() {
   // document.getElementById("mainContainer").style.display = 'none';
@@ -54,6 +53,7 @@ function hideAll() {
   displayHome();
   hideLogin();
   hideRegister();
+  hideEditProf();
   hideSettings();
   hideFAQ();
 }
@@ -74,6 +74,15 @@ function displayRegister() {
 
 function hideRegister() {
   document.getElementById("register").style.display = "none";
+}
+
+function displayEditProf() {
+  document.getElementById("edit_prof").style.display = "block";
+  hideLogin();
+}
+
+function hideEditProf() {
+  document.getElementById("edit_prof").style.display = "none";
 }
 
 function displaySettings() {
@@ -105,7 +114,7 @@ window.addEventListener("load", function () {
     document.body.style.color = "white";
     // event.preventDefault();
     // Hamburger Menu Restyle
-    document.getElementById("menu-icon").style.color = "white";
+    document.getElementById("menu_icon").style.color = "white";
     // Navigation UL Tag Restyle
     document.getElementById("slide-out").style.backgroundColor = "#474747";
   } else {
@@ -114,11 +123,12 @@ window.addEventListener("load", function () {
     document.body.style.backgroundColor = "white";
     document.body.style.color = "black";
     // Hamburger Menu Default
-    document.getElementById("menu-icon").style.color = "black";
+    document.getElementById("menu_icon").style.color = "black";
     // Navigation UL Tag Default
     document.getElementById("slide-out").style.backgroundColor = "#fff";
   }
 })
+
 // Store values in localStorgae
 function switchBG(checkBG) {
   if (checkBG.checked == true) {
@@ -127,7 +137,7 @@ function switchBG(checkBG) {
     document.body.style.backgroundColor = "#050505";
     document.body.style.color = "white";
     // Hamburger Menu Restyle
-    document.getElementById("menu-icon").style.color = "white";
+    document.getElementById("menu_icon").style.color = "white";
     // Navigation UL Tag Restyle
     document.getElementById("slide-out").style.backgroundColor = "#474747";
     localStorage.setItem("darktheme", "true");
@@ -136,7 +146,7 @@ function switchBG(checkBG) {
     document.body.style.backgroundColor = "white";
     document.body.style.color = "black";
     // Hamburger Menu Default
-    document.getElementById("menu-icon").style.color = "black";
+    document.getElementById("menu_icon").style.color = "black";
     // Navigation UL Tag Default
     document.getElementById("slide-out").style.backgroundColor = "#fff";
     localStorage.setItem("darktheme", "false");
@@ -153,3 +163,70 @@ $(document).ready(function () {
   $('.modal').modal();
   // closeOnClick: true;
 });
+
+/* Select */
+$(document).ready(function () {
+  $('select').formSelect();
+});
+
+/* Chip */
+var chip = {
+  tag: 'chip content',
+  image: '', //optional
+};
+
+
+/* ==== Get User Location ==== */
+// Note: This example requires that you consent to location sharing when
+// prompted by your browser. If you see the error "The Geolocation service
+// failed.", it means you probably did not give permission for the browser to
+// locate you.
+let map, infoWindow;
+
+function initMap() {
+  map = new google.maps.Map(document.getElementById("map"), {
+    center: {
+      lat: -34.397,
+      lng: 150.644
+    },
+    zoom: 6,
+  });
+  infoWindow = new google.maps.InfoWindow();
+  const locationButton = document.createElement("button");
+  locationButton.textContent = "Pan to Current Location";
+  locationButton.classList.add("custom-map-control-button");
+  map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
+  locationButton.addEventListener("click", () => {
+    // Try HTML5 geolocation.
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+          infoWindow.setPosition(pos);
+          infoWindow.setContent("Location found.");
+          infoWindow.open(map);
+          map.setCenter(pos);
+        },
+        () => {
+          handleLocationError(true, infoWindow, map.getCenter());
+        }
+      );
+    } else {
+      // Browser doesn't support Geolocation
+      handleLocationError(false, infoWindow, map.getCenter());
+    }
+  });
+}
+
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+  infoWindow.setPosition(pos);
+  infoWindow.setContent(
+    browserHasGeolocation ?
+      "Error: The Geolocation service failed." :
+      "Error: Your browser doesn't support geolocation."
+  );
+  infoWindow.open(map);
+}

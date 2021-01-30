@@ -34,6 +34,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 
+    <!-- Google Maps JavaScript API -->
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC38Ty6VW0-y0yw2GQPnBH7ssKvOp8imE4&callback=initMap">
+    </script>
+
     <!-- Custom Links -->
     <link rel="stylesheet" href="src/css/style.css">
     <script src="src/js/script.js"></script>
@@ -63,14 +68,16 @@
             </li>
             <li><a href="#home" onclick="hideAll()" class="sidenav-close"><i class="material-icons">home</i>Home</a>
             </li>
-            <li><a href="#view_prof" class="sidenav-close"><i class="material-icons">groups</i>View Profile</a></li>
+            <li><a href="#edit_prof" onclick="displayEditProf(); hideHome()" class="sidenav-close"><i
+                        class="material-icons">groups</i>Edit Profile</a></li>
             <li><a href="#my_events" class="sidenav-close"><i class="material-icons">today</i>My Events</a></li>
             <li><a href="#create_event" class="sidenav-close"><i class="material-icons">add_circle</i>Create Event</a>
             </li>
             <li><a href="#community" class="sidenav-close"><i class="material-icons">forum</i>Community</a></li>
             <li><a href="#settings" onclick="displaySettings(); hideHome()" class="sidenav-close"><i
                         class="material-icons">settings</i>Settings</a></li>
-            <li><a href="#faq" class="sidenav-close"><i class="material-icons">contact_support</i>Eventee FAQ</a></li>
+            <li><a href="#faq" onclick="displayFAQ(); hideHome()" class="sidenav-close"><i
+                        class="material-icons">contact_support</i>Eventee FAQ</a></li>
             <li>
                 <div class="divider"></div>
             </li>
@@ -89,16 +96,28 @@
                 Success!!
             </div>
         </div>
-        <!-- Preloader -->
-        <div class="loadprogress indigo darken-4" style="width: 40%">
-            <div class="runningbar indigo lighten-1"></div>
-        </div>
 
         <!-- Home Section -->
         <div id="home">
+            <!-- Preloader -->
+            <div class="loadprogress indigo darken-4" style="width: 40%">
+                <div class="runningbar indigo lighten-1"></div>
+            </div>
+            <br>
             <div class="row">
                 <div class="col s12">
                     <h4 class="center">Browse Events</h4>
+                    <!-- Filter Events -->
+                    <select class="icons">
+                        <option value="Auto" disabled selected>Choose your option</option>
+                        <option value="Business" data-icon="images/sample-1.jpg">example 1</option>
+                        <option value="Charity" data-icon="images/office.jpg">example 2</option>
+                        <option value="" data-icon="images/yuna.jpg">example 3</option>
+                    </select>
+                    <label>Images in select</label>
+                    <!--The div element for the map -->
+                    <div id="map"></div>
+                    <br>
                     <div class="card small">
                         <div class="card-image waves-effect waves-block waves-light">
                             <img class="activator" src="src/images/business_event.jpg">
@@ -106,12 +125,21 @@
                         <div class="card-content">
                             <span class="card-title activator grey-text text-darken-4">2021 Conference<i
                                     class="material-icons right">more_vert</i></span>
-                            <p><a href="#">This is a link</a></p>
+                            <div class="chip">
+                                Business
+                                <i class="close material-icons">close</i>
+                            </div>
                         </div>
                         <div class="card-reveal">
                             <span class="card-title grey-text text-darken-4">2021 Conference<i
                                     class="material-icons right">close</i></span>
                             <p>Here is some more information about this product that is only revealed once clicked on.
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt officia magnam impedit
+                                fugiat similique dolorem totam quisquam, laborum velit repellat delectus quibusdam,
+                                neque eveniet recusandae quod, asperiores tempore facere soluta. Lorem ipsum dolor sit
+                                amet, consectetur adipisicing elit. Atque eum aliquam ea aut laboriosam modi eos ut
+                                culpa, laudantium aliquid repudiandae? A accusamus dicta unde sunt voluptate alias illo
+                                pariatur.
                             </p>
                         </div>
                     </div>
@@ -126,12 +154,21 @@
                         <div class="card-content">
                             <span class="card-title activator grey-text text-darken-4">South Bank Meetup<i
                                     class="material-icons right">more_vert</i></span>
-                            <p><a href="#">This is a link</a></p>
+                            <div class="chip">
+                                Tag
+                                <i class="close material-icons">close</i>
+                            </div>
                         </div>
                         <div class="card-reveal">
                             <span class="card-title grey-text text-darken-4">South Bank Meetup<i
                                     class="material-icons right">close</i></span>
                             <p>Here is some more information about this product that is only revealed once clicked on.
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt officia magnam impedit
+                                fugiat similique dolorem totam quisquam, laborum velit repellat delectus quibusdam,
+                                neque eveniet recusandae quod, asperiores tempore facere soluta. Lorem ipsum dolor sit
+                                amet, consectetur adipisicing elit. Atque eum aliquam ea aut laboriosam modi eos ut
+                                culpa, laudantium aliquid repudiandae? A accusamus dicta unde sunt voluptate alias illo
+                                pariatur.
                             </p>
                         </div>
                     </div>
@@ -146,12 +183,21 @@
                         <div class="card-content">
                             <span class="card-title activator grey-text text-darken-4">Concert Title<i
                                     class="material-icons right">more_vert</i></span>
-                            <p><a href="#">This is a link</a></p>
+                            <div class="chip">
+                                Tag
+                                <i class="close material-icons">close</i>
+                            </div>
                         </div>
                         <div class="card-reveal">
                             <span class="card-title grey-text text-darken-4">Concert Title<i
                                     class="material-icons right">close</i></span>
                             <p>Here is some more information about this product that is only revealed once clicked on.
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt officia magnam impedit
+                                fugiat similique dolorem totam quisquam, laborum velit repellat delectus quibusdam,
+                                neque eveniet recusandae quod, asperiores tempore facere soluta. Lorem ipsum dolor sit
+                                amet, consectetur adipisicing elit. Atque eum aliquam ea aut laboriosam modi eos ut
+                                culpa, laudantium aliquid repudiandae? A accusamus dicta unde sunt voluptate alias illo
+                                pariatur.
                             </p>
                         </div>
                     </div>
@@ -160,117 +206,202 @@
         </div>
 
         <!---- Login Section ---->
-        <!-- Preloader -->
-        <div class="loadprogress indigo darken-4" style="width: 40%">
-            <div class="runningbar indigo lighten-1"></div>
-        </div>
         <div id="login_container" class="menu_link">
+            <!-- Preloader -->
+            <div class="loadprogress indigo darken-4" style="width: 40%">
+                <div class="runningbar indigo lighten-1"></div>
+            </div>
+            <br>
             <div class="row">
-                <div class="col s12">
-                    <div class="center container">
-                        <h5>Login Form</h5>
-                        <form method="POST">
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <i class="material-icons prefix">email</i>
-                                    <input type="text" id="log_email" name="log_email" placeholder="Email"
-                                        class="validate" title="Email must have @ and more than 2 characters" required>
-                                    <!-- pattern="[a-zA-Z' ]{2,}" -->
-                                    <span class="helper-text" data-error="Please Enter Valid Email!"
-                                        data-success="Correct"></span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <i class="material-icons prefix">vpn_key</i>
-                                    <input type="password" id="log_pass" name="log_pass" placeholder="Password"
-                                        class="validate" title="Password must be more than 2 characters long" required>
-                                    <span class="helper-text" data-error="Please Enter Valid Password!"
-                                        data-success="Correct"></span>
-                                </div>
-                            </div>
-                            <div class="left">
-                                <p>
-                                    <label>
-                                        <input type="checkbox" class="filled-in" />
-                                        <span>Remember Me</span>
-                                    </label>
-                                </p>
-                            </div>
-                            <div class="login-methods">
-                                <div class="fb-login-button" data-size="medium" data-button-type="login_with"
-                                    data-layout="rounded" data-auto-logout-link="false" data-use-continue-as="false"
-                                    data-width=""></div>
-                                <i class="material-icons prefix">groups</i>
-                                <a href="#register" onclick="displayRegister()">Continue as Guest</a>
-                            </div>
-                            <input type="hidden" name="action" id="login" value="login">
-                            <br>
-                            <button class="btn waves-effect waves-light" type="submit" name="action">Login</button>
-                        </form>
-                    </div>
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">email</i>
+                    <input id="email" type="email" class="validate" placeholder="Email">
+                    <span class="helper-text" data-error="Please enter a valid email" data-success="Correct"></span>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <!-- Registeration Section -->
-    <!-- Preloader -->
-    <div class="loadprogress indigo darken-4" style="width: 40%">
-        <div class="runningbar indigo lighten-1"></div>
-    </div>
-    <div id="register" class="menu_link">
-        <div class="row">
-            <div class="col s12">
-                <h5>User Details</h5>
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">vpn_key</i>
+                    <input id="password" type="password" class="validate" placeholder="Password">
+                    <span class="helper-text" data-error="Please enter a valid password" data-success="Correct"
+                        max="20"></span>
+                </div>
             </div>
-        </div>
-    </div>
-
-    <!---- Settings Section  ---->
-    <div id="settings" class="menu_link">
-        <!-- Preloader -->
-        <div class="loadprogress indigo darken-4" style="width: 40%">
-            <div class="runningbar indigo lighten-1"></div>
-        </div>
-        <div class="row">
-            <div class="col s12">
-                <h4>App Settings</h4>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores minus repellat debitis
-                    perspiciatis excepturi voluptatem tempora voluptas in nisi est ea dolorem, ipsa voluptates
-                    voluptatibus doloremque dolorum, repellendus esse. Aspernatur!</p>
-                <!-- Dark Mode Toggle -->
+            <div class="left">
                 <p>
                     <label>
-                        <input type="checkbox" class="filled-in" id="checkBG" onchange="switchBG(this)">
-                        <span>Dark Mode/Light Mode</span>
+                        <input type="checkbox" class="filled-in" />
+                        <span>Remember Me</span>
                     </label>
                 </p>
             </div>
+            <br>
+            <div class="login-methods">
+                <div class="fb-login-button" data-size="medium" data-button-type="login_with" data-layout="rounded"
+                    data-auto-logout-link="false" data-use-continue-as="false" data-width=""></div>
+                <br>
+                <i class="material-icons prefix">groups</i>
+                <a href="#register" onclick="displayRegister()">Continue as Guest</a>
+                <br>
+            </div>
+            <input type="hidden" name="action" id="login" value="login">
+            <br>
+            <button class="btn waves-effect waves-light" type="submit" name="action">Login</button>
+            </form>
         </div>
-    </div>
 
-    <div id="faq">
-        <div class="row">
-            <div class="col s12">
-                <h4>Frequently Asked Questions</h4>
-                <h6>For more answers visit - <a href="htmlHelpPage.html">Help Page</a></h6>
-                <!-- Questions -->
-                <h6><strong>❓ What are event categories?</strong></h6>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum quidem eaque molestias
-                    qui dicta,
-                    veniam natus nulla et voluptatibus porro quos enim, ipsa nam quod animi delectus nobis fuga
-                    deleniti!</p>
-                <h6><strong>❓ How do you see specific events on the map?</strong></h6>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, doloribus natus. Corporis
-                    deleniti
-                    consequatur illum laboriosam corrupti ad quas sint quia aspernatur. Provident, cumque! Quas
-                    aperiam
-                    sapiente nulla quisquam omnis. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Nihil
-                    aliquam omnis quibusdam illum eveniet deserunt, eaque odio. Quas, harum distinctio
-                    perspiciatis amet
-                    aspernatur quisquam repudiandae, commodi reiciendis quia pariatur tempore.</p>
+        <!-- Registeration Section -->
+        <div id="register" class="menu_link">
+            <!-- Preloader -->
+            <div class="loadprogress indigo darken-4" style="width: 40%">
+                <div class="runningbar indigo lighten-1"></div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col s12">
+                    <h5>User Details</h5>
+                    <form action="api/ws.php" method="POST" onclick="return preventDefault()" novalidate>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">account_circle</i>
+                                <input id="icon_prefix" type="text" class="validate" placeholder="Full Name">
+                                <span class="helper-text" data-error="Please enter a valid name"
+                                    data-success="Correct"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">phone</i>
+                                <input id="icon_telephone" type="tel" class="validate" placeholder="Phone Number">
+                                <span class="helper-text" data-error="Please enter a valid phone number"
+                                    data-success="Correct"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">email</i>
+                                <input id="email" type="email" class="validate" placeholder="Email">
+                                <span class="helper-text" data-error="Please enter a valid email"
+                                    data-success="Correct"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">vpn_key</i>
+                                <input id="password" type="password" class="validate" placeholder="Password">
+                                <span class="helper-text" data-error="Please enter a valid password"
+                                    data-success="Correct" max="20"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">vpn_key</i>
+                                <input id="confirm_password" type="password" class="validate"
+                                    placeholder="Confirm Password">
+                                <span class="helper-text" data-error="Please enter a valid password"
+                                    data-success="Correct" max="20"></span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="edit_prof" class="menu_link">
+            <br>
+            <div class="row">
+                <div class="col s12">
+                    <h5>Update Profile</h5>
+                    <img id="prof_pic" class="circle" src="src/images/blank-profile.png">
+                    <h6>User Details</h6>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">account_circle</i>
+                            <input id="email" type="email" class="validate" placeholder="Name">
+                            <span class="helper-text" data-error="Please enter a valid email"
+                                data-success="Correct"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">email</i>
+                            <input id="email" type="email" class="validate" placeholder="Email">
+                            <span class="helper-text" data-error="Please enter a valid email"
+                                data-success="Correct"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">vpn_key</i>
+                            <input id="password" type="password" class="validate" placeholder="Password">
+                            <span class="helper-text" data-error="Please enter a valid password" data-success="Correct"
+                                max="20"></span>
+                        </div>
+                    </div>
+                    <br>
+                    <div id="checkbox">
+                        <p>
+                            <label>
+                                <input type="checkbox" id="check" onchange="setLocal(this)" class="filled-in" />
+                                <span>Save</span>
+                            </label>
+                        </p>
+                    </div>
+                    <br>
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!---- Settings Section  ---->
+        <div id="settings" class="menu_link">
+            <!-- Preloader -->
+            <div class="loadprogress indigo darken-4" style="width: 40%">
+                <div class="runningbar indigo lighten-1"></div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col s12">
+                    <h4>App Settings</h4>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores minus repellat debitis
+                        perspiciatis excepturi voluptatem tempora voluptas in nisi est ea dolorem, ipsa voluptates
+                        voluptatibus doloremque dolorum, repellendus esse. Aspernatur!</p>
+                    <!-- Dark Mode Toggle -->
+                    <p>
+                        <label>
+                            <input type="checkbox" class="filled-in" id="checkBG" onchange="switchBG(this)">
+                            <span>Dark Mode/Light Mode</span>
+                        </label>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div id="faq" class="menu_link">
+            <br>
+            <div class="row">
+                <div class="col s12">
+                    <h4>Frequently Asked Questions</h4>
+                    <h6>For more answers visit - <a href="htmlHelpPage.html">Help Page</a></h6>
+                    <!-- Questions -->
+                    <h6><strong>❓ What are event categories?</strong></h6>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum quidem eaque molestias
+                        qui dicta,
+                        veniam natus nulla et voluptatibus porro quos enim, ipsa nam quod animi delectus nobis fuga
+                        deleniti!</p>
+                    <h6><strong>❓ How do you see specific events on the map?</strong></h6>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, doloribus natus. Corporis
+                        deleniti
+                        consequatur illum laboriosam corrupti ad quas sint quia aspernatur. Provident, cumque! Quas
+                        aperiam
+                        sapiente nulla quisquam omnis. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                        Nihil
+                        aliquam omnis quibusdam illum eveniet deserunt, eaque odio. Quas, harum distinctio
+                        perspiciatis amet
+                        aspernatur quisquam repudiandae, commodi reiciendis quia pariatur tempore.</p>
+                </div>
             </div>
         </div>
     </div>
