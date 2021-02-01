@@ -24,7 +24,7 @@ button {
 /* Alert Messages */
 #successmessage {
     display: none;
-    background-color: #4caf50;
+    background-color: #38af3c;
 }
 
 #errormessage {
@@ -55,6 +55,10 @@ button {
 
 .menu_link {
     display: none;
+}
+
+.btn-floating.btn-large.halfway-fab {
+    bottom: 0.8em;
 }
 
 /* = Google Maps Styling = */

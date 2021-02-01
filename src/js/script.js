@@ -7,15 +7,15 @@ function preventDefault() {
 
 /* == Preloader == */
 function loadPage() {
-  // document.getElementById("mainContainer").style.display = 'none';
+  // document.getElementById("main_container").style.display = 'none';
   document.querySelector(".loadprogress").classList.add('progress');
   document.querySelector(".runningbar").classList.add('indeterminate');
 
   setTimeout(function () {
     document.querySelector(".loadprogress").classList.remove('progress');
     document.querySelector(".runningbar").classList.remove('indeterminate');
-    // document.getElementById("mainContainer").style.display = 'block';
-    // document.getElementById("mainContainer").style.visibility = 'visible';
+    document.getElementById("main_container").style.display = 'block';
+    document.getElementById("main_container").style.visibility = 'visible';
   }, 500);
 }
 
@@ -54,6 +54,9 @@ function hideAll() {
   hideLogin();
   hideRegister();
   hideEditProf();
+  hideMyEvents();
+  hideCreateEvent();
+  hideCommunity();
   hideSettings();
   hideFAQ();
 }
@@ -68,12 +71,12 @@ function hideLogin() {
 }
 
 function displayRegister() {
-  document.getElementById("register").style.display = "block";
+  document.getElementById("register_container").style.display = "block";
   hideLogin();
 }
 
 function hideRegister() {
-  document.getElementById("register").style.display = "none";
+  document.getElementById("register_container").style.display = "none";
 }
 
 function displayEditProf() {
@@ -83,6 +86,33 @@ function displayEditProf() {
 
 function hideEditProf() {
   document.getElementById("edit_prof").style.display = "none";
+}
+
+function displayMyEvents() {
+  document.getElementById("my_events").style.display = "block";
+  hideLogin();
+}
+
+function hideMyEvents() {
+  document.getElementById("my_events").style.display = "none";
+}
+
+function displayCreateEvent() {
+  document.getElementById("create_event").style.display = "block";
+  hideLogin();
+}
+
+function hideCreateEvent() {
+  document.getElementById("create_event").style.display = "none";
+}
+
+function displayCommunity() {
+  document.getElementById("community").style.display = "block";
+  hideLogin();
+}
+
+function hideCommunity() {
+  document.getElementById("community").style.display = "none";
 }
 
 function displaySettings() {
@@ -115,8 +145,10 @@ window.addEventListener("load", function () {
     // event.preventDefault();
     // Hamburger Menu Restyle
     document.getElementById("menu_icon").style.color = "white";
+    document.getElementById("login_icon").style.color = "white";
     // Navigation UL Tag Restyle
-    document.getElementById("slide-out").style.backgroundColor = "#474747";
+    document.getElementById("slide-out").style.backgroundColor = "#121212";
+    document.getElementById("slide-out").style.color = "white";
   } else {
     checkBG.checked = false;
     // Body Default
@@ -124,6 +156,8 @@ window.addEventListener("load", function () {
     document.body.style.color = "black";
     // Hamburger Menu Default
     document.getElementById("menu_icon").style.color = "black";
+    document.getElementById("login_icon").style.color = "black";
+
     // Navigation UL Tag Default
     document.getElementById("slide-out").style.backgroundColor = "#fff";
   }
@@ -138,8 +172,9 @@ function switchBG(checkBG) {
     document.body.style.color = "white";
     // Hamburger Menu Restyle
     document.getElementById("menu_icon").style.color = "white";
+    document.getElementById("login_icon").style.color = "white";
     // Navigation UL Tag Restyle
-    document.getElementById("slide-out").style.backgroundColor = "#474747";
+    document.getElementById("slide-out").style.backgroundColor = "#121212";
     localStorage.setItem("darktheme", "true");
   } else {
     // Body Default
@@ -147,6 +182,7 @@ function switchBG(checkBG) {
     document.body.style.color = "black";
     // Hamburger Menu Default
     document.getElementById("menu_icon").style.color = "black";
+    document.getElementById("login_icon").style.color = "black";
     // Navigation UL Tag Default
     document.getElementById("slide-out").style.backgroundColor = "#fff";
     localStorage.setItem("darktheme", "false");
@@ -164,12 +200,12 @@ $(document).ready(function () {
   // closeOnClick: true;
 });
 
-/* Select */
+/* == Select == */
 $(document).ready(function () {
   $('select').formSelect();
 });
 
-/* Chip */
+/* == Chip == */
 var chip = {
   tag: 'chip content',
   image: '', //optional
