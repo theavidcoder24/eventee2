@@ -159,7 +159,7 @@ window.addEventListener("load", function () {
     document.getElementById("login_icon").style.color = "black";
 
     // Navigation UL Tag Default
-    document.getElementById("slide-out").style.backgroundColor = "#fff";
+    document.getElementById("slide-out").style.backgroundColor = "white";
   }
 })
 
@@ -184,7 +184,7 @@ function switchBG(checkBG) {
     document.getElementById("menu_icon").style.color = "black";
     document.getElementById("login_icon").style.color = "black";
     // Navigation UL Tag Default
-    document.getElementById("slide-out").style.backgroundColor = "#fff";
+    document.getElementById("slide-out").style.backgroundColor = "white";
     localStorage.setItem("darktheme", "false");
   }
 }
@@ -204,6 +204,7 @@ $(document).ready(function () {
 $(document).ready(function () {
   $('select').formSelect();
 });
+
 
 /* == Chip == */
 var chip = {
