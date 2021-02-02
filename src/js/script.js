@@ -205,6 +205,11 @@ $(document).ready(function () {
   $('select').formSelect();
 });
 
+/* == Date Picker == */
+$(document).ready(function () {
+  $('.datepicker').datepicker();
+});
+
 
 /* == Chip == */
 var chip = {
