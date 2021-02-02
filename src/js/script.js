@@ -198,8 +198,7 @@ window.addEventListener("load", function () {
     document.getElementById("menu_icon").style.color = "white";
     document.getElementById("login_icon").style.color = "white";
     // Navigation UL Tag Restyle
-    document.getElementById("slide-out").style.backgroundColor = "#121212";
-    document.getElementById("slide-out").style.color = "white";
+    document.getElementById("slide-out").style.backgroundColor = "#4d4d4d";
   } else {
     checkBG.checked = false;
     // Body Default
@@ -225,7 +224,7 @@ function switchBG(checkBG) {
     document.getElementById("menu_icon").style.color = "white";
     document.getElementById("login_icon").style.color = "white";
     // Navigation UL Tag Restyle
-    document.getElementById("slide-out").style.backgroundColor = "#121212";
+    document.getElementById("slide-out").style.backgroundColor = "#4d4d4d";
     localStorage.setItem("darktheme", "true");
   } else {
     // Body Default
