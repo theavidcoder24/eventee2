@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="light-theme || dark-theme">
 
 <head>
     <meta charset="UTF-8">
@@ -285,20 +285,20 @@
                     data-auto-logout-link="false" data-use-continue-as="false" data-width=""></div>
             </div>
             <br>
-            <div class="right">
-                <i class="material-icons prefix">groups</i>
-                <a href="#home" onclick="displayHome()">Continue as Guest</a>
-            </div>
             <div class="center">
                 <p>Don't have an account?<a href="#register_container" onclick="displayRegister(); hideLogin()"
                         class="large">
                         Register</a>
                 </p>
             </div>
+            <div class="center">
+                <a href="#home" onclick="displayHome()">Continue as
+                    Guest</a>
+            </div>
             <br>
             <input type="hidden" name="action" id="login" value="login">
             <br>
-            <button class="btn waves-effect waves-light" type="submit" name="action">Login</button>
+            <button class="btn indigo waves-effect waves-light" type="submit" name="action">Login</button>
             </form>
         </div>
 
@@ -311,7 +311,7 @@
             <br>
             <div class="row">
                 <div class="col s12">
-                    <h5>User Details</h5>
+                    <h5 class="center">User Details</h5>
                     <form action="api/ws.php" method="POST" onclick="return preventDefault()" novalidate>
                         <div class="row">
                             <div class="input-field col s12">
@@ -353,11 +353,14 @@
                                     data-success="Correct" max="20"></span>
                             </div>
                         </div>
+                        <input type="hidden" name="action" value="register" id="register_user">
+                        <button class="btn indigo waves-effect waves-light" type="submit" name="regsiter">Join</button>
                     </form>
                 </div>
             </div>
         </div>
 
+        <!-- Edit Profile -->
         <div id="edit_prof" class="menu_link">
             <br>
             <div class="row">
@@ -416,6 +419,7 @@
             </div>
         </div>
 
+        <!-- Create Event Section -->
         <div id="create_event" class="menu_link">
             <!-- Preloader -->
             <div class="loadprogress indigo darken-4" style="width: 40%">
@@ -488,6 +492,7 @@
             </div>
         </div>
 
+        <!-- Community Section  -->
         <div id="community" class="menu_link">
             <!-- Preloader -->
             <div class="loadprogress indigo darken-4" style="width: 40%">
