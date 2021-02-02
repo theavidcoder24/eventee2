@@ -64,6 +64,13 @@ function hideAll() {
 function displayLogin() {
   document.getElementById("login_container").style.display = "block";
   hideHome();
+  hideRegister();
+  hideEditProf();
+  hideMyEvents();
+  hideCreateEvent();
+  hideCommunity();
+  hideSettings();
+  hideFAQ();
 }
 
 function hideLogin() {
@@ -73,6 +80,12 @@ function hideLogin() {
 function displayRegister() {
   document.getElementById("register_container").style.display = "block";
   hideLogin();
+  hideEditProf();
+  hideMyEvents();
+  hideCreateEvent();
+  hideCommunity();
+  hideSettings();
+  hideFAQ();
 }
 
 function hideRegister() {
@@ -82,6 +95,12 @@ function hideRegister() {
 function displayEditProf() {
   document.getElementById("edit_prof").style.display = "block";
   hideLogin();
+  hideRegister();
+  hideMyEvents();
+  hideCreateEvent();
+  hideCommunity();
+  hideSettings();
+  hideFAQ();
 }
 
 function hideEditProf() {
@@ -91,6 +110,12 @@ function hideEditProf() {
 function displayMyEvents() {
   document.getElementById("my_events").style.display = "block";
   hideLogin();
+  hideRegister();
+  hideEditProf();
+  hideMyEvents();
+  hideCommunity();
+  hideSettings();
+  hideFAQ();
 }
 
 function hideMyEvents() {
@@ -100,6 +125,12 @@ function hideMyEvents() {
 function displayCreateEvent() {
   document.getElementById("create_event").style.display = "block";
   hideLogin();
+  hideRegister();
+  hideEditProf();
+  hideMyEvents();
+  hideCommunity();
+  hideSettings();
+  hideFAQ();
 }
 
 function hideCreateEvent() {
@@ -109,6 +140,12 @@ function hideCreateEvent() {
 function displayCommunity() {
   document.getElementById("community").style.display = "block";
   hideLogin();
+  hideRegister();
+  hideEditProf();
+  hideMyEvents();
+  hideCreateEvent();
+  hideSettings();
+  hideFAQ();
 }
 
 function hideCommunity() {
@@ -118,6 +155,13 @@ function hideCommunity() {
 function displaySettings() {
   document.getElementById("settings").style.display = "block";
   hideHome();
+  hideLogin();
+  hideRegister();
+  hideEditProf();
+  hideMyEvents();
+  hideCreateEvent();
+  hideCommunity();
+  hideFAQ();
 }
 
 function hideSettings() {
@@ -127,6 +171,13 @@ function hideSettings() {
 function displayFAQ() {
   document.getElementById("faq").style.display = "block";
   hideHome();
+  hideLogin();
+  hideRegister();
+  hideEditProf();
+  hideMyEvents();
+  hideCreateEvent();
+  hideCommunity();
+  hideSettings();
 }
 
 function hideFAQ() {
@@ -209,7 +260,6 @@ $(document).ready(function () {
 $(document).ready(function () {
   $('.datepicker').datepicker();
 });
-
 
 /* == Chip == */
 var chip = {
