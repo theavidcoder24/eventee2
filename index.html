@@ -276,14 +276,24 @@
                     </label>
                 </p>
             </div>
+            <div class="right">
+                <a href="#forgot_pass">Forgot Password?</a>
+            </div>
             <br>
             <div class="login-methods">
                 <div class="fb-login-button" data-size="medium" data-button-type="login_with" data-layout="rounded"
                     data-auto-logout-link="false" data-use-continue-as="false" data-width=""></div>
             </div>
+            <br>
             <div class="right">
                 <i class="material-icons prefix">groups</i>
-                <a href="#register_container" onclick="displayRegister()">Continue as Guest</a>
+                <a href="#home" onclick="displayHome()">Continue as Guest</a>
+            </div>
+            <div class="center">
+                <p>Don't have an account?<a href="#register_container" onclick="displayRegister(); hideLogin()"
+                        class="large">
+                        Register</a>
+                </p>
             </div>
             <br>
             <input type="hidden" name="action" id="login" value="login">
