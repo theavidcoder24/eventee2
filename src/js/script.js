@@ -256,9 +256,10 @@ $(document).ready(function () {
 });
 
 /* == Date Picker == */
-$(document).ready(function () {
+$(document).ready(function(){
   $('.datepicker').datepicker();
 });
+      
 
 /* == Chip == */
 var chip = {
