@@ -92,7 +92,7 @@
     <div class="container" id="main_container">
         <div id="errormessage" class="ui negative message">
             <div class="header">
-                Something's wrong
+                Wrong!
             </div>
         </div>
         <div id="successmessage" class="ui positive message">
@@ -354,6 +354,14 @@
         <!-- Edit Profile -->
         <div id="edit_prof" class="menu_link">
             <br>
+            <nav class="">
+                <div class="nav-wrapper">
+                    <div class="col s12">
+                        <a href="#home" class="breadcrumb" onclick="hideAll()">Home</a>
+                        <a href="#!" class="breadcrumb">Update Profile</a>
+                    </div>
+                </div>
+            </nav>
             <div class="row">
                 <div class="col s12">
                     <h5>Update Profile</h5>
@@ -388,7 +396,7 @@
                         </p>
                     </div>
                     <br>
-                    <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                    <button class="btn indigo waves-effect waves-light" type="submit" name="action">Submit
                         <i class="material-icons right">send</i>
                     </button>
                 </div>
@@ -444,7 +452,7 @@
                                         <span>Yellow</span>
                                     </label>
                                 </p>
-                                <span class="helper-text" data-error="Please enter a valid password"
+                                <span class="helper-text" data-error="Please enter a valid category"
                                     data-success="Correct" max="20"></span>
                             </div>
                             <div class="input-field col s12">
@@ -461,18 +469,18 @@
                             </div>
                             <div class="input-field col s12">
                                 <i class="material-icons prefix">date_range</i>
-                                <input id="event_date" type="datetime" class="validate" placeholder="Password">
-                                <span class="helper-text" data-error="Please enter a valid password"
-                                    data-success="Correct" max="20"></span>
+                                <input id="event_date" type="datetime" class="validate" placeholder="Event Date">
+                                <span class="helper-text" data-error="Please enter a valid date" data-success="Correct"
+                                    max="20"></span>
                             </div>
                             <div class="input-field col s12">
                                 <i class="material-icons prefix">schedule</i>
-                                <input id="event_time" type="password" class="validate" placeholder="Password">
-                                <span class="helper-text" data-error="Please enter a valid password"
-                                    data-success="Correct" max="20"></span>
+                                <input id="event_time" type="text" class="timepicker validate" placeholder="Event Time">
+                                <span class="helper-text" data-error="Please enter a valid time" data-success="Correct"
+                                    max="20"></span>
                             </div>
                             <input type="hidden" name="action" value="createEvents" id="createEvents">
-                            <button class="btn waves-effect waves-light" type="submit" name="action"
+                            <button class="btn indigo waves-effect waves-light" type="submit" name="action"
                                 onclick="closeModal(); M.toast({html: 'Event Created', classes: 'rounded'})">Create
                                 Event
                                 <i class="material-icons right">send</i>
