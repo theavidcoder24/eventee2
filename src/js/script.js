@@ -112,7 +112,6 @@ function displayMyEvents() {
   hideLogin();
   hideRegister();
   hideEditProf();
-  hideMyEvents();
   hideCommunity();
   hideSettings();
   hideFAQ();
@@ -256,10 +255,15 @@ $(document).ready(function () {
 });
 
 /* == Date Picker == */
-$(document).ready(function(){
+$(document).ready(function () {
   $('.datepicker').datepicker();
 });
-      
+
+/* == Time Picker == */
+$(document).ready(function () {
+  $('.timepicker').timepicker();
+});
+
 
 /* == Chip == */
 var chip = {
@@ -268,7 +272,17 @@ var chip = {
 };
 
 
-/* ==== Get User Location ==== */
+/* Maps */
+
+// let map;
+
+// function initMap() {
+//   map = new google.maps.Map(document.getElementById("map"), {
+//     center: { lat: -34.397, lng: 150.644 },
+//     zoom: 8,
+//   });
+// }
+
 // Note: This example requires that you consent to location sharing when
 // prompted by your browser. If you see the error "The Geolocation service
 // failed.", it means you probably did not give permission for the browser to
@@ -277,10 +291,7 @@ let map, infoWindow;
 
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
-    center: {
-      lat: -34.397,
-      lng: 150.644
-    },
+    center: { lat: -34.397, lng: 150.644 },
     zoom: 6,
   });
   infoWindow = new google.maps.InfoWindow();
@@ -316,9 +327,9 @@ function initMap() {
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.setPosition(pos);
   infoWindow.setContent(
-    browserHasGeolocation ?
-      "Error: The Geolocation service failed." :
-      "Error: Your browser doesn't support geolocation."
+    browserHasGeolocation
+      ? "Error: The Geolocation service failed."
+      : "Error: Your browser doesn't support geolocation."
   );
   infoWindow.open(map);
 }

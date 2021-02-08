@@ -111,3 +111,4 @@ If installing on a new development environment be sure to run the command below 
 | Delete Event (Admin)  |        |      | \*     | \*     |         |
 | Manage Users (Admin)  | \*     | \*   | \*     | \*     |         |
 | Manage Events (Admin) | \*     | \*   | \*     | \*     |         |
+
