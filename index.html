@@ -31,11 +31,11 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- Google Maps JavaScript API -->
-    <script
+    <!-- <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC38Ty6VW0-y0yw2GQPnBH7ssKvOp8imE4&callback=initMap&libraries=&v=weekly"
         async>
     </script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script> -->
 
 
     <!-- Import Font Family -->
@@ -92,7 +92,7 @@
         </ul>
     </header>
     <!-- Facebook API Scripts + Functions -->
-    <script>
+    <!-- <script>
         window.fbAsyncInit = function () {
             FB.init({
                 appId: '323316612359943',
@@ -117,7 +117,7 @@
     <div id="fb-root"></div>
     <script async defer crossorigin="anonymous"
         src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v8.0&appId=323316612359943&autoLogAppEvents=1"
-        nonce="D2SuveTi"></script>
+        nonce="D2SuveTi"></script> -->
 
     <div class="container" id="main_container">
         <div id="errormessage" class="ui negative message">
@@ -305,6 +305,10 @@
                         max="20"></span>
                 </div>
             </div>
+            <div class="login-methods center">
+                <div class="fb-login-button" data-size="medium" data-button-type="login_with" data-layout="rounded"
+                    data-auto-logout-link="false" data-use-continue-as="false" data-width=""></div>
+            </div>
             <div class="left">
                 <p>
                     <label>
@@ -438,11 +442,9 @@
                             </label>
                         </p>
                     </div>
-                    <br>
-                    <button class="btn indigo waves-effect waves-light" type="reset" name="action">Cancel
-                    </button>
-                    <button class="btn indigo waves-effect waves-light" type="submit" name="action">Save Profile
-                    </button>
+                    <button class="btn indigo waves-effect waves-light" type="reset" name="action">Cancel</button>
+                    <button class="btn indigo waves-effect waves-light" type="submit" name="action">Save
+                        Profile</button>
                 </div>
             </div>
         </div>
