@@ -183,6 +183,8 @@ function hideFAQ() {
   document.getElementById("faq").style.display = "none";
 }
 
+/* if logged in 201 display event created if logged in not 201 or 202 display message must be logged in */
+
 /* ==== Switch Dark Mode Theme + Local Storage ==== */
 // Onload of page
 window.addEventListener("load", function () {
@@ -263,7 +265,6 @@ $(document).ready(function () {
 $(document).ready(function () {
   $('.timepicker').timepicker();
 });
-
 
 /* == Chip == */
 var chip = {

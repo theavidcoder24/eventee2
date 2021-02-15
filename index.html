@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Eventee 2</title>
 
     <!-- Icons + Manifest -->
     <link rel="icon" href="src/images/eventee_logo.png" type="image/gif" sizes="16x16">
@@ -31,11 +32,11 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- Google Maps JavaScript API -->
-    <!-- <script
+    <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC38Ty6VW0-y0yw2GQPnBH7ssKvOp8imE4&callback=initMap&libraries=&v=weekly"
         async>
     </script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script> -->
+    <!-- <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script> -->
 
 
     <!-- Import Font Family -->
@@ -80,7 +81,7 @@
                         class="material-icons">add_circle</i>Create Event</a>
             </li>
             <li><a href="#community" onclick="displayCommunity(); hideHome()" class="sidenav-close"><i
-                        class="material-icons">forum</i>Community</a></li>
+                        class="material-icons">forum</i><span class="badge indigo-text">4</span>Community</a></li>
             <li><a href="#settings" onclick="displaySettings(); hideHome()" class="sidenav-close"><i
                         class="material-icons">settings</i>Settings</a></li>
             <li><a href="#faq" onclick="displayFAQ(); hideHome()" class="sidenav-close"><i
@@ -159,8 +160,6 @@
                     </select>
                     <label>Images in select</label>
                     <br>
-                    <!--The div element for the map -->
-                    <div id="map"></div>
                     <br>
                     <div class="row">
                         <div class="card">
@@ -287,7 +286,7 @@
                 <div class="nav-wrapper">
                     <div class="col s12">
                         <a href="#home" class="breadcrumb" onclick="hideAll()">Home</a>
-                        <a href="#!" class="breadcrumb">Login</a>
+                        <a href="#!" class="breadcrumb blue-text accent-3">Login</a>
                     </div>
                 </div>
             </nav>
@@ -361,7 +360,8 @@
                         <div class="row">
                             <div class="input-field col s12">
                                 <i class="material-icons prefix">account_circle</i>
-                                <input id="reg_name" type="text" class="validate" placeholder="Full Name">
+                                <input id="reg_name" type="text" class="validate tooltipped" placeholder="Full Name"
+                                    data-position="top" data-tooltip="Must be more than 2 characters">
                                 <span class="helper-text" data-error="Please enter a valid name"
                                     data-success="Correct"></span>
                             </div>
@@ -389,7 +389,9 @@
                                 <input id="reg_pas" type="password" class="validate" placeholder="Password">
                                 <span class="helper-text" data-error="Please enter a valid password"
                                     data-success="Correct" max="20"></span>
-                            </div>
+                                </div>
+                                <span class="center">Already a member?<a href="#login_container" onclick="displayLogin()">
+                                        Login</a></span>
                         </div>
                         <input type="hidden" name="action" value="register" id="register_user">
                         <button class="btn indigo waves-effect waves-light" type="submit" name="regsiter">Join</button>
