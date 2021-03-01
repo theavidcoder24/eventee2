@@ -1,6 +1,26 @@
-
+// Test script link
 console.log("Hello");
 
+// Call setup functions
+window.onload = function () {
+  loadPage();
+  // Check the logged in status
+  // isLogged();
+  // if (localStorage.getItem('login') == 'true') {
+  //   // isLogged();
+  // }
+  // if (localStorage.getItem('login') == 'false') {
+  //   userLogout();
+  // }
+  // See if theme has been switched to dark mode
+  // if (localStorage.getItem('darktheme') == 'true') {
+  //   checkBG.checked = true;
+  //   switchBG(checkBG);
+  // }
+}
+
+
+/* Prevent Form Redirect */
 function preventDefault() {
   return false;
 }
@@ -10,13 +30,15 @@ function loadPage() {
   // document.getElementById("main_container").style.display = 'none';
   document.querySelector(".loadprogress").classList.add('progress');
   document.querySelector(".runningbar").classList.add('indeterminate');
+  document.querySelector(".content").style.display = 'none';
 
   setTimeout(function () {
     document.querySelector(".loadprogress").classList.remove('progress');
     document.querySelector(".runningbar").classList.remove('indeterminate');
-    document.getElementById("main_container").style.display = 'block';
-    document.getElementById("main_container").style.visibility = 'visible';
-  }, 500);
+    document.querySelector(".content").style.display = 'block';
+    // document.getElementById("main_container").style.display = 'block';
+    // document.getElementById("main_container").style.visibility = 'visible';
+  }, 600);
 }
 
 /* Success Messages */
@@ -71,6 +93,7 @@ function displayLogin() {
   hideCommunity();
   hideSettings();
   hideFAQ();
+  loadPage();
 }
 
 function hideLogin() {
