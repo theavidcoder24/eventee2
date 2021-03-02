@@ -116,6 +116,7 @@ function hideRegister() {
 
 function displayEditProf() {
   document.getElementById("edit_prof").style.display = "block";
+  localStorage.setItem("selectedpage", "editprofile");
   hideLogin();
   hideRegister();
   hideMyEvents();
@@ -206,7 +207,12 @@ function hideFAQ() {
 }
 
 
+
 /* == Fetch Responses == */
+/* - Register - */
+
+
+
 /* - Login - */
 function postLoginFetch() {
   loadPage();
@@ -240,14 +246,6 @@ function postLoginFetch() {
           credentials: 'include',
         })
         console.log('Login Successful');
-        // Display Events Container
-        var eventContainer = document.querySelector("#eventContainer");
-        eventContainer.style.display = "block";
-        var createMenuItem = document.querySelector("#createMenuItem");
-        createMenuItem.style.display = "block";
-        var logoutMenuItem = document.querySelector("#logoutMenuItem");
-        logoutMenuItem.style.display = "block";
-        // var createEvent = document.getElementById("#createEvent");
         // createEvent.style.display = "block";
         // localStorage.getItem('Login Email', log_email);
         // localStorage.getItem('Login Password', log_pass);
@@ -273,8 +271,6 @@ function postLoginFetch() {
         createMenuItem.style.display = "none";
         var logoutMenuItem = document.querySelector("#logoutMenuItem");
         logoutMenuItem.style.display = "none";
-        // var createEvent = document.querySelector("#createEvent");
-        // createEvent.style.display = "none";
       }
     })
   // .catch(function (err) {
@@ -318,18 +314,6 @@ function isLogged() {
         console.log('Not logged in failed');
         errormessage("Error: Not implemented");
         localStorage.setItem('login', "false");
-        // Display Events Container
-        var eventContainer = document.querySelector("#eventContainer");
-        eventContainer.style.display = "none";
-        // Create Events Menu Item
-        var createMenuItem = document.querySelector("#createMenuItem");
-        createMenuItem.style.display = "none";
-        // Logout Menu Item
-        var logoutMenuItem = document.querySelector("#logoutMenuItem");
-        logoutMenuItem.style.display = "none";
-        // Create Events modal
-        var createEvent = document.querySelector("#createEvent");
-        createEvent.style.display = "none";
         return;
       }
       if (response.status === 429) {
@@ -356,15 +340,7 @@ function userLogout() {
       if (response.status === 202) {
         console.log("Logout Success");
         successmessage("Success, You're Logged Out");
-        // Display Events Container
-        var eventContainer = document.querySelector("#eventContainer");
-        eventContainer.style.display = "none";
-        // Create Events Menu Item
-        var createEvent = document.querySelector("#createEvent");
-        createEvent.style.display = "none";
-        // Logout Menu Item
-        var logoutMenuItem = document.querySelector("#logoutMenuItem");
-        logoutMenuItem.style.display = "none";
+        unsetUserSession();
         // localStorage.removeItem('Login Email', reg_email);
         // localStorage.removeItem('Login Password', reg_pass);
         localStorage.setItem('login', "false");
@@ -391,8 +367,6 @@ function userLogout() {
   // });
 }
 
-
-/* if logged in 201 display event created if logged in not 201 or 202 display message must be logged in */
 
 /* ==== Switch Dark Mode Theme + Local Storage ==== */
 // Onload of page
