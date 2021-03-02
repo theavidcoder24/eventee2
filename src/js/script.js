@@ -93,7 +93,6 @@ function displayLogin() {
   hideCommunity();
   hideSettings();
   hideFAQ();
-  loadPage();
 }
 
 function hideLogin() {
