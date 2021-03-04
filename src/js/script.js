@@ -1,6 +1,26 @@
-
+// Test script link
 console.log("Hello");
 
+// Call setup functions
+window.onload = function () {
+  loadPage();
+  // Check the logged in status
+  // isLogged();
+  // if (localStorage.getItem('login') == 'true') {
+  //   // isLogged();
+  // }
+  // if (localStorage.getItem('login') == 'false') {
+  //   userLogout();
+  // }
+  // See if theme has been switched to dark mode
+  // if (localStorage.getItem('darktheme') == 'true') {
+  //   checkBG.checked = true;
+  //   switchBG(checkBG);
+  // }
+}
+
+
+/* Prevent Form Redirect */
 function preventDefault() {
   return false;
 }
@@ -10,13 +30,15 @@ function loadPage() {
   // document.getElementById("main_container").style.display = 'none';
   document.querySelector(".loadprogress").classList.add('progress');
   document.querySelector(".runningbar").classList.add('indeterminate');
+  document.querySelector(".content").style.display = 'none';
 
   setTimeout(function () {
     document.querySelector(".loadprogress").classList.remove('progress');
     document.querySelector(".runningbar").classList.remove('indeterminate');
-    document.getElementById("main_container").style.display = 'block';
-    document.getElementById("main_container").style.visibility = 'visible';
-  }, 500);
+    document.querySelector(".content").style.display = 'block';
+    // document.getElementById("main_container").style.display = 'block';
+    // document.getElementById("main_container").style.visibility = 'visible';
+  }, 600);
 }
 
 /* Success Messages */
@@ -39,7 +61,7 @@ function errormessage(message) {
   }, 7000)
 }
 
-/* Display Sections */
+/* == Display Sections == */
 function hideHome() {
   document.getElementById("home").style.display = "none";
 }
@@ -94,6 +116,7 @@ function hideRegister() {
 
 function displayEditProf() {
   document.getElementById("edit_prof").style.display = "block";
+  localStorage.setItem("selectedpage", "editprofile");
   hideLogin();
   hideRegister();
   hideMyEvents();
@@ -183,7 +206,252 @@ function hideFAQ() {
   document.getElementById("faq").style.display = "none";
 }
 
-/* if logged in 201 display event created if logged in not 201 or 202 display message must be logged in */
+
+
+/* == Fetch Responses == */
+/* - Register - */
+/* Register */
+function postRegFetch() {
+  loadPage();
+  // var errStr = "";
+  // if (reg_fullname.checkValidity() === false) {
+  //   errStr += "Please type a valid name ";
+  //   console.log("Error: Full Name");
+  //   return;
+  // }
+  // if (reg_ph.checkValidity() === false) {
+  //   errStr += "Please type a valid phone number ";
+  //   console.log("Error: Phone Number");
+  //   return;
+  // }
+  // if (reg_dob.checkValidity() === false) {
+  //   errStr += "Please insert a valid date of birth ";
+  //   console.log("Error: Email");
+  //   return;
+  // }
+  // if (reg_email.checkValidity() === false) {
+  //   errStr += "Please type in a valid email ";
+  //   console.log("Error: Email");
+  //   return;
+  // }
+  // if (reg_pass.checkValidity() === false) {
+  //   errStr += "Please type in a valid password ";
+  //   console.log("Error: Password");
+  //   return;
+  // }
+  var fd = new FormData();
+  var reg_fullname = document.getElementById("reg_fullname");
+  var reg_ph = document.getElementById("reg_ph");
+  var reg_dob = document.getElementById("reg_dob");
+  var reg_email = document.getElementById("reg_email");
+  var reg_pass = document.getElementById("reg_pass");
+  fd.append('action', 'register');
+  fd.append('reg_fullname', reg_fullname.value);
+  fd.append('reg_ph', reg_ph.value);
+  fd.append('reg_dob', reg_dob.value);
+  fd.append('reg_email', reg_email.value);
+  fd.append('reg_pass', reg_pass.value);
+  // fd.append('reg_prof', reg_prof.value);
+  fd.append('registerUser', registerUser.value);
+  // each form element goes into the fd object ^
+  fetch('api/ws.php?action=register', {
+    method: 'POST',
+    body: fd,
+    credentials: 'include',
+  })
+    .then(function (response) {
+      // Force error into console
+      response.text().then(function (text) {
+        console.log(text);
+      });
+      // HTTP Response Codes
+      if (response.status === 400) {
+        console.log('Bad Request');
+        errormessage("Bad Request");
+        return;
+      }
+      if (response.status === 401) {
+        console.log('Not permitted');
+        errormessage("Not Permitted");
+        return;
+      }
+      if (response.status === 501) {
+        console.log('Not implemented');
+        errormessage("Server Error Try Again");
+        return;
+      }
+      if (response.status === 202) {
+        loadPage();
+        console.log('Registration Successful');
+        successmessage('Yay Successfully Registered!');
+        // localStorage.setItem('Login Email', reg_email);
+        // localStorage.setItem('Login Password', reg_pass);
+        return;
+      }
+      // response.json().then(function (data) {
+      //   localStorage.setItem('credentials', JSON.stringify(data));
+      // })
+    })
+    .catch(function (err) {
+      console.log("Connection unavailable");
+      console.log(err);
+    });
+}
+
+
+/* - Login - */
+function postLoginFetch() {
+  loadPage();
+  var log_email = document.getElementById("log_email");
+  var log_pass = document.getElementById("log_pass");
+  var login_details = new FormData();
+  login_details.append('log_email', log_email.value);
+  login_details.append('log_pass', log_pass.value);
+  login_details.append('action', 'login');
+  // each form element goes into the login_details object ^
+  fetch('api/ws.php?action=login', {
+    method: 'POST',
+    body: login_details,
+    credentials: 'include',
+  })
+    .then(function (response) {
+      // Force error into console
+      // response.text().then(function (text) {
+      //   console.log(text);
+      // });
+      // HTTP Response Codes
+      if (response.status === 202) {
+        localStorage.setItem('login', "true");
+        successmessage('Yay Successfully Logged in!');
+        var log_email = document.getElementById("log_email");
+        var login_details = new FormData();
+        login_details.append('log_email', log_email.value);
+        fetch('api/ws.php?action=is_logged_in', {
+          method: 'GET',
+          body: login_details,
+          credentials: 'include',
+        })
+        console.log('Login Successful');
+        // localStorage.getItem('Login Email', log_email);
+        // localStorage.getItem('Login Password', log_pass);
+      }
+      if (response.status === 401) {
+        console.log('Not permitted');
+        errormessage("Error: Not implemented");
+        // localStorage.setItem('login', "false");
+        fetch('api/ws.php?action=logout', {
+          method: 'GET'
+        })
+      }
+      if (response.status === 501) {
+        console.log('Not implemented');
+        errormessage("Error: Not implemented");
+        // localStorage.setItem('login', "false");
+        fetch('api/ws.php?action=logout', {
+          method: 'GET'
+        })
+        var eventContainer = document.querySelector("#eventContainer");
+        eventContainer.style.display = "none";
+        var createMenuItem = document.getElementById("#createMenuItem");
+        createMenuItem.style.display = "none";
+        var logoutMenuItem = document.querySelector("#logoutMenuItem");
+        logoutMenuItem.style.display = "none";
+      }
+    })
+    .catch(function (err) {
+      console.log("Connection unavailable");
+      console.log(err);
+    });
+}
+
+
+/* - is logged in Fetch - */
+function isLogged() {
+  fetch('api/ws.php?action=is_logged_in', {
+    method: 'GET',
+    body: login_details,
+    credentials: 'include',
+  })
+    // HTTP Response Codes
+    .then(function (response) {
+      response.text().then(function (text) {
+        console.log(text);
+      });
+      if (response.status === 202) {
+        localStorage.setItem('login', "true");
+        console.log('Logged In!!');
+        loadPage();
+        // Display Events Container
+        var eventContainer = document.querySelector("#eventContainer");
+        eventContainer.style.display = "block";
+        // Create Events Menu Item
+        var createMenuItem = document.querySelector("#createMenuItem");
+        createMenuItem.style.display = "block";
+        // Logout Menu Item
+        var logoutMenuItem = document.querySelector("#logoutMenuItem");
+        logoutMenuItem.style.display = "block";
+        // Create Events modal
+        var createEvent = document.querySelector("#createEvent");
+        createEvent.style.display = "block";
+      }
+      if (response.status === 401) {
+        loadPage();
+        console.log('Not logged in failed');
+        errormessage("Error: Not implemented");
+        localStorage.setItem('login', "false");
+        return;
+      }
+      if (response.status === 429) {
+        console.log('Rate limit exceeded');
+      }
+    })
+  // .catch(function (err) {
+  //   console.log("Connection unavailable");
+  //   console.log(err);
+  // });
+}
+
+/* - User Logout - */
+function userLogout() {
+  fetch('api/ws.php?action=logout', {
+    method: 'GET'
+  })
+    .then(function (response) {
+      // Force error into console
+      response.text().then(function (text) {
+        console.log(text);
+      });
+      // HTTP Response Codes
+      if (response.status === 202) {
+        console.log("Logout Success");
+        successmessage("Success, You're Logged Out");
+        unsetUserSession();
+        // localStorage.removeItem('Login Email', reg_email);
+        // localStorage.removeItem('Login Password', reg_pass);
+        localStorage.setItem('login', "false");
+      }
+      // if (response.status === 401) {
+      //   console.log("Not permitted");
+      //   errormessage("Internal Server - Not Permitted");
+      //   return;
+      // }
+      // if (response.status === 501) {
+      //   console.log("Logout Failed");
+      //   return;
+      // }
+      if (response.status === 429) {
+        console.log('Rate limit exceeded');
+      }
+      else {
+        errormessage("Error - Internal Server error not logged out");
+      }
+    })
+  // .catch(function (err) {
+  //   console.log("Connection unavailable");
+  //   console.log(err);
+  // });
+}
+
 
 /* ==== Switch Dark Mode Theme + Local Storage ==== */
 // Onload of page
