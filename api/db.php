@@ -6,7 +6,7 @@ function db_connection()
     $dbusername = "root";
     $dbpassword = "";
     try {
-        $dbconn = new PDO("mysql:host=$servername;dbname=eventee", $dbusername, $dbpassword);
+        $dbconn = new PDO("mysql:host=$servername;dbname=eventee2", $dbusername, $dbpassword);
         $dbconn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $dbconn->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
     } catch (PDOException $e) {
@@ -30,38 +30,39 @@ class dbObj
         $servername = "localhost";
         $dbusername = "root";
         $dbpassword = "";
-        $this->dbconn = new PDO("mysql:host=$servername;dbname=eventee", $dbusername, $dbpassword);
+        $this->dbconn = new PDO("mysql:host=$servername;dbname=eventee2", $dbusername, $dbpassword);
         // set the PDO error mode to exception 
         // (debug - comment out in production)
         $this->dbconn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
     /* -- New User Function -- */
-    public function register($reg_fullname, $reg_ph, $reg_dob, $reg_email, $reg_pass, $date, $browser, $action_type)
+    public function register($reg_name, $reg_phone, $log_email, $reg_dob, $log_pass, $date, $browser, $action_type)
     {
         db_connection();
         try {
             $this->dbconn->beginTransaction();
 
             /* - Users Table - */
-            $stmt = $this->dbconn->prepare("INSERT INTO users(FullName, PhoneNumber, DateOfBirth) VALUES(:reg_fullname, :reg_ph, :reg_dob)");
-            $stmt->bindValue(':reg_fullname', $reg_fullname);
-            $stmt->bindValue(':reg_ph', $reg_ph);
+            $stmt = $this->dbconn->prepare("INSERT INTO users(FullName, PhoneNumber, DateOfBirth) VALUES(:reg_name, :reg_phone, :reg_dob)");
+            $stmt->bindValue(':reg_name', $reg_name);
+            $stmt->bindValue(':reg_phone', $reg_phone);
             $stmt->bindValue(':reg_dob', $reg_dob);
+            // $stmt->bindValue(':login_ID', $lastloginID);
             $row = $stmt->fetch();
-            // ^ Added
-            // $stmt->bindValue('reg_prof', $reg_prof);
             $stmt->execute();
 
             // last inserted = loginID
             $lastuserID = $this->dbconn->lastInsertId();
+            // $lastloginID = $this->dbconn->lastInsertId();
+
 
             /* - Login Table - */
-            $reg_pass = password_hash($reg_pass, PASSWORD_DEFAULT);
-            $stmt = $this->dbconn->prepare("INSERT INTO login(Email, Password, UserID) VALUES(:reg_email, :reg_pass, :user_ID)");
+            $log_pass = password_hash($log_pass, PASSWORD_DEFAULT);
+            $stmt = $this->dbconn->prepare("INSERT INTO login(Email, Password, userID) VALUES(:log_email, :log_pass, :user_ID)");
             // hashing the password with PASSWORD_HASH()
-            $stmt->bindValue(':reg_email', $reg_email);
-            $stmt->bindValue(':reg_pass', $reg_pass);
+            $stmt->bindValue(':log_email', $log_email);
+            $stmt->bindValue(':log_pass', $log_pass);
             $stmt->bindValue(':user_ID', $lastuserID);
             $row = $stmt->fetch();
             // ^ Added
@@ -75,9 +76,9 @@ class dbObj
             $stmt->execute();
 
             /* Set the session variables for each user that logs in to also record what the users will interact with */
-            $_SESSION['User'] = $reg_email;
-            $_SESSION["login"] = 'true';
-            $_SESSION['LoginID'] = $row['LoginID'];
+            // $_SESSION['User_Email'] = $log_email;
+            // $_SESSION["login"] = 'true';
+            $_SESSION['loginID'] = $row['LoginID'];
             $_SESSION['user_ID'] = $row['UserID'];
 
             $this->dbconn->commit();
@@ -88,25 +89,25 @@ class dbObj
     }
 
     /* -- Login Function -- */
-    public function login($reg_email, $reg_pass)
+    public function login($log_email, $log_pass)
     {
         db_connection();
         try {
             $this->dbconn->beginTransaction();
-            // $reg_email = ($_POST['reg_email']);
+            // $log_email = ($_POST['log_email']);
             // $reg_pass = ($_POST['reg_pass']);
-            $stmt = $this->dbconn->prepare("SELECT * FROM login INNER JOIN users on login.UserID = users.UserID WHERE login.Email =:reg_email");
-            $stmt->bindValue(':reg_email', $reg_email);
+            $stmt = $this->dbconn->prepare("SELECT * FROM login INNER JOIN users on login.userID = users.userID WHERE login.Email =:log_email");
+            $stmt->bindValue(':log_email', $log_email);
             $stmt->execute();
             $row = $stmt->fetch();
-            if (password_verify($reg_pass, $row['Password'])) {
+            if (password_verify($log_pass, $row['Password'])) {
                 /* Define the session variables for login */
-                $_SESSION['log_email'] = $reg_email;
+                $_SESSION['User_Email'] = $log_email;
                 $_SESSION["login"] = 'true';
-                $_SESSION['LoginID'] = $row['LoginID'];
-                $_SESSION['user_ID'] = $row['UserID'];
+                // $_SESSION['LoginID'] = $row['LoginID'];
+                // $_SESSION['user_ID'] = $row['UserID'];
                 $_SESSION['time_start_login'] = time();
-                // time('H:i:s');
+                time('H:i:s');
                 return true;
             } else {
                 return false;

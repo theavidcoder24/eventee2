@@ -5,6 +5,11 @@ console.log("Hello");
 window.onload = function () {
   loadPage();
   console.log(localStorage.getItem("login"))
+  console.log(localStorage.getItem("LoginName"))
+  console.log(localStorage.getItem("LoginPhone"))
+  console.log(localStorage.getItem("LoginEmail"))
+  console.log(localStorage.getItem("LoginDOB"))
+  console.log(localStorage.getItem("LoginPassword"))
   // if (localStorage.getItem('login') == 'true') {
   //   // isLogged();
   // }
@@ -272,11 +277,11 @@ function postRegFetch() {
         // loadPage();
         console.log('Registration Successful');
         successmessage('Yay Successfully Registered!');
-        localStorage.setItem('Login Name', reg_name);
-        localStorage.setItem('Login Phone', reg_phone);
-        localStorage.setItem('Login Email', log_email);
-        localStorage.setItem('Login Date of Birth', reg_dob);
-        localStorage.setItem('Login Password', log_pass);
+        localStorage.setItem('LoginName', reg_name);
+        localStorage.setItem('LoginPhone', reg_phone);
+        localStorage.setItem('LoginEmail', log_email);
+        localStorage.setItem('LoginDOB', reg_dob);
+        localStorage.setItem('LoginPassword', log_pass);
         return;
       }
       // response.json().then(function (data) {

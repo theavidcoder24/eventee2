@@ -30,10 +30,10 @@ if (!isset($_SESSION['se']))
 // }
 
 /* -- Referrer -- */
-if ($_SESSION['se']->is_referrer() == false) {
-    http_response_code(400);
-    die();
-}
+// if ($_SESSION['se']->is_referrer() == false) {
+//     http_response_code(400);
+//     die();
+// }
 
 /* -- Base Case -- */
 /* The base case serves as the main section where the api actions will be referenced from the fetch statements in 'script.js'. As default the isset is defined as GET so that if a case is defined as a GET action it will run automatically as for POST actions it requires another extra line in order to be recognised as a POST */
@@ -42,14 +42,14 @@ if (isset($_GET["action"])) {
             // User Register
         case "register":
             if (isset($_POST["action"])) {
-                $reg_fullname = $_POST['reg_fullname'];
-                $reg_ph = $_POST['reg_ph'];
+                $reg_name = $_POST['reg_name'];
+                $reg_phone = $_POST['reg_phone'];
+                $log_email = $_POST['log_email'];
                 $reg_dob = $_POST['reg_dob'];
-                $reg_email = $_POST['reg_email'];
-                $reg_pass = $_POST['reg_pass'];
+                $log_pass = $_POST['log_pass'];
                 $date = date('Y-m-d H:i:s');
                 $browser = $_SERVER['HTTP_USER_AGENT'];
-                $action_type = $_POST['registerUser'];
+                $action_type = $_POST['register_user'];
                 /* - Server Validation - */
                 // Check if input field is empty
                 // if ($reg_fullname == "") {
@@ -82,7 +82,7 @@ if (isset($_GET["action"])) {
                 // }
                 // Call the function
                 // if (isset($reg_email)) {
-                $db->register($reg_fullname, $reg_ph, $reg_dob, $reg_email, $reg_pass, $date, $browser, $action_type);
+                $db->register($reg_name, $reg_phone, $log_email, $reg_dob, $log_pass, $date, $browser, $action_type);
                 http_response_code(202);
                 // }
             } else {
