@@ -4,21 +4,14 @@ console.log("Hello");
 // Call setup functions
 window.onload = function () {
   loadPage();
-  // Check the logged in status
-  // isLogged();
+  console.log(localStorage.getItem("login"))
   // if (localStorage.getItem('login') == 'true') {
   //   // isLogged();
   // }
   // if (localStorage.getItem('login') == 'false') {
   //   userLogout();
   // }
-  // See if theme has been switched to dark mode
-  // if (localStorage.getItem('darktheme') == 'true') {
-  //   checkBG.checked = true;
-  //   switchBG(checkBG);
-  // }
 }
-
 
 /* Prevent Form Redirect */
 function preventDefault() {
@@ -36,8 +29,6 @@ function loadPage() {
     document.querySelector(".loadprogress").classList.remove('progress');
     document.querySelector(".runningbar").classList.remove('indeterminate');
     document.querySelector(".content").style.display = 'block';
-    // document.getElementById("main_container").style.display = 'block';
-    // document.getElementById("main_container").style.visibility = 'visible';
   }, 600);
 }
 
@@ -206,11 +197,8 @@ function hideFAQ() {
   document.getElementById("faq").style.display = "none";
 }
 
-
-
 /* == Fetch Responses == */
 /* - Register - */
-/* Register */
 function postRegFetch() {
   loadPage();
   // var errStr = "";
@@ -240,19 +228,19 @@ function postRegFetch() {
   //   return;
   // }
   var fd = new FormData();
-  var reg_fullname = document.getElementById("reg_fullname");
-  var reg_ph = document.getElementById("reg_ph");
+  var reg_name = document.getElementById("reg_name");
+  var reg_phone = document.getElementById("reg_phone");
+  var log_email = document.getElementById("log_email");
   var reg_dob = document.getElementById("reg_dob");
-  var reg_email = document.getElementById("reg_email");
-  var reg_pass = document.getElementById("reg_pass");
+  var log_pass = document.getElementById("log_pass");
   fd.append('action', 'register');
-  fd.append('reg_fullname', reg_fullname.value);
-  fd.append('reg_ph', reg_ph.value);
+  fd.append('reg_name', reg_name.value);
+  fd.append('reg_phone', reg_phone.value);
+  fd.append('log_email', log_email.value);
   fd.append('reg_dob', reg_dob.value);
-  fd.append('reg_email', reg_email.value);
-  fd.append('reg_pass', reg_pass.value);
+  fd.append('log_pass', log_pass.value);
   // fd.append('reg_prof', reg_prof.value);
-  fd.append('registerUser', registerUser.value);
+  fd.append('register_user', register_user.value);
   // each form element goes into the fd object ^
   fetch('api/ws.php?action=register', {
     method: 'POST',
@@ -281,11 +269,14 @@ function postRegFetch() {
         return;
       }
       if (response.status === 202) {
-        loadPage();
+        // loadPage();
         console.log('Registration Successful');
         successmessage('Yay Successfully Registered!');
-        // localStorage.setItem('Login Email', reg_email);
-        // localStorage.setItem('Login Password', reg_pass);
+        localStorage.setItem('Login Name', reg_name);
+        localStorage.setItem('Login Phone', reg_phone);
+        localStorage.setItem('Login Email', log_email);
+        localStorage.setItem('Login Date of Birth', reg_dob);
+        localStorage.setItem('Login Password', log_pass);
         return;
       }
       // response.json().then(function (data) {
@@ -332,8 +323,8 @@ function postLoginFetch() {
           credentials: 'include',
         })
         console.log('Login Successful');
-        // localStorage.getItem('Login Email', log_email);
-        // localStorage.getItem('Login Password', log_pass);
+        localStorage.getItem('Login Email', log_email);
+        localStorage.getItem('Login Password', log_pass);
       }
       if (response.status === 401) {
         console.log('Not permitted');
@@ -426,8 +417,8 @@ function userLogout() {
         console.log("Logout Success");
         successmessage("Success, You're Logged Out");
         unsetUserSession();
-        // localStorage.removeItem('Login Email', reg_email);
-        // localStorage.removeItem('Login Password', reg_pass);
+        // localStorage.removeItem('Login Email', log_email);
+        // localStorage.removeItem('Login Password', log_pass);
         localStorage.setItem('login', "false");
       }
       // if (response.status === 401) {
