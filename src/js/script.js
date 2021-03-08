@@ -5,11 +5,11 @@ console.log("Hello");
 window.onload = function () {
   loadPage();
   console.log(localStorage.getItem("login"))
-  console.log(localStorage.getItem("LoginName"))
-  console.log(localStorage.getItem("LoginPhone"))
-  console.log(localStorage.getItem("LoginEmail"))
-  console.log(localStorage.getItem("LoginDOB"))
-  console.log(localStorage.getItem("LoginPassword"))
+  // console.log(localStorage.getItem("LoginName"))
+  // console.log(localStorage.getItem("LoginPhone"))
+  // console.log(localStorage.getItem("LoginEmail"))
+  // console.log(localStorage.getItem("LoginDOB"))
+  // console.log(localStorage.getItem("LoginPassword"))
   // if (localStorage.getItem('login') == 'true') {
   //   // isLogged();
   // }
@@ -328,8 +328,8 @@ function postLoginFetch() {
           credentials: 'include',
         })
         console.log('Login Successful');
-        localStorage.getItem('Login Email', log_email);
-        localStorage.getItem('Login Password', log_pass);
+        localStorage.setItem('LoginEmail', log_email);
+        localStorage.getItem('LoginPassword', log_pass);
       }
       if (response.status === 401) {
         console.log('Not permitted');

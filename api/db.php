@@ -43,30 +43,30 @@ class dbObj
         try {
             $this->dbconn->beginTransaction();
 
+            /* - Login Table - */
+            $log_pass = password_hash($log_pass, PASSWORD_DEFAULT);
+            $stmt = $this->dbconn->prepare("INSERT INTO login(Email, Password, userID) VALUES(:log_email, :log_pass)");
+            // :user_ID
+            // hashing the password with PASSWORD_HASH()
+            $stmt->bindValue(':log_email', $log_email);
+            $stmt->bindValue(':log_pass', $log_pass);
+            // $stmt->bindValue(':user_ID', $lastuserID);
+            $row = $stmt->fetch();
+            $stmt->execute();
+
+            // last inserted = loginID
+            // $lastuserID = $this->dbconn->lastInsertId();
+            $lastloginID = $this->dbconn->lastInsertId();
+
             /* - Users Table - */
             $stmt = $this->dbconn->prepare("INSERT INTO users(FullName, PhoneNumber, DateOfBirth) VALUES(:reg_name, :reg_phone, :reg_dob)");
             $stmt->bindValue(':reg_name', $reg_name);
             $stmt->bindValue(':reg_phone', $reg_phone);
             $stmt->bindValue(':reg_dob', $reg_dob);
-            // $stmt->bindValue(':login_ID', $lastloginID);
+            $stmt->bindValue(':login_ID', $lastloginID);
             $row = $stmt->fetch();
             $stmt->execute();
 
-            // last inserted = loginID
-            $lastuserID = $this->dbconn->lastInsertId();
-            // $lastloginID = $this->dbconn->lastInsertId();
-
-
-            /* - Login Table - */
-            $log_pass = password_hash($log_pass, PASSWORD_DEFAULT);
-            $stmt = $this->dbconn->prepare("INSERT INTO login(Email, Password, userID) VALUES(:log_email, :log_pass, :user_ID)");
-            // hashing the password with PASSWORD_HASH()
-            $stmt->bindValue(':log_email', $log_email);
-            $stmt->bindValue(':log_pass', $log_pass);
-            $stmt->bindValue(':user_ID', $lastuserID);
-            $row = $stmt->fetch();
-            // ^ Added
-            $stmt->execute();
 
             $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, action_type) VALUES (:date, :browser, :action_type)");
             $stmt->bindValue(':date', $date);
