@@ -37,25 +37,12 @@ class dbObj
     }
 
     /* -- New User Function -- */
-    public function register($reg_name, $reg_phone, $log_email, $reg_dob, $log_pass, $date, $browser, $action_type)
+    public function register($reg_name, $reg_phone, $reg_email, $reg_dob, $reg_pass, $date, $browser, $ip, $action_type)
     {
         db_connection();
         try {
             $this->dbconn->beginTransaction();
 
-            /* - Login Table - */
-            $log_pass = password_hash($log_pass, PASSWORD_DEFAULT);
-            $stmt = $this->dbconn->prepare("INSERT INTO login(Email, Password, userID) VALUES(:log_email, :log_pass)");
-            // :user_ID
-            // hashing the password with PASSWORD_HASH()
-            $stmt->bindValue(':log_email', $log_email);
-            $stmt->bindValue(':log_pass', $log_pass);
-            // $stmt->bindValue(':user_ID', $lastuserID);
-            $row = $stmt->fetch();
-            $stmt->execute();
-
-            // last inserted = loginID
-            // $lastuserID = $this->dbconn->lastInsertId();
             $lastloginID = $this->dbconn->lastInsertId();
 
             /* - Users Table - */
@@ -67,17 +54,25 @@ class dbObj
             $row = $stmt->fetch();
             $stmt->execute();
 
+            /* - Login Table - */
+            $reg_pass = password_hash($reg_pass, PASSWORD_DEFAULT);
+            $stmt = $this->dbconn->prepare("INSERT INTO login(Email, Password) VALUES(:log_email, :log_pass)");
+            // hashing the password with PASSWORD_HASH()
+            $stmt->bindValue(':log_email', $reg_email);
+            $stmt->bindValue(':log_pass', $reg_pass);
+            $row = $stmt->fetch();
+            $stmt->execute();
 
-            $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, action_type) VALUES (:date, :browser, :action_type)");
+
+            /* - Changelog Table - */
+            $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type) VALUES (:date, :browser, :ip, :action_type)");
             $stmt->bindValue(':date', $date);
             $stmt->bindValue(':browser', $browser);
+            $stmt->bindValue(':ip', $ip);
             $stmt->bindValue(':action_type', $action_type);
             // $stmt->bindValue(':userID', $userID);
             $stmt->execute();
 
-            /* Set the session variables for each user that logs in to also record what the users will interact with */
-            // $_SESSION['User_Email'] = $log_email;
-            // $_SESSION["login"] = 'true';
             $_SESSION['loginID'] = $row['LoginID'];
             $_SESSION['user_ID'] = $row['UserID'];
 
@@ -89,7 +84,7 @@ class dbObj
     }
 
     /* -- Login Function -- */
-    public function login($log_email, $log_pass)
+    public function login($reg_email, $reg_pass)
     {
         db_connection();
         try {
@@ -97,12 +92,13 @@ class dbObj
             // $log_email = ($_POST['log_email']);
             // $reg_pass = ($_POST['reg_pass']);
             $stmt = $this->dbconn->prepare("SELECT * FROM login INNER JOIN users on login.userID = users.userID WHERE login.Email =:log_email");
-            $stmt->bindValue(':log_email', $log_email);
+            $stmt->bindValue(':log_email', $reg_email);
             $stmt->execute();
             $row = $stmt->fetch();
-            if (password_verify($log_pass, $row['Password'])) {
+            if (password_verify($reg_pass, $row['Password'])) {
+                /* Set the session variables for each user that logs in to also record what the users will interact with */
                 /* Define the session variables for login */
-                $_SESSION['User_Email'] = $log_email;
+                $_SESSION['User_Email'] = $reg_email;
                 $_SESSION["login"] = 'true';
                 // $_SESSION['LoginID'] = $row['LoginID'];
                 // $_SESSION['user_ID'] = $row['UserID'];
@@ -118,7 +114,13 @@ class dbObj
         }
     }
 
-    /* -- Admin Login Function -- */
+    /* -- Check if user account exists -- */
+    function checkUserAccount()
+    {
+        return "['account': 'exists']";
+    }
+
+    /* -- Admin Panel Login Function -- */
     // public function adminLogin($reg_email, $reg_pass)
     // {
     //     try {
@@ -149,120 +151,99 @@ class dbObj
     // }
 
     /* -- Create Events Function -- */
-    public function createEvents($event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time)
-    {
-        db_connection();
-        try {
-            $this->dbconn->beginTransaction();
-            /* - Events Table - */
-            $stmt = $this->dbconn->prepare("INSERT INTO events(EventName, EventDescription, EventCategory, EventAddress, EventLocation, EventDate, EventTime) VALUES(:event_name, :event_desc, :event_cat, :event_address, :event_loc, :event_date, :event_time)");
-            $stmt->bindValue(':event_name', $event_name);
-            $stmt->bindValue(':event_desc', $event_desc);
-            $stmt->bindValue(':event_cat', $event_cat);
-            $stmt->bindValue(':event_address', $event_address);
-            $stmt->bindValue(':event_loc', $event_loc);
-            $stmt->bindValue(':event_date', $event_date);
-            $stmt->bindValue(':event_time', $event_time);
-            // $stmt->bindValue(':reg_prof', $reg_prof);
-            $stmt->execute();
-
-            $this->dbconn->commit();
-        } catch (PDOException $ex) {
-            $this->dbconn->rollBack();
-            throw $ex;
-        }
-    }
-
-    /* -- Display Events Function -- */
-    function displayEvents()
-    {
-        db_connection();
-        try {
-            $stmt = $this->dbconn->prepare('SELECT EventID, EventName, EventDescription, EventCategory, EventAddress, EventLocation, EventDate, EventTime FROM events');
-            $stmt->execute();
-            $result = $stmt->fetchAll();
-            return $result;
-        } catch (PDOException $ex) {
-            throw $ex;
-        }
-    }
-
-    /* - Autofill the Update Event Form - */
-    function get_details($evid)
-    {
-        $stmt = $this->dbconn->prepare("SELECT * FROM events WHERE EventID = :eid");
-        $stmt->bindValue(":eid", $evid);
-        $stmt->execute();
-        $result = $stmt->fetch();
-        return $result;
-    }
-
-    /* -- Update Events Function -- */
-    public function updateEvent($event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time, $evid)
-    {
-        db_connection();
-        try {
-            $this->dbconn->beginTransaction();
-            /* --- Event Table --- */
-            // $UserID = $_SESSION['user_ID'];
-            $stmt = $this->dbconn->prepare("UPDATE events SET EventName = :event_name, EventDescription = :event_desc, EventCategory = :event_cat, EventAddress = :event_address, EventLocation = :event_loc, EventDate = :event_date, EventTime = :event_time WHERE EventID = :eid");
-            // bind values
-            $stmt->bindValue(':event_name', $event_name);
-            $stmt->bindValue(':event_desc', $event_desc);
-            $stmt->bindValue(':event_cat', $event_cat);
-            $stmt->bindValue(':event_address', $event_address);
-            $stmt->bindValue(':event_loc', $event_loc);
-            $stmt->bindValue(':event_date', $event_date);
-            $stmt->bindValue(':event_time', $event_time);
-            $stmt->bindValue(":eid", $evid);
-            // $stmt->bindValue(':user_ID', $UserID);
-
-            // Execute the update statement
-            $stmt->execute();
-
-            // Commit changes here 
-            $this->dbconn->commit();
-        } catch (PDOException $ex) {
-            $ex->getMessage();
-            exit();
-        }
-    }
-
-    /* -- Delete Events Function -- */
-    public function removeEvent($evid)
-    {
-        db_connection();
-        try {
-            $this->dbconn->beginTransaction();
-            $stmt = $this->dbconn->prepare("DELETE FROM events WHERE EventID = :eid");
-            $stmt->bindValue(':eid', $evid);
-
-            $stmt->execute();
-            $this->dbconn->commit();
-        } catch (PDOException $ex) {
-            $this->dbconn->rollBack();
-            throw $ex;
-        }
-    }
-    // public function removeEvent($evid)
+    // public function createEvents($event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time)
     // {
+    //     db_connection();
     //     try {
     //         $this->dbconn->beginTransaction();
-    //         // Query to delete a record
-    //         $stmt = $this->dbconn->prepare("DELETE FROM events WHERE EventID = :eid");
-    //         // Bind values
-    //         $stmt->bindValue(':eid', $evid);
-    //         // Use exec() because no results are returned
+    //         /* - Events Table - */
+    //         $stmt = $this->dbconn->prepare("INSERT INTO events(EventName, EventDescription, EventCategory, EventAddress, EventLocation, EventDate, EventTime) VALUES(:event_name, :event_desc, :event_cat, :event_address, :event_loc, :event_date, :event_time)");
+    //         $stmt->bindValue(':event_name', $event_name);
+    //         $stmt->bindValue(':event_desc', $event_desc);
+    //         $stmt->bindValue(':event_cat', $event_cat);
+    //         $stmt->bindValue(':event_address', $event_address);
+    //         $stmt->bindValue(':event_loc', $event_loc);
+    //         $stmt->bindValue(':event_date', $event_date);
+    //         $stmt->bindValue(':event_time', $event_time);
+    //         // $stmt->bindValue(':reg_prof', $reg_prof);
     //         $stmt->execute();
-    //         // Commit changes
+
     //         $this->dbconn->commit();
+    //     } catch (PDOException $ex) {
+    //         $this->dbconn->rollBack();
+    //         throw $ex;
+    //     }
+    // }
+
+    // /* -- Display Events Function -- */
+    // function displayEvents()
+    // {
+    //     db_connection();
+    //     try {
+    //         $stmt = $this->dbconn->prepare('SELECT EventID, EventName, EventDescription, EventCategory, EventAddress, EventLocation, EventDate, EventTime FROM events');
+    //         $stmt->execute();
+    //         $result = $stmt->fetchAll();
+    //         return $result;
     //     } catch (PDOException $ex) {
     //         throw $ex;
     //     }
     // }
 
-    // function checkUserAccount()
+    // /* - Autofill the Update Event Form - */
+    // function get_details($evid)
     // {
-    //     return "['account': 'exists']";
+    //     $stmt = $this->dbconn->prepare("SELECT * FROM events WHERE EventID = :eid");
+    //     $stmt->bindValue(":eid", $evid);
+    //     $stmt->execute();
+    //     $result = $stmt->fetch();
+    //     return $result;
+    // }
+
+    // /* -- Update Events Function -- */
+    // public function updateEvent($event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time, $evid)
+    // {
+    //     db_connection();
+    //     try {
+    //         $this->dbconn->beginTransaction();
+    //         /* --- Event Table --- */
+    //         // $UserID = $_SESSION['user_ID'];
+    //         $stmt = $this->dbconn->prepare("UPDATE events SET EventName = :event_name, EventDescription = :event_desc, EventCategory = :event_cat, EventAddress = :event_address, EventLocation = :event_loc, EventDate = :event_date, EventTime = :event_time WHERE EventID = :eid");
+    //         // bind values
+    //         $stmt->bindValue(':event_name', $event_name);
+    //         $stmt->bindValue(':event_desc', $event_desc);
+    //         $stmt->bindValue(':event_cat', $event_cat);
+    //         $stmt->bindValue(':event_address', $event_address);
+    //         $stmt->bindValue(':event_loc', $event_loc);
+    //         $stmt->bindValue(':event_date', $event_date);
+    //         $stmt->bindValue(':event_time', $event_time);
+    //         $stmt->bindValue(":eid", $evid);
+    //         // $stmt->bindValue(':user_ID', $UserID);
+
+    //         // Execute the update statement
+    //         $stmt->execute();
+
+    //         // Commit changes here 
+    //         $this->dbconn->commit();
+    //     } catch (PDOException $ex) {
+    //         $ex->getMessage();
+    //         exit();
+    //     }
+    // }
+
+    // /* -- Delete Events Function -- */
+    // public function removeEvent($evid)
+    // {
+    //     db_connection();
+    //     try {
+    //         $this->dbconn->beginTransaction();
+    //         $stmt = $this->dbconn->prepare("DELETE FROM events WHERE EventID = :eid");
+    //         $stmt->bindValue(':eid', $evid);
+
+    //         $stmt->execute();
+    //         $this->dbconn->commit();
+    //     } catch (PDOException $ex) {
+    //         $this->dbconn->rollBack();
+    //         throw $ex;
+    //     }
     // }
 }

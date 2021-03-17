@@ -282,12 +282,9 @@
         <!---- Login Section ---->
         <div id="login_container" class="menu_link">
             <!-- Preloader -->
-            <div class="progress">
+            <!-- <div class="progress">
                 <div class="indeterminate"></div>
-            </div>
-            <div class="loadprogress indigo darken-4" style="width: 100%">
-                <div class="runningbar indigo lighten-1"></div>
-            </div>
+            </div> -->
             <br>
             <nav class="clean">
                 <div class="nav-wrapper">
@@ -300,7 +297,7 @@
             <h4 class="center">Login</h4>
             <div class="content">
                 <div class="row">
-                    <form>
+                    <form method="POST" action="api/ws.php">
                         <div class="input-field col s12">
                             <i class="material-icons prefix">email</i>
                             <input id="log_email" name="log_email" type="email" class="validate" placeholder="Email">
@@ -346,7 +343,8 @@
                 <br>
                 <input type="hidden" name="action" id="login" value="login">
                 <br>
-                <button class="btn indigo waves-effect waves-light" type="submit" name="action">Login</button>
+                <button class="btn indigo waves-effect waves-light" type="submit" name="action"
+                    onclick="postLoginFetch()">Login</button>
                 </form>
             </div>
         </div>
@@ -387,7 +385,7 @@
                                 </div>
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">email</i>
-                                    <input id="log_email" name="log_email" type="email" class="validate"
+                                    <input id="reg_email" name="reg_email" type="email" class="validate"
                                         placeholder="Email">
                                     <span class="helper-text" data-error="Please enter a valid email"
                                         data-success="Correct"></span>
@@ -401,7 +399,7 @@
                                 </div>
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">vpn_key</i>
-                                    <input id="log_pass" name="log_pass" type="password" class="validate"
+                                    <input id="reg_pass" name="reg_pass" type="password" class="validate"
                                         placeholder="Password">
                                     <span class="helper-text" data-error="Please enter a valid password"
                                         data-success="Correct" max="20"></span>
@@ -467,6 +465,7 @@
                             </p>
                         </div>
                         <button class="btn indigo waves-effect waves-light" type="reset" name="action">Cancel</button>
+                        <br>
                         <button class="btn indigo waves-effect waves-light" type="submit" name="action">Save
                             Profile</button>
                     </div>

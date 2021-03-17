@@ -5,7 +5,7 @@ console.log("Hello");
 window.onload = function () {
   loadPage();
   console.log(localStorage.getItem("login"))
-  // console.log(localStorage.getItem("LoginName"))
+  console.log(localStorage.getItem("LoginName"))
   // console.log(localStorage.getItem("LoginPhone"))
   // console.log(localStorage.getItem("LoginEmail"))
   // console.log(localStorage.getItem("LoginDOB"))
@@ -235,16 +235,15 @@ function postRegFetch() {
   var fd = new FormData();
   var reg_name = document.getElementById("reg_name");
   var reg_phone = document.getElementById("reg_phone");
-  var log_email = document.getElementById("log_email");
+  var reg_email = document.getElementById("reg_email");
   var reg_dob = document.getElementById("reg_dob");
-  var log_pass = document.getElementById("log_pass");
+  var reg_pass = document.getElementById("reg_pass");
   fd.append('action', 'register');
   fd.append('reg_name', reg_name.value);
   fd.append('reg_phone', reg_phone.value);
-  fd.append('log_email', log_email.value);
+  fd.append('reg_email', reg_email.value);
   fd.append('reg_dob', reg_dob.value);
-  fd.append('log_pass', log_pass.value);
-  // fd.append('reg_prof', reg_prof.value);
+  fd.append('reg_pass', reg_pass.value);
   fd.append('register_user', register_user.value);
   // each form element goes into the fd object ^
   fetch('api/ws.php?action=register', {
@@ -268,20 +267,20 @@ function postRegFetch() {
         errormessage("Not Permitted");
         return;
       }
-      if (response.status === 501) {
-        console.log('Not implemented');
-        errormessage("Server Error Try Again");
-        return;
-      }
+      // if (response.status === 501) {
+      //   console.log('Not implemented');
+      //   errormessage("Server Error Try Again");
+      //   return;
+      // }
       if (response.status === 202) {
         // loadPage();
         console.log('Registration Successful');
         successmessage('Yay Successfully Registered!');
         localStorage.setItem('LoginName', reg_name);
         localStorage.setItem('LoginPhone', reg_phone);
-        localStorage.setItem('LoginEmail', log_email);
+        localStorage.setItem('LoginEmail', reg_email);
         localStorage.setItem('LoginDOB', reg_dob);
-        localStorage.setItem('LoginPassword', log_pass);
+        localStorage.setItem('LoginPassword', reg_pass);
         return;
       }
       // response.json().then(function (data) {
@@ -312,9 +311,9 @@ function postLoginFetch() {
   })
     .then(function (response) {
       // Force error into console
-      // response.text().then(function (text) {
-      //   console.log(text);
-      // });
+      response.text().then(function (text) {
+        console.log(text);
+      });
       // HTTP Response Codes
       if (response.status === 202) {
         localStorage.setItem('login', "true");
@@ -334,25 +333,19 @@ function postLoginFetch() {
       if (response.status === 401) {
         console.log('Not permitted');
         errormessage("Error: Not implemented");
-        // localStorage.setItem('login', "false");
+        localStorage.setItem('login', "false");
         fetch('api/ws.php?action=logout', {
           method: 'GET'
         })
       }
-      if (response.status === 501) {
-        console.log('Not implemented');
-        errormessage("Error: Not implemented");
-        // localStorage.setItem('login', "false");
-        fetch('api/ws.php?action=logout', {
-          method: 'GET'
-        })
-        var eventContainer = document.querySelector("#eventContainer");
-        eventContainer.style.display = "none";
-        var createMenuItem = document.getElementById("#createMenuItem");
-        createMenuItem.style.display = "none";
-        var logoutMenuItem = document.querySelector("#logoutMenuItem");
-        logoutMenuItem.style.display = "none";
-      }
+      // if (response.status === 501) {
+      //   console.log('Not implemented');
+      //   errormessage("Error: Not implemented");
+      //   localStorage.setItem('login', "false");
+      //   fetch('api/ws.php?action=logout', {
+      //     method: 'GET'
+      //   })
+      // }
     })
     .catch(function (err) {
       console.log("Connection unavailable");
@@ -377,18 +370,6 @@ function isLogged() {
         localStorage.setItem('login', "true");
         console.log('Logged In!!');
         loadPage();
-        // Display Events Container
-        var eventContainer = document.querySelector("#eventContainer");
-        eventContainer.style.display = "block";
-        // Create Events Menu Item
-        var createMenuItem = document.querySelector("#createMenuItem");
-        createMenuItem.style.display = "block";
-        // Logout Menu Item
-        var logoutMenuItem = document.querySelector("#logoutMenuItem");
-        logoutMenuItem.style.display = "block";
-        // Create Events modal
-        var createEvent = document.querySelector("#createEvent");
-        createEvent.style.display = "block";
       }
       if (response.status === 401) {
         loadPage();
