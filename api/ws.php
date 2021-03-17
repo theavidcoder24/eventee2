@@ -44,9 +44,9 @@ if (isset($_GET["action"])) {
             if (isset($_POST["action"])) {
                 $reg_name = $_POST['reg_name'];
                 $reg_phone = $_POST['reg_phone'];
-                $reg_email = $_POST['log_email'];
+                $reg_email = $_POST['reg_email'];
                 $reg_dob = $_POST['reg_dob'];
-                $reg_pass = $_POST['log_pass'];
+                $reg_pass = $_POST['reg_pass'];
                 $date = date('Y-m-d H:i:s');
                 $browser = $_SERVER['HTTP_USER_AGENT'];
                 $ip = $_SERVER['REMOTE_ADDR'];

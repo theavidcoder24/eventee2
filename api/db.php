@@ -43,35 +43,35 @@ class dbObj
         try {
             $this->dbconn->beginTransaction();
 
-            $lastloginID = $this->dbconn->lastInsertId();
+            // $lastloginID = $this->dbconn->lastInsertId();
 
             /* - Users Table - */
             $stmt = $this->dbconn->prepare("INSERT INTO users(FullName, PhoneNumber, DateOfBirth) VALUES(:reg_name, :reg_phone, :reg_dob)");
             $stmt->bindValue(':reg_name', $reg_name);
             $stmt->bindValue(':reg_phone', $reg_phone);
             $stmt->bindValue(':reg_dob', $reg_dob);
-            $stmt->bindValue(':login_ID', $lastloginID);
+            // $stmt->bindValue(':login_ID', $lastloginID);
             $row = $stmt->fetch();
             $stmt->execute();
 
             /* - Login Table - */
             $reg_pass = password_hash($reg_pass, PASSWORD_DEFAULT);
-            $stmt = $this->dbconn->prepare("INSERT INTO login(Email, Password) VALUES(:log_email, :log_pass)");
+            $stmt = $this->dbconn->prepare("INSERT INTO login(Email, Password) VALUES(:reg_email, :reg_pass)");
             // hashing the password with PASSWORD_HASH()
-            $stmt->bindValue(':log_email', $reg_email);
-            $stmt->bindValue(':log_pass', $reg_pass);
+            $stmt->bindValue(':reg_email', $reg_email);
+            $stmt->bindValue(':reg_pass', $reg_pass);
             $row = $stmt->fetch();
             $stmt->execute();
 
 
             /* - Changelog Table - */
-            $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type) VALUES (:date, :browser, :ip, :action_type)");
-            $stmt->bindValue(':date', $date);
-            $stmt->bindValue(':browser', $browser);
-            $stmt->bindValue(':ip', $ip);
-            $stmt->bindValue(':action_type', $action_type);
-            // $stmt->bindValue(':userID', $userID);
-            $stmt->execute();
+            // $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type) VALUES (:date, :browser, :ip, :action_type)");
+            // $stmt->bindValue(':date', $date);
+            // $stmt->bindValue(':browser', $browser);
+            // $stmt->bindValue(':ip', $ip);
+            // $stmt->bindValue(':action_type', $action_type);
+            // // $stmt->bindValue(':userID', $userID);
+            // $stmt->execute();
 
             $_SESSION['loginID'] = $row['LoginID'];
             $_SESSION['user_ID'] = $row['UserID'];
