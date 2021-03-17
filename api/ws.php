@@ -51,36 +51,6 @@ if (isset($_GET["action"])) {
                 $browser = $_SERVER['HTTP_USER_AGENT'];
                 $ip = $_SERVER['REMOTE_ADDR'];
                 $action_type = $_POST['register_user'];
-                /* - Server Validation - */
-                // Check if input field is empty
-                // if ($reg_fullname == "") {
-                //     $errorMsg = "Error: Full Name Field is Empty";
-                //     die;
-                // }
-                // if ($reg_ph == "") {
-                //     $errorMsg = "Error: Phone Number Field is Empty";
-                //     die;
-                // }
-                // // Check if the phone number field is numeric
-                // elseif (is_numeric(trim($reg_ph)) == false) {
-                //     $errorMsg = "Error: Please enter numeric value";
-                //     die;
-                // }
-                // if ($reg_dob == "") {
-                //     $errorMsg = "Error: Date of Birth Field is Empty";
-                //     die;
-                // }
-                // if ($reg_email == "") {
-                //     $errorMsg = "Error: Email Field is Empty";
-                //     die;
-                // } elseif (!preg_match("/^[_\.0-9a-zA-Z-]+@([0-9a-zA-Z][0-9a-zA-Z-]+\.)+[a-zA-Z]{2,50}/i", $reg_email)) {
-                //     $errorMsg = 'error : You did not enter a valid email.';
-                //     die;
-                // }
-                // if ($reg_pass == "") {
-                //     $errorMsg = "Error: Password Field is Empty";
-                //     die;
-                // }
                 $db->register($reg_name, $reg_phone, $reg_email, $reg_dob, $reg_pass, $date, $browser, $ip, $action_type);
                 http_response_code(202);
             } else {
@@ -148,14 +118,14 @@ if (isset($_GET["action"])) {
             //     break;
 
             // Check if user is logged in
-        // case "is_logged_in":
-        //     $result = $_SESSION['se']->is_logged_in();
-        //     if ($result == true) {
-        //         http_response_code(202);
-        //     } else {
-        //         http_response_code(401);
-        //     }
-        //     break;
+            // case "is_logged_in":
+            //     $result = $_SESSION['se']->is_logged_in();
+            //     if ($result == true) {
+            //         http_response_code(202);
+            //     } else {
+            //         http_response_code(401);
+            //     }
+            //     break;
 
             // Log user out
         case "logout":

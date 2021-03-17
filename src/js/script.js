@@ -206,32 +206,6 @@ function hideFAQ() {
 /* - Register - */
 function postRegFetch() {
   loadPage();
-  // var errStr = "";
-  // if (reg_fullname.checkValidity() === false) {
-  //   errStr += "Please type a valid name ";
-  //   console.log("Error: Full Name");
-  //   return;
-  // }
-  // if (reg_ph.checkValidity() === false) {
-  //   errStr += "Please type a valid phone number ";
-  //   console.log("Error: Phone Number");
-  //   return;
-  // }
-  // if (reg_dob.checkValidity() === false) {
-  //   errStr += "Please insert a valid date of birth ";
-  //   console.log("Error: Email");
-  //   return;
-  // }
-  // if (reg_email.checkValidity() === false) {
-  //   errStr += "Please type in a valid email ";
-  //   console.log("Error: Email");
-  //   return;
-  // }
-  // if (reg_pass.checkValidity() === false) {
-  //   errStr += "Please type in a valid password ";
-  //   console.log("Error: Password");
-  //   return;
-  // }
   var fd = new FormData();
   var reg_name = document.getElementById("reg_name");
   var reg_phone = document.getElementById("reg_phone");
@@ -338,14 +312,14 @@ function postLoginFetch() {
           method: 'GET'
         })
       }
-      // if (response.status === 501) {
-      //   console.log('Not implemented');
-      //   errormessage("Error: Not implemented");
-      //   localStorage.setItem('login', "false");
-      //   fetch('api/ws.php?action=logout', {
-      //     method: 'GET'
-      //   })
-      // }
+      if (response.status === 501) {
+        console.log('Not implemented');
+        errormessage("Error: Not implemented");
+        localStorage.setItem('login', "false");
+        fetch('api/ws.php?action=logout', {
+          method: 'GET'
+        })
+      }
     })
     .catch(function (err) {
       console.log("Connection unavailable");
@@ -382,10 +356,10 @@ function isLogged() {
         console.log('Rate limit exceeded');
       }
     })
-  // .catch(function (err) {
-  //   console.log("Connection unavailable");
-  //   console.log(err);
-  // });
+    .catch(function (err) {
+      console.log("Connection unavailable");
+      console.log(err);
+    });
 }
 
 /* - User Logout - */
@@ -402,20 +376,21 @@ function userLogout() {
       if (response.status === 202) {
         console.log("Logout Success");
         successmessage("Success, You're Logged Out");
-        unsetUserSession();
-        // localStorage.removeItem('Login Email', log_email);
-        // localStorage.removeItem('Login Password', log_pass);
+        // var createquestion = document.querySelector("#createquestion");
+        // createquestion.style.display = "none";
+        localStorage.removeItem('Login Email', log_email);
+        localStorage.removeItem('Login Password', log_pass);
         localStorage.setItem('login', "false");
       }
-      // if (response.status === 401) {
-      //   console.log("Not permitted");
-      //   errormessage("Internal Server - Not Permitted");
-      //   return;
-      // }
-      // if (response.status === 501) {
-      //   console.log("Logout Failed");
-      //   return;
-      // }
+      if (response.status === 401) {
+        console.log("Not permitted");
+        errormessage("Internal Server - Not Permitted");
+        return;
+      }
+      if (response.status === 501) {
+        console.log("Logout Failed");
+        return;
+      }
       if (response.status === 429) {
         console.log('Rate limit exceeded');
       }
@@ -423,10 +398,10 @@ function userLogout() {
         errormessage("Error - Internal Server error not logged out");
       }
     })
-  // .catch(function (err) {
-  //   console.log("Connection unavailable");
-  //   console.log(err);
-  // });
+    .catch(function (err) {
+      console.log("Connection unavailable");
+      console.log(err);
+    });
 }
 
 
