@@ -3,8 +3,8 @@
 header('Access-Control-Allow-Credentials: true');
 
 // All echo statements will be json_encoded
-header("Access-Control-Allow-Headers", "content-type");
-header('Content-Type: application/json');
+// header("Access-Control-Allow-Headers", "content-type");
+// header('Content-Type: application/json');
 
 // Set the timezone to Australia 
 date_default_timezone_set('Australia/Brisbane');

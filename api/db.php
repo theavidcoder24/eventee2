@@ -165,7 +165,6 @@ class dbObj
             $stmt->bindValue(':event_loc', $event_loc);
             $stmt->bindValue(':event_date', $event_date);
             $stmt->bindValue(':event_time', $event_time);
-            // $stmt->bindValue(':reg_prof', $reg_prof);
             $stmt->execute();
 
             $this->dbconn->commit();
