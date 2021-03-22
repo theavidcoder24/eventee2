@@ -130,8 +130,8 @@ if (isset($_GET["action"])) {
             // Log user out
         case "logout":
             session_destroy();
+            $result->do_logout();
             http_response_code(202);
-            // $result->do_logout();
             break;
 
             //     // Create Events

@@ -5,9 +5,9 @@ console.log("Hello");
 window.onload = function () {
   loadPage();
   console.log(localStorage.getItem("login"))
-  console.log(localStorage.getItem("LoginName"))
+  // console.log(localStorage.getItem("LoginName"))
   // console.log(localStorage.getItem("LoginPhone"))
-  // console.log(localStorage.getItem("LoginEmail"))
+  console.log(localStorage.getItem("LoginEmail"))
   // console.log(localStorage.getItem("LoginDOB"))
   // console.log(localStorage.getItem("LoginPassword"))
   // if (localStorage.getItem('login') == 'true') {
@@ -293,8 +293,10 @@ function postLoginFetch() {
         localStorage.setItem('login', "true");
         successmessage('Yay Successfully Logged in!');
         var log_email = document.getElementById("log_email");
+        var log_pass = document.getElementById("log_pass");
         var login_details = new FormData();
         login_details.append('log_email', log_email.value);
+        login_details.append('log_pass', log_pass.value);
         fetch('api/ws.php?action=is_logged_in', {
           method: 'GET',
           body: login_details,
@@ -354,6 +356,7 @@ function isLogged() {
       }
       if (response.status === 429) {
         console.log('Rate limit exceeded');
+        localStorage.setItem('login', "false");
       }
     })
     .catch(function (err) {
@@ -376,10 +379,10 @@ function userLogout() {
       if (response.status === 202) {
         console.log("Logout Success");
         successmessage("Success, You're Logged Out");
-        // var createquestion = document.querySelector("#createquestion");
-        // createquestion.style.display = "none";
-        localStorage.removeItem('Login Email', log_email);
-        localStorage.removeItem('Login Password', log_pass);
+        var logout_icon = document.querySelector("#logout_icon");
+        logout_icon.style.display = "none";
+        // localStorage.removeItem('Login Email', log_email);
+        // localStorage.removeItem('Login Password', log_pass);
         localStorage.setItem('login', "false");
       }
       if (response.status === 401) {
