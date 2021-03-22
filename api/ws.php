@@ -24,16 +24,16 @@ if (!isset($_SESSION['se']))
     $_SESSION['se'] = new sessObj;
 
 /* -- Rate Limit 24 Hour Check -- */
-if ($_SESSION['se']->Rate24HourCheck() === false) {
-    http_response_code(429); // Too Many Requests!
-    die();
-}
+// if ($_SESSION['se']->Rate24HourCheck() === false) {
+//     http_response_code(429); // Too Many Requests!
+//     die();
+// }
 
-/* -- Referrer -- */
-if ($_SESSION['se']->is_referrer() == false) {
-    http_response_code(400);
-    die();
-}
+// /* -- Referrer -- */
+// if ($_SESSION['se']->is_referrer() == false) {
+//     http_response_code(400);
+//     die();
+// }
 
 /* -- Base Case -- */
 /* The base case serves as the main section where the api actions will be referenced from the fetch statements in 'script.js'. As default the isset is defined as GET so that if a case is defined as a GET action it will run automatically as for POST actions it requires another extra line in order to be recognised as a POST */
@@ -90,42 +90,15 @@ if (isset($_GET["action"])) {
             // }
 
             break;
-            // case "adminLogin":
-            //     if (isset($_POST["action"])) {
-            //         $reg_email = $_POST['reg_email'];
-            //         $reg_pass = $_POST['reg_pass'];
-
-            //         // check if field is empty
-            //         if ($reg_email == "") {
-            //             $errorMsg = "Error: Email Field is Empty";
-            //         }
-            //         // check if field is empty
-            //         elseif ($reg_pass == "") {
-            //             $errorMsg = "Error: Password Field is Empty";
-            //         }
-
-            //         if (isset($reg_email)) {
-            //             $success = $db->adminLogin($reg_email, $reg_pass);
-            //             if ($success == true) {
-            //                 http_response_code(201);
-            //             } else {
-            //                 http_response_code(501);
-            //             }
-            //         } else {
-            //             http_response_code(501);
-            //         }
-            //     }
-            //     break;
-
             // Check if user is logged in
-            // case "is_logged_in":
-            //     $result = $_SESSION['se']->is_logged_in();
-            //     if ($result == true) {
-            //         http_response_code(202);
-            //     } else {
-            //         http_response_code(401);
-            //     }
-            //     break;
+            case "is_logged_in":
+                $result = $_SESSION['se']->is_logged_in();
+                if ($result == true) {
+                    http_response_code(202);
+                } else {
+                    http_response_code(401);
+                }
+                break;
 
             // Log user out
         case "logout":
