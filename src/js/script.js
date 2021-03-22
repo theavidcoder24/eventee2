@@ -407,6 +407,240 @@ function userLogout() {
     });
 }
 
+/* Create Events */
+function postCreateEvents() {
+  loadPage();
+  // var errStr = "";
+  // if (event_name.checkValidity() === false) {
+  //   errStr += "Please type a valid name ";
+  //   console.log("Error: Event Name");
+  //   return;
+  // }
+  var fd = new FormData();
+  fd.append('action', 'createEvents');
+  fd.append('event_name', event_name.value);
+  fd.append('event_desc', event_desc.value);
+  fd.append('event_cat', event_cat.value);
+  fd.append('event_address', event_address.value);
+  fd.append('event_loc', event_loc.value);
+  fd.append('event_date', event_date.value);
+  fd.append('event_time', event_time.value);
+  // each form element goes into the fd object ^
+  fetch('api/ws.php?action=createEvents', {
+    method: 'POST',
+    body: fd,
+    credentials: 'include'
+  })
+    // Force error into console
+    .then(function (response) {
+      response.text().then(function (text) {
+        console.log(text);
+      });
+      // HTTP Response Codes
+      if (response.status === 201) {
+        console.log('Creation Successful');
+        successmessage("Success: Event Created!");
+        loadPage();
+        return;
+      }
+      if (response.status === 202) {
+        console.log('Creation Successful');
+        successmessage("Success: Event Created!");
+        return;
+      }
+      if (response.status === 400) {
+        console.log('Bad Request');
+        errormessage('Error: Bad Request');
+        return;
+      }
+      if (response.status === 401) {
+        console.log('Not permitted');
+        errormessage('Error: Not Permitted');
+        return;
+      }
+      if (response.status === 501) {
+        console.log('Not implemented :(');
+        errormessage('Error: Not Implemented');
+        return;
+      }
+    });
+  return false;
+}
+
+// /* Display Events */
+// function displayEvents() {
+//   loadPage();
+//   // Define output string that will display the database data
+//   var outStr = '';
+//   fetch('api/ws.php?action=displayEvents', {
+//     method: "GET",
+//     credentials: "include",
+//   })
+//     .then(function (response) {
+//       loadPage();
+//       response.json().then(function (data) {
+//         localStorage.setItem("events", JSON.stringify(data));
+//         console.log(data);
+//         data.forEach(row => {
+//           outStr +=
+//             '<tr><td>' + row.EventName +
+//             '</td><td>' + row.EventDescription +
+//             '</td><td>' + row.EventCategory +
+//             '</td><td>' + row.EventAddress +
+//             '</td><td>' + row.EventLocation +
+//             '</td><td>' + row.EventDate +
+//             '</td><td>' + row.EventTime +
+//             '</td><td>' + row.EventID +
+//             '</td><td><button href="#update-events" class="modal-trigger" onclick="fillUpdate(' + row.EventID + ')" value="' + row.EventID + '"><i class="material-icons">edit</i></button>' +
+//             '</td><td>' + '<button onclick="deleteRemoveEvent(' + row.EventID + ')" value="' + row.EventID + '"><i class="material-icons">delete</i></button>' +
+//             '</td></tr>';
+//         });
+//         document.getElementById('eventsTable').innerHTML = outStr;
+//       });
+//     });
+// }
+
+// /* Autofill Update Form */
+// function fillUpdate(eventid) {
+//   console.log("Fill event with id " + eventid);
+
+//   events = JSON.parse(localStorage.getItem("events"));
+//   console.log(events);
+
+//   selectedEvent = events.filter(event => event[0] == eventid)[0];
+
+//   if (selectedEvent != null) {
+//     console.log(selectedEvent);
+//     document.getElementById("update_ev_name").value = selectedEvent[1];
+//     document.getElementById("update_ev_desc").value = selectedEvent[2];
+//     document.getElementById("update_ev_cat").value = selectedEvent[3];
+//     document.getElementById("update_ev_address").value = selectedEvent[4];
+//     document.getElementById("update_ev_loc").value = selectedEvent[5];
+//     document.getElementById("update_ev_date").value = selectedEvent[6];
+//     document.getElementById("update_ev_time").value = selectedEvent[7];
+//     document.getElementById("eventid").value = selectedEvent[8];
+
+//   }
+// }
+
+// /* Update Events */
+// function postUpdateEvent(eventid) {
+//   console.log("Update event with id " + eventid);
+
+//   events = JSON.parse(localStorage.getItem("events"));
+
+//   selectedEvent = events.filter(event => event[0] == eventid)[0];
+
+//   if (selectedEvent != null) {
+//     console.log(selectedEvent);
+//     document.getElementById("update_ev_name").value = selectedEvent[1];
+//     document.getElementById("update_ev_desc").value = selectedEvent[2];
+//     document.getElementById("update_ev_cat").value = selectedEvent[3];
+//     document.getElementById("update_ev_address").value = selectedEvent[4];
+//     document.getElementById("update_ev_loc").value = selectedEvent[5];
+//     document.getElementById("update_ev_date").value = selectedEvent[6];
+//     document.getElementById("update_ev_time").value = selectedEvent[7];
+//     document.getElementById("eventid").value = selectedEvent[8];
+//   }
+
+//   var eventid = "eventid";
+//   var updatefd = new FormData();
+//   updatefd.append('action', 'update');
+//   updatefd.append('eventid', eventid.value);
+
+//   // updatefd.append('update_ev_name', update_ev_name.value);
+//   // updatefd.append('update_ev_desc', update_ev_desc.value);
+//   // updatefd.append('update_ev_cat', update_ev_cat.value);
+//   // updatefd.append('update_ev_address', update_ev_address.value);
+//   // updatefd.append('update_ev_loc', update_ev_loc.value);
+//   // updatefd.append('update_ev_date', update_ev_date.value);
+//   // updatefd.append('update_ev_time', update_ev_time.value);
+//   updatefd.append('updateEvent', updateEvent.value);
+//   fetch('api/ws.php?action=updateEvent', {
+//     method: "POST",
+//     body: updatefd,
+//     credentials: 'include',
+//   })
+//     // Force error into console
+//     .then(function (response) {
+//       response.text().then(function (text) {
+//         console.log(text);
+//       });
+//       // HTTP Response Codes
+//       if (response.status === 200) {
+//         loadPage();
+//         // console.log(eventid);
+//       }
+//       if (response.status === 202) {
+//         console.log('Update Successful');
+//       }
+//       if (response.status === 400) {
+//         errormessage('Error: Bad Request');
+//         console.log('Bad Request');
+//         return;
+//       }
+//       if (response.status === 401) {
+//         console.log('Not permitted');
+//         return;
+//       }
+//       // if (response.status === 501) {
+//       //   errormessage('Error: Not implemented');
+//       //   console.log('Not implemented :(');
+//       //   return;
+//       // }
+//     });
+// }
+
+// /* Delete Events */
+// function deleteRemoveEvent(eventid) {
+//   console.log("Delete event with id " + eventid);
+
+//   events = JSON.parse(localStorage.getItem("events"));
+
+//   selectedEvent = events.filter(event => event[0] == eventid)[0];
+
+//   if (selectedEvent != null) {
+//     console.log(selectedEvent);
+//     document.getElementById("update_ev_name").value = selectedEvent[1];
+//     document.getElementById("update_ev_desc").value = selectedEvent[2];
+//     document.getElementById("update_ev_cat").value = selectedEvent[3];
+//     document.getElementById("update_ev_address").value = selectedEvent[4];
+//     document.getElementById("update_ev_loc").value = selectedEvent[5];
+//     document.getElementById("update_ev_date").value = selectedEvent[6];
+//     document.getElementById("update_ev_time").value = selectedEvent[7];
+//   }
+
+//   var removefd = new FormData();
+//   removefd.append('action', 'deleteRemoveEvent');
+//   removefd.append('eventid', eventid);
+
+//   fetch('api/ws.php?action=removeEvent', {
+//     method: 'POST',
+//     body: removefd,
+//   })
+//     .then(function (response) {
+//       // Force error into console
+//       response.text().then(function (text) {
+//         console.log(text);
+//       });
+//       // HTTP Response Codes
+//       if (response.status == 202) {
+//         loadPage();
+//         successmessage("Success: Removal Successful");
+//       }
+//       if (response.status === 400) {
+//         console.log('Bad Request');
+//         errormessage('Error: Bad Request');
+//         return;
+//       }
+//       if (response.status === 401) {
+//         console.log('Not permitted');
+//         errormessage('Error: Not Permitted');
+//         return;
+//       }
+//     });
+// }
+
 
 /* ==== Switch Dark Mode Theme + Local Storage ==== */
 // Onload of page
