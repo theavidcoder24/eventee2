@@ -151,29 +151,29 @@ class dbObj
     // }
 
     /* -- Create Events Function -- */
-    // public function createEvents($event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time)
-    // {
-    //     db_connection();
-    //     try {
-    //         $this->dbconn->beginTransaction();
-    //         /* - Events Table - */
-    //         $stmt = $this->dbconn->prepare("INSERT INTO events(EventName, EventDescription, EventCategory, EventAddress, EventLocation, EventDate, EventTime) VALUES(:event_name, :event_desc, :event_cat, :event_address, :event_loc, :event_date, :event_time)");
-    //         $stmt->bindValue(':event_name', $event_name);
-    //         $stmt->bindValue(':event_desc', $event_desc);
-    //         $stmt->bindValue(':event_cat', $event_cat);
-    //         $stmt->bindValue(':event_address', $event_address);
-    //         $stmt->bindValue(':event_loc', $event_loc);
-    //         $stmt->bindValue(':event_date', $event_date);
-    //         $stmt->bindValue(':event_time', $event_time);
-    //         // $stmt->bindValue(':reg_prof', $reg_prof);
-    //         $stmt->execute();
+    public function createEvents($event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time)
+    {
+        db_connection();
+        try {
+            $this->dbconn->beginTransaction();
+            /* - Events Table - */
+            $stmt = $this->dbconn->prepare("INSERT INTO events(EventName, EventDescription, EventCategory, EventAddress, EventLocation, EventDate, EventTime) VALUES(:event_name, :event_desc, :event_cat, :event_address, :event_loc, :event_date, :event_time)");
+            $stmt->bindValue(':event_name', $event_name);
+            $stmt->bindValue(':event_desc', $event_desc);
+            $stmt->bindValue(':event_cat', $event_cat);
+            $stmt->bindValue(':event_address', $event_address);
+            $stmt->bindValue(':event_loc', $event_loc);
+            $stmt->bindValue(':event_date', $event_date);
+            $stmt->bindValue(':event_time', $event_time);
+            // $stmt->bindValue(':reg_prof', $reg_prof);
+            $stmt->execute();
 
-    //         $this->dbconn->commit();
-    //     } catch (PDOException $ex) {
-    //         $this->dbconn->rollBack();
-    //         throw $ex;
-    //     }
-    // }
+            $this->dbconn->commit();
+        } catch (PDOException $ex) {
+            $this->dbconn->rollBack();
+            throw $ex;
+        }
+    }
 
     // /* -- Display Events Function -- */
     // function displayEvents()

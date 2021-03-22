@@ -404,6 +404,67 @@ function userLogout() {
     });
 }
 
+/* Create Events */
+function postCreateEvents() {
+  loadPage();
+  // var errStr = "";
+  // if (event_name.checkValidity() === false) {
+  //   errStr += "Please type a valid name ";
+  //   console.log("Error: Event Name");
+  //   return;
+  // }
+  var fd = new FormData();
+  fd.append('action', 'createEvents');
+  fd.append('event_name', event_name.value);
+  fd.append('event_desc', event_desc.value);
+  fd.append('event_cat', event_cat.value);
+  fd.append('event_address', event_address.value);
+  fd.append('event_loc', event_loc.value);
+  fd.append('event_date', event_date.value);
+  fd.append('event_time', event_time.value);
+  // each form element goes into the fd object ^
+  fetch('api/ws.php?action=createEvents', {
+    method: 'POST',
+    body: fd,
+    credentials: 'include'
+  })
+    // Force error into console
+    .then(function (response) {
+      response.text().then(function (text) {
+        console.log(text);
+      });
+      // HTTP Response Codes
+      if (response.status === 201) {
+        console.log('Creation Successful');
+        successmessage("Success: Event Created!");
+        loadPage();
+        return;
+      }
+      if (response.status === 202) {
+        console.log('Creation Successful');
+        successmessage("Success: Event Created!");
+        return;
+      }
+      if (response.status === 400) {
+        console.log('Bad Request');
+        errormessage('Error: Bad Request');
+        return;
+      }
+      if (response.status === 401) {
+        console.log('Not permitted');
+        errormessage('Error: Not Permitted');
+        return;
+      }
+      if (response.status === 501) {
+        console.log('Not implemented :(');
+        errormessage('Error: Not Implemented');
+        return;
+      }
+    });
+  return false;
+}
+
+
 
 /* ==== Switch Dark Mode Theme + Local Storage ==== */
 // Onload of page

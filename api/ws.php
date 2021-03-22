@@ -3,8 +3,8 @@
 header('Access-Control-Allow-Credentials: true');
 
 // All echo statements will be json_encoded
-// header("Access-Control-Allow-Headers", "content-type");
-// header('Content-Type: application/json');
+header("Access-Control-Allow-Headers", "content-type");
+header('Content-Type: application/json');
 
 // Set the timezone to Australia 
 date_default_timezone_set('Australia/Brisbane');
@@ -24,16 +24,16 @@ if (!isset($_SESSION['se']))
     $_SESSION['se'] = new sessObj;
 
 /* -- Rate Limit 24 Hour Check -- */
-// if ($_SESSION['se']->Rate24HourCheck() === false) {
-//     http_response_code(429); // Too Many Requests!
-//     die();
-// }
+if ($_SESSION['se']->Rate24HourCheck() === false) {
+    http_response_code(429); // Too Many Requests!
+    die();
+}
 
-// /* -- Referrer -- */
-// if ($_SESSION['se']->is_referrer() == false) {
-//     http_response_code(400);
-//     die();
-// }
+/* -- Referrer -- */
+if ($_SESSION['se']->is_referrer() == false) {
+    http_response_code(400);
+    die();
+}
 
 /* -- Base Case -- */
 /* The base case serves as the main section where the api actions will be referenced from the fetch statements in 'script.js'. As default the isset is defined as GET so that if a case is defined as a GET action it will run automatically as for POST actions it requires another extra line in order to be recognised as a POST */
@@ -135,37 +135,37 @@ if (isset($_GET["action"])) {
             break;
 
             //     // Create Events
-            // case "createEvents":
-            //     if (isset($_POST["action"])) {
-            //         $event_name = $_POST['event_name'];
-            //         $event_desc = $_POST['event_desc'];
-            //         $event_cat = $_POST['event_cat'];
-            //         $event_address = $_POST['event_address'];
-            //         $event_loc = $_POST['event_loc'];
-            //         $event_date = $_POST['event_date'];
-            //         $event_time = $_POST['event_time'];
-            //         /* - Server Validation - */
-            //         // Check if input field is empty
-            //         // if ($event_name == "") {
-            //         //     $errorMsg = "Error: Event Name Field is Empty";
-            //         //     die;
-            //         // }
-            //         // if ($event_time == "") {
-            //         //     $errorMsg = "Error: Event Description Field is Empty";
-            //         //     die;
-            //         // }
-            //         // // Check if the phone number field is numeric
-            //         // elseif (is_numeric(trim($event_time)) == false) {
-            //         //     $errorMsg = "Error: Please enter numeric value";
-            //         //     die;
-            //         // }
-            //         // Call the function
-            //         $db->createEvents($event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time);
-            //         http_response_code(202);
-            //     } else {
-            //         http_response_code(501);
-            //     }
-            //     break;
+        case "createEvents":
+            if (isset($_POST["action"])) {
+                $event_name = $_POST['event_name'];
+                $event_desc = $_POST['event_desc'];
+                $event_cat = $_POST['event_cat'];
+                $event_address = $_POST['event_address'];
+                $event_loc = $_POST['event_loc'];
+                $event_date = $_POST['event_date'];
+                $event_time = $_POST['event_time'];
+                /* - Server Validation - */
+                // Check if input field is empty
+                // if ($event_name == "") {
+                //     $errorMsg = "Error: Event Name Field is Empty";
+                //     die;
+                // }
+                // if ($event_time == "") {
+                //     $errorMsg = "Error: Event Description Field is Empty";
+                //     die;
+                // }
+                // // Check if the phone number field is numeric
+                // elseif (is_numeric(trim($event_time)) == false) {
+                //     $errorMsg = "Error: Please enter numeric value";
+                //     die;
+                // }
+                // Call the function
+                $db->createEvents($event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time);
+                http_response_code(202);
+            } else {
+                http_response_code(501);
+            }
+            break;
             //     // Display User Events
             // case "displayEvents":
             //     if ($_SESSION['se']->is_logged_in()) {
