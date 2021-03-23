@@ -51,23 +51,26 @@ class dbObj
             $row = $stmt->fetch();
             $stmt->execute();
 
+            $lastuserID = $this->dbconn->lastInsertId();
+
             /* - Login Table - */
             $reg_pass = password_hash($reg_pass, PASSWORD_DEFAULT);
-            $stmt = $this->dbconn->prepare("INSERT INTO login(Email, Password) VALUES(:reg_email, :reg_pass)");
+            $stmt = $this->dbconn->prepare("INSERT INTO login(Email, Password, UserID) VALUES(:reg_email, :reg_pass, :user_ID)");
             // hashing the password with PASSWORD_HASH()
             $stmt->bindValue(':reg_email', $reg_email);
             $stmt->bindValue(':reg_pass', $reg_pass);
+            $stmt->bindValue(':user_ID', $lastuserID);
             $row = $stmt->fetch();
             $stmt->execute();
 
 
             /* - Changelog Table - */
-            $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type) VALUES (:date, :browser, :ip, :action_type)");
+            $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type, UserID) VALUES (:date, :browser, :ip, :action_type, :user_ID)");
             $stmt->bindValue(':date', $date);
             $stmt->bindValue(':browser', $browser);
             $stmt->bindValue(':ip', $ip);
             $stmt->bindValue(':action_type', $action_type);
-            // $stmt->bindValue(':userID', $userID);
+            $stmt->bindValue(':userID', $lastuserID);
             $stmt->execute();
 
             $_SESSION['loginID'] = $row['LoginID'];
@@ -97,8 +100,6 @@ class dbObj
                 /* Define the session variables for login */
                 $_SESSION['User_Email'] = $reg_email;
                 $_SESSION["login"] = 'true';
-                // $_SESSION['LoginID'] = $row['LoginID'];
-                // $_SESSION['user_ID'] = $row['UserID'];
                 $_SESSION['time_start_login'] = time();
                 time('H:i:s');
                 return true;

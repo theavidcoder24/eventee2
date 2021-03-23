@@ -205,7 +205,7 @@ function hideFAQ() {
 /* == Fetch Responses == */
 /* - Register - */
 function postRegFetch() {
-  loadPage();
+  // loadPage();
   var fd = new FormData();
   var reg_name = document.getElementById("reg_name");
   var reg_phone = document.getElementById("reg_phone");
@@ -241,20 +241,17 @@ function postRegFetch() {
         errormessage("Not Permitted");
         return;
       }
-      // if (response.status === 501) {
-      //   console.log('Not implemented');
-      //   errormessage("Server Error Try Again");
-      //   return;
-      // }
+      if (response.status === 501) {
+        console.log('Not implemented');
+        errormessage("Server Error Try Again");
+        return;
+      }
       if (response.status === 202) {
         // loadPage();
         console.log('Registration Successful');
         successmessage('Yay Successfully Registered!');
-        localStorage.setItem('LoginName', reg_name);
-        localStorage.setItem('LoginPhone', reg_phone);
-        localStorage.setItem('LoginEmail', reg_email);
-        localStorage.setItem('LoginDOB', reg_dob);
-        localStorage.setItem('LoginPassword', reg_pass);
+        // localStorage.setItem('LoginEmail', reg_email);
+        // localStorage.setItem('LoginPassword', reg_pass);
         return;
       }
       // response.json().then(function (data) {
@@ -297,14 +294,15 @@ function postLoginFetch() {
         var login_details = new FormData();
         login_details.append('log_email', log_email.value);
         login_details.append('log_pass', log_pass.value);
+        localStorage.setItem('LoginEmail', log_email);
         fetch('api/ws.php?action=is_logged_in', {
           method: 'GET',
           body: login_details,
           credentials: 'include',
         })
         console.log('Login Successful');
-        localStorage.setItem('LoginEmail', log_email);
-        localStorage.getItem('LoginPassword', log_pass);
+        // localStorage.setItem('LoginEmail', log_email);
+        // localStorage.getItem('LoginPassword', log_pass);
       }
       if (response.status === 401) {
         console.log('Not permitted');
