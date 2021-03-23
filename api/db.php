@@ -55,7 +55,7 @@ class dbObj
 
             /* - Login Table - */
             $reg_pass = password_hash($reg_pass, PASSWORD_DEFAULT);
-            $stmt = $this->dbconn->prepare("INSERT INTO login(Email, Password, UserID) VALUES(:reg_email, :reg_pass, :user_ID)");
+            $stmt = $this->dbconn->prepare("INSERT INTO login(Email, Password, userID) VALUES(:reg_email, :reg_pass, :user_ID)");
             // hashing the password with PASSWORD_HASH()
             $stmt->bindValue(':reg_email', $reg_email);
             $stmt->bindValue(':reg_pass', $reg_pass);
