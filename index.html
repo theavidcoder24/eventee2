@@ -462,13 +462,22 @@
                         <div class="row">
                             <div class="input-field col s12">
                                 <i class="material-icons prefix">account_circle</i>
-                                <input id="log_name" type="email" class="validate" placeholder="Name">
+                                <input id="log_name_e" type="text" class="validate" placeholder="Name"
+                                    onblur="saveName(this)">
                                 <span class="helper-text" data-error="Please enter a valid name"
                                     data-success="Correct"></span>
                             </div>
                             <div class="input-field col s12">
                                 <i class="material-icons prefix">email</i>
-                                <input id="log_email_e" type="email" class="validate" placeholder="Email">
+                                <input id="log_email_e" type="email" class="validate" placeholder="Email"
+                                    onblur="saveEmail(this)">
+                                <span class="helper-text" data-error="Please enter a valid email"
+                                    data-success="Correct"></span>
+                            </div>
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">phone</i>
+                                <input id="log_phone_e" type="text" class="validate" placeholder="Phone Number"
+                                    onblur="savePhone(this)">
                                 <span class="helper-text" data-error="Please enter a valid email"
                                     data-success="Correct"></span>
                             </div>
@@ -482,7 +491,7 @@
                         <div id="checkbox">
                             <p>
                                 <label>
-                                    <input type="checkbox" id="check" onchange="setLocal(this)" class="filled-in" />
+                                    <input type="checkbox" id="checkProf" onchange="setLocal(this)" class="filled-in" />
                                     <span>Save</span>
                                 </label>
                             </p>

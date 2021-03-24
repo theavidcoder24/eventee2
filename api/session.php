@@ -13,7 +13,6 @@ class sessObj
         // } elseif ($_SESSION['se']){
 
         // }
-
         if ("login" == true) {
             return true;
         } elseif ("login" == false) {

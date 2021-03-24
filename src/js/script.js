@@ -4,12 +4,9 @@ console.log("Hello");
 // Call setup functions
 window.onload = function () {
   loadPage();
-  console.log(localStorage.getItem("login"))
-  // console.log(localStorage.getItem("LoginName"))
-  // console.log(localStorage.getItem("LoginPhone"))
-  // console.log(localStorage.getItem("LoginDOB"))
-  console.log(localStorage.getItem("LoginEmail"))
-  console.log(localStorage.getItem("LoginPassword"))
+  console.log(localStorage.getItem("login"));
+  console.log(localStorage.getItem("LoginEmail"));
+  is_logged_in();
   // if (localStorage.getItem('login') == 'true') {
   //   // isLogged();
   // }
@@ -654,6 +651,57 @@ function postCreateEvents() {
 //     });
 // }
 
+/* ==== User Profile Local Storage ==== */
+window.addEventListener("load", function () {
+  log_name_e.value = localStorage.getItem("log_name_e");
+  log_email_e.value = localStorage.getItem("log_email_e");
+  log_phone_e.value = localStorage.getItem("log_phone_e");
+  if (localStorage.getItem("log_name_e", "log_email_e", "log_phone_e") == null) {
+    checkProf.checked = false;
+  } else {
+    checkProf.checked = true;
+  }
+})
+
+function setLocal() {
+  if (checkProf.checked == true) {
+    localStorage.setItem("log_name_e", log_name_e.value);
+    localStorage.setItem("log_email_e", log_email_e.value);
+    localStorage.setItem("log_phone_e", log_phone_e.value);
+
+  } else {
+    localStorage.removeItem("log_name_e");
+    localStorage.removeItem("log_email_e");
+    localStorage.removeItem("log_phone_e");
+  }
+}
+
+/* Saves the user's name input */
+function saveName(checkProf) {
+  if (checkProf.checked == true) {
+    var save = document.getElementById("log_name_e");
+    localStorage.setItem("log_name_e", log_name_e.value);
+  }
+}
+
+/* Saves the user's email input */
+function saveEmail(checkProf) {
+  if (checkProf.checked == true) {
+    var save = document.getElementById("log_email_e");
+    localStorage.setItem("log_email_e", log_email_e.value);
+  }
+}
+
+function savePhone(checkProf) {
+  if (checkProf.checked == true) {
+    var save = document.getElementById("log_phone_e");
+    localStorage.setItem("log_phone_e", log_phone_e.value);
+  }
+}
+// function saveVName() {
+//   var save = document.getElementById("fullnameV");
+//   localStorage.setItem("fullnameV", fullnameV.value);
+// }
 
 /* ==== Switch Dark Mode Theme + Local Storage ==== */
 // Onload of page
