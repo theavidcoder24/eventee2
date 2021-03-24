@@ -65,12 +65,11 @@ class dbObj
 
 
             /* - Changelog Table - */
-            $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type, UserID) VALUES (:date, :browser, :ip, :action_type, :user_ID)");
+            $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type) VALUES (:date, :browser, :ip, :action_type)");
             $stmt->bindValue(':date', $date);
             $stmt->bindValue(':browser', $browser);
             $stmt->bindValue(':ip', $ip);
             $stmt->bindValue(':action_type', $action_type);
-            $stmt->bindValue(':userID', $lastuserID);
             $stmt->execute();
 
             $_SESSION['loginID'] = $row['LoginID'];
