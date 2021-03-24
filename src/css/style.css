@@ -48,6 +48,10 @@ button {
     padding-right: 0.3em;
 }
 
+#user_icon {
+    display: none;
+}
+
 .material-icons {
     color: black;
     font-size: 28px;

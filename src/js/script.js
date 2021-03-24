@@ -7,9 +7,9 @@ window.onload = function () {
   console.log(localStorage.getItem("login"))
   // console.log(localStorage.getItem("LoginName"))
   // console.log(localStorage.getItem("LoginPhone"))
-  console.log(localStorage.getItem("LoginEmail"))
   // console.log(localStorage.getItem("LoginDOB"))
-  // console.log(localStorage.getItem("LoginPassword"))
+  console.log(localStorage.getItem("LoginEmail"))
+  console.log(localStorage.getItem("LoginPassword"))
   // if (localStorage.getItem('login') == 'true') {
   //   // isLogged();
   // }
@@ -264,6 +264,13 @@ function postRegFetch() {
     });
 }
 
+function displayUserIcon() {
+  if (localStorage.getItem('login') == 'true') {
+    document.getElementById("login_icon").style.display = "none";
+    document.getElementById("user_icon").style.display = "block";
+  }
+}
+
 
 /* - Login - */
 function postLoginFetch() {
@@ -271,9 +278,10 @@ function postLoginFetch() {
   var log_email = document.getElementById("log_email");
   var log_pass = document.getElementById("log_pass");
   var login_details = new FormData();
+  login_details.append('action', 'login');
   login_details.append('log_email', log_email.value);
   login_details.append('log_pass', log_pass.value);
-  login_details.append('action', 'login');
+  login_details.append('login_user', login_user.value);
   // each form element goes into the login_details object ^
   fetch('api/ws.php?action=login', {
     method: 'POST',
@@ -296,6 +304,8 @@ function postLoginFetch() {
         login_details.append('log_pass', log_pass.value);
         localStorage.setItem('LoginEmail', log_email.value);
         sessionStorage.setItem("currentloggedin", log_email);
+        hideAll();
+        displayUserIcon();
         // fetch('api/ws.php?action=is_logged_in', {
         //   method: 'GET',
         //   body: login_details,
@@ -498,6 +508,10 @@ function postCreateEvents() {
 //       });
 //     });
 // }
+
+// function getattendees()
+// SELECT * FROM users INNER JOIN attendees ON attendees.userID = users.userID
+
 
 // /* Autofill Update Form */
 // function fillUpdate(eventid) {

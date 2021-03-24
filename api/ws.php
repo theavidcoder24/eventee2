@@ -63,27 +63,31 @@ if (isset($_GET["action"])) {
             // User Login
         case "login":
             if (isset($_POST["action"])) {
-                $reg_email = $_POST['log_email'];
-                $reg_pass = $_POST['log_pass'];
+                $log_email = $_POST['log_email'];
+                $log_pass = $_POST['log_pass'];
+                $date = date('Y-m-d H:i:s');
+                $browser = $_SERVER['HTTP_USER_AGENT'];
+                $ip = $_SERVER['REMOTE_ADDR'];
+                $action_type = $_POST['login_user'];
                 /* - Server Validation - */
                 // Check if input field is empty
-                if ($reg_email == "") {
+                if ($log_email == "") {
                     $errorMsg = "Error: Email Field is Empty";
                     die;
                 }
                 // Check if email field is valid
-                elseif (!preg_match("/^[_\.0-9a-zA-Z-]+@([0-9a-zA-Z][0-9a-zA-Z-]+\.)+[a-zA-Z]{2,50}/i", $reg_email)) {
+                elseif (!preg_match("/^[_\.0-9a-zA-Z-]+@([0-9a-zA-Z][0-9a-zA-Z-]+\.)+[a-zA-Z]{2,50}/i", $log_email)) {
                     $errorMsg = 'error : You did not enter a valid email.';
                     die;
                 }
                 // Check if input field is empty
-                if ($reg_pass == "") {
+                if ($log_pass == "") {
                     $errorMsg = "Error: Password Field is Empty";
                     die;
                 }
                 // if ($_SESSION['login'] == 'true') {
 
-                $db->login($reg_email, $reg_pass);
+                $db->login($log_email, $log_pass, $date, $browser, $ip, $action_type);
                 http_response_code(202);
             } else {
                 http_response_code(401);
@@ -136,7 +140,7 @@ if (isset($_GET["action"])) {
                 //     die;
                 // }
                 // Call the function
-                $db->createEvents($event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time);
+                $db->createEvents($event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time, $date, $browser, $ip, $action_type);
                 http_response_code(202);
             } else {
                 http_response_code(501);

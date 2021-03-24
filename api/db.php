@@ -83,24 +83,37 @@ class dbObj
     }
 
     /* -- Login Function -- */
-    public function login($reg_email, $reg_pass)
+    public function login($log_email, $log_pass, $date, $browser, $ip, $action_type)
     {
         db_connection();
         try {
             $this->dbconn->beginTransaction();
             // $log_email = ($_POST['log_email']);
-            // $reg_pass = ($_POST['reg_pass']);
+            // $log_pass = ($_POST['log_pass']);
             $stmt = $this->dbconn->prepare("SELECT * FROM login INNER JOIN users on login.userID = users.userID WHERE login.Email =:log_email");
-            $stmt->bindValue(':log_email', $reg_email);
+            $stmt->bindValue(':log_email', $log_email);
             $stmt->execute();
             $row = $stmt->fetch();
-            if (password_verify($reg_pass, $row['Password'])) {
+            if (password_verify($log_pass, $row['Password'])) {
                 /* Set the session variables for each user that logs in to also record what the users will interact with */
                 /* Define the session variables for login */
-                $_SESSION['User_Email'] = $reg_email;
+                $_SESSION['currentloggedin'] = $log_email;
                 $_SESSION["login"] = 'true';
                 $_SESSION['time_start_login'] = time();
                 time('H:i:s');
+
+                echo "Welcome " . $_SESSION['currentloggedin'];
+
+                /* - Changelog Table - */
+                $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type) VALUES (:date, :browser, :ip, :action_type)");
+                $stmt->bindValue(':date', $date);
+                $stmt->bindValue(':browser', $browser);
+                $stmt->bindValue(':ip', $ip);
+                $stmt->bindValue(':action_type', $action_type);
+                $stmt->execute();
+
+                $this->dbconn->commit();
+
                 return true;
             } else {
                 return false;
@@ -148,7 +161,7 @@ class dbObj
     // }
 
     /* -- Create Events Function -- */
-    public function createEvents($event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time)
+    public function createEvents($event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time, $date, $browser, $ip, $action_type)
     {
         db_connection();
         try {
@@ -162,6 +175,14 @@ class dbObj
             $stmt->bindValue(':event_loc', $event_loc);
             $stmt->bindValue(':event_date', $event_date);
             $stmt->bindValue(':event_time', $event_time);
+            $stmt->execute();
+
+            /* - Changelog Table - */
+            $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type) VALUES (:date, :browser, :ip, :action_type)");
+            $stmt->bindValue(':date', $date);
+            $stmt->bindValue(':browser', $browser);
+            $stmt->bindValue(':ip', $ip);
+            $stmt->bindValue(':action_type', $action_type);
             $stmt->execute();
 
             $this->dbconn->commit();
