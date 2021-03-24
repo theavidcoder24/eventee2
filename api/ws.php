@@ -20,8 +20,11 @@ $_SESSION['se'] = new sessObj;
 // Starts the session
 session_start();
 
-if (!isset($_SESSION['se']))
+// Checks if session is set if it's not then creates new session
+if (!isset($_SESSION['se'])) {
     $_SESSION['se'] = new sessObj;
+}
+
 
 /* -- Rate Limit 24 Hour Check -- */
 // if ($_SESSION['se']->Rate24HourCheck() === false) {
@@ -91,14 +94,14 @@ if (isset($_GET["action"])) {
 
             break;
             // Check if user is logged in
-            case "is_logged_in":
-                $result = $_SESSION['se']->is_logged_in();
-                if ($result == true) {
-                    http_response_code(202);
-                } else {
-                    http_response_code(401);
-                }
-                break;
+        case "is_logged_in":
+            $result = $_SESSION['se']->is_logged_in();
+            if ($result == true) {
+                http_response_code(202);
+            } else {
+                http_response_code(401);
+            }
+            break;
 
             // Log user out
         case "logout":

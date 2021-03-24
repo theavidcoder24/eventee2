@@ -294,12 +294,13 @@ function postLoginFetch() {
         var login_details = new FormData();
         login_details.append('log_email', log_email.value);
         login_details.append('log_pass', log_pass.value);
-        localStorage.setItem('LoginEmail', log_email);
-        fetch('api/ws.php?action=is_logged_in', {
-          method: 'GET',
-          body: login_details,
-          credentials: 'include',
-        })
+        localStorage.setItem('LoginEmail', log_email.value);
+        sessionStorage.setItem("currentloggedin", log_email);
+        // fetch('api/ws.php?action=is_logged_in', {
+        //   method: 'GET',
+        //   body: login_details,
+        //   credentials: 'include',
+        // })
         console.log('Login Successful');
         // localStorage.setItem('LoginEmail', log_email);
         // localStorage.getItem('LoginPassword', log_pass);

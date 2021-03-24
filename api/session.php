@@ -2,6 +2,25 @@
 
 class sessObj
 {
+    /* This session function checks if the user is logged in by refering to the session variable login whether it's set to true or false based on the sesssion array */
+    function is_logged_in()
+    {
+        db_connection();
+        // if (!isset($_SESSION['se'])) {
+        //     $_SESSION['se'] = new sessObj;
+
+        //     return true;
+        // } elseif ($_SESSION['se']){
+
+        // }
+
+        if ("login" == true) {
+            return true;
+        } elseif ("login" == false) {
+            return false;
+        }
+    }
+
     /* - Rate Limiting - */
     /* The rate limiting function that is programmed into the project will check if there is a session set. It sets the start time and if it happens to be null the function will set the current time to the start time */
     // public function setStartTime($startTime)
@@ -62,22 +81,6 @@ class sessObj
     //     return true;
     // }
 
-    /* This session function checks if the user is logged in by refering to the session variable login whether it's set to true or false based on the sesssion array */
-    function is_logged_in()
-    {
-        db_connection();
-        if ("login" == true) {
-            return true;
-        } elseif ("login" == false) {
-            return false;
-        }
-    }
-
-    // function login_User()
-    // {
-    //     $db->checkUserAccount();
-    //     return true;
-    // }
 
     function do_logout()
     {
