@@ -27,16 +27,16 @@ if (!isset($_SESSION['se'])) {
 
 
 /* -- Rate Limit 24 Hour Check -- */
-// if ($_SESSION['se']->Rate24HourCheck() === false) {
-//     http_response_code(429); // Too Many Requests!
-//     die();
-// }
+if ($_SESSION['se']->Rate24HourCheck() === false) {
+    http_response_code(429); // Too Many Requests!
+    die();
+}
 
-// /* -- Referrer -- */
-// if ($_SESSION['se']->is_referrer() == false) {
-//     http_response_code(400);
-//     die();
-// }
+/* -- Referrer -- */
+if ($_SESSION['se']->is_referrer() == false) {
+    http_response_code(400);
+    die();
+}
 
 /* -- Base Case -- */
 /* The base case serves as the main section where the api actions will be referenced from the fetch statements in 'script.js'. As default the isset is defined as GET so that if a case is defined as a GET action it will run automatically as for POST actions it requires another extra line in order to be recognised as a POST */
@@ -141,7 +141,7 @@ if (isset($_GET["action"])) {
                 //     die;
                 // }
                 // Call the function
-                $db->createEvents($event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time, $date, $browser, $ip, $action_type);
+                $db->createEvents($event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time);
                 http_response_code(202);
             } else {
                 http_response_code(501);

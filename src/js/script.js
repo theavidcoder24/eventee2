@@ -365,6 +365,8 @@ function isLogged() {
           console.log('Logged In!!');
           // sessionStorage.setItem("currentloggedin", log_email);
           // document.getElementById("result").innerHTML = sessionStorage.getItem("currentloggedin");
+
+          // LoginEmail - localstorage
           // Check browser support
           if (typeof (Storage) !== "undefined") {
             // Store
@@ -729,12 +731,21 @@ function saveEmail(checkProf) {
   }
 }
 
+/* Saves the user's phone input */
 function savePhone(checkProf) {
   if (checkProf.checked == true) {
     var save = document.getElementById("log_phone_e");
     localStorage.setItem("log_phone_e", log_phone_e.value);
   }
 }
+
+// function saveLogout() {
+//     if (localStorage.getItem('login') == 'false') {
+//       userLogout();
+//       hideUserInfo();
+//   }
+// }
+
 // function saveVName() {
 //   var save = document.getElementById("fullnameV");
 //   localStorage.setItem("fullnameV", fullnameV.value);

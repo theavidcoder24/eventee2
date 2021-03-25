@@ -57,7 +57,7 @@
                     class="brand-logo center"></a>
             <a href="#login_container" class="right" onclick="displayLogin(); loadPage()"><i id="login_icon"
                     class="material-icons white-text">login</i></a>
-            <a href="#edit_prof" onclick="displayEditProf(); hideHome(); loadPage()"  class="right"><i id="user_icon"
+            <a href="#edit_prof" onclick="displayEditProf(); hideHome(); loadPage()" class="right"><i id="user_icon"
                     class="material-icons white-text">account_circle</i></a>
         </nav>
 
@@ -638,11 +638,27 @@
                                         data-success="Correct" max="20"></span>
                                 </div>
                                 <input type="hidden" name="action" value="createEvents" id="createEvents">
-                                <button class="btn indigo waves-effect waves-light" type="submit" name="action"
-                                    onclick="postCreateEvents(); M.toast({html: 'Event Created', classes: 'rounded'})">Create
+                                <!-- <button class="btn indigo waves-effect waves-light" type="submit" name="action"
+                                    onclick="postCreateEvents(); M.toast({html: 'Event Created', classes: 'rounded'})"
+                                    href="#event_success">Create
                                     Event
                                     <i class="material-icons right">send</i>
-                                </button>
+                                </button> -->
+                                <!-- Modal Trigger -->
+                                <a class="btn indigo waves-effect waves-light modal-trigger" type="submit" name="action"
+                                    onclick="postCreateEvents()" href="#event_success">Create Event<i
+                                        class="material-icons right">send</i></a>
+                                <!-- Modal Structure -->
+                                <div id="event_success" class="modal bottom-sheet">
+                                    <div class="modal-content">
+                                        <h4>You've successfully created an Event!</h4>
+                                        <a href="#my_events" onclick="displayMyEvents(); hideHome(); hideCreateEvent()"
+                                            class="modal-close"><i class="material-icons">today</i>My Events</a>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+                                    </div>
+                                </div>
                             </div>
                         </form>
                     </div>

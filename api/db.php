@@ -165,7 +165,7 @@ class dbObj
     // }
 
     /* -- Create Events Function -- */
-    public function createEvents($event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time, $date, $browser, $ip, $action_type)
+    public function createEvents($event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time)
     {
         db_connection();
         try {
@@ -182,12 +182,12 @@ class dbObj
             $stmt->execute();
 
             /* - Changelog Table - */
-            $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type) VALUES (:date, :browser, :ip, :action_type)");
-            $stmt->bindValue(':date', $date);
-            $stmt->bindValue(':browser', $browser);
-            $stmt->bindValue(':ip', $ip);
-            $stmt->bindValue(':action_type', $action_type);
-            $stmt->execute();
+            // $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type) VALUES (:date, :browser, :ip, :action_type)");
+            // $stmt->bindValue(':date', $date);
+            // $stmt->bindValue(':browser', $browser);
+            // $stmt->bindValue(':ip', $ip);
+            // $stmt->bindValue(':action_type', $action_type);
+            // $stmt->execute();
 
             $this->dbconn->commit();
         } catch (PDOException $ex) {
