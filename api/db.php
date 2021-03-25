@@ -86,10 +86,11 @@ class dbObj
     public function login($log_email, $log_pass, $date, $browser, $ip, $action_type)
     {
         db_connection();
+        session_start();
         try {
             $this->dbconn->beginTransaction();
-            // $log_email = ($_POST['log_email']);
-            // $log_pass = ($_POST['log_pass']);
+            $log_email = ($_POST['log_email']);
+            $log_pass = ($_POST['log_pass']);
             $stmt = $this->dbconn->prepare("SELECT * FROM login INNER JOIN users on login.userID = users.userID WHERE login.Email =:log_email");
             $stmt->bindValue(':log_email', $log_email);
             $stmt->execute();
@@ -99,6 +100,8 @@ class dbObj
                 /* Define the session variables for login */
                 $_SESSION['currentloggedin'] = $log_email;
                 $_SESSION["login"] = 'true';
+                // $_SESSION['LoginID'] = $row['LoginID'];
+                // $_SESSION["accessrights"] = $row["accessRights"];
                 $_SESSION['time_start_login'] = time();
                 time('H:i:s');
 
@@ -116,6 +119,7 @@ class dbObj
 
                 return true;
             } else {
+                echo "Login credentials are incorrect";
                 return false;
             }
         } catch (PDOException $ex) {
@@ -192,29 +196,29 @@ class dbObj
         }
     }
 
-    // /* -- Display Events Function -- */
-    // function displayEvents()
-    // {
-    //     db_connection();
-    //     try {
-    //         $stmt = $this->dbconn->prepare('SELECT EventID, EventName, EventDescription, EventCategory, EventAddress, EventLocation, EventDate, EventTime FROM events');
-    //         $stmt->execute();
-    //         $result = $stmt->fetchAll();
-    //         return $result;
-    //     } catch (PDOException $ex) {
-    //         throw $ex;
-    //     }
-    // }
+    /* -- Display Events Function -- */
+    function displayEvents()
+    {
+        db_connection();
+        try {
+            $stmt = $this->dbconn->prepare('SELECT EventID, EventName, EventDescription, EventCategory, EventAddress, EventLocation, EventDate, EventTime FROM events');
+            $stmt->execute();
+            $result = $stmt->fetchAll();
+            return $result;
+        } catch (PDOException $ex) {
+            throw $ex;
+        }
+    }
 
-    // /* - Autofill the Update Event Form - */
-    // function get_details($evid)
-    // {
-    //     $stmt = $this->dbconn->prepare("SELECT * FROM events WHERE EventID = :eid");
-    //     $stmt->bindValue(":eid", $evid);
-    //     $stmt->execute();
-    //     $result = $stmt->fetch();
-    //     return $result;
-    // }
+    /* - Autofill the Update Event Form - */
+    function get_details($evid)
+    {
+        $stmt = $this->dbconn->prepare("SELECT * FROM events WHERE EventID = :eid");
+        $stmt->bindValue(":eid", $evid);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result;
+    }
 
     // /* -- Update Events Function -- */
     // public function updateEvent($event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time, $evid)

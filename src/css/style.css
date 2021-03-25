@@ -52,6 +52,18 @@ button {
     display: none;
 }
 
+#editprof_icon {
+    display: none;
+}
+
+#myevents_icon {
+    display: none;
+}
+
+#logout_icon {
+    display: none;
+}
+
 .material-icons {
     color: black;
     font-size: 28px;

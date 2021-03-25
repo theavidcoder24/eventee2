@@ -14,6 +14,7 @@ class sessObj
 
         // }
         if ("login" == true) {
+            echo "Welcome " . $_SESSION['currentloggedin'];
             return true;
         } elseif ("login" == false) {
             return false;

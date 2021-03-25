@@ -71,20 +71,20 @@ if (isset($_GET["action"])) {
                 $action_type = $_POST['login_user'];
                 /* - Server Validation - */
                 // Check if input field is empty
-                if ($log_email == "") {
-                    $errorMsg = "Error: Email Field is Empty";
-                    die;
-                }
-                // Check if email field is valid
-                elseif (!preg_match("/^[_\.0-9a-zA-Z-]+@([0-9a-zA-Z][0-9a-zA-Z-]+\.)+[a-zA-Z]{2,50}/i", $log_email)) {
-                    $errorMsg = 'error : You did not enter a valid email.';
-                    die;
-                }
-                // Check if input field is empty
-                if ($log_pass == "") {
-                    $errorMsg = "Error: Password Field is Empty";
-                    die;
-                }
+                // if ($log_email == "") {
+                //     $errorMsg = "Error: Email Field is Empty";
+                //     die;
+                // }
+                // // Check if email field is valid
+                // elseif (!preg_match("/^[_\.0-9a-zA-Z-]+@([0-9a-zA-Z][0-9a-zA-Z-]+\.)+[a-zA-Z]{2,50}/i", $log_email)) {
+                //     $errorMsg = 'error : You did not enter a valid email.';
+                //     die;
+                // }
+                // // Check if input field is empty
+                // if ($log_pass == "") {
+                //     $errorMsg = "Error: Password Field is Empty";
+                //     die;
+                // }
                 // if ($_SESSION['login'] == 'true') {
 
                 $db->login($log_email, $log_pass, $date, $browser, $ip, $action_type);
@@ -102,7 +102,8 @@ if (isset($_GET["action"])) {
             $result = $_SESSION['se']->is_logged_in();
             if ($result == true) {
                 http_response_code(202);
-            } else {
+            }
+            if ($result == false) {
                 http_response_code(401);
             }
             break;
@@ -146,20 +147,20 @@ if (isset($_GET["action"])) {
                 http_response_code(501);
             }
             break;
-            //     // Display User Events
-            // case "displayEvents":
-            //     if ($_SESSION['se']->is_logged_in()) {
-            //         $result = $db->displayEvents();
-            //         if ($result == false) {
-            //             http_response_code(501);
-            //         } else {
-            //             http_response_code(201);
-            //             echo json_encode($result);
-            //         }
-            //     } else {
-            //         http_response_code(401);
-            //     }
-            //     break;
+            // Display User Events
+        case "displayEvents":
+            if ($_SESSION['se']->is_logged_in()) {
+                $result = $db->displayEvents();
+                if ($result == false) {
+                    http_response_code(501);
+                } else {
+                    http_response_code(201);
+                    echo json_encode($result);
+                }
+            } else {
+                http_response_code(401);
+            }
+            break;
             //     // Autofill the update form
             // case "fillUpdate":
             //     if (isset($_POST["action"])) {

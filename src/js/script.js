@@ -4,9 +4,9 @@ console.log("Hello");
 // Call setup functions
 window.onload = function () {
   loadPage();
+  isLogged();
   console.log(localStorage.getItem("login"));
   console.log(localStorage.getItem("LoginEmail"));
-  is_logged_in();
   // if (localStorage.getItem('login') == 'true') {
   //   // isLogged();
   // }
@@ -261,10 +261,13 @@ function postRegFetch() {
     });
 }
 
-function displayUserIcon() {
+function displayUserInfo() {
   if (localStorage.getItem('login') == 'true') {
     document.getElementById("login_icon").style.display = "none";
     document.getElementById("user_icon").style.display = "block";
+    document.getElementById("editprof_icon").style.display = "block";
+    document.getElementById("myevents_icon").style.display = "block";
+    document.getElementById("logout_icon").style.display = "block";
   }
 }
 
@@ -301,13 +304,11 @@ function postLoginFetch() {
         login_details.append('log_pass', log_pass.value);
         localStorage.setItem('LoginEmail', log_email.value);
         sessionStorage.setItem("currentloggedin", log_email);
-        hideAll();
-        displayUserIcon();
-        // fetch('api/ws.php?action=is_logged_in', {
-        //   method: 'GET',
-        //   body: login_details,
-        //   credentials: 'include',
-        // })
+        fetch('api/ws.php?action=is_logged_in', {
+          method: 'GET',
+          body: login_details,
+          credentials: 'include',
+        })
         console.log('Login Successful');
         // localStorage.setItem('LoginEmail', log_email);
         // localStorage.getItem('LoginPassword', log_pass);
@@ -340,8 +341,6 @@ function postLoginFetch() {
 function isLogged() {
   fetch('api/ws.php?action=is_logged_in', {
     method: 'GET',
-    body: login_details,
-    credentials: 'include',
   })
     // HTTP Response Codes
     .then(function (response) {
@@ -350,19 +349,29 @@ function isLogged() {
       });
       if (response.status === 202) {
         localStorage.setItem('login', "true");
-        console.log('Logged In!!');
-        loadPage();
+        if (localStorage.getItem('login') == 'true') {
+          console.log('Logged In!!');
+          loadPage();
+          hideAll();
+          displayUserInfo();
+        }
       }
       if (response.status === 401) {
         loadPage();
         console.log('Not logged in failed');
         errormessage("Error: Not implemented");
         localStorage.setItem('login', "false");
+        if (localStorage.getItem('login') == 'false') {
+          userLogout();
+        }
         return;
       }
       if (response.status === 429) {
         console.log('Rate limit exceeded');
         localStorage.setItem('login', "false");
+        if (localStorage.getItem('login') == 'false') {
+          userLogout();
+        }
       }
     })
     .catch(function (err) {
@@ -387,8 +396,6 @@ function userLogout() {
         successmessage("Success, You're Logged Out");
         var logout_icon = document.querySelector("#logout_icon");
         logout_icon.style.display = "none";
-        // localStorage.removeItem('Login Email', log_email);
-        // localStorage.removeItem('Login Password', log_pass);
         localStorage.setItem('login', "false");
       }
       if (response.status === 401) {
@@ -473,38 +480,38 @@ function postCreateEvents() {
   return false;
 }
 
-// /* Display Events */
-// function displayEvents() {
-//   loadPage();
-//   // Define output string that will display the database data
-//   var outStr = '';
-//   fetch('api/ws.php?action=displayEvents', {
-//     method: "GET",
-//     credentials: "include",
-//   })
-//     .then(function (response) {
-//       loadPage();
-//       response.json().then(function (data) {
-//         localStorage.setItem("events", JSON.stringify(data));
-//         console.log(data);
-//         data.forEach(row => {
-//           outStr +=
-//             '<tr><td>' + row.EventName +
-//             '</td><td>' + row.EventDescription +
-//             '</td><td>' + row.EventCategory +
-//             '</td><td>' + row.EventAddress +
-//             '</td><td>' + row.EventLocation +
-//             '</td><td>' + row.EventDate +
-//             '</td><td>' + row.EventTime +
-//             '</td><td>' + row.EventID +
-//             '</td><td><button href="#update-events" class="modal-trigger" onclick="fillUpdate(' + row.EventID + ')" value="' + row.EventID + '"><i class="material-icons">edit</i></button>' +
-//             '</td><td>' + '<button onclick="deleteRemoveEvent(' + row.EventID + ')" value="' + row.EventID + '"><i class="material-icons">delete</i></button>' +
-//             '</td></tr>';
-//         });
-//         document.getElementById('eventsTable').innerHTML = outStr;
-//       });
-//     });
-// }
+/* Display Events */
+function displayEvents() {
+  loadPage();
+  // Define output string that will display the database data
+  var outStr = '';
+  fetch('api/ws.php?action=displayEvents', {
+    method: "GET",
+    credentials: "include",
+  })
+    .then(function (response) {
+      loadPage();
+      response.json().then(function (data) {
+        localStorage.setItem("events", JSON.stringify(data));
+        console.log(data);
+        data.forEach(row => {
+          outStr +=
+            '<tr><td>' + row.EventName +
+            '</td><td>' + row.EventDescription +
+            '</td><td>' + row.EventCategory +
+            '</td><td>' + row.EventAddress +
+            '</td><td>' + row.EventLocation +
+            '</td><td>' + row.EventDate +
+            '</td><td>' + row.EventTime +
+            '</td><td>' + row.EventID +
+            '</td><td><button href="#update-events" class="modal-trigger" onclick="fillUpdate(' + row.EventID + ')" value="' + row.EventID + '"><i class="material-icons">edit</i></button>' +
+            '</td><td>' + '<button onclick="deleteRemoveEvent(' + row.EventID + ')" value="' + row.EventID + '"><i class="material-icons">delete</i></button>' +
+            '</td></tr>';
+        });
+        document.getElementById('eventsTable').innerHTML = outStr;
+      });
+    });
+}
 
 // function getattendees()
 // SELECT * FROM users INNER JOIN attendees ON attendees.userID = users.userID
