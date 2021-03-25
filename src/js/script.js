@@ -1,5 +1,5 @@
 // Test script link
-console.log("Hello");
+// console.log("Hello");
 
 // Call setup functions
 window.onload = function () {
@@ -74,6 +74,26 @@ function hideAll() {
   hideCommunity();
   hideSettings();
   hideFAQ();
+}
+
+function displayUserInfo() {
+  if (localStorage.getItem('login') == 'true') {
+    document.getElementById("login_icon").style.display = "none";
+    document.getElementById("user_icon").style.display = "block";
+    document.getElementById("editprof_icon").style.display = "block";
+    document.getElementById("myevents_icon").style.display = "block";
+    document.getElementById("logout_icon").style.display = "block";
+  }
+}
+
+function hideUserInfo() {
+  if (localStorage.getItem('login') == 'false') {
+    document.getElementById("login_icon").style.display = "block";
+    document.getElementById("user_icon").style.display = "none";
+    document.getElementById("editprof_icon").style.display = "none";
+    document.getElementById("myevents_icon").style.display = "none";
+    document.getElementById("logout_icon").style.display = "none";
+  }
 }
 
 function displayLogin() {
@@ -261,15 +281,7 @@ function postRegFetch() {
     });
 }
 
-function displayUserInfo() {
-  if (localStorage.getItem('login') == 'true') {
-    document.getElementById("login_icon").style.display = "none";
-    document.getElementById("user_icon").style.display = "block";
-    document.getElementById("editprof_icon").style.display = "block";
-    document.getElementById("myevents_icon").style.display = "block";
-    document.getElementById("logout_icon").style.display = "block";
-  }
-}
+
 
 
 /* - Login - */
@@ -304,11 +316,11 @@ function postLoginFetch() {
         login_details.append('log_pass', log_pass.value);
         localStorage.setItem('LoginEmail', log_email.value);
         sessionStorage.setItem("currentloggedin", log_email);
-        fetch('api/ws.php?action=is_logged_in', {
-          method: 'GET',
-          body: login_details,
-          credentials: 'include',
-        })
+        // fetch('api/ws.php?action=is_logged_in', {
+        //   method: 'GET',
+        //   body: login_details,
+        //   credentials: 'include',
+        // })
         console.log('Login Successful');
         // localStorage.setItem('LoginEmail', log_email);
         // localStorage.getItem('LoginPassword', log_pass);
@@ -351,10 +363,26 @@ function isLogged() {
         localStorage.setItem('login', "true");
         if (localStorage.getItem('login') == 'true') {
           console.log('Logged In!!');
+          // sessionStorage.setItem("currentloggedin", log_email);
+          // document.getElementById("result").innerHTML = sessionStorage.getItem("currentloggedin");
+          // Check browser support
+          if (typeof (Storage) !== "undefined") {
+            // Store
+            sessionStorage.setItem("currentloggedin", log_email.value);
+            // Retrieve
+            document.getElementById("result").innerHTML = sessionStorage.getItem("currentloggedin");
+          } else {
+            document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+          }
           loadPage();
           hideAll();
           displayUserInfo();
         }
+      }
+      else {
+        localStorage.setItem('login', "false");
+        userLogout();
+        hideUserInfo();
       }
       if (response.status === 401) {
         loadPage();
@@ -363,6 +391,7 @@ function isLogged() {
         localStorage.setItem('login', "false");
         if (localStorage.getItem('login') == 'false') {
           userLogout();
+          hideUserInfo();
         }
         return;
       }
@@ -371,6 +400,7 @@ function isLogged() {
         localStorage.setItem('login', "false");
         if (localStorage.getItem('login') == 'false') {
           userLogout();
+          hideUserInfo();
         }
       }
     })
@@ -394,9 +424,9 @@ function userLogout() {
       if (response.status === 202) {
         console.log("Logout Success");
         successmessage("Success, You're Logged Out");
-        var logout_icon = document.querySelector("#logout_icon");
-        logout_icon.style.display = "none";
         localStorage.setItem('login', "false");
+        // sessionStorage.clear();
+        hideUserInfo();
       }
       if (response.status === 401) {
         console.log("Not permitted");
@@ -503,9 +533,9 @@ function displayEvents() {
             '</td><td>' + row.EventLocation +
             '</td><td>' + row.EventDate +
             '</td><td>' + row.EventTime +
-            '</td><td>' + row.EventID +
-            '</td><td><button href="#update-events" class="modal-trigger" onclick="fillUpdate(' + row.EventID + ')" value="' + row.EventID + '"><i class="material-icons">edit</i></button>' +
-            '</td><td>' + '<button onclick="deleteRemoveEvent(' + row.EventID + ')" value="' + row.EventID + '"><i class="material-icons">delete</i></button>' +
+            '</td><td>' + row.eventID +
+            '</td><td><button href="#update-events" class="modal-trigger" onclick="fillUpdate(' + row.eventID + ')" value="' + row.eventID + '"><i class="material-icons">edit</i></button>' +
+            '</td><td>' + '<button onclick="deleteRemoveEvent(' + row.eventID + ')" value="' + row.eventID + '"><i class="material-icons">delete</i></button>' +
             '</td></tr>';
         });
         document.getElementById('eventsTable').innerHTML = outStr;

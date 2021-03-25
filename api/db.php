@@ -86,7 +86,7 @@ class dbObj
     public function login($log_email, $log_pass, $date, $browser, $ip, $action_type)
     {
         db_connection();
-        session_start();
+        // session_start();
         try {
             $this->dbconn->beginTransaction();
             $log_email = ($_POST['log_email']);
@@ -201,7 +201,7 @@ class dbObj
     {
         db_connection();
         try {
-            $stmt = $this->dbconn->prepare('SELECT EventID, EventName, EventDescription, EventCategory, EventAddress, EventLocation, EventDate, EventTime FROM events');
+            $stmt = $this->dbconn->prepare('SELECT eventID, EventName, EventDescription, EventCategory, EventAddress, EventLocation, EventDate, EventTime FROM events');
             $stmt->execute();
             $result = $stmt->fetchAll();
             return $result;
@@ -213,7 +213,7 @@ class dbObj
     /* - Autofill the Update Event Form - */
     function get_details($evid)
     {
-        $stmt = $this->dbconn->prepare("SELECT * FROM events WHERE EventID = :eid");
+        $stmt = $this->dbconn->prepare("SELECT * FROM events WHERE eventID = :eid");
         $stmt->bindValue(":eid", $evid);
         $stmt->execute();
         $result = $stmt->fetch();

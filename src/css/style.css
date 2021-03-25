@@ -50,6 +50,8 @@ button {
 
 #user_icon {
     display: none;
+    font-size: 2.8em;
+    padding-right: 0.3em;
 }
 
 #editprof_icon {

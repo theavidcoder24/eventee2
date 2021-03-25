@@ -57,7 +57,7 @@
                     class="brand-logo center"></a>
             <a href="#login_container" class="right" onclick="displayLogin(); loadPage()"><i id="login_icon"
                     class="material-icons white-text">login</i></a>
-            <a href="#edit_prof" onclick="displayEditProf(); hideHome(); loadPage()" id="user_icon" class="right"><i
+            <a href="#edit_prof" onclick="displayEditProf(); hideHome(); loadPage()"  class="right"><i id="user_icon"
                     class="material-icons white-text">account_circle</i></a>
         </nav>
 
@@ -140,6 +140,7 @@
             <br>
             <div class="row">
                 <div class="col s12">
+                    <div id="result"></div>
                     <h4 class="center">Browse Events</h4>
                     <!-- Preloader -->
                     <div class="loadprogress indigo darken-4" style="width: 100%">
@@ -347,7 +348,7 @@
                 <input type="hidden" name="action" value="login" id="login_user">
                 <br>
                 <button class="btn indigo waves-effect waves-light" type="submit" name="login"
-                    onclick="postLoginFetch(); displayUserInfo()">Login</button>
+                    onclick="postLoginFetch(); displayUserInfo(); hideAll()">Login</button>
                 </form>
             </div>
         </div>
@@ -496,7 +497,8 @@
                                 </label>
                             </p>
                         </div>
-                        <button class="btn indigo waves-effect waves-light" type="reset" name="action">Cancel</button>
+                        <button class="btn indigo waves-effect waves-light" type="reset" name="action"
+                            onclick="hideAll()">Cancel</button>
                         <br>
                         <br>
                         <button class="btn indigo waves-effect waves-light" type="submit" name="action">Save

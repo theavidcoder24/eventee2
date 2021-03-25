@@ -6,17 +6,14 @@ class sessObj
     function is_logged_in()
     {
         db_connection();
-        // if (!isset($_SESSION['se'])) {
-        //     $_SESSION['se'] = new sessObj;
-
-        //     return true;
-        // } elseif ($_SESSION['se']){
-
-        // }
         if ("login" == true) {
-            echo "Welcome " . $_SESSION['currentloggedin'];
-            return true;
+            if (!isset($_SESSION['currentloggedin'])) {
+                echo "Welcome " . $_SESSION['currentloggedin'];
+                // exit();
+                return true;
+            }
         } elseif ("login" == false) {
+            echo "Not Logged in!";
             return false;
         }
     }
@@ -82,18 +79,22 @@ class sessObj
     // }
 
 
-    function do_logout()
-    {
-        if ("login" == false) {
-            return true;
-        } elseif ("login" == true) {
-            return false;
-        }
-        // session_unset();
-        // unset($_SESSION['reg_email']);
-        // unset($_SESSION["login"]);
-        // unset($_SESSION['LoginID']);
-        // unset($_SESSION['user_ID']);
-        // unset($_SESSION['access_rights']);
-    }
+    // function do_logout()
+    // {
+    //     session_start();
+    //     if (session_destroy()) {
+    //         echo "muahaha";
+    //     }
+    //     // if ("login" == false) {
+    //     //     return true;
+    //     // } elseif ("login" == true) {
+    //     //     return false;
+    //     // }
+    //     // session_unset();
+    //     // unset($_SESSION['reg_email']);
+    //     // unset($_SESSION["login"]);
+    //     // unset($_SESSION['LoginID']);
+    //     // unset($_SESSION['user_ID']);
+    //     // unset($_SESSION['access_rights']);
+    // }
 }
