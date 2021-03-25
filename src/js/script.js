@@ -547,146 +547,146 @@ function displayEvents() {
 // SELECT * FROM users INNER JOIN attendees ON attendees.userID = users.userID
 
 
-// /* Autofill Update Form */
-// function fillUpdate(eventid) {
-//   console.log("Fill event with id " + eventid);
+/* Autofill Update Form */
+function fillUpdate(eventid) {
+  console.log("Fill event with id " + eventid);
 
-//   events = JSON.parse(localStorage.getItem("events"));
-//   console.log(events);
+  events = JSON.parse(localStorage.getItem("events"));
+  console.log(events);
 
-//   selectedEvent = events.filter(event => event[0] == eventid)[0];
+  selectedEvent = events.filter(event => event[0] == eventid)[0];
 
-//   if (selectedEvent != null) {
-//     console.log(selectedEvent);
-//     document.getElementById("update_ev_name").value = selectedEvent[1];
-//     document.getElementById("update_ev_desc").value = selectedEvent[2];
-//     document.getElementById("update_ev_cat").value = selectedEvent[3];
-//     document.getElementById("update_ev_address").value = selectedEvent[4];
-//     document.getElementById("update_ev_loc").value = selectedEvent[5];
-//     document.getElementById("update_ev_date").value = selectedEvent[6];
-//     document.getElementById("update_ev_time").value = selectedEvent[7];
-//     document.getElementById("eventid").value = selectedEvent[8];
+  if (selectedEvent != null) {
+    console.log(selectedEvent);
+    document.getElementById("update_ev_name").value = selectedEvent[1];
+    document.getElementById("update_ev_desc").value = selectedEvent[2];
+    document.getElementById("update_ev_cat").value = selectedEvent[3];
+    document.getElementById("update_ev_address").value = selectedEvent[4];
+    document.getElementById("update_ev_loc").value = selectedEvent[5];
+    document.getElementById("update_ev_date").value = selectedEvent[6];
+    document.getElementById("update_ev_time").value = selectedEvent[7];
+    document.getElementById("eventid").value = selectedEvent[8];
 
-//   }
-// }
+  }
+}
 
-// /* Update Events */
-// function postUpdateEvent(eventid) {
-//   console.log("Update event with id " + eventid);
+/* Update Events */
+function postUpdateEvent(eventid) {
+  console.log("Update event with id " + eventid);
 
-//   events = JSON.parse(localStorage.getItem("events"));
+  events = JSON.parse(localStorage.getItem("events"));
 
-//   selectedEvent = events.filter(event => event[0] == eventid)[0];
+  selectedEvent = events.filter(event => event[0] == eventid)[0];
 
-//   if (selectedEvent != null) {
-//     console.log(selectedEvent);
-//     document.getElementById("update_ev_name").value = selectedEvent[1];
-//     document.getElementById("update_ev_desc").value = selectedEvent[2];
-//     document.getElementById("update_ev_cat").value = selectedEvent[3];
-//     document.getElementById("update_ev_address").value = selectedEvent[4];
-//     document.getElementById("update_ev_loc").value = selectedEvent[5];
-//     document.getElementById("update_ev_date").value = selectedEvent[6];
-//     document.getElementById("update_ev_time").value = selectedEvent[7];
-//     document.getElementById("eventid").value = selectedEvent[8];
-//   }
+  if (selectedEvent != null) {
+    console.log(selectedEvent);
+    document.getElementById("update_ev_name").value = selectedEvent[1];
+    document.getElementById("update_ev_desc").value = selectedEvent[2];
+    document.getElementById("update_ev_cat").value = selectedEvent[3];
+    document.getElementById("update_ev_address").value = selectedEvent[4];
+    document.getElementById("update_ev_loc").value = selectedEvent[5];
+    document.getElementById("update_ev_date").value = selectedEvent[6];
+    document.getElementById("update_ev_time").value = selectedEvent[7];
+    document.getElementById("eventid").value = selectedEvent[8];
+  }
 
-//   var eventid = "eventid";
-//   var updatefd = new FormData();
-//   updatefd.append('action', 'update');
-//   updatefd.append('eventid', eventid.value);
+  var eventid = "eventid";
+  var updatefd = new FormData();
+  updatefd.append('action', 'update');
+  updatefd.append('eventid', eventid.value);
 
-//   // updatefd.append('update_ev_name', update_ev_name.value);
-//   // updatefd.append('update_ev_desc', update_ev_desc.value);
-//   // updatefd.append('update_ev_cat', update_ev_cat.value);
-//   // updatefd.append('update_ev_address', update_ev_address.value);
-//   // updatefd.append('update_ev_loc', update_ev_loc.value);
-//   // updatefd.append('update_ev_date', update_ev_date.value);
-//   // updatefd.append('update_ev_time', update_ev_time.value);
-//   updatefd.append('updateEvent', updateEvent.value);
-//   fetch('api/ws.php?action=updateEvent', {
-//     method: "POST",
-//     body: updatefd,
-//     credentials: 'include',
-//   })
-//     // Force error into console
-//     .then(function (response) {
-//       response.text().then(function (text) {
-//         console.log(text);
-//       });
-//       // HTTP Response Codes
-//       if (response.status === 200) {
-//         loadPage();
-//         // console.log(eventid);
-//       }
-//       if (response.status === 202) {
-//         console.log('Update Successful');
-//       }
-//       if (response.status === 400) {
-//         errormessage('Error: Bad Request');
-//         console.log('Bad Request');
-//         return;
-//       }
-//       if (response.status === 401) {
-//         console.log('Not permitted');
-//         return;
-//       }
-//       // if (response.status === 501) {
-//       //   errormessage('Error: Not implemented');
-//       //   console.log('Not implemented :(');
-//       //   return;
-//       // }
-//     });
-// }
+  // updatefd.append('update_ev_name', update_ev_name.value);
+  // updatefd.append('update_ev_desc', update_ev_desc.value);
+  // updatefd.append('update_ev_cat', update_ev_cat.value);
+  // updatefd.append('update_ev_address', update_ev_address.value);
+  // updatefd.append('update_ev_loc', update_ev_loc.value);
+  // updatefd.append('update_ev_date', update_ev_date.value);
+  // updatefd.append('update_ev_time', update_ev_time.value);
+  updatefd.append('updateEvent', updateEvent.value);
+  fetch('api/ws.php?action=updateEvent', {
+    method: "POST",
+    body: updatefd,
+    credentials: 'include',
+  })
+    // Force error into console
+    .then(function (response) {
+      response.text().then(function (text) {
+        console.log(text);
+      });
+      // HTTP Response Codes
+      if (response.status === 200) {
+        loadPage();
+        // console.log(eventid);
+      }
+      if (response.status === 202) {
+        console.log('Update Successful');
+      }
+      if (response.status === 400) {
+        errormessage('Error: Bad Request');
+        console.log('Bad Request');
+        return;
+      }
+      if (response.status === 401) {
+        console.log('Not permitted');
+        return;
+      }
+      // if (response.status === 501) {
+      //   errormessage('Error: Not implemented');
+      //   console.log('Not implemented :(');
+      //   return;
+      // }
+    });
+}
 
-// /* Delete Events */
-// function deleteRemoveEvent(eventid) {
-//   console.log("Delete event with id " + eventid);
+/* Delete Events */
+function deleteRemoveEvent(eventid) {
+  console.log("Delete event with id " + eventid);
 
-//   events = JSON.parse(localStorage.getItem("events"));
+  events = JSON.parse(localStorage.getItem("events"));
 
-//   selectedEvent = events.filter(event => event[0] == eventid)[0];
+  selectedEvent = events.filter(event => event[0] == eventid)[0];
 
-//   if (selectedEvent != null) {
-//     console.log(selectedEvent);
-//     document.getElementById("update_ev_name").value = selectedEvent[1];
-//     document.getElementById("update_ev_desc").value = selectedEvent[2];
-//     document.getElementById("update_ev_cat").value = selectedEvent[3];
-//     document.getElementById("update_ev_address").value = selectedEvent[4];
-//     document.getElementById("update_ev_loc").value = selectedEvent[5];
-//     document.getElementById("update_ev_date").value = selectedEvent[6];
-//     document.getElementById("update_ev_time").value = selectedEvent[7];
-//   }
+  if (selectedEvent != null) {
+    console.log(selectedEvent);
+    document.getElementById("update_ev_name").value = selectedEvent[1];
+    document.getElementById("update_ev_desc").value = selectedEvent[2];
+    document.getElementById("update_ev_cat").value = selectedEvent[3];
+    document.getElementById("update_ev_address").value = selectedEvent[4];
+    document.getElementById("update_ev_loc").value = selectedEvent[5];
+    document.getElementById("update_ev_date").value = selectedEvent[6];
+    document.getElementById("update_ev_time").value = selectedEvent[7];
+  }
 
-//   var removefd = new FormData();
-//   removefd.append('action', 'deleteRemoveEvent');
-//   removefd.append('eventid', eventid);
+  var removefd = new FormData();
+  removefd.append('action', 'deleteRemoveEvent');
+  removefd.append('eventid', eventid);
 
-//   fetch('api/ws.php?action=removeEvent', {
-//     method: 'POST',
-//     body: removefd,
-//   })
-//     .then(function (response) {
-//       // Force error into console
-//       response.text().then(function (text) {
-//         console.log(text);
-//       });
-//       // HTTP Response Codes
-//       if (response.status == 202) {
-//         loadPage();
-//         successmessage("Success: Removal Successful");
-//       }
-//       if (response.status === 400) {
-//         console.log('Bad Request');
-//         errormessage('Error: Bad Request');
-//         return;
-//       }
-//       if (response.status === 401) {
-//         console.log('Not permitted');
-//         errormessage('Error: Not Permitted');
-//         return;
-//       }
-//     });
-// }
+  fetch('api/ws.php?action=removeEvent', {
+    method: 'POST',
+    body: removefd,
+  })
+    .then(function (response) {
+      // Force error into console
+      response.text().then(function (text) {
+        console.log(text);
+      });
+      // HTTP Response Codes
+      if (response.status == 202) {
+        loadPage();
+        successmessage("Success: Removal Successful");
+      }
+      if (response.status === 400) {
+        console.log('Bad Request');
+        errormessage('Error: Bad Request');
+        return;
+      }
+      if (response.status === 401) {
+        console.log('Not permitted');
+        errormessage('Error: Not Permitted');
+        return;
+      }
+    });
+}
 
 /* ==== User Profile Local Storage ==== */
 window.addEventListener("load", function () {

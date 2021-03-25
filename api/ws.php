@@ -154,64 +154,64 @@ if (isset($_GET["action"])) {
                 if ($result == false) {
                     http_response_code(501);
                 } else {
-                    http_response_code(201);
+                    http_response_code(202);
                     echo json_encode($result);
                 }
             } else {
                 http_response_code(401);
             }
             break;
-            //     // Autofill the update form
-            // case "fillUpdate":
-            //     if (isset($_POST["action"])) {
-            //         $result = $_SESSION['se']->is_logged_in();
-            //         if ($result == true) {
-            //             $evid = $_POST['evid'];
-            //             $details = $db->get_details($evid);
-            //             if ($details == false) {
-            //                 http_response_code(501);
-            //             } else {
-            //                 http_response_code(201);
-            //                 echo json_encode($details);
-            //             }
-            //         }
-            //         // } else {
-            //         //     http_response_code(401);
-            //     }
-            //     break;
-            //     // Update the User Event
-            // case "updateEvent":
-            //     // $event_name = $_POST['event_name'];
-            //     // $event_desc = $_POST['event_desc'];
-            //     // $event_cat = $_POST['event_cat'];
-            //     // $event_address = $_POST['event_address'];
-            //     // $event_loc = $_POST['event_loc'];
-            //     // $event_date = $_POST['event_date'];
-            //     // $event_time = $_POST['event_time'];
-            //     $evid = $_POST['eventid'];
-            //     if (isset($_POST["action"]) == "updateEvent") {
-            //         $db->updateEvent($event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time, $evid);
-            //         http_response_code(202);
-            //     } else {
-            //         if ($_POST["eventid"] == null) {
-            //             http_response_code(404);
-            //         }
-            //     }
-            //     break;
-            //     // Remove User Event
-            // case "removeEvent":
-            //     $evid = $_POST['eventid'];
-            //     if (isset($_POST["action"])) {
-            //         if ($_POST["eventid"] == null) {
-            //             // echo "[$_POST]" die;
-            //             http_response_code(401);
-            //         } else {
-            //             // $evid = $_POST['evid'];
-            //             $db->removeEvent($evid);
-            //             http_response_code(202);
-            //         }
-            //     }
-            //     break;
+            // Autofill the update form
+        case "fillUpdate":
+            if (isset($_POST["action"])) {
+                $result = $_SESSION['se']->is_logged_in();
+                if ($result == true) {
+                    $evid = $_POST['evid'];
+                    $details = $db->get_details($evid);
+                    if ($details == false) {
+                        http_response_code(501);
+                    } else {
+                        http_response_code(201);
+                        echo json_encode($details);
+                    }
+                }
+                // } else {
+                //     http_response_code(401);
+            }
+            break;
+            // Update the User Event
+        case "updateEvent":
+            // $event_name = $_POST['event_name'];
+            // $event_desc = $_POST['event_desc'];
+            // $event_cat = $_POST['event_cat'];
+            // $event_address = $_POST['event_address'];
+            // $event_loc = $_POST['event_loc'];
+            // $event_date = $_POST['event_date'];
+            // $event_time = $_POST['event_time'];
+            $evid = $_POST['eventid'];
+            if (isset($_POST["action"]) == "updateEvent") {
+                $db->updateEvent($event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time, $evid);
+                http_response_code(202);
+            } else {
+                if ($_POST["eventid"] == null) {
+                    http_response_code(404);
+                }
+            }
+            break;
+            // Remove User Event
+        case "removeEvent":
+            $evid = $_POST['eventid'];
+            if (isset($_POST["action"])) {
+                if ($_POST["eventid"] == null) {
+                    // echo "[$_POST]" die;
+                    http_response_code(401);
+                } else {
+                    // $evid = $_POST['evid'];
+                    $db->removeEvent($evid);
+                    http_response_code(202);
+                }
+            }
+            break;
             /* As a default the default case is set to a 501 error so that it is catgetorised as a general error */
         default:
             // http_response_code(501);

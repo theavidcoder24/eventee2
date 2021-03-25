@@ -220,51 +220,51 @@ class dbObj
         return $result;
     }
 
-    // /* -- Update Events Function -- */
-    // public function updateEvent($event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time, $evid)
-    // {
-    //     db_connection();
-    //     try {
-    //         $this->dbconn->beginTransaction();
-    //         /* --- Event Table --- */
-    //         // $UserID = $_SESSION['user_ID'];
-    //         $stmt = $this->dbconn->prepare("UPDATE events SET EventName = :event_name, EventDescription = :event_desc, EventCategory = :event_cat, EventAddress = :event_address, EventLocation = :event_loc, EventDate = :event_date, EventTime = :event_time WHERE EventID = :eid");
-    //         // bind values
-    //         $stmt->bindValue(':event_name', $event_name);
-    //         $stmt->bindValue(':event_desc', $event_desc);
-    //         $stmt->bindValue(':event_cat', $event_cat);
-    //         $stmt->bindValue(':event_address', $event_address);
-    //         $stmt->bindValue(':event_loc', $event_loc);
-    //         $stmt->bindValue(':event_date', $event_date);
-    //         $stmt->bindValue(':event_time', $event_time);
-    //         $stmt->bindValue(":eid", $evid);
-    //         // $stmt->bindValue(':user_ID', $UserID);
+    /* -- Update Events Function -- */
+    public function updateEvent($event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time, $evid)
+    {
+        db_connection();
+        try {
+            $this->dbconn->beginTransaction();
+            /* --- Event Table --- */
+            // $UserID = $_SESSION['user_ID'];
+            $stmt = $this->dbconn->prepare("UPDATE events SET EventName = :event_name, EventDescription = :event_desc, EventCategory = :event_cat, EventAddress = :event_address, EventLocation = :event_loc, EventDate = :event_date, EventTime = :event_time WHERE eventID = :eid");
+            // bind values
+            $stmt->bindValue(':event_name', $event_name);
+            $stmt->bindValue(':event_desc', $event_desc);
+            $stmt->bindValue(':event_cat', $event_cat);
+            $stmt->bindValue(':event_address', $event_address);
+            $stmt->bindValue(':event_loc', $event_loc);
+            $stmt->bindValue(':event_date', $event_date);
+            $stmt->bindValue(':event_time', $event_time);
+            $stmt->bindValue(":eid", $evid);
+            // $stmt->bindValue(':user_ID', $UserID);
 
-    //         // Execute the update statement
-    //         $stmt->execute();
+            // Execute the update statement
+            $stmt->execute();
 
-    //         // Commit changes here 
-    //         $this->dbconn->commit();
-    //     } catch (PDOException $ex) {
-    //         $ex->getMessage();
-    //         exit();
-    //     }
-    // }
+            // Commit changes here 
+            $this->dbconn->commit();
+        } catch (PDOException $ex) {
+            $ex->getMessage();
+            exit();
+        }
+    }
 
-    // /* -- Delete Events Function -- */
-    // public function removeEvent($evid)
-    // {
-    //     db_connection();
-    //     try {
-    //         $this->dbconn->beginTransaction();
-    //         $stmt = $this->dbconn->prepare("DELETE FROM events WHERE EventID = :eid");
-    //         $stmt->bindValue(':eid', $evid);
+    /* -- Delete Events Function -- */
+    public function removeEvent($evid)
+    {
+        db_connection();
+        try {
+            $this->dbconn->beginTransaction();
+            $stmt = $this->dbconn->prepare("DELETE FROM events WHERE eventID = :eid");
+            $stmt->bindValue(':eid', $evid);
 
-    //         $stmt->execute();
-    //         $this->dbconn->commit();
-    //     } catch (PDOException $ex) {
-    //         $this->dbconn->rollBack();
-    //         throw $ex;
-    //     }
-    // }
+            $stmt->execute();
+            $this->dbconn->commit();
+        } catch (PDOException $ex) {
+            $this->dbconn->rollBack();
+            throw $ex;
+        }
+    }
 }

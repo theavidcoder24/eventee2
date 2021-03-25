@@ -1,0 +1,37 @@
+[{
+        "Event_ID": 1,
+        "EventName": "Wings & Waffles",
+        "EventDescription": "Wigs and Waffles a collection of the best food combined into one all you can eat buffet.",
+        "EventAddress": "167 Brown Street",
+        "EventLocation": "South Brisbane",
+        "EventDate": "2020-10-20",
+        "EventTime": "11:00pm",
+        "EventImageCover": "A_Tale_of_Two_Cities.jpg",
+        "EventCategory": "Food & Drink",
+        "UserID": "5"
+    },
+    {
+        "Event_ID": 2,
+        "EventName": "LavaCon",
+        "EventDescription": "LavaCon includes a piece of its own history in the name. It was originally started in Hawaii, hence the use of the word “lava”. It’s both creative and it stands out while also providing a fun piece of trivia for those in the know.",
+        "EventAddress": "195 Lee Street",
+        "EventLocation": "Toowong",
+        "EventDate": "2020-19-20",
+        "EventTime": "11:00pm",
+        "EventImageCover": "A_Tale_of_Two_Cities.jpg",
+        "EventCategory": "Conference",
+        "UserID": "5"
+    },
+    {
+        "Event_ID": 3,
+        "EventName": "Test",
+        "EventDescription": "Test Event includes a piece of its own history in the name. It was originally started in Hawaii, hence the use of the word “lava”. It’s both creative and it stands out while also providing a fun piece of trivia for those in the know.",
+        "EventAddress": "195 Lee Street",
+        "EventLocation": "Toowong",
+        "EventDate": "2020-19-20",
+        "EventTime": "11:00pm",
+        "EventImageCover": "A_Tale_of_Two_Cities.jpg",
+        "EventCategory": "Conference",
+        "UserID": "12"
+    }
+]
