@@ -76,6 +76,7 @@ function hideAll() {
   hideFAQ();
 }
 
+/* Display User Profile Information */
 function displayUserInfo() {
   if (localStorage.getItem('login') == 'true') {
     document.getElementById("login_icon").style.display = "none";
@@ -86,6 +87,7 @@ function displayUserInfo() {
   }
 }
 
+/* Hide User Profile Information */
 function hideUserInfo() {
   if (localStorage.getItem('login') == 'false') {
     document.getElementById("login_icon").style.display = "block";
@@ -96,6 +98,7 @@ function hideUserInfo() {
   }
 }
 
+/* Display User Login */
 function displayLogin() {
   document.getElementById("login_container").style.display = "block";
   hideHome();
@@ -108,10 +111,12 @@ function displayLogin() {
   hideFAQ();
 }
 
+/* Hide User Login */
 function hideLogin() {
   document.getElementById("login_container").style.display = "none";
 }
 
+/* Display User Register */
 function displayRegister() {
   document.getElementById("register_container").style.display = "block";
   hideLogin();
@@ -123,10 +128,12 @@ function displayRegister() {
   hideFAQ();
 }
 
+/* Display User Register */
 function hideRegister() {
   document.getElementById("register_container").style.display = "none";
 }
 
+/* Display User Edit Profile */
 function displayEditProf() {
   document.getElementById("edit_prof").style.display = "block";
   localStorage.setItem("selectedpage", "editprofile");
@@ -139,10 +146,12 @@ function displayEditProf() {
   hideFAQ();
 }
 
+/* Hide User Edit Profile */
 function hideEditProf() {
   document.getElementById("edit_prof").style.display = "none";
 }
 
+/* Display User Events */
 function displayMyEvents() {
   document.getElementById("my_events").style.display = "block";
   hideLogin();
@@ -153,10 +162,12 @@ function displayMyEvents() {
   hideFAQ();
 }
 
+/* Hide User Events */
 function hideMyEvents() {
   document.getElementById("my_events").style.display = "none";
 }
 
+/* Display Create User Events */
 function displayCreateEvent() {
   document.getElementById("create_event").style.display = "block";
   hideLogin();
@@ -168,10 +179,12 @@ function displayCreateEvent() {
   hideFAQ();
 }
 
+/* Hide Create User Events */
 function hideCreateEvent() {
   document.getElementById("create_event").style.display = "none";
 }
 
+/* Display User Community */
 function displayCommunity() {
   document.getElementById("community").style.display = "block";
   hideLogin();
@@ -183,10 +196,12 @@ function displayCommunity() {
   hideFAQ();
 }
 
+/* Hide User Community */
 function hideCommunity() {
   document.getElementById("community").style.display = "none";
 }
 
+/* Display Settings */
 function displaySettings() {
   document.getElementById("settings").style.display = "block";
   hideHome();
@@ -199,10 +214,12 @@ function displaySettings() {
   hideFAQ();
 }
 
+/* Hide Settings */
 function hideSettings() {
   document.getElementById("settings").style.display = "none";
 }
 
+/* Display Frequently Asked Questions */
 function displayFAQ() {
   document.getElementById("faq").style.display = "block";
   hideHome();
@@ -215,6 +232,7 @@ function displayFAQ() {
   hideSettings();
 }
 
+/* Hide Frequently Asked Questions */
 function hideFAQ() {
   document.getElementById("faq").style.display = "none";
 }
@@ -339,11 +357,6 @@ function postLoginFetch() {
         login_details.append('log_pass', log_pass.value);
         localStorage.setItem('LoginEmail', log_email.value);
         sessionStorage.setItem("currentloggedin", log_email);
-        // fetch('api/ws.php?action=is_logged_in', {
-        //   method: 'GET',
-        //   body: login_details,
-        //   credentials: 'include',
-        // })
         console.log('Login Successful');
         localStorage.setItem('LoginEmail', log_email);
         localStorage.getItem('LoginPassword', log_pass);
@@ -374,32 +387,31 @@ function postLoginFetch() {
 
 /* - is logged in Fetch - */
 function isLogged() {
+  loadPage();
   fetch('api/ws.php?action=is_logged_in', {
     method: 'GET',
   })
     // HTTP Response Codes
     .then(function (response) {
-      response.text().then(function (text) {
-        console.log(text);
-      });
+      // response.text().then(function (text) {
+      //   console.log(text);
+      // });
       if (response.status === 202) {
         localStorage.setItem('login', "true");
         if (localStorage.getItem('login') == 'true') {
           console.log('Logged In!!');
           sessionStorage.setItem("currentloggedin", log_email);
           document.getElementById("result").innerHTML = sessionStorage.getItem("currentloggedin");
-
           // LoginEmail - localstorage
           // Check browser support
-          if (typeof (Storage) !== "undefined") {
-            // Store
-            sessionStorage.setItem("currentloggedin", log_email.value);
-            // Retrieve
-            document.getElementById("result").innerHTML = sessionStorage.getItem("currentloggedin");
-          } else {
-            document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
-          }
-          loadPage();
+          // if (typeof (Storage) !== "undefined") {
+          //   // Store
+          //   sessionStorage.setItem("currentloggedin", log_email.value);
+          //   // Retrieve
+          //   document.getElementById("result").innerHTML = sessionStorage.getItem("currentloggedin");
+          // } else {
+          //   document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+          // }
           hideAll();
           displayUserInfo();
         }
@@ -475,15 +487,45 @@ function userLogout() {
     });
 }
 
-/* Create Events */
+/* - Create Events - */
 function postCreateEvents() {
   loadPage();
-  // var errStr = "";
-  // if (event_name.checkValidity() === false) {
-  //   errStr += "Please type a valid name ";
-  //   console.log("Error: Event Name");
-  //   return;
-  // }
+  var errStr = "";
+  if (event_name.checkValidity() === false) {
+    errStr += "Please type a valid name ";
+    console.log("Error: Event Name");
+    return;
+  }
+  if (event_desc.checkValidity() === false) {
+    errStr += "Please type a valid description ";
+    console.log("Error: Event Name");
+    return;
+  }
+  if (event_cat.checkValidity() === false) {
+    errStr += "Please type a valid category ";
+    console.log("Error: Event Name");
+    return;
+  }
+  if (event_address.checkValidity() === false) {
+    errStr += "Please type a valid address ";
+    console.log("Error: Event Name");
+    return;
+  }
+  if (event_loc.checkValidity() === false) {
+    errStr += "Please type a valid location ";
+    console.log("Error: Event Name");
+    return;
+  }
+  if (event_date.checkValidity() === false) {
+    errStr += "Please type a valid date ";
+    console.log("Error: Event Name");
+    return;
+  }
+  if (event_time.checkValidity() === false) {
+    errStr += "Please type a valid time ";
+    console.log("Error: Event Name");
+    return;
+  }
   var fd = new FormData();
   fd.append('action', 'createEvents');
   fd.append('event_name', event_name.value);
@@ -505,12 +547,6 @@ function postCreateEvents() {
         console.log(text);
       });
       // HTTP Response Codes
-      if (response.status === 201) {
-        console.log('Creation Successful');
-        successmessage("Success: Event Created!");
-        loadPage();
-        return;
-      }
       if (response.status === 202) {
         console.log('Creation Successful');
         successmessage("Success: Event Created!");
@@ -535,7 +571,7 @@ function postCreateEvents() {
   return false;
 }
 
-/* Display Events */
+/* - Display Events - */
 function displayEvents() {
   loadPage();
   // Define output string that will display the database data
@@ -551,13 +587,13 @@ function displayEvents() {
         console.log(data);
         data.forEach(row => {
           outStr +=
-            '<tr><td>' + row.EventName +
-            '</td><td>' + row.EventDescription +
-            '</td><td>' + row.EventCategory +
-            '</td><td>' + row.EventAddress +
-            '</td><td>' + row.EventLocation +
-            '</td><td>' + row.EventDate +
-            '</td><td>' + row.EventTime +
+            '<tr><td>' + row.eventName +
+            '</td><td>' + row.eventDescription +
+            '</td><td>' + row.eventCategory +
+            '</td><td>' + row.eventAddress +
+            '</td><td>' + row.eventLocation +
+            '</td><td>' + row.eventDate +
+            '</td><td>' + row.eventTime +
             '</td><td>' + row.eventID +
             '</td><td><button href="#update-events" class="modal-trigger" onclick="fillUpdate(' + row.eventID + ')" value="' + row.eventID + '"><i class="material-icons">edit</i></button>' +
             '</td><td>' + '<button onclick="deleteRemoveEvent(' + row.eventID + ')" value="' + row.eventID + '"><i class="material-icons">delete</i></button>' +
@@ -571,8 +607,7 @@ function displayEvents() {
 // function getattendees()
 // SELECT * FROM users INNER JOIN attendees ON attendees.userID = users.userID
 
-
-/* Autofill Update Form */
+/* - Autofill Update Form - */
 function fillUpdate(eventid) {
   console.log("Fill event with id " + eventid);
 
@@ -640,8 +675,8 @@ function postUpdateEvent(eventid) {
       });
       // HTTP Response Codes
       if (response.status === 200) {
-        loadPage();
-        // console.log(eventid);
+        // loadPage();
+        console.log(eventid);
       }
       if (response.status === 202) {
         console.log('Update Successful');
@@ -718,7 +753,8 @@ window.addEventListener("load", function () {
   log_name_e.value = localStorage.getItem("log_name_e");
   log_email_e.value = localStorage.getItem("log_email_e");
   log_phone_e.value = localStorage.getItem("log_phone_e");
-  if (localStorage.getItem("log_name_e", "log_email_e", "log_phone_e") == null) {
+  log_pass_e.value = localStorage.getItem("log_pass_e");
+  if (localStorage.getItem("log_name_e", "log_email_e", "log_phone_e", "log_pass_e") == null) {
     checkProf.checked = false;
   } else {
     checkProf.checked = true;
@@ -730,11 +766,13 @@ function setLocal() {
     localStorage.setItem("log_name_e", log_name_e.value);
     localStorage.setItem("log_email_e", log_email_e.value);
     localStorage.setItem("log_phone_e", log_phone_e.value);
+    localStorage.setItem("log_pass_e", log_pass_e.value);
 
   } else {
     localStorage.removeItem("log_name_e");
     localStorage.removeItem("log_email_e");
     localStorage.removeItem("log_phone_e");
+    localStorage.removeItem("log_pass_e");
   }
 }
 
@@ -762,17 +800,14 @@ function savePhone(checkProf) {
   }
 }
 
-// function saveLogout() {
-//     if (localStorage.getItem('login') == 'false') {
-//       userLogout();
-//       hideUserInfo();
-//   }
-// }
+/* Saves the user's password input */
+function savePass(checkProf) {
+  if (checkProf.checked == true) {
+    var save = document.getElementById("log_pass_e");
+    localStorage.setItem("log_pass_e", log_pass_e.value);
+  }
+}
 
-// function saveVName() {
-//   var save = document.getElementById("fullnameV");
-//   localStorage.setItem("fullnameV", fullnameV.value);
-// }
 
 /* ==== Switch Dark Mode Theme + Local Storage ==== */
 // Onload of page

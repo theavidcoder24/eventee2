@@ -8,7 +8,7 @@ class sessObj
         db_connection();
         if ("login" == true) {
             if (!isset($_SESSION['currentloggedin'])) {
-                echo "Welcome " . $_SESSION['currentloggedin'];
+                // echo "Welcome " . $_SESSION['currentloggedin'];
                 // exit();
                 return true;
             }

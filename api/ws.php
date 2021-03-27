@@ -25,7 +25,6 @@ if (!isset($_SESSION['se'])) {
     $_SESSION['se'] = new sessObj;
 }
 
-
 /* -- Rate Limit 24 Hour Check -- */
 if ($_SESSION['se']->Rate24HourCheck() === false) {
     http_response_code(429); // Too Many Requests!
@@ -120,9 +119,6 @@ if (isset($_GET["action"])) {
             } else {
                 http_response_code(401);
             }
-            // } else {
-            //     http_response_code(501);
-            // }
 
             break;
             // Check if user is logged in
@@ -139,7 +135,6 @@ if (isset($_GET["action"])) {
             // Log user out
         case "logout":
             session_destroy();
-            // $result->do_logout();
             http_response_code(202);
             break;
 
@@ -197,7 +192,7 @@ if (isset($_GET["action"])) {
             break;
             // Display User Events
         case "displayEvents":
-            if ($_SESSION['se']->is_logged_in()) {
+            // if ($_SESSION['se']->is_logged_in()) {
                 $result = $db->displayEvents();
                 if ($result == false) {
                     http_response_code(501);
@@ -205,9 +200,9 @@ if (isset($_GET["action"])) {
                     http_response_code(202);
                     echo json_encode($result);
                 }
-            } else {
-                http_response_code(401);
-            }
+            // } else {
+            //     http_response_code(401);
+            // }
             break;
             // Autofill the update form
         case "fillUpdate":
