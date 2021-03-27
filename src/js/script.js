@@ -7,12 +7,12 @@ window.onload = function () {
   isLogged();
   console.log(localStorage.getItem("login"));
   console.log(localStorage.getItem("LoginEmail"));
-  // if (localStorage.getItem('login') == 'true') {
-  //   // isLogged();
-  // }
-  // if (localStorage.getItem('login') == 'false') {
-  //   userLogout();
-  // }
+  if (localStorage.getItem('login') == 'true') {
+    isLogged();
+  }
+  if (localStorage.getItem('login') == 'false') {
+    userLogout();
+  }
 }
 
 /* Prevent Form Redirect */
@@ -449,7 +449,7 @@ function userLogout() {
         console.log("Logout Success");
         successmessage("Success, You're Logged Out");
         localStorage.setItem('login', "false");
-        // sessionStorage.clear();
+        sessionStorage.clear();
         hideUserInfo();
       }
       if (response.status === 401) {
@@ -464,9 +464,9 @@ function userLogout() {
       if (response.status === 429) {
         console.log('Rate limit exceeded');
       }
-      else {
-        errormessage("Error - Internal Server error not logged out");
-      }
+      // else {
+      //   errormessage("Error - Internal Server error not logged out");
+      // }
     })
     .catch(function (err) {
       console.log("Connection unavailable");
