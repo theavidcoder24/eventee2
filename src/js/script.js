@@ -331,6 +331,7 @@ function postLoginFetch() {
       if (response.status === 202) {
         localStorage.setItem('login', "true");
         successmessage('Yay Successfully Logged in!');
+        displayUserInfo();
         var log_email = document.getElementById("log_email");
         var log_pass = document.getElementById("log_pass");
         var login_details = new FormData();
