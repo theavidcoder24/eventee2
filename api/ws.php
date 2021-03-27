@@ -54,6 +54,36 @@ if (isset($_GET["action"])) {
                 $browser = $_SERVER['HTTP_USER_AGENT'];
                 $ip = $_SERVER['REMOTE_ADDR'];
                 $action_type = $_POST['register_user'];
+                /* - Server Validation - */
+                // Check if input field is empty
+                if ($reg_name == "") {
+                    $errorMsg = "Error: Full Name Field is Empty";
+                    die;
+                }
+                if ($reg_phone == "") {
+                    $errorMsg = "Error: Phone Number Field is Empty";
+                    die;
+                }
+                // Check if the phone number field is numeric
+                elseif (is_numeric(trim($reg_ph)) == false) {
+                    $errorMsg = "Error: Please enter numeric value";
+                    die;
+                }
+                if ($reg_dob == "") {
+                    $errorMsg = "Error: Date of Birth Field is Empty";
+                    die;
+                }
+                if ($reg_email == "") {
+                    $errorMsg = "Error: Email Field is Empty";
+                    die;
+                } elseif (!preg_match("/^[_\.0-9a-zA-Z-]+@([0-9a-zA-Z][0-9a-zA-Z-]+\.)+[a-zA-Z]{2,50}/i", $reg_email)) {
+                    $errorMsg = 'error : You did not enter a valid email.';
+                    die;
+                }
+                if ($reg_pass == "") {
+                    $errorMsg = "Error: Password Field is Empty";
+                    die;
+                }
                 $db->register($reg_name, $reg_phone, $reg_email, $reg_dob, $reg_pass, $date, $browser, $ip, $action_type);
                 http_response_code(202);
             } else {
@@ -71,22 +101,20 @@ if (isset($_GET["action"])) {
                 $action_type = $_POST['login_user'];
                 /* - Server Validation - */
                 // Check if input field is empty
-                // if ($log_email == "") {
-                //     $errorMsg = "Error: Email Field is Empty";
-                //     die;
-                // }
-                // // Check if email field is valid
-                // elseif (!preg_match("/^[_\.0-9a-zA-Z-]+@([0-9a-zA-Z][0-9a-zA-Z-]+\.)+[a-zA-Z]{2,50}/i", $log_email)) {
-                //     $errorMsg = 'error : You did not enter a valid email.';
-                //     die;
-                // }
-                // // Check if input field is empty
-                // if ($log_pass == "") {
-                //     $errorMsg = "Error: Password Field is Empty";
-                //     die;
-                // }
-                // if ($_SESSION['login'] == 'true') {
-
+                if ($log_email == "") {
+                    $errorMsg = "Error: Email Field is Empty";
+                    die;
+                }
+                // Check if email field is valid
+                elseif (!preg_match("/^[_\.0-9a-zA-Z-]+@([0-9a-zA-Z][0-9a-zA-Z-]+\.)+[a-zA-Z]{2,50}/i", $log_email)) {
+                    $errorMsg = 'error : You did not enter a valid email.';
+                    die;
+                }
+                // Check if input field is empty
+                if ($log_pass == "") {
+                    $errorMsg = "Error: Password Field is Empty";
+                    die;
+                }
                 $db->login($log_email, $log_pass, $date, $browser, $ip, $action_type);
                 http_response_code(202);
             } else {
@@ -127,19 +155,39 @@ if (isset($_GET["action"])) {
                 $event_time = $_POST['event_time'];
                 /* - Server Validation - */
                 // Check if input field is empty
-                // if ($event_name == "") {
-                //     $errorMsg = "Error: Event Name Field is Empty";
-                //     die;
-                // }
-                // if ($event_time == "") {
-                //     $errorMsg = "Error: Event Description Field is Empty";
-                //     die;
-                // }
-                // // Check if the phone number field is numeric
-                // elseif (is_numeric(trim($event_time)) == false) {
-                //     $errorMsg = "Error: Please enter numeric value";
-                //     die;
-                // }
+                if ($event_name == "") {
+                    $errorMsg = "Error: Event Name Field is Empty";
+                    die;
+                }
+                if ($event_desc == "") {
+                    $errorMsg = "Error: Event Description Field is Empty";
+                    die;
+                }
+                if ($event_cat == "") {
+                    $errorMsg = "Error: Event Category Field is Empty";
+                    die;
+                }
+                if ($event_address == "") {
+                    $errorMsg = "Error: Event Address Field is Empty";
+                    die;
+                }
+                if ($event_loc == "") {
+                    $errorMsg = "Error: Event Location Field is Empty";
+                    die;
+                }
+                if ($event_date == "") {
+                    $errorMsg = "Error: Event Name Field is Empty";
+                    die;
+                }
+                if ($event_time == "") {
+                    $errorMsg = "Error: Event Description Field is Empty";
+                    die;
+                }
+                // Check if the phone number field is numeric
+                elseif (is_numeric(trim($event_time)) == false) {
+                    $errorMsg = "Error: Please enter numeric value";
+                    die;
+                }
                 // Call the function
                 $db->createEvents($event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time);
                 http_response_code(202);
@@ -181,13 +229,13 @@ if (isset($_GET["action"])) {
             break;
             // Update the User Event
         case "updateEvent":
-            // $event_name = $_POST['event_name'];
-            // $event_desc = $_POST['event_desc'];
-            // $event_cat = $_POST['event_cat'];
-            // $event_address = $_POST['event_address'];
-            // $event_loc = $_POST['event_loc'];
-            // $event_date = $_POST['event_date'];
-            // $event_time = $_POST['event_time'];
+            $event_name = $_POST['event_name'];
+            $event_desc = $_POST['event_desc'];
+            $event_cat = $_POST['event_cat'];
+            $event_address = $_POST['event_address'];
+            $event_loc = $_POST['event_loc'];
+            $event_date = $_POST['event_date'];
+            $event_time = $_POST['event_time'];
             $evid = $_POST['eventid'];
             if (isset($_POST["action"]) == "updateEvent") {
                 $db->updateEvent($event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time, $evid);
