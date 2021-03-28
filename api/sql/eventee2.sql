@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Mar 27, 2021 at 10:27 PM
+-- Generation Time: Mar 28, 2021 at 12:43 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.3.12
 
@@ -56,7 +56,13 @@ CREATE TABLE IF NOT EXISTS `changelog` (
 --
 
 INSERT INTO `changelog` (`date`, `browser`, `ip`, `action_type`) VALUES
-('2021-03-24 02:34:33.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36', '::1', 'register');
+('2021-03-24 02:34:33.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36', '::1', 'register'),
+('2021-03-28 00:19:07.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36', '::1', 'undefined'),
+('2021-03-28 00:20:31.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36', '::1', 'undefined'),
+('2021-03-28 00:25:36.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36', '::1', 'createEvent'),
+('2021-03-28 02:47:17.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36', '::1', 'register'),
+('2021-03-28 12:27:36.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36', '::1', 'createEvent'),
+('2021-03-28 12:29:43.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36', '::1', 'register');
 
 -- --------------------------------------------------------
 
@@ -75,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `events` (
   `eventDate` char(15) NOT NULL,
   `eventTime` char(10) NOT NULL,
   PRIMARY KEY (`eventID`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `events`
@@ -83,9 +89,8 @@ CREATE TABLE IF NOT EXISTS `events` (
 
 INSERT INTO `events` (`eventID`, `eventName`, `eventDescription`, `eventCategory`, `eventAddress`, `eventLocation`, `eventDate`, `eventTime`) VALUES
 (1, 'Library Meetup', 'Loremjskjksjkfjds', 'Food & Drink', '676 Hjs', 'brisbane', '18 March', '11:20AM'),
-(3, 'fgfgfgf', 'gfgfg', '', 'fgf', 'gfgf', 'Mar 30, 2021', '12:40 PM'),
 (7, 'Pool', 'klsdk', 'Family', 'kdlk', 'dklkdlk', 'Mar 26, 2021', '01:00 PM'),
-(12, '', '', '', '', '', '', '');
+(16, 'Fish and Chips', 'fhjdhfhj', 'Food & Drink', 'djkfjfkjk', 'brisbane', '27 Oct', '2:00PM');
 
 -- --------------------------------------------------------
 
@@ -101,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `login` (
   `userID` int(10) UNSIGNED NOT NULL,
   PRIMARY KEY (`loginID`),
   KEY `userID` (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `login`
@@ -124,7 +129,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `PhoneNumber` char(10) NOT NULL,
   `DateOfBirth` char(15) NOT NULL,
   PRIMARY KEY (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
@@ -132,7 +137,9 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`userID`, `FullName`, `PhoneNumber`, `DateOfBirth`) VALUES
 (29, 'Kira Light', '0466988766', '6 Oct 2001'),
-(31, 'Jessie Pierce', '046656565', 'Mar 03, 2021');
+(31, 'Jessie Pierce', '046656565', 'Mar 03, 2021'),
+(32, 'Leina', 'sds', 'Mar 31, 2021'),
+(33, 'sddd', '04545', 'Mar 31, 2021');
 
 --
 -- Constraints for dumped tables
