@@ -233,7 +233,7 @@ if (isset($_GET["action"])) {
             break;
             /* - Update the User Event - */
         case "updateEvent":
-            if ($_POST['action'] == 'update') {
+            if (isset($_POST["action"])) {
                 $evid = $_GET['evid'];
                 echo "Record updated successfully";
                 $db->updateEvent($event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time, $evid);
