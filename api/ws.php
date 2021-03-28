@@ -3,8 +3,8 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Credentials: true');
 
 // All echo statements will be json_encoded
-// header("Access-Control-Allow-Headers", "content-type");
-// header('Content-Type: application/json');
+header("Access-Control-Allow-Headers", "content-type");
+header('Content-Type: application/json');
 
 // Set the timezone to Australia 
 date_default_timezone_set('Australia/Brisbane');
@@ -25,17 +25,17 @@ if (!isset($_SESSION['se'])) {
     $_SESSION['se'] = new sessObj;
 }
 
-// /* -- Rate Limit 24 Hour Check -- */
-// if ($_SESSION['se']->Rate24HourCheck() === false) {
-//     http_response_code(429); // Too Many Requests!
-//     die();
-// }
+/* -- Rate Limit 24 Hour Check -- */
+if ($_SESSION['se']->Rate24HourCheck() === false) {
+    http_response_code(429); // Too Many Requests!
+    die();
+}
 
-// /* -- Referrer -- */
-// if ($_SESSION['se']->is_referrer() == false) {
-//     http_response_code(400);
-//     die();
-// }
+/* -- Referrer -- */
+if ($_SESSION['se']->is_referrer() == false) {
+    http_response_code(400);
+    die();
+}
 
 /* -- Base Case -- */
 /* The base case serves as the main section where the api actions will be referenced from the fetch statements in 'script.js'. As default the isset is defined as GET so that if a case is defined as a GET action it will run automatically as for POST actions it requires another extra line in order to be recognised as a POST */
@@ -124,7 +124,6 @@ if (isset($_GET["action"])) {
             } else {
                 http_response_code(401);
             }
-
             break;
             /* - Check if user is logged in/status of login - */
         case "is_logged_in":
@@ -136,13 +135,11 @@ if (isset($_GET["action"])) {
                 http_response_code(401);
             }
             break;
-
             /* - Log user out - */
         case "logout":
             session_destroy();
             http_response_code(202);
             break;
-
             /* - Create Events - */
         case "createEvents":
             if (isset($_POST["action"])) {
@@ -233,7 +230,7 @@ if (isset($_GET["action"])) {
         case "updateEvent":
             if (isset($_POST["action"])) {
                 $evid = $_POST['evid'];
-                $db->updateEvent($evid, $event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time);
+                $result = $db->updateEvent($evid, $event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time);
                 // echo "Record updated successfully";
                 http_response_code(202);
             } else {
@@ -260,10 +257,8 @@ if (isset($_GET["action"])) {
             $evid = $_POST['eventid'];
             if (isset($_POST["action"])) {
                 if ($_POST["eventid"] == null) {
-                    // echo "[$_POST]" die;
                     http_response_code(401);
                 } else {
-                    // $evid = $_POST['evid'];
                     $db->removeEvent($evid);
                     http_response_code(202);
                 }

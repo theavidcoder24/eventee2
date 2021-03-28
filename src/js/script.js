@@ -5,7 +5,7 @@
 window.onload = function () {
   loadPage();
   console.log(localStorage.getItem("login"));
-  console.log(localStorage.getItem("LoginEmail"));
+  // console.log(localStorage.getItem("LoginEmail"));
   if (localStorage.getItem('login') == 'true') {
     isLogged();
   }
@@ -356,8 +356,6 @@ function postLoginFetch() {
         localStorage.setItem('LoginEmail', log_email.value);
         sessionStorage.setItem("currentloggedin", log_email);
         console.log('Login Successful');
-        localStorage.setItem('LoginEmail', log_email);
-        localStorage.getItem('LoginPassword', log_pass);
       }
       if (response.status === 401) {
         console.log('Not permitted');
@@ -396,10 +394,11 @@ function isLogged() {
       // });
       if (response.status === 202) {
         localStorage.setItem('login', "true");
+        localStorage.setItem('LoginEmail', log_email);     
         if (localStorage.getItem('login') == 'true') {
           console.log('Logged In!!');
           sessionStorage.setItem("currentloggedin", log_email);
-          document.getElementById("result").innerHTML = sessionStorage.getItem("currentloggedin");
+          // document.getElementById("result").innerHTML = sessionStorage.getItem("currentloggedin");
           // LoginEmail - localstorage
           // Check browser support
           // if (typeof (Storage) !== "undefined") {
