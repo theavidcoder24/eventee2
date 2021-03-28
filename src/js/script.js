@@ -626,7 +626,7 @@ function fillUpdate(eventid) {
     document.getElementById("update_ev_loc").value = selectedEvent[5];
     document.getElementById("update_ev_date").value = selectedEvent[6];
     document.getElementById("update_ev_time").value = selectedEvent[7];
-    document.getElementById("eventid").value = selectedEvent[8];
+    // document.getElementById("eventid").value = selectedEvent[8];
   }
 }
 
@@ -639,34 +639,34 @@ function postUpdateEvent(eventid) {
   selectedEvent = events.filter(event => event[0] == eventid)[0];
 
   var eventid = "eventid";
-  
-  if (selectedEvent != null) {
-    console.log(selectedEvent);
-    document.getElementById("update_ev_name").value = selectedEvent[1];
-    document.getElementById("update_ev_desc").value = selectedEvent[2];
-    document.getElementById("update_ev_cat").value = selectedEvent[3];
-    document.getElementById("update_ev_address").value = selectedEvent[4];
-    document.getElementById("update_ev_loc").value = selectedEvent[5];
-    document.getElementById("update_ev_date").value = selectedEvent[6];
-    document.getElementById("update_ev_time").value = selectedEvent[7];
-    document.getElementById("eventid").value = selectedEvent[8];
-  }
+
+  // if (selectedEvent != null) {
+  //   console.log(selectedEvent);
+  //   document.getElementById("update_ev_name").value = selectedEvent[1];
+  //   document.getElementById("update_ev_desc").value = selectedEvent[2];
+  //   document.getElementById("update_ev_cat").value = selectedEvent[3];
+  //   document.getElementById("update_ev_address").value = selectedEvent[4];
+  //   document.getElementById("update_ev_loc").value = selectedEvent[5];
+  //   document.getElementById("update_ev_date").value = selectedEvent[6];
+  //   document.getElementById("update_ev_time").value = selectedEvent[7];
+  //   // document.getElementById("eventid").value = selectedEvent[8];
+  // }
 
   var updatefd = new FormData();
   updatefd.append('action', 'update');
   updatefd.append('eventid', eventid.value);
-  updatefd.append('update_ev_name', update_ev_name.value);
-  updatefd.append('update_ev_desc', update_ev_desc.value);
-  updatefd.append('update_ev_cat', update_ev_cat.value);
-  updatefd.append('update_ev_address', update_ev_address.value);
-  updatefd.append('update_ev_loc', update_ev_loc.value);
-  updatefd.append('update_ev_date', update_ev_date.value);
-  updatefd.append('update_ev_time', update_ev_time.value);
+  // updatefd.append('update_ev_name', update_ev_name.value);
+  // updatefd.append('update_ev_desc', update_ev_desc.value);
+  // updatefd.append('update_ev_cat', update_ev_cat.value);
+  // updatefd.append('update_ev_address', update_ev_address.value);
+  // updatefd.append('update_ev_loc', update_ev_loc.value);
+  // updatefd.append('update_ev_date', update_ev_date.value);
+  // updatefd.append('update_ev_time', update_ev_time.value);
   updatefd.append('updateEvent', updateEvent.value);
   fetch('api/ws.php?action=updateEvent', {
     method: "POST",
     body: updatefd,
-    credentials: 'include',
+    // credentials: 'include',
   })
     // Force error into console
     .then(function (response) {

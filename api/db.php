@@ -86,7 +86,6 @@ class dbObj
     public function login($log_email, $log_pass, $date, $browser, $ip, $action_type)
     {
         db_connection();
-        // session_start();
         try {
             $this->dbconn->beginTransaction();
             $log_email = ($_POST['log_email']);
@@ -222,21 +221,22 @@ class dbObj
     }
 
     /* -- Update Events Function -- */
-    public function updateEvent($event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time, $evid)
+    public function updateEvent($evid, $event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time)
+    // 
     {
         db_connection();
         try {
             $this->dbconn->beginTransaction();
             /* --- Event Table --- */
-            $stmt = $this->dbconn->prepare("UPDATE events SET eventName = :event_name, eventDescription = :event_desc, eventCategory = :event_cat, eventAddress = :event_address, eventLocation = :event_loc, eventDate = :event_date, eventTime = :event_time WHERE eventID = :eid");
+            $stmt = $this->dbconn->prepare("UPDATE events SET eventName = :update_ev_name, eventDescription = :update_ev_desc, eventCategory = :update_ev_cat, eventAddress = :update_ev_address, eventLocation = :update_ev_loc, eventDate = :update_ev_date, eventTime = :update_ev_time WHERE eventID = :eid");
             // bind values
-            $stmt->bindValue(':event_name', $event_name);
-            $stmt->bindValue(':event_desc', $event_desc);
-            $stmt->bindValue(':event_cat', $event_cat);
-            $stmt->bindValue(':event_address', $event_address);
-            $stmt->bindValue(':event_loc', $event_loc);
-            $stmt->bindValue(':event_date', $event_date);
-            $stmt->bindValue(':event_time', $event_time);
+            $stmt->bindValue(':update_ev_name', $event_name);
+            $stmt->bindValue(':update_ev_desc', $event_desc);
+            $stmt->bindValue(':update_ev_cat', $event_cat);
+            $stmt->bindValue(':update_ev_address', $event_address);
+            $stmt->bindValue(':update_ev_loc', $event_loc);
+            $stmt->bindValue(':update_ev_date', $event_date);
+            $stmt->bindValue(':update_ev_time', $event_time);
             $stmt->bindValue(":eid", $evid);
 
             // Execute the update statement

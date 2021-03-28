@@ -3,8 +3,8 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Credentials: true');
 
 // All echo statements will be json_encoded
-header("Access-Control-Allow-Headers", "content-type");
-header('Content-Type: application/json');
+// header("Access-Control-Allow-Headers", "content-type");
+// header('Content-Type: application/json');
 
 // Set the timezone to Australia 
 date_default_timezone_set('Australia/Brisbane');
@@ -227,19 +227,19 @@ if (isset($_GET["action"])) {
                         echo json_encode($details);
                     }
                 }
-                // } else {
-                //     http_response_code(401);
             }
             break;
             /* - Update the User Event - */
         case "updateEvent":
             if (isset($_POST["action"])) {
-                $evid = $_GET['evid'];
+                $evid = $_POST['evid'];
+                $details = $db->get_details($evid);
+                $db->updateEvent($evid, $event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time);
                 echo "Record updated successfully";
-                $db->updateEvent($event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time, $evid);
                 http_response_code(202);
             } else {
                 http_response_code(404);
+                echo "Nope";
             }
             // $event_name = $_POST['update_ev_name'];
             // $event_desc = $_POST['update_ev_desc'];
