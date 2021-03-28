@@ -233,13 +233,13 @@ if (isset($_GET["action"])) {
             break;
             /* - Update the User Event - */
         case "updateEvent":
-            $event_name = $_POST['event_name'];
-            $event_desc = $_POST['event_desc'];
-            $event_cat = $_POST['event_cat'];
-            $event_address = $_POST['event_address'];
-            $event_loc = $_POST['event_loc'];
-            $event_date = $_POST['event_date'];
-            $event_time = $_POST['event_time'];
+            $event_name = $_POST['update_ev_name'];
+            $event_desc = $_POST['update_ev_desc'];
+            $event_cat = $_POST['update_ev_cat'];
+            $event_address = $_POST['update_ev_address'];
+            $event_loc = $_POST['update_ev_loc'];
+            $event_date = $_POST['update_ev_date'];
+            $event_time = $_POST['update_ev_time'];
             $evid = $_POST['eventid'];
             // $evid = $_POST['evid'];
             if (isset($_POST["action"]) == "updateEvent") {

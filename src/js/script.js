@@ -453,9 +453,9 @@ function userLogout() {
   })
     .then(function (response) {
       // Force error into console
-      response.text().then(function (text) {
-        console.log(text);
-      });
+      // response.text().then(function (text) {
+      //   console.log(text);
+      // });
       // HTTP Response Codes
       if (response.status === 202) {
         console.log("Logout Success");
@@ -654,13 +654,13 @@ function postUpdateEvent(eventid) {
   var updatefd = new FormData();
   updatefd.append('action', 'update');
   updatefd.append('eventid', eventid.value);
-  // updatefd.append('update_ev_name', update_ev_name.value);
-  // updatefd.append('update_ev_desc', update_ev_desc.value);
-  // updatefd.append('update_ev_cat', update_ev_cat.value);
-  // updatefd.append('update_ev_address', update_ev_address.value);
-  // updatefd.append('update_ev_loc', update_ev_loc.value);
-  // updatefd.append('update_ev_date', update_ev_date.value);
-  // updatefd.append('update_ev_time', update_ev_time.value);
+  updatefd.append('update_ev_name', update_ev_name.value);
+  updatefd.append('update_ev_desc', update_ev_desc.value);
+  updatefd.append('update_ev_cat', update_ev_cat.value);
+  updatefd.append('update_ev_address', update_ev_address.value);
+  updatefd.append('update_ev_loc', update_ev_loc.value);
+  updatefd.append('update_ev_date', update_ev_date.value);
+  updatefd.append('update_ev_time', update_ev_time.value);
   updatefd.append('updateEvent', updateEvent.value);
   fetch('api/ws.php?action=updateEvent', {
     method: "POST",
@@ -689,11 +689,11 @@ function postUpdateEvent(eventid) {
         console.log('Not permitted');
         return;
       }
-      // if (response.status === 501) {
-      //   errormessage('Error: Not implemented');
-      //   console.log('Not implemented :(');
-      //   return;
-      // }
+      if (response.status === 501) {
+        errormessage('Error: Not implemented');
+        console.log('Not implemented :(');
+        return;
+      }
     });
 }
 

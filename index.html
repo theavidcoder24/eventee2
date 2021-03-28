@@ -560,7 +560,7 @@
                             <th>Event Location</th>
                             <th>Event Date</th>
                             <th>Event Time</th>
-                            <table id="eventsTable">
+                            <table id="eventsTable" class="striped">
                                 <!-- List user events -->
                             </table>
                         </table>
@@ -717,7 +717,7 @@
                         <i class="material-icons prefix">schedule</i>
                         <input type="text" id="update_ev_time" class="timepicker" placeholder="Event Time">
                     </div>
-                    <input type="hidden" name="eventID" value="" id="eventID">
+                    <input type="hidden" name="eventid" value="" id="eventid">
                     <input type="hidden" name="action" value="update" id="updateEvent">
                     <button class="btn waves-effect waves-light" type="submit" onclick="postUpdateEvent()">Update
                         Event</button>
