@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help Page</title>
+    <!-- Icons + Manifest -->
+    <link rel="icon" href="src/images/Eventee Calendar transparent no text.png" type="image/gif" sizes="16x16">
+    <link rel="apple-touch-icon" href="src/images/Eventee Calendar transparent no text.png">
+
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="eventee">
+    <meta name="apple-mobile-web-app-title" content="eventee">
+    <meta name="msapplication-starturl" content="/">
+
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Materialize jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- Eventee Scripts -->
+    <script defer src="src/js/script.js"></script>
+    <script defer src="src/js/regScript.js"></script>
+    <!-- Google Font API -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Eventee CSS -->
+    <link href="src/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <!---- Navigation ---->
+            <ul id="slide-out" class="sidenav">
+                <li>
+                    <div class="user-view">
+                        <div class="background">
+                            <img src="src/images/photo.jpg">
+                        </div>
+                        <a href="#user"><img class="circle" src="src/images/blank-profile.png"></a>
+                        <a href="#name"><span id="reg_fullname" class="white-text name"></span></a>
+                        <a href="#email"><span id="reg_email" class="white-text email"></span></a>
+                    </div>
+                </li>
+                <li><a href="#view-prof" class="modal-trigger"><i class="material-icons">groups</i>View Profile</a></li>
+                <li id="createMenuItem"><a href="#create-event" class="modal-trigger"><i
+                            class="material-icons">add_circle</i>Create
+                        Event</a>
+                </li>
+                <li><a href="#community" class="modal-trigger"><i class="material-icons">forum</i>Community</a></li>
+                <li>
+                    <div class="divider"></div>
+                </li>
+                <li><a href="#settings" class="modal-trigger"><i class="material-icons">settings</i>Settings</a></li>
+                <li><a href="#faq" class="modal-trigger"><i class="material-icons">contact_support</i>Eventee FAQ</a>
+                </li>
+                <li id="logoutMenuItem"><a onclick="userLogout()"><i class="material-icons">exit_to_app</i>Logout</a>
+                </li>
+            </ul>
+            <a href="#" data-target="slide-out" class="sidenav-trigger"><i id="menu-icon"
+                    class="material-icons">menu</i></a>
+        </header>
+        <div id="helpContainer">
+            <h2>HTML Help Document</h2>
+            <h4>Manually Install Project</h4>
+            <p>Clone the repository onto the your local machine and start your web server, whether it be WAMP or MAMP.
+                Create a new databse in your database software of choice e.g. MongoDB or MySQL phpmyadmin, name the
+                database "eventee" then import the SQL file that contains all teh database tables and data.</p>
+            <br>
+            <h4>Turn on Web Server</h4>
+            <p>In the terminal, run npm start to start the build server. To start the production server you must type in
+                "npm run build" to the git bash command line. Follow the node instructions to set up system and server.
+                You can then follow it with "npm start"</p>
+            <br>
+            <h4>Navigating the Application</h4>
+            <p>There are 10 key functions within the app:</p>
+            <ol>
+                <li>Register - The unregistered user will be able to input their details in the form that will show
+                    itself once the user clicks "Register"</li>
+                <li> Login - by clicking the icon in the top right corner the user will be able to input their details
+                    and login</li>
+                <li> Is Logged In - because of how this application is expected to be utilized the application can be
+                    utilized by both logged in and non-logged in users, although a few functions are limited to users
+                    who are logged in.</li>
+                <li> Logout – located in modal that triggers from buttons in both the side nav and welcome modal post
+                    login</li>
+                <li> View User Profile – located in modal that will trigger when user clicks on the "view Profile"
+                    linkin the navigation side bar</li>
+                <li>Update User Profile Details – located in modal that triggers from the user havig already opened the
+                    view user profile modal which will give them a chance to change their user details.</li>
+                <li> Display User Events - once user is logged in the events they are signed up for will appear in table
+                    format when the "Display Events" button is pressed on the homepage</li>
+                <li> Create Events - create user events and define the event category</li>
+                <li>Delete Events - delete the user events thus removing them from attending</li>
+                <li> Update Event Details - update the user's event details</li>
+            </ol>
+            <br>
+            <h4>API Testing</h4>
+            <p>In the root of the project directory there is a folder called "debug" which contains the script file that
+                contains the necessary test scripts for all the API calls</p>
+            <h4>Information about the Backend</h4>
+            <h5>API</h5>
+            <p>For this application, I utilized the base case system to make the principle API of the system. This
+                document is the ws.php record and is situated in the SRC organizer of the application information. This
+                document contains the principle capacities for the activities of the application and is used by both the
+                backend and the frontend of the interface to make usefulness. There are two valuable recorded to the
+                ws.php document which is the db.php and the sessions.php documents the two of which are essential for
+                usefulness. The DB document contains all the SQL demands that really cooperate with and adjust the
+                database for the application.</p>
+            <p>
+                Talend custom test script:
+                The Talend API tester was used to create the testing script for the app. The test functions and the
+                expected response codes are as follows:
+            </p>
+            <ul>
+                <li>Register (POST): 202 Success</li>
+                <li>Login (POST): 202 Success</li>
+                <li>is_logged_in? (GET): 202 Success</li>
+                <li>logout (GET): 202 Success</li>
+                <li>Create Events (POST): 202 Success</li>
+                <li>Display Events (GET): 202 Success</li>
+                <li>Fill Events Update (GET): 202 Success</li>
+                <li>Update Events (POST): 202 Success</li>
+                <li>Delete Events (POST): 202 Success</li>
+            </ul>
+            <h5>Security</h5>
+            <p>All clients on the framework that are enlisted clients use PHP encryption to hash the passwords in the
+                information base and guarantee their security.
+                The administrator panel is ensured utilizing a type of IP whitelisting that will hide all open fields
+                from show and will send the user back to the front finish of the application if their IP doesn't
+                coordinate the IP coded into the framework.
+                If a user breaks through to the backend by utilizing a similar IP, they will be stopped from getting to
+                the backend if they don't have the consent of the "administrator" alloted to the account within the
+                database.</p>
+            <h4>Validation in Forms</h5>
+                <p>The form validation on the administrator panel is provided by the React Form Validation feature
+                    built-in. It utilized the set state function to test whether data sources meet the set regex rules
+                    and in the event that it doesn't the code won't run, and a blunder will show up.</p>
+        </div>
+    </div>
+</body>
+
+</html>
