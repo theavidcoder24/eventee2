@@ -41,7 +41,7 @@ if (!isset($_SESSION['se'])) {
 /* The base case serves as the main section where the api actions will be referenced from the fetch statements in 'script.js'. As default the isset is defined as GET so that if a case is defined as a GET action it will run automatically as for POST actions it requires another extra line in order to be recognised as a POST */
 if (isset($_GET["action"])) {
     switch ($_GET["action"]) {
-            // User Register
+            /* - User Register - */
         case "register":
             if (isset($_POST["action"])) {
                 $reg_name = $_POST['reg_name'];
@@ -89,7 +89,7 @@ if (isset($_GET["action"])) {
                 http_response_code(501);
             }
             break;
-            // User Login
+            /* - User Login - */
         case "login":
             if (isset($_POST["action"])) {
                 $log_email = $_POST['log_email'];
@@ -126,7 +126,7 @@ if (isset($_GET["action"])) {
             }
 
             break;
-            // Check if user is logged in
+            /* - Check if user is logged in/status of login - */
         case "is_logged_in":
             $result = $_SESSION['se']->is_logged_in();
             if ($result == true) {
@@ -137,13 +137,13 @@ if (isset($_GET["action"])) {
             }
             break;
 
-            // Log user out
+            /* - Log user out - */
         case "logout":
             session_destroy();
             http_response_code(202);
             break;
 
-            //     // Create Events
+            /* - Create Events - */
         case "createEvents":
             if (isset($_POST["action"])) {
                 $event_name = $_POST['event_name'];
@@ -199,7 +199,7 @@ if (isset($_GET["action"])) {
                 http_response_code(501);
             }
             break;
-            // Display User Events
+            /* - Display User Events - */
         case "displayEvents":
             // if ($_SESSION['se']->is_logged_in()) {
             $result = $db->displayEvents();
@@ -213,7 +213,7 @@ if (isset($_GET["action"])) {
             //     http_response_code(401);
             // }
             break;
-            // Autofill the update form
+            /* - Autofill the update form - */
         case "fillUpdate":
             if (isset($_POST["action"])) {
                 $result = $_SESSION['se']->is_logged_in();
@@ -231,7 +231,7 @@ if (isset($_GET["action"])) {
                 //     http_response_code(401);
             }
             break;
-            // Update the User Event
+            /* - Update the User Event - */
         case "updateEvent":
             $event_name = $_POST['event_name'];
             $event_desc = $_POST['event_desc'];
@@ -251,7 +251,7 @@ if (isset($_GET["action"])) {
                 }
             }
             break;
-            // Remove User Event
+            /* - Remove User Event - */
         case "removeEvent":
             $evid = $_POST['eventid'];
             if (isset($_POST["action"])) {
