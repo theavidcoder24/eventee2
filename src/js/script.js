@@ -627,7 +627,6 @@ function fillUpdate(eventid) {
     document.getElementById("update_ev_date").value = selectedEvent[6];
     document.getElementById("update_ev_time").value = selectedEvent[7];
     document.getElementById("eventid").value = selectedEvent[8];
-
   }
 }
 
@@ -676,7 +675,7 @@ function postUpdateEvent(eventid) {
       // HTTP Response Codes
       if (response.status === 200) {
         // loadPage();
-        console.log(eventid);
+        console.log(eventid.value);
       }
       if (response.status === 202) {
         console.log('Update Successful');
