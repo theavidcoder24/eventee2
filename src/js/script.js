@@ -317,7 +317,6 @@ function postRegFetch() {
       })
     })
     .catch(function (err) {
-      console.log("Connection unavailable");
       console.log(err);
     });
 }
@@ -441,7 +440,7 @@ function isLogged() {
       }
     })
     .catch(function (err) {
-      console.log("Connection unavailable");
+      // console.log("Connection unavailable");
       console.log(err);
     });
 }
@@ -481,7 +480,7 @@ function userLogout() {
       // }
     })
     .catch(function (err) {
-      console.log("Connection unavailable");
+      // console.log("Connection unavailable");
       console.log(err);
     });
 }
