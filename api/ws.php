@@ -233,6 +233,14 @@ if (isset($_GET["action"])) {
             break;
             /* - Update the User Event - */
         case "updateEvent":
+            if ($_POST['action_type'] == 'update') {
+                $evid = $_GET['evid'];
+                echo "Record updated successfully";
+                $db->updateEvent($event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time, $evid);
+                http_response_code(202);
+            } else {
+                http_response_code(404);
+            }
             // $event_name = $_POST['update_ev_name'];
             // $event_desc = $_POST['update_ev_desc'];
             // $event_cat = $_POST['update_ev_cat'];
@@ -240,13 +248,13 @@ if (isset($_GET["action"])) {
             // $event_loc = $_POST['update_ev_loc'];
             // $event_date = $_POST['update_ev_date'];
             // $event_time = $_POST['update_ev_time'];
-            if (isset($_POST["action"])) {
-                $evid = $_POST['eventid'];
-                $db->updateEvent($event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time, $evid);
-                http_response_code(202);
-            } elseif ($_POST["eventid"] == null) {
-                http_response_code(404);
-            }
+            // if (isset($_POST["action"])) {
+            //     $evid = $_POST['eventid'];
+            //     $db->updateEvent($event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time, $evid);
+            //     http_response_code(202);
+            // } elseif ($_POST["eventid"] == null) {
+            //     http_response_code(404);
+            // }
             break;
             /* - Remove User Event - */
         case "removeEvent":
