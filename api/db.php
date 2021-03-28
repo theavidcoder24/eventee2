@@ -228,8 +228,7 @@ class dbObj
         try {
             $this->dbconn->beginTransaction();
             /* --- Event Table --- */
-            // $UserID = $_SESSION['user_ID'];
-            $stmt = $this->dbconn->prepare("UPDATE events SET EventName = :event_name, EventDescription = :event_desc, EventCategory = :event_cat, EventAddress = :event_address, EventLocation = :event_loc, EventDate = :event_date, EventTime = :event_time WHERE eventID = :eid");
+            $stmt = $this->dbconn->prepare("UPDATE events SET eventName = :event_name, eventDescription = :event_desc, eventCategory = :event_cat, eventAddress = :event_address, eventLocation = :event_loc, eventDate = :event_date, eventTime = :event_time WHERE eventID = :eid");
             // bind values
             $stmt->bindValue(':event_name', $event_name);
             $stmt->bindValue(':event_desc', $event_desc);
@@ -239,7 +238,6 @@ class dbObj
             $stmt->bindValue(':event_date', $event_date);
             $stmt->bindValue(':event_time', $event_time);
             $stmt->bindValue(":eid", $evid);
-            // $stmt->bindValue(':user_ID', $UserID);
 
             // Execute the update statement
             $stmt->execute();

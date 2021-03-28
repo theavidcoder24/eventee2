@@ -587,14 +587,14 @@ function displayEvents() {
         console.log(data);
         data.forEach(row => {
           outStr +=
-            '<tr><td>' + row.eventName +
+            '<tr><td>' + row.eventID +
+            '</td><td>' + row.eventName +
             '</td><td>' + row.eventDescription +
             '</td><td>' + row.eventCategory +
             '</td><td>' + row.eventAddress +
             '</td><td>' + row.eventLocation +
             '</td><td>' + row.eventDate +
             '</td><td>' + row.eventTime +
-            '</td><td>' + row.eventID +
             '</td><td><button href="#update_events" class="modal-trigger" onclick="fillUpdate(' + row.eventID + ')" value="' + row.eventID + '"><i class="material-icons">edit</i></button>' +
             '</td><td>' + '<button onclick="deleteRemoveEvent(' + row.eventID + ')" value="' + row.eventID + '"><i class="material-icons">delete</i></button>' +
             '</td></tr>';
@@ -630,7 +630,7 @@ function fillUpdate(eventid) {
   }
 }
 
-/* Update Events */
+/* - Update Events - */
 function postUpdateEvent(eventid) {
   console.log("Update event with id " + eventid);
 
@@ -638,6 +638,8 @@ function postUpdateEvent(eventid) {
 
   selectedEvent = events.filter(event => event[0] == eventid)[0];
 
+  var eventid = "eventid";
+  
   if (selectedEvent != null) {
     console.log(selectedEvent);
     document.getElementById("update_ev_name").value = selectedEvent[1];
@@ -650,7 +652,6 @@ function postUpdateEvent(eventid) {
     document.getElementById("eventid").value = selectedEvent[8];
   }
 
-  var eventid = "eventid";
   var updatefd = new FormData();
   updatefd.append('action', 'update');
   updatefd.append('eventid', eventid.value);

@@ -233,6 +233,7 @@ if (isset($_GET["action"])) {
             break;
             /* - Update the User Event - */
         case "updateEvent":
+            $evid = $_POST['eventid'];
             $event_name = $_POST['update_ev_name'];
             $event_desc = $_POST['update_ev_desc'];
             $event_cat = $_POST['update_ev_cat'];
@@ -240,9 +241,8 @@ if (isset($_GET["action"])) {
             $event_loc = $_POST['update_ev_loc'];
             $event_date = $_POST['update_ev_date'];
             $event_time = $_POST['update_ev_time'];
-            $evid = $_POST['eventid'];
             // $evid = $_POST['evid'];
-            if (isset($_POST["action"]) == "updateEvent") {
+            if (isset($_POST["action"])) {
                 $db->updateEvent($event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time, $evid);
                 http_response_code(202);
             } else {
