@@ -3,7 +3,7 @@
 
 // Call setup functions
 window.onload = function () {
-  loadPage();
+  // loadPage();
   console.log(localStorage.getItem("login"));
   // console.log(localStorage.getItem("LoginEmail"));
   if (localStorage.getItem('login') == 'true') {
@@ -394,7 +394,7 @@ function isLogged() {
       // });
       if (response.status === 202) {
         localStorage.setItem('login', "true");
-        localStorage.setItem('LoginEmail', log_email);     
+        localStorage.setItem('LoginEmail', log_email);
         if (localStorage.getItem('login') == 'true') {
           console.log('Logged In!!');
           sessionStorage.setItem("currentloggedin", log_email);
