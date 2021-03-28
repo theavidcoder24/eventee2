@@ -3,8 +3,8 @@
 header('Access-Control-Allow-Credentials: true');
 
 // All echo statements will be json_encoded
-header("Access-Control-Allow-Headers", "content-type");
-header('Content-Type: application/json');
+// header("Access-Control-Allow-Headers", "content-type");
+// header('Content-Type: application/json');
 
 // Set the timezone to Australia 
 date_default_timezone_set('Australia/Brisbane');
@@ -236,6 +236,7 @@ if (isset($_GET["action"])) {
             $event_date = $_POST['event_date'];
             $event_time = $_POST['event_time'];
             $evid = $_POST['eventid'];
+            // $evid = $_POST['evid'];
             if (isset($_POST["action"]) == "updateEvent") {
                 $db->updateEvent($event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time, $evid);
                 http_response_code(202);
