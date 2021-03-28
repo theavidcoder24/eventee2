@@ -604,8 +604,9 @@ function displayEvents() {
     });
 }
 
-// function getattendees()
+// function getattendees() {
 // SELECT * FROM users INNER JOIN attendees ON attendees.userID = users.userID
+// }
 
 /* - Autofill Update Form - */
 function fillUpdate(eventid) {
