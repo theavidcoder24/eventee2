@@ -1,5 +1,5 @@
 <?php
-// header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Credentials: true');
 
 // All echo statements will be json_encoded
