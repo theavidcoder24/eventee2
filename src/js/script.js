@@ -4,7 +4,6 @@
 // Call setup functions
 window.onload = function () {
   loadPage();
-  // isLogged();
   console.log(localStorage.getItem("login"));
   console.log(localStorage.getItem("LoginEmail"));
   if (localStorage.getItem('login') == 'true') {
