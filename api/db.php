@@ -119,7 +119,6 @@ class dbObj
 
                 return true;
             } else {
-                // echo "Login credentials are incorrect";
                 return false;
             }
         } catch (PDOException $ex) {

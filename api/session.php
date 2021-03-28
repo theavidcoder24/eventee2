@@ -13,7 +13,6 @@ class sessObj
                 return true;
             }
         } elseif ("login" == false) {
-            echo "Not Logged in!";
             return false;
         }
     }

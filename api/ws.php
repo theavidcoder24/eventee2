@@ -233,13 +233,12 @@ if (isset($_GET["action"])) {
         case "updateEvent":
             if (isset($_POST["action"])) {
                 $evid = $_POST['evid'];
-                $details = $db->get_details($evid);
                 $db->updateEvent($evid, $event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time);
-                echo "Record updated successfully";
+                // echo "Record updated successfully";
                 http_response_code(202);
             } else {
                 http_response_code(404);
-                echo "Nope";
+                // echo "Nope";
             }
             // $event_name = $_POST['update_ev_name'];
             // $event_desc = $_POST['update_ev_desc'];
