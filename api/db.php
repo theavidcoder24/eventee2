@@ -165,7 +165,7 @@ class dbObj
     // }
 
     /* -- Create Events Function -- */
-    public function createEvents($event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time)
+    public function createEvents($event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time, $date, $browser, $ip, $action_type)
     {
         db_connection();
         try {
@@ -182,12 +182,12 @@ class dbObj
             $stmt->execute();
 
             /* - Changelog Table - */
-            // $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type) VALUES (:date, :browser, :ip, :action_type)");
-            // $stmt->bindValue(':date', $date);
-            // $stmt->bindValue(':browser', $browser);
-            // $stmt->bindValue(':ip', $ip);
-            // $stmt->bindValue(':action_type', $action_type);
-            // $stmt->execute();
+            $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type) VALUES (:date, :browser, :ip, :action_type)");
+            $stmt->bindValue(':date', $date);
+            $stmt->bindValue(':browser', $browser);
+            $stmt->bindValue(':ip', $ip);
+            $stmt->bindValue(':action_type', $action_type);
+            $stmt->execute();
 
             $this->dbconn->commit();
         } catch (PDOException $ex) {
@@ -228,7 +228,7 @@ class dbObj
             $this->dbconn->beginTransaction();
             /* --- Event Table --- */
             // $UserID = $_SESSION['user_ID'];
-            $stmt = $this->dbconn->prepare("UPDATE events SET eventName = :event_name, eventDescription = :event_desc, eventCategory = :event_cat, eventAddress = :event_address, eventLocation = :event_loc, eventDate = :event_date, eventTime = :event_time WHERE eventID = :eid");
+            $stmt = $this->dbconn->prepare("UPDATE events SET EventName = :event_name, EventDescription = :event_desc, EventCategory = :event_cat, EventAddress = :event_address, EventLocation = :event_loc, EventDate = :event_date, EventTime = :event_time WHERE eventID = :eid");
             // bind values
             $stmt->bindValue(':event_name', $event_name);
             $stmt->bindValue(':event_desc', $event_desc);

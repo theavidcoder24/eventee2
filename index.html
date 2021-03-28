@@ -345,9 +345,9 @@
                         Guest</a>
                 </div>
                 <br>
-                <input type="hidden" name="action" value="login" id="login_user">
+                <input type="hidden" name="action" value="login_user" id="login_user">
                 <br>
-                <button class="btn indigo waves-effect waves-light" type="submit" name="login"
+                <button class="btn indigo waves-effect waves-light" type="submit" name="login_user"
                     onclick="postLoginFetch(); displayUserInfo(); hideAll()">Login</button>
                 </form>
             </div>
@@ -443,7 +443,7 @@
             </div>
         </div>
 
-        <!-- Edit Profile -->
+        <!---- Edit Profile ---->
         <div id="edit_prof" class="menu_link">
             <br>
             <nav class="clean">
@@ -484,7 +484,8 @@
                             </div>
                             <div class="input-field col s12">
                                 <i class="material-icons prefix">vpn_key</i>
-                                <input id="log_pass_e" type="password" class="validate" placeholder="Password" onblur="savePass(this)">
+                                <input id="log_pass_e" type="password" class="validate" placeholder="Password"
+                                    onblur="savePass(this)">
                                 <span class="helper-text" data-error="Please enter a valid password"
                                     data-success="Correct" max="20"></span>
                             </div>
@@ -508,7 +509,7 @@
             </div>
         </div>
 
-        <!-- My Events -->
+        <!---- My Events ---->
         <div id="my_events" class="menu_link">
             <br>
             <nav class="clean">
@@ -549,7 +550,7 @@
             </div>
         </div>
 
-        <!-- Create Event Section -->
+        <!---- Create Event Section ---->
         <div id="create_event" class="menu_link">
             <!-- Preloader -->
             <div class="loadprogress indigo darken-4" style="width: 100%">
@@ -638,11 +639,11 @@
                                     <span class="helper-text" data-error="Please enter a valid time"
                                         data-success="Correct" max="20"></span>
                                 </div>
-                                <input type="hidden" name="action" value="createEvents" id="createEvents">
+                                <input type="hidden" name="action" value="createEvent" id="createEvent">
                                 <!-- Modal Trigger -->
-                                <a class="btn indigo waves-effect waves-light modal-trigger" type="submit" name="action"
-                                    onclick="postCreateEvents()" href="#event_success">Create Event<i
-                                        class="material-icons right">send</i></a>
+                                <a class="btn indigo waves-effect waves-light modal-trigger" type="submit"
+                                    name="createEvent" onclick="postCreateEvents()" href="#event_success">Create
+                                    Event<i class="material-icons right">send</i></a>
                                 <!-- Modal Structure -->
                                 <div id="event_success" class="modal bottom-sheet">
                                     <div class="modal-content">
@@ -661,51 +662,51 @@
             </div>
         </div>
 
-              <!---- Update Events ---->
-            <!-- Modal Structure -->
-            <div id="update-events" class="modal">
-                <h5 class="modal-close" onclick="closeModal()">&#10005;</h5>
-                <div class="modal-content">
-                    <h4>Update Events</h4>
-                    <form action="api/ws.php" method="POST" onclick="return preventDefault()" novalidate>
-                        <div class="input-field">
-                            <i class="material-icons prefix">title</i>
-                            <input id="update_ev_name" placeholder="Event Name" type="text">
-                        </div>
-                        <div class="input-field">
-                            <i class="material-icons prefix">notes</i>
-                            <textarea id="update_ev_desc" class="materialize-textarea"
-                                placeholder="Event Description"></textarea>
-                        </div>
-                        <div class="input-field">
-                            <i class="material-icons prefix">category</i>
-                            <input type="text" id="update_ev_cat" placeholder="Enter Your Event Type">
-                        </div>
-                        <div class="input-field col s6">
-                            <i class="material-icons prefix">map</i>
-                            <input type="text" id="update_ev_address" placeholder="Enter Your Address">
-                        </div>
-                        <div class="input-field col s6">
-                            <i class="material-icons prefix">flag</i>
-                            <input type="text" id="update_ev_loc" placeholder="Event Location">
-                        </div>
-                        <div class="input-field col s6">
-                            <i class="material-icons prefix">date_range</i>
-                            <input type="text" id="update_ev_date" class="datepicker" placeholder="Event Date">
-                        </div>
-                        <div class="input-field col s6">
-                            <i class="material-icons prefix">schedule</i>
-                            <input type="text" id="update_ev_time" class="timepicker" placeholder="Event Time">
-                        </div>
-                        <input type="hidden" name="eventID" value="" id="eventID">
-                        <input type="hidden" name="action" value="update" id="updateEvent">
-                        <button class="btn waves-effect waves-light" type="submit" onclick="postUpdateEvent()">Update
-                            Event</button>
-                    </form>
-                </div>
+        <!---- Create Event Section ---->
+        <!-- Modal Structure -->
+        <div id="update_events" class="modal">
+            <h5 class="modal-close right" onclick="closeModal()">&#10005;</h5>
+            <div class="modal-content">
+                <h4>Update Events</h4>
+                <form action="api/ws.php" method="POST" onclick="return preventDefault()" novalidate>
+                    <div class="input-field">
+                        <i class="material-icons prefix">title</i>
+                        <input id="update_ev_name" placeholder="Event Name" type="text">
+                    </div>
+                    <div class="input-field">
+                        <i class="material-icons prefix">notes</i>
+                        <textarea id="update_ev_desc" class="materialize-textarea"
+                            placeholder="Event Description"></textarea>
+                    </div>
+                    <div class="input-field">
+                        <i class="material-icons prefix">category</i>
+                        <input type="text" id="update_ev_cat" placeholder="Enter Your Event Type">
+                    </div>
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">map</i>
+                        <input type="text" id="update_ev_address" placeholder="Enter Your Address">
+                    </div>
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">flag</i>
+                        <input type="text" id="update_ev_loc" placeholder="Event Location">
+                    </div>
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">date_range</i>
+                        <input type="text" id="update_ev_date" class="datepicker" placeholder="Event Date">
+                    </div>
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">schedule</i>
+                        <input type="text" id="update_ev_time" class="timepicker" placeholder="Event Time">
+                    </div>
+                    <input type="hidden" name="eventID" value="" id="eventID">
+                    <input type="hidden" name="action" value="update" id="updateEvent">
+                    <button class="btn waves-effect waves-light" type="submit" onclick="postUpdateEvent()">Update
+                        Event</button>
+                </form>
             </div>
+        </div>
 
-        <!-- Community Section  -->
+        <!---- Community Section ---->
         <div id="community" class="menu_link">
             <!-- Preloader -->
             <div class="loadprogress indigo darken-4" style="width: 100%">
@@ -769,7 +770,7 @@
             </div>
         </div>
 
-        <!-- Frequently Asked Questions -->
+        <!---- Frequently Asked Questions ---->
         <div id="faq" class="menu_link" onblur="loadPage()">
             <!-- Preloader -->
             <div class="loadprogress indigo darken-4" style="width: 100%">

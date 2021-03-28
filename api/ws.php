@@ -148,43 +148,47 @@ if (isset($_GET["action"])) {
                 $event_loc = $_POST['event_loc'];
                 $event_date = $_POST['event_date'];
                 $event_time = $_POST['event_time'];
+                $date = date('Y-m-d H:i:s');
+                $browser = $_SERVER['HTTP_USER_AGENT'];
+                $ip = $_SERVER['REMOTE_ADDR'];
+                $action_type = $_POST['createEvent'];
                 /* - Server Validation - */
                 // Check if input field is empty
-                if ($event_name == "") {
-                    $errorMsg = "Error: Event Name Field is Empty";
-                    die;
-                }
-                if ($event_desc == "") {
-                    $errorMsg = "Error: Event Description Field is Empty";
-                    die;
-                }
-                if ($event_cat == "") {
-                    $errorMsg = "Error: Event Category Field is Empty";
-                    die;
-                }
-                if ($event_address == "") {
-                    $errorMsg = "Error: Event Address Field is Empty";
-                    die;
-                }
-                if ($event_loc == "") {
-                    $errorMsg = "Error: Event Location Field is Empty";
-                    die;
-                }
-                if ($event_date == "") {
-                    $errorMsg = "Error: Event Name Field is Empty";
-                    die;
-                }
-                if ($event_time == "") {
-                    $errorMsg = "Error: Event Description Field is Empty";
-                    die;
-                }
-                // Check if the phone number field is numeric
-                elseif (is_numeric(trim($event_time)) == false) {
-                    $errorMsg = "Error: Please enter numeric value";
-                    die;
-                }
+                // if ($event_name == "") {
+                //     $errorMsg = "Error: Event Name Field is Empty";
+                //     die;
+                // }
+                // if ($event_desc == "") {
+                //     $errorMsg = "Error: Event Description Field is Empty";
+                //     die;
+                // }
+                // if ($event_cat == "") {
+                //     $errorMsg = "Error: Event Category Field is Empty";
+                //     die;
+                // }
+                // if ($event_address == "") {
+                //     $errorMsg = "Error: Event Address Field is Empty";
+                //     die;
+                // }
+                // if ($event_loc == "") {
+                //     $errorMsg = "Error: Event Location Field is Empty";
+                //     die;
+                // }
+                // if ($event_date == "") {
+                //     $errorMsg = "Error: Event Name Field is Empty";
+                //     die;
+                // }
+                // if ($event_time == "") {
+                //     $errorMsg = "Error: Event Description Field is Empty";
+                //     die;
+                // }
+                // // Check if the phone number field is numeric
+                // elseif (is_numeric(trim($event_time)) == false) {
+                //     $errorMsg = "Error: Please enter numeric value";
+                //     die;
+                // }
                 // Call the function
-                $db->createEvents($event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time);
+                $db->createEvents($event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time, $date, $browser, $ip, $action_type);
                 http_response_code(202);
             } else {
                 http_response_code(501);
@@ -193,13 +197,13 @@ if (isset($_GET["action"])) {
             // Display User Events
         case "displayEvents":
             // if ($_SESSION['se']->is_logged_in()) {
-                $result = $db->displayEvents();
-                if ($result == false) {
-                    http_response_code(501);
-                } else {
-                    http_response_code(202);
-                    echo json_encode($result);
-                }
+            $result = $db->displayEvents();
+            if ($result == false) {
+                http_response_code(501);
+            } else {
+                http_response_code(202);
+                echo json_encode($result);
+            }
             // } else {
             //     http_response_code(401);
             // }

@@ -4,7 +4,7 @@
 // Call setup functions
 window.onload = function () {
   loadPage();
-  isLogged();
+  // isLogged();
   console.log(localStorage.getItem("login"));
   console.log(localStorage.getItem("LoginEmail"));
   if (localStorage.getItem('login') == 'true') {
@@ -330,7 +330,7 @@ function postLoginFetch() {
   var log_email = document.getElementById("log_email");
   var log_pass = document.getElementById("log_pass");
   var login_details = new FormData();
-  login_details.append('action', 'login');
+  login_details.append('action', 'login_user');
   login_details.append('log_email', log_email.value);
   login_details.append('log_pass', log_pass.value);
   login_details.append('login_user', login_user.value);
@@ -490,44 +490,44 @@ function userLogout() {
 /* - Create Events - */
 function postCreateEvents() {
   loadPage();
-  var errStr = "";
-  if (event_name.checkValidity() === false) {
-    errStr += "Please type a valid name ";
-    console.log("Error: Event Name");
-    return;
-  }
-  if (event_desc.checkValidity() === false) {
-    errStr += "Please type a valid description ";
-    console.log("Error: Event Name");
-    return;
-  }
-  if (event_cat.checkValidity() === false) {
-    errStr += "Please type a valid category ";
-    console.log("Error: Event Name");
-    return;
-  }
-  if (event_address.checkValidity() === false) {
-    errStr += "Please type a valid address ";
-    console.log("Error: Event Name");
-    return;
-  }
-  if (event_loc.checkValidity() === false) {
-    errStr += "Please type a valid location ";
-    console.log("Error: Event Name");
-    return;
-  }
-  if (event_date.checkValidity() === false) {
-    errStr += "Please type a valid date ";
-    console.log("Error: Event Name");
-    return;
-  }
-  if (event_time.checkValidity() === false) {
-    errStr += "Please type a valid time ";
-    console.log("Error: Event Name");
-    return;
-  }
+  // var errStr = "";
+  // if (event_name.checkValidity() === false) {
+  //   errStr += "Please type a valid name ";
+  //   console.log("Error: Event Name");
+  //   return;
+  // }
+  // if (event_desc.checkValidity() === false) {
+  //   errStr += "Please type a valid description ";
+  //   console.log("Error: Event Name");
+  //   return;
+  // }
+  // if (event_cat.checkValidity() === false) {
+  //   errStr += "Please type a valid category ";
+  //   console.log("Error: Event Name");
+  //   return;
+  // }
+  // if (event_address.checkValidity() === false) {
+  //   errStr += "Please type a valid address ";
+  //   console.log("Error: Event Name");
+  //   return;
+  // }
+  // if (event_loc.checkValidity() === false) {
+  //   errStr += "Please type a valid location ";
+  //   console.log("Error: Event Name");
+  //   return;
+  // }
+  // if (event_date.checkValidity() === false) {
+  //   errStr += "Please type a valid date ";
+  //   console.log("Error: Event Name");
+  //   return;
+  // }
+  // if (event_time.checkValidity() === false) {
+  //   errStr += "Please type a valid time ";
+  //   console.log("Error: Event Name");
+  //   return;
+  // }
   var fd = new FormData();
-  fd.append('action', 'createEvents');
+  fd.append('action', 'createEvent');
   fd.append('event_name', event_name.value);
   fd.append('event_desc', event_desc.value);
   fd.append('event_cat', event_cat.value);
@@ -535,6 +535,7 @@ function postCreateEvents() {
   fd.append('event_loc', event_loc.value);
   fd.append('event_date', event_date.value);
   fd.append('event_time', event_time.value);
+  fd.append('createEvent', createEvent.value);
   // each form element goes into the fd object ^
   fetch('api/ws.php?action=createEvents', {
     method: 'POST',
@@ -595,7 +596,7 @@ function displayEvents() {
             '</td><td>' + row.eventDate +
             '</td><td>' + row.eventTime +
             '</td><td>' + row.eventID +
-            '</td><td><button href="#update-events" class="modal-trigger" onclick="fillUpdate(' + row.eventID + ')" value="' + row.eventID + '"><i class="material-icons">edit</i></button>' +
+            '</td><td><button href="#update_events" class="modal-trigger" onclick="fillUpdate(' + row.eventID + ')" value="' + row.eventID + '"><i class="material-icons">edit</i></button>' +
             '</td><td>' + '<button onclick="deleteRemoveEvent(' + row.eventID + ')" value="' + row.eventID + '"><i class="material-icons">delete</i></button>' +
             '</td></tr>';
         });
@@ -654,7 +655,6 @@ function postUpdateEvent(eventid) {
   var updatefd = new FormData();
   updatefd.append('action', 'update');
   updatefd.append('eventid', eventid.value);
-
   // updatefd.append('update_ev_name', update_ev_name.value);
   // updatefd.append('update_ev_desc', update_ev_desc.value);
   // updatefd.append('update_ev_cat', update_ev_cat.value);
