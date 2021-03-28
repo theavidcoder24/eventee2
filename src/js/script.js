@@ -241,32 +241,32 @@ function hideFAQ() {
 /* - Register - */
 function postRegFetch() {
   // loadPage();
-  var errStr = "";
-  if (reg_name.checkValidity() === false) {
-    errStr += "Please type a valid name ";
-    console.log("Error: Full Name");
-    return;
-  }
-  if (reg_phone.checkValidity() === false) {
-    errStr += "Please type a valid phone number ";
-    console.log("Error: Phone Number");
-    return;
-  }
-  if (reg_dob.checkValidity() === false) {
-    errStr += "Please insert a valid date of birth ";
-    console.log("Error: Date of Birth");
-    return;
-  }
-  if (reg_email.checkValidity() === false) {
-    errStr += "Please type in a valid email ";
-    console.log("Error: Email");
-    return;
-  }
-  if (reg_pass.checkValidity() === false) {
-    errStr += "Please type in a valid password ";
-    console.log("Error: Password");
-    return;
-  }
+  // var errStr = "";
+  // if (reg_name.checkValidity() === false) {
+  //   errStr += "Please type a valid name ";
+  //   console.log("Error: Full Name");
+  //   return;
+  // }
+  // if (reg_phone.checkValidity() === false) {
+  //   errStr += "Please type a valid phone number ";
+  //   console.log("Error: Phone Number");
+  //   return;
+  // }
+  // if (reg_dob.checkValidity() === false) {
+  //   errStr += "Please insert a valid date of birth ";
+  //   console.log("Error: Date of Birth");
+  //   return;
+  // }
+  // if (reg_email.checkValidity() === false) {
+  //   errStr += "Please type in a valid email ";
+  //   console.log("Error: Email");
+  //   return;
+  // }
+  // if (reg_pass.checkValidity() === false) {
+  //   errStr += "Please type in a valid password ";
+  //   console.log("Error: Password");
+  //   return;
+  // }
   var fd = new FormData();
   var reg_name = document.getElementById("reg_name");
   var reg_phone = document.getElementById("reg_phone");

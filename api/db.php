@@ -100,12 +100,13 @@ class dbObj
                 /* Define the session variables for login */
                 $_SESSION['currentloggedin'] = $log_email;
                 $_SESSION["login"] = 'true';
+                $_SESSION["access_rights"] = $row["access_rights"];
+                $_SESSION['Admin'] = $log_email;
                 // $_SESSION['LoginID'] = $row['LoginID'];
-                // $_SESSION["accessrights"] = $row["accessRights"];
                 $_SESSION['time_start_login'] = time();
                 time('H:i:s');
 
-                echo "Welcome " . $_SESSION['currentloggedin'];
+                // echo "Welcome " . $_SESSION['currentloggedin'];
 
                 /* - Changelog Table - */
                 $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type) VALUES (:date, :browser, :ip, :action_type)");
@@ -119,7 +120,7 @@ class dbObj
 
                 return true;
             } else {
-                echo "Login credentials are incorrect";
+                // echo "Login credentials are incorrect";
                 return false;
             }
         } catch (PDOException $ex) {

@@ -97,6 +97,12 @@ button {
     color: rgba(0, 0, 0, 0.7);
 }
 
+
+/* Admin Access Rights Option */
+#rights_container {
+    display: none;
+}
+
 /* = Google Maps Styling = */
 /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
