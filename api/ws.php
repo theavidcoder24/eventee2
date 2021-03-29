@@ -37,6 +37,15 @@ if ($_SESSION['se']->is_referrer() == false) {
     die();
 }
 
+function testInput($data)
+{
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    $data = htmlentities($data);
+    return $data;
+}
+
 /* -- Base Case -- */
 /* The base case serves as the main section where the api actions will be referenced from the fetch statements in 'script.js'. As default the isset is defined as GET so that if a case is defined as a GET action it will run automatically as for POST actions it requires another extra line in order to be recognised as a POST */
 if (isset($_GET["action"])) {
@@ -229,28 +238,31 @@ if (isset($_GET["action"])) {
             /* - Update the User Event - */
         case "updateEvent":
             if (isset($_POST["action"])) {
-                $evid = $_POST['evid'];
-                $result = $db->updateEvent($evid, $event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time);
+                // $evid = $_GET['evid'];
+                $_SERVER['REQUEST_METHOD'] == 'POST';
+                $objreg = json_decode(file_get_contents("php://input"), true);
+                $evid = testInput($objreg['evid']);
+                $update_ev_name = testInput($objreg['update_ev_name']);
+                $update_ev_desc = testInput($objreg['update_ev_desc']);
+                $update_ev_cat = testInput($objreg['update_ev_cat']);
+                $update_ev_address = testInput($objreg['update_ev_address']);
+                $update_ev_loc = testInput($objreg['update_ev_loc']);
+                $update_ev_date = testInput($objreg['update_ev_date']);
+                $update_ev_time = testInput($objreg['update_ev_time']);
+                // $update_ev_name = $_POST['update_ev_name'];
+                // $update_ev_desc = $_POST['update_ev_desc'];
+                // $update_ev_cat = $_POST['update_ev_cat'];
+                // $update_ev_address = $_POST['update_ev_address'];
+                // $update_ev_loc = $_POST['update_ev_loc'];
+                // $update_ev_date = $_POST['update_ev_date'];
+                // $update_ev_time = $_POST['update_ev_time'];
+                $db->updateEvent($evid, $update_ev_name, $update_ev_desc, $update_ev_cat, $update_ev_address, $update_ev_loc, $update_ev_date, $update_ev_time);
                 // echo "Record updated successfully";
                 http_response_code(202);
             } else {
-                http_response_code(404);
-                // echo "Nope";
+                http_response_code(400);
             }
-            // $event_name = $_POST['update_ev_name'];
-            // $event_desc = $_POST['update_ev_desc'];
-            // $event_cat = $_POST['update_ev_cat'];
-            // $event_address = $_POST['update_ev_address'];
-            // $event_loc = $_POST['update_ev_loc'];
-            // $event_date = $_POST['update_ev_date'];
-            // $event_time = $_POST['update_ev_time'];
-            // if (isset($_POST["action"])) {
-            //     $evid = $_POST['eventid'];
-            //     $db->updateEvent($event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time, $evid);
-            //     http_response_code(202);
-            // } elseif ($_POST["eventid"] == null) {
-            //     http_response_code(404);
-            // }
+            // if ($_POST["eventid"] == null)
             break;
             /* - Remove User Event - */
         case "removeEvent":

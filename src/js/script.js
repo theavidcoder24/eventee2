@@ -574,6 +574,7 @@ function displayEvents() {
   loadPage();
   // Define output string that will display the database data
   var outStr = '';
+  var outStr2 = '';
   fetch('api/ws.php?action=displayEvents', {
     method: "GET",
     credentials: "include",
@@ -582,7 +583,7 @@ function displayEvents() {
       loadPage();
       response.json().then(function (data) {
         localStorage.setItem("events", JSON.stringify(data));
-        console.log(data);
+        // console.log(data);
         data.forEach(row => {
           outStr +=
             '<tr><td>' + row.eventID +
@@ -596,8 +597,48 @@ function displayEvents() {
             '</td><td><button href="#update_events" class="modal-trigger" onclick="fillUpdate(' + row.eventID + ')" value="' + row.eventID + '"><i class="material-icons">edit</i></button>' +
             '</td><td>' + '<button onclick="deleteRemoveEvent(' + row.eventID + ')" value="' + row.eventID + '"><i class="material-icons">delete</i></button>' +
             '</td></tr>';
+          outStr2 =
+            `<div>
+              <h4>Update Events</h4>
+                <form action="api/ws.php" method="POST" onclick="return preventDefault()" novalidate>
+                    <div class="input-field">
+                        <i class="material-icons prefix">title</i>
+                        <input id="update_ev_name" name="update_ev_name" placeholder="Event Name" type="text">
+                    </div>
+                    <div class="input-field">
+                        <i class="material-icons prefix">notes</i>
+                        <textarea id="update_ev_desc" name="update_ev_desc" class="materialize-textarea"
+                            placeholder="Event Description"></textarea>
+                    </div>
+                    <div class="input-field">
+                        <i class="material-icons prefix">category</i>
+                        <input type="text" id="update_ev_cat" name="update_ev_cat" placeholder="Enter Your Event Type">
+                    </div>
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">map</i>
+                        <input type="text" id="update_ev_address" name="update_ev_address" placeholder="Enter Your Address">
+                    </div>
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">flag</i>
+                        <input type="text" id="update_ev_loc" name="update_ev_loc" placeholder="Event Location">
+                    </div>
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">date_range</i>
+                        <input type="text" id="update_ev_date" class="datepicker" placeholder="Event Date">
+                    </div>
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">schedule</i>
+                        <input type="text" id="update_ev_time" class="timepicker" placeholder="Event Time">
+                    </div>
+                    <input type="hidden" name="eventid" value="`+ row.eventID +`" id="eventid">
+                    <input type="hidden" name="action" value="update" id="updateEvent">
+                    <button class="btn waves-effect waves-light" type="submit" onclick="postUpdateEvent(`+ row.eventID +`)">Update
+                        Event</button>
+                </form>
+            </div>`
         });
         document.getElementById('eventsTable').innerHTML = outStr;
+        document.getElementById('update_events').innerHTML = outStr2;
       });
     });
 }
@@ -611,7 +652,7 @@ function fillUpdate(eventid) {
   console.log("Fill event with id " + eventid);
 
   events = JSON.parse(localStorage.getItem("events"));
-  console.log(events);
+  // console.log(events);
 
   selectedEvent = events.filter(event => event[0] == eventid)[0];
 
@@ -638,21 +679,31 @@ function postUpdateEvent(eventid) {
 
   var eventid = "eventid";
 
-  // if (selectedEvent != null) {
-  //   console.log(selectedEvent);
-  //   document.getElementById("update_ev_name").value = selectedEvent[1];
-  //   document.getElementById("update_ev_desc").value = selectedEvent[2];
-  //   document.getElementById("update_ev_cat").value = selectedEvent[3];
-  //   document.getElementById("update_ev_address").value = selectedEvent[4];
-  //   document.getElementById("update_ev_loc").value = selectedEvent[5];
-  //   document.getElementById("update_ev_date").value = selectedEvent[6];
-  //   document.getElementById("update_ev_time").value = selectedEvent[7];
-  //   // document.getElementById("eventid").value = selectedEvent[8];
-  // }
+  if (selectedEvent != null) {
+    console.log(selectedEvent);
+    document.getElementById("update_ev_name").value = selectedEvent[1];
+    document.getElementById("update_ev_desc").value = selectedEvent[2];
+    document.getElementById("update_ev_cat").value = selectedEvent[3];
+    document.getElementById("update_ev_address").value = selectedEvent[4];
+    document.getElementById("update_ev_loc").value = selectedEvent[5];
+    document.getElementById("update_ev_date").value = selectedEvent[6];
+    document.getElementById("update_ev_time").value = selectedEvent[7];
+    // document.getElementById("eventid").value = selectedEvent[8];
+  }
 
-  var updatefd = new FormData();
-  updatefd.append('action', 'update');
-  updatefd.append('eventid', eventid.value);
+  var userUpdate = {
+    'update_ev_name': document.getElementById("update_ev_name").value,
+    'update_ev_desc': document.getElementById("update_ev_desc").value,
+    'update_ev_cat': document.getElementById("update_ev_cat").value,
+    'update_ev_address': document.getElementById("update_ev_address").value,
+    'update_ev_loc': document.getElementById("update_ev_loc").value,
+    'update_ev_date': document.getElementById("update_ev_date").value,
+    'update_ev_time': document.getElementById("update_ev_time").value
+  }
+
+  // var updatefd = new FormData();
+  // updatefd.append('action', 'update');
+  // updatefd.append('eventid', eventid.value);
   // updatefd.append('update_ev_name', update_ev_name.value);
   // updatefd.append('update_ev_desc', update_ev_desc.value);
   // updatefd.append('update_ev_cat', update_ev_cat.value);
@@ -660,11 +711,12 @@ function postUpdateEvent(eventid) {
   // updatefd.append('update_ev_loc', update_ev_loc.value);
   // updatefd.append('update_ev_date', update_ev_date.value);
   // updatefd.append('update_ev_time', update_ev_time.value);
-  updatefd.append('updateEvent', updateEvent.value);
+  // updatefd.append('updateEvent', updateEvent.value);
   fetch('api/ws.php?action=updateEvent', {
     method: "POST",
-    body: updatefd,
-    // credentials: 'include',
+    body: JSON.stringify(userUpdate),
+    credentials: 'include',
+    // body: updatefd,
   })
     // Force error into console
     .then(function (response) {
@@ -682,6 +734,7 @@ function postUpdateEvent(eventid) {
       if (response.status === 400) {
         errormessage('Error: Bad Request');
         console.log('Bad Request');
+        console.log(eventid.value);
         return;
       }
       if (response.status === 401) {
@@ -693,6 +746,9 @@ function postUpdateEvent(eventid) {
         console.log('Not implemented :(');
         return;
       }
+      response.text().then(function (text) {
+        console.log(text);
+      });
     });
 }
 
