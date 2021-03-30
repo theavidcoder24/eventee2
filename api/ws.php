@@ -14,13 +14,16 @@ date_default_timezone_set('Australia/Brisbane');
 require('db.php');
 $db = new dbObj;
 
+// Include the session php file for session object related
+require('session.php');
+
 // Starts the session
 session_start();
 
-// Include the session php file for session object related
-require('session.php');
-$_SESSION['se'] = new sessObj;
-
+// Checks if session is set if it's not then creates new session
+if (!isset($_SESSION['se'])) {
+    $_SESSION['se'] = new sessObj;
+}
 
 /* -- Rate Limit 24 Hour Check -- */
 if ($_SESSION['se']->Rate24HourCheck() === false) {
