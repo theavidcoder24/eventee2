@@ -249,13 +249,6 @@ if (isset($_GET["action"])) {
                 $update_ev_loc = testInput($objreg['update_ev_loc']);
                 $update_ev_date = testInput($objreg['update_ev_date']);
                 $update_ev_time = testInput($objreg['update_ev_time']);
-                // $update_ev_name = $_POST['update_ev_name'];
-                // $update_ev_desc = $_POST['update_ev_desc'];
-                // $update_ev_cat = $_POST['update_ev_cat'];
-                // $update_ev_address = $_POST['update_ev_address'];
-                // $update_ev_loc = $_POST['update_ev_loc'];
-                // $update_ev_date = $_POST['update_ev_date'];
-                // $update_ev_time = $_POST['update_ev_time'];
                 $db->updateEvent($evid, $update_ev_name, $update_ev_desc, $update_ev_cat, $update_ev_address, $update_ev_loc, $update_ev_date, $update_ev_time);
                 // echo "Record updated successfully";
                 http_response_code(202);
