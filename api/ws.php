@@ -219,6 +219,9 @@ if (isset($_GET["action"])) {
             //     http_response_code(401);
             // }
             break;
+        case "attendEvent":
+
+            break;
             /* - Autofill the update form - */
         case "fillUpdate":
             if (isset($_POST["action"])) {

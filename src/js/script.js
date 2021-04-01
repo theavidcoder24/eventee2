@@ -630,9 +630,9 @@ function displayEvents() {
                         <i class="material-icons prefix">schedule</i>
                         <input type="text" id="update_ev_time" class="timepicker" placeholder="Event Time">
                     </div>
-                    <input type="hidden" name="eventid" value="`+ row.eventID +`" id="eventid">
+                    <input type="hidden" name="eventid" value="`+ row.eventID + `" id="eventid">
                     <input type="hidden" name="action" value="update" id="updateEvent">
-                    <button class="btn waves-effect waves-light" type="submit" onclick="postUpdateEvent(`+ row.eventID +`)">Update
+                    <button class="btn waves-effect waves-light" type="submit" onclick="postUpdateEvent(`+ row.eventID + `)">Update
                         Event</button>
                 </form>
             </div>`
@@ -646,6 +646,51 @@ function displayEvents() {
 // function getattendees() {
 // SELECT * FROM users INNER JOIN attendees ON attendees.userID = users.userID
 // }
+
+function attendEvent() {
+  if (checkAnswer.checked == true) {
+    loadPage();
+    var fd = new FormData();
+    fd.append('action', 'attendEvent');
+    fd.append('event_name', event_name.value);
+    fd.append('createEvent', createEvent.value);
+    // each form element goes into the fd object ^
+    fetch('api/ws.php?action=attendEvent', {
+      method: 'UPDATE',
+      body: fd,
+      credentials: 'include'
+    })
+      // Force error into console
+      .then(function (response) {
+        response.text().then(function (text) {
+          console.log(text);
+        });
+        // HTTP Response Codes
+        if (response.status === 202) {
+          console.log('Successful Attendance Recorded');
+          successmessage("Success: Attendance Recorded");
+          return;
+        }
+        if (response.status === 400) {
+          console.log('Bad Request');
+          errormessage('Error: Bad Request');
+          return;
+        }
+        if (response.status === 401) {
+          console.log('Not permitted');
+          errormessage('Error: Not Permitted');
+          return;
+        }
+        if (response.status === 501) {
+          console.log('Not implemented :(');
+          errormessage('Error: Not Implemented');
+          return;
+        }
+      });
+    return false;
+  } else {
+  }
+}
 
 /* - Autofill Update Form - */
 function fillUpdate(eventid) {

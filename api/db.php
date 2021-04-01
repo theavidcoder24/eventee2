@@ -206,7 +206,7 @@ class dbObj
         }
     }
 
-    public function uppdateAttend($evid, $answer)
+    public function updateAttend($evid, $answer)
     {
         db_connection();
         try {
