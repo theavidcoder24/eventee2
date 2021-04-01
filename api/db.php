@@ -123,6 +123,7 @@ class dbObj
         }
     }
 
+
     /* -- Check if user account exists -- */
     // function checkUserAccount()
     // {
@@ -201,6 +202,25 @@ class dbObj
             $result = $stmt->fetchAll();
             return $result;
         } catch (PDOException $ex) {
+            throw $ex;
+        }
+    }
+
+    public function uppdateAttend($evid, $answer)
+    {
+        db_connection();
+        try {
+            $this->dbconn->beginTransaction();
+            $stmt = $this->dbconn->prepare("UPDATE attendees SET attending = :answer WHERE events.eventID = :questionid");
+            $stmt->bindValue(":eid", $evid);
+            $stmt->bindValue(':answer', $answer);
+
+            $stmt->execute();
+
+            $this->dbconn->commit();
+        } catch (PDOException $ex) {
+            $this->dbconn->rollBack();
+
             throw $ex;
         }
     }
