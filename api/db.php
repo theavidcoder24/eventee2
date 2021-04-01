@@ -220,7 +220,6 @@ class dbObj
             $this->dbconn->commit();
         } catch (PDOException $ex) {
             $this->dbconn->rollBack();
-
             throw $ex;
         }
     }
