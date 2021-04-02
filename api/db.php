@@ -123,41 +123,14 @@ class dbObj
         }
     }
 
+    public function updateUser() {
+        
+    }
 
     /* -- Check if user account exists -- */
     // function checkUserAccount()
     // {
     //     return "['account': 'exists']";
-    // }
-
-    /* -- Admin Panel Login Function -- */
-    // public function adminLogin($reg_email, $reg_pass)
-    // {
-    //     try {
-    //         $this->dbconn->beginTransaction();
-    //         // $reg_email = ($_POST['reg_email']);
-    //         // $reg_pass = ($_POST['reg_pass']);
-    //         $stmt = $this->dbconn->prepare("SELECT login.LoginID, login.Email, login.Password, users.UserID, users.FullName, users.PhoneNumber, users.DateOfBirth FROM login INNER JOIN users on login.UserID = users.UserID WHERE login.Email = :reg_email");
-    //         $stmt->bindValue(':reg_email', $reg_email);
-    //         $stmt->execute();
-    //         $row = $stmt->fetch();
-    //         if (password_verify($reg_pass, $row['Password'])) {
-    //             if ($row['permissions'] == ("admin")) {
-    //                 /* Define the session variables for login */
-    //                 $_SESSION['reg_email'] = $reg_email;
-    //                 $_SESSION["login"] = 'true';
-    //                 $_SESSION['LoginID'] = $row['LoginID'];
-    //                 $_SESSION['user_ID'] = $row['UserID'];
-    //                 $_SESSION['time_start_login'] = time('H:i:s');
-    //                 return true;
-    //             }
-    //         } else {
-    //             return false;
-    //         }
-    //     } catch (PDOException $ex) {
-    //         $this->dbconn->rollback();
-    //         throw $ex;
-    //     }
     // }
 
     /* -- Create Events Function -- */
@@ -204,6 +177,16 @@ class dbObj
         } catch (PDOException $ex) {
             throw $ex;
         }
+    }
+
+    // Check if more than 5 checked
+    function checkAttendance($evid) {
+        db_connection();
+        $stmt = $this->dbconn->prepare("SELECT * FROM attendance INNER JOIN events on attendance.userID = events.userID WHERE events.EventID =:eid");
+            // $stmt->bindValue(':', $);
+            $stmt->bindValue(":eid", $evid);
+            $stmt->execute();
+            $row = $stmt->fetch();
     }
 
     public function updateAttend($evid, $answer)

@@ -149,6 +149,9 @@ if (isset($_GET["action"])) {
             session_destroy();
             http_response_code(202);
             break;
+        case "updateUser":
+
+            break;
             /* - Create Events - */
         case "createEvents":
             if (isset($_POST["action"])) {

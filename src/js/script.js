@@ -484,6 +484,42 @@ function userLogout() {
     });
 }
 
+function updateUserInfo() {
+  var updateuserfd = new FormData();
+  updateuserfd.append('userid', userid);
+  fetch('api/ws.php?action=updateUser', {
+    method: 'POST',
+    body: updateuserfd,
+  })
+    // Force error into console
+    .then(function (response) {
+      response.text().then(function (text) {
+        console.log(text);
+      });
+      // HTTP Response Codes
+      if (response.status === 202) {
+        console.log('Creation Successful');
+        successmessage("Success: User Updated!");
+        return;
+      }
+      if (response.status === 400) {
+        console.log('Bad Request');
+        errormessage('Error: Bad Request');
+        return;
+      }
+      if (response.status === 401) {
+        console.log('Not permitted');
+        errormessage('Error: Not Permitted');
+        return;
+      }
+      if (response.status === 501) {
+        console.log('Not implemented :(');
+        errormessage('Error: Not Implemented');
+        return;
+      }
+    });
+}
+
 /* - Create Events - */
 function postCreateEvents() {
   loadPage();
@@ -643,17 +679,28 @@ function displayEvents() {
     });
 }
 
+// Get List of attendees by Event ID
 // function getattendees() {
-// SELECT * FROM users INNER JOIN attendees ON attendees.userID = users.userID
+// fetch('api/ws.php?action=checkAttendance', {
+//   method: 'UPDATE',
+//   body: fd,
+//   credentials: 'include'
+// })  
 // }
 
+// Add user to event
 function attendEvent() {
   if (checkAnswer.checked == true) {
     loadPage();
     var fd = new FormData();
-    fd.append('action', 'attendEvent');
+    var reg_name = document.getElementById("reg_name");
+    var reg_phone = document.getElementById("reg_phone");
+    var reg_email = document.getElementById("reg_email");
+    fd.append('reg_name', reg_name.value);
+    fd.append('reg_phone', reg_phone.value);
+    fd.append('reg_email', reg_email.value);
     fd.append('event_name', event_name.value);
-    fd.append('createEvent', createEvent.value);
+    fd.append('action', 'attendEvent');
     // each form element goes into the fd object ^
     fetch('api/ws.php?action=attendEvent', {
       method: 'UPDATE',
@@ -670,6 +717,11 @@ function attendEvent() {
           console.log('Successful Attendance Recorded');
           successmessage("Success: Attendance Recorded");
           return;
+          // if (checkAnswer > 5) {
+
+          // } elseif (checkAnswer < 5) {
+
+          // }
         }
         if (response.status === 400) {
           console.log('Bad Request');
