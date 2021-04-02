@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Mar 28, 2021 at 12:54 PM
+-- Generation Time: Apr 02, 2021 at 06:14 AM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.3.12
 
@@ -34,6 +34,7 @@ CREATE TABLE IF NOT EXISTS `attendees` (
   `eventID` int(11) UNSIGNED NOT NULL,
   `FullName` char(200) NOT NULL,
   `eventName` char(250) NOT NULL,
+  `eventAttendance` char(10) NOT NULL DEFAULT 'Not Going',
   KEY `userID` (`userID`),
   KEY `eventID` (`eventID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
