@@ -60,6 +60,7 @@ function hideHome() {
 
 function displayHome() {
   document.getElementById("home").style.display = "block";
+  localStorage.setItem("page_selected", "home");
 }
 
 /* Hide all sections except home section */
@@ -100,6 +101,7 @@ function hideUserInfo() {
 /* Display User Login */
 function displayLogin() {
   document.getElementById("login_container").style.display = "block";
+  localStorage.setItem("page_selected", "login");
   hideHome();
   hideRegister();
   hideEditProf();
@@ -118,6 +120,7 @@ function hideLogin() {
 /* Display User Register */
 function displayRegister() {
   document.getElementById("register_container").style.display = "block";
+  localStorage.setItem("page_selected", "register");
   hideLogin();
   hideEditProf();
   hideMyEvents();
@@ -135,7 +138,7 @@ function hideRegister() {
 /* Display User Edit Profile */
 function displayEditProf() {
   document.getElementById("edit_prof").style.display = "block";
-  localStorage.setItem("selectedpage", "editprofile");
+  localStorage.setItem("page_selected", "editprofile");
   hideLogin();
   hideRegister();
   hideMyEvents();
@@ -153,6 +156,7 @@ function hideEditProf() {
 /* Display User Events */
 function displayMyEvents() {
   document.getElementById("my_events").style.display = "block";
+  localStorage.setItem("page_selected", "myevents");
   hideLogin();
   hideRegister();
   hideEditProf();
@@ -169,6 +173,7 @@ function hideMyEvents() {
 /* Display Create User Events */
 function displayCreateEvent() {
   document.getElementById("create_event").style.display = "block";
+  localStorage.setItem("page_selected", "createevents");
   hideLogin();
   hideRegister();
   hideEditProf();
@@ -186,6 +191,7 @@ function hideCreateEvent() {
 /* Display User Community */
 function displayCommunity() {
   document.getElementById("community").style.display = "block";
+  localStorage.setItem("page_selected", "community");
   hideLogin();
   hideRegister();
   hideEditProf();
@@ -203,6 +209,7 @@ function hideCommunity() {
 /* Display Settings */
 function displaySettings() {
   document.getElementById("settings").style.display = "block";
+  localStorage.setItem("page_selected", "settings");
   hideHome();
   hideLogin();
   hideRegister();
@@ -221,6 +228,7 @@ function hideSettings() {
 /* Display Frequently Asked Questions */
 function displayFAQ() {
   document.getElementById("faq").style.display = "block";
+  localStorage.setItem("page_selected", "faq");
   hideHome();
   hideLogin();
   hideRegister();
@@ -491,7 +499,7 @@ function updateUserInfo() {
   updateuserfd.append('log_name_e', log_name_e);
   updateuserfd.append('log_email_e', log_email_e);
   updateuserfd.append('log_phone_e', log_phone_e);
-  updateuserfd.append('userid', userid);
+  // updateuserfd.append('userid', userid);
   updateuserfd.append('updateUser', updateUser.value);
   fetch('api/ws.php?action=updateUser', {
     method: 'POST',
