@@ -51,6 +51,7 @@ class dbObj
             $row = $stmt->fetch();
             $stmt->execute();
 
+            // last User ID
             $lastuserID = $this->dbconn->lastInsertId();
 
             /* - Login Table - */
@@ -123,8 +124,44 @@ class dbObj
         }
     }
 
-    public function updateUser() {
-        
+    public function updateUser($reg_name, $reg_phone, $log_email, $date, $browser, $ip, $action_type)
+    {
+        try {
+            $this->dbconn->beginTransaction($reg_name, $reg_phone, $log_email);
+
+            /* - User Table - */
+            $stmt = $this->dbconn->prepare("UPDATE users SET BookTitle = :log_name_e, OriginalTitle = :ogTitle, YearofPublication = :yearOfPub, Genre = :genre, MillionsSold = :millSold, LanguageWritten = :langWritten, coverImagePath = :covImage WHERE BookID = :BookID");
+            // bind values
+            $stmt->bindValue(':reg_name', $reg_name);
+            $stmt->bindValue(':reg_phone', $reg_phone);
+            // Execute the update statement
+            $stmt->execute();
+
+            // last User ID
+            $lastuserID = $this->dbconn->lastInsertId();
+
+
+            /* -  Login Table - */
+            $stmt = $this->dbconn->prepare("UPDATE login SET BookTitle = :bkTitle, OriginalTitle = :ogTitle, YearofPublication = :yearOfPub, Genre = :genre, MillionsSold = :millSold, LanguageWritten = :langWritten, coverImagePath = :covImage WHERE BookID = :BookID");
+            // bind values
+            $stmt->bindValue(':log_email', $log_email);
+            $stmt->bindValue(':user_ID', $lastuserID);
+            // Execute the update statement
+            $stmt->execute();
+
+            /* - Changelog Table - */
+            $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type) VALUES (:date, :browser, :ip, :action_type)");
+            $stmt->bindValue(':date', $date);
+            $stmt->bindValue(':browser', $browser);
+            $stmt->bindValue(':ip', $ip);
+            $stmt->bindValue(':action_type', $action_type);
+            $stmt->execute();
+
+            // Commit changes here //
+            $this->dbconn->commit();
+        } catch (PDOException $ex) {
+            throw $ex;
+        }
     }
 
     /* -- Check if user account exists -- */
@@ -180,13 +217,14 @@ class dbObj
     }
 
     // Check if more than 5 checked
-    function checkAttendance($evid) {
+    function checkAttendance($evid)
+    {
         db_connection();
         $stmt = $this->dbconn->prepare("SELECT * FROM attendance INNER JOIN events on attendance.userID = events.userID WHERE events.EventID =:eid");
-            // $stmt->bindValue(':', $);
-            $stmt->bindValue(":eid", $evid);
-            $stmt->execute();
-            $row = $stmt->fetch();
+        // $stmt->bindValue(':', $);
+        $stmt->bindValue(":eid", $evid);
+        $stmt->execute();
+        $row = $stmt->fetch();
     }
 
     public function updateAttend($evid, $answer)

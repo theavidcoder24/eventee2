@@ -450,10 +450,6 @@ function userLogout() {
     method: 'GET'
   })
     .then(function (response) {
-      // Force error into console
-      // response.text().then(function (text) {
-      //   console.log(text);
-      // });
       // HTTP Response Codes
       if (response.status === 202) {
         console.log("Logout Success");
@@ -484,9 +480,19 @@ function userLogout() {
     });
 }
 
+/* - Edit Profile - */
 function updateUserInfo() {
+  loadPage();
+  var log_name_e = document.getElementById("log_name_e");
+  var log_email_e = document.getElementById("log_email_e");
+  var log_phone_e = document.getElementById("log_phone_e");
   var updateuserfd = new FormData();
+  updateuserfd.append('action', 'updateUser');
+  updateuserfd.append('log_name_e', log_name_e);
+  updateuserfd.append('log_email_e', log_email_e);
+  updateuserfd.append('log_phone_e', log_phone_e);
   updateuserfd.append('userid', userid);
+  updateuserfd.append('updateUser', updateUser.value);
   fetch('api/ws.php?action=updateUser', {
     method: 'POST',
     body: updateuserfd,
@@ -499,7 +505,7 @@ function updateUserInfo() {
       // HTTP Response Codes
       if (response.status === 202) {
         console.log('Creation Successful');
-        successmessage("Success: User Updated!");
+        successmessage("Success: User Profile Updated!");
         return;
       }
       if (response.status === 400) {
@@ -682,7 +688,7 @@ function displayEvents() {
 // Get List of attendees by Event ID
 // function getattendees() {
 // fetch('api/ws.php?action=checkAttendance', {
-//   method: 'UPDATE',
+//   method: '',
 //   body: fd,
 //   credentials: 'include'
 // })  
