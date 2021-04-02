@@ -124,30 +124,29 @@ class dbObj
         }
     }
 
-    public function updateUser($reg_name, $reg_phone, $log_email, $date, $browser, $ip, $action_type)
+    public function updateUser($reg_name, $reg_phone, $date, $browser, $ip, $action_type)
     {
         try {
-            $this->dbconn->beginTransaction($reg_name, $reg_phone, $log_email);
+            $this->dbconn->beginTransaction();
 
             /* - User Table - */
-            $stmt = $this->dbconn->prepare("UPDATE users SET BookTitle = :log_name_e, OriginalTitle = :ogTitle, YearofPublication = :yearOfPub, Genre = :genre, MillionsSold = :millSold, LanguageWritten = :langWritten, coverImagePath = :covImage WHERE BookID = :BookID");
+            $stmt = $this->dbconn->prepare("UPDATE users SET FullName = :log_name_e, PhoneNumber = :log_phone_e WHERE user_ID = :user_ID");
             // bind values
-            $stmt->bindValue(':reg_name', $reg_name);
-            $stmt->bindValue(':reg_phone', $reg_phone);
+            $stmt->bindValue(':log_name_e', $reg_name);
+            $stmt->bindValue(':log_phone_e', $reg_phone);
             // Execute the update statement
             $stmt->execute();
 
             // last User ID
-            $lastuserID = $this->dbconn->lastInsertId();
-
+            // $lastuserID = $this->dbconn->lastInsertId();
 
             /* -  Login Table - */
-            $stmt = $this->dbconn->prepare("UPDATE login SET BookTitle = :bkTitle, OriginalTitle = :ogTitle, YearofPublication = :yearOfPub, Genre = :genre, MillionsSold = :millSold, LanguageWritten = :langWritten, coverImagePath = :covImage WHERE BookID = :BookID");
-            // bind values
-            $stmt->bindValue(':log_email', $log_email);
-            $stmt->bindValue(':user_ID', $lastuserID);
-            // Execute the update statement
-            $stmt->execute();
+            // $stmt = $this->dbconn->prepare("UPDATE login SET Email = :log_email_e WHERE loginID = :login_ID");
+            // // bind values
+            // $stmt->bindValue(':log_email_e', $log_email);
+            // $stmt->bindValue(':user_ID', $lastuserID);
+            // // Execute the update statement
+            // $stmt->execute();
 
             /* - Changelog Table - */
             $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type) VALUES (:date, :browser, :ip, :action_type)");

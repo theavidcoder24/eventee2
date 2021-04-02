@@ -149,16 +149,17 @@ if (isset($_GET["action"])) {
             session_destroy();
             http_response_code(202);
             break;
+            /* - Update User - */
         case "updateUser":
             if (isset($_POST["action"])) {
                 $reg_name = $_POST['log_name_e'];
                 $reg_phone = $_POST['log_phone_e'];
-                $log_email = $_POST['log_email_e'];
+                // $log_email = $_POST['log_email_e'];
                 $date = date('Y-m-d H:i:s');
                 $browser = $_SERVER['HTTP_USER_AGENT'];
                 $ip = $_SERVER['REMOTE_ADDR'];
                 $action_type = $_POST['update_user'];
-                $db->updateUser($reg_name, $reg_phone, $log_email, $date, $browser, $ip, $action_type);
+                $db->updateUser($reg_name, $reg_phone, $date, $browser, $ip, $action_type);
                 http_response_code(202);
             } else {
                 http_response_code(501);
