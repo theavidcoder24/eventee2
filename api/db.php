@@ -223,7 +223,8 @@ class dbObj
         // $stmt->bindValue(':', $);
         $stmt->bindValue(":eid", $evid);
         $stmt->execute();
-        $row = $stmt->fetch();
+        $result = $stmt->fetchAll();
+        return $result;
     }
 
     public function updateAttend($evid, $answer)
