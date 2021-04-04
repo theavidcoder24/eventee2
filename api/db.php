@@ -144,6 +144,7 @@ class dbObj
             // $stmt = $this->dbconn->prepare("UPDATE login SET Email = :log_email_e WHERE loginID = :login_ID");
             // // bind values
             // $stmt->bindValue(':log_email_e', $log_email);
+            // $stmt->bindValue(':log_pass_e', $log_pass);
             // $stmt->bindValue(':user_ID', $lastuserID);
             // // Execute the update statement
             // $stmt->execute();
