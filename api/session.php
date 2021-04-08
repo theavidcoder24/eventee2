@@ -9,7 +9,6 @@ class sessObj
         if ("login" == true) {
             if (!isset($_SESSION['currentloggedin'])) {
                 // echo "Welcome " . $_SESSION['currentloggedin'];
-                // exit();
                 return true;
             }
         } elseif ("login" == false) {
