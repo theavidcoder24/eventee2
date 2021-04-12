@@ -4,8 +4,8 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Credentials: true');
 
 // All echo statements will be json_encoded
-header("Access-Control-Allow-Headers", "content-type");
-header('Content-Type: application/json');
+// header("Access-Control-Allow-Headers", "content-type");
+// header('Content-Type: application/json');
 
 // Set the timezone to Australia 
 date_default_timezone_set('Australia/Brisbane');
@@ -154,11 +154,13 @@ if (isset($_GET["action"])) {
             if (isset($_POST["action"])) {
                 $reg_name = $_POST['log_name_e'];
                 $reg_phone = $_POST['log_phone_e'];
+                $reg_dob = $_POST['log_dob_e'];
+                $user_ID = $_POST['user_ID'];
                 $date = date('Y-m-d H:i:s');
                 $browser = $_SERVER['HTTP_USER_AGENT'];
                 $ip = $_SERVER['REMOTE_ADDR'];
                 $action_type = $_POST['updateUser'];
-                $db->updateUser($reg_name, $reg_phone, $date, $browser, $ip, $action_type);
+                $db->updateUser($reg_name, $reg_phone, $reg_dob, $date, $browser, $ip, $action_type, $user_ID);
                 http_response_code(202);
             } else {
                 http_response_code(501);

@@ -99,6 +99,7 @@ class dbObj
                 $_SESSION["login"] = 'true';
                 $_SESSION["access_rights"] = $row["access_rights"];
                 $_SESSION['loginID'] = $row['loginID'];
+                $_SESSION['user_ID'] = $row['user_ID'];
                 $_SESSION['time_start_login'] = time();
                 time('H:i:s');
 
@@ -124,17 +125,19 @@ class dbObj
         }
     }
 
-    public function updateUser($reg_name, $reg_phone, $date, $browser, $ip, $action_type)
+    public function updateUser($reg_name, $reg_phone, $reg_dob, $date, $browser, $ip, $action_type, $user_ID)
     {
         try {
             $this->dbconn->beginTransaction();
 
             /* - User Table - */
-            $stmt = $this->dbconn->prepare("UPDATE users SET FullName = :log_name_e, PhoneNumber = :log_phone_e WHERE user_ID = :user_ID");
+            $stmt = $this->dbconn->prepare("UPDATE users SET FullName = :log_name_e, PhoneNumber = :log_phone_e, DateOfBirth = :log_dob_e WHERE user_ID = :user_ID");
             // bind values
-            
+
             $stmt->bindValue(':log_name_e', $reg_name);
             $stmt->bindValue(':log_phone_e', $reg_phone);
+            $stmt->bindValue(':log_dob_e', $reg_dob);
+            $stmt->bindValue(':user_ID', $user_ID);
             // Execute the update statement
             $stmt->execute();
 

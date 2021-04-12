@@ -511,6 +511,13 @@
                                     <span class="helper-text" data-error="Please enter a valid email"
                                         data-success="Correct"></span>
                                 </div>
+                                <div class="input-field col s12">
+                                    <i class="material-icons prefix">cake</i>
+                                    <input type="text" id="log_dob_e" class="datepicker validate"
+                                        placeholder="Date of Birth *" onblur="saveDOB(this)">
+                                    <span class="helper-text" data-error="Please enter a valid date of birth"
+                                        data-success="Correct" max="20"></span>
+                                </div>
                                 <!-- <div class="input-field col s12">
                                 <i class="material-icons prefix">vpn_key</i>
                                 <input id="log_pass_e" type="password" class="validate" placeholder="Password"
@@ -528,12 +535,12 @@
                                 </label>
                             </p>
                         </div>
-                        <button class="btn indigo waves-effect waves-light" type="reset" name="action"
+                        <button class="btn indigo waves-effect waves-light" type="reset"
                             onclick="hideAll()">Cancel</button>
                         <br>
                         <br>
                         <input type="hidden" name="action" value="updateUser" id="updateUser">
-                        <button class="btn indigo waves-effect waves-light" type="submit" name="action"
+                        <button class="btn indigo waves-effect waves-light" type="submit"
                             onclick="updateUserInfo()">Save
                             Profile</button>
                     </div>

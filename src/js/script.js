@@ -493,11 +493,13 @@ function updateUserInfo() {
   loadPage();
   var log_name_e = document.getElementById("log_name_e");
   var log_phone_e = document.getElementById("log_phone_e");
+  var log_phone_e = document.getElementById("log_dob_e");
   var updateuserfd = new FormData();
   updateuserfd.append('action', 'updateUser');
   updateuserfd.append('log_name_e', log_name_e);
   updateuserfd.append('log_phone_e', log_phone_e);
-  // updateuserfd.append('userid', userid);
+  updateuserfd.append('log_dob_e', log_dob_e);
+  // updateuserfd.append('user_ID', user_ID);
   updateuserfd.append('updateUser', updateUser.value);
   fetch('api/ws.php?action=updateUser', {
     method: 'POST',
@@ -914,10 +916,11 @@ function deleteRemoveEvent(eventid) {
 /* ==== User Profile Local Storage ==== */
 window.addEventListener("load", function () {
   log_name_e.value = localStorage.getItem("log_name_e");
-  log_email_e.value = localStorage.getItem("log_email_e");
+  // log_email_e.value = localStorage.getItem("log_email_e");
   log_phone_e.value = localStorage.getItem("log_phone_e");
-  log_pass_e.value = localStorage.getItem("log_pass_e");
-  if (localStorage.getItem("log_name_e", "log_email_e", "log_phone_e", "log_pass_e") == null) {
+  log_dob_e.value = localStorage.getItem("log_dob_e");
+  // log_pass_e.value = localStorage.getItem("log_pass_e");
+  if (localStorage.getItem("log_name_e", "log_phone_e", "log_dob_e") == null) {
     checkProf.checked = false;
   } else {
     checkProf.checked = true;
@@ -927,15 +930,17 @@ window.addEventListener("load", function () {
 function setLocal() {
   if (checkProf.checked == true) {
     localStorage.setItem("log_name_e", log_name_e.value);
-    localStorage.setItem("log_email_e", log_email_e.value);
+    // localStorage.setItem("log_email_e", log_email_e.value);
     localStorage.setItem("log_phone_e", log_phone_e.value);
-    localStorage.setItem("log_pass_e", log_pass_e.value);
+    localStorage.setItem("log_dob_e", log_dob_e.value);
+    // localStorage.setItem("log_pass_e", log_pass_e.value);
 
   } else {
     localStorage.removeItem("log_name_e");
-    localStorage.removeItem("log_email_e");
+    // localStorage.removeItem("log_email_e");
     localStorage.removeItem("log_phone_e");
-    localStorage.removeItem("log_pass_e");
+    localStorage.removeItem("log_dob_e");
+    // localStorage.removeItem("log_pass_e");
   }
 }
 
@@ -948,12 +953,12 @@ function saveName(checkProf) {
 }
 
 /* Saves the user's email input */
-function saveEmail(checkProf) {
-  if (checkProf.checked == true) {
-    var save = document.getElementById("log_email_e");
-    localStorage.setItem("log_email_e", log_email_e.value);
-  }
-}
+// function saveEmail(checkProf) {
+//   if (checkProf.checked == true) {
+//     var save = document.getElementById("log_email_e");
+//     localStorage.setItem("log_email_e", log_email_e.value);
+//   }
+// }
 
 /* Saves the user's phone input */
 function savePhone(checkProf) {
@@ -963,13 +968,21 @@ function savePhone(checkProf) {
   }
 }
 
-/* Saves the user's password input */
-function savePass(checkProf) {
+/* Saves the user's date of birth input */
+function saveDOB(checkProf) {
   if (checkProf.checked == true) {
-    var save = document.getElementById("log_pass_e");
-    localStorage.setItem("log_pass_e", log_pass_e.value);
+    var save = document.getElementById("log_dob_e");
+    localStorage.setItem("log_dob_e", log_dob_e.value);
   }
 }
+
+/* Saves the user's password input */
+// function savePass(checkProf) {
+//   if (checkProf.checked == true) {
+//     var save = document.getElementById("log_pass_e");
+//     localStorage.setItem("log_pass_e", log_pass_e.value);
+//   }
+// }
 
 
 /* ==== Switch Dark Mode Theme + Local Storage ==== */
