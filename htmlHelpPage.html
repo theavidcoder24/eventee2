@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="light-theme || dark-theme">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Help Page</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Eventee 2</title>
+
     <!-- Icons + Manifest -->
-    <link rel="icon" href="src/images/Eventee Calendar transparent no text.png" type="image/gif" sizes="16x16">
-    <link rel="apple-touch-icon" href="src/images/Eventee Calendar transparent no text.png">
+    <link rel="icon" href="src/images/eventee_logo.png" type="image/gif" sizes="16x16">
+    <link rel="apple-touch-icon" href="src/images/eventee_logo.png">
 
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -22,50 +24,46 @@
 
     <!-- Materialize jQuery -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <!-- Eventee Scripts -->
-    <script defer src="src/js/script.js"></script>
-    <script defer src="src/js/regScript.js"></script>
+
     <!-- Google Font API -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!-- Eventee CSS -->
-    <link href="src/css/style.css" rel="stylesheet">
+
+    <!-- Google Maps JavaScript API -->
+    <!-- <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC38Ty6VW0-y0yw2GQPnBH7ssKvOp8imE4&callback=initMap&libraries=&v=weekly"
+        async>
+    </script> -->
+    <!-- <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script> -->
+
+    <!-- Import Font Family -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
+    <!-- Custom Links -->
+    <link rel="stylesheet" href="src/css/style.css">
+    <script src="src/js/script.js"></script>
 </head>
 
 <body>
+    <header>
+        <!--- Navigation --->
+        <nav class="indigo">
+            <a href="index.html" data-target="slide-out" class="sidenav-trigger"><i
+                    class="material-icons white-text">home</i></a>
+            <a href="#home" onclick="hideAll(); loadPage()"><img src="src/images/eventee_logo.png" alt="Eventee Logo"
+                    class="brand-logo center"></a>
+            <!-- <a href="#login_container" class="right" onclick="displayLogin(); loadPage()"><i id="login_icon"
+                    class="material-icons white-text">login</i></a>
+            <a href="#edit_prof" onclick="displayEditProf(); hideHome(); loadPage()" class="right"><i id="user_icon"
+                    class="material-icons white-text">account_circle</i></a> -->
+        </nav>
+
+    
+    </header>
     <div class="container">
-        <header>
-            <!---- Navigation ---->
-            <ul id="slide-out" class="sidenav">
-                <li>
-                    <div class="user-view">
-                        <div class="background">
-                            <img src="src/images/photo.jpg">
-                        </div>
-                        <a href="#user"><img class="circle" src="src/images/blank-profile.png"></a>
-                        <a href="#name"><span id="reg_fullname" class="white-text name"></span></a>
-                        <a href="#email"><span id="reg_email" class="white-text email"></span></a>
-                    </div>
-                </li>
-                <li><a href="#view-prof" class="modal-trigger"><i class="material-icons">groups</i>View Profile</a></li>
-                <li id="createMenuItem"><a href="#create-event" class="modal-trigger"><i
-                            class="material-icons">add_circle</i>Create
-                        Event</a>
-                </li>
-                <li><a href="#community" class="modal-trigger"><i class="material-icons">forum</i>Community</a></li>
-                <li>
-                    <div class="divider"></div>
-                </li>
-                <li><a href="#settings" class="modal-trigger"><i class="material-icons">settings</i>Settings</a></li>
-                <li><a href="#faq" class="modal-trigger"><i class="material-icons">contact_support</i>Eventee FAQ</a>
-                </li>
-                <li id="logoutMenuItem"><a onclick="userLogout()"><i class="material-icons">exit_to_app</i>Logout</a>
-                </li>
-            </ul>
-            <a href="#" data-target="slide-out" class="sidenav-trigger"><i id="menu-icon"
-                    class="material-icons">menu</i></a>
-        </header>
         <div id="helpContainer">
             <h2>HTML Help Document</h2>
             <h4>Manually Install Project</h4>
