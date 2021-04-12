@@ -488,6 +488,7 @@ function userLogout() {
     });
 }
 
+
 /* - Edit Profile - */
 function updateUserInfo() {
   loadPage();
