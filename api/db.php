@@ -125,6 +125,15 @@ class dbObj
         }
     }
 
+    // function getUsers()
+    // {
+    //     $user_ID = $_GET['user_ID'];
+    //     $sql = "SELECT * FROM users WHERE userID = '$user_ID'"; //{$_GET[$BookID]}
+    //     $stmt = $this->dbconn->prepare($sql);
+    //     $stmt->execute();
+    //     $stmt->fetch(PDO::FETCH_ASSOC);
+    // }
+
     public function updateUser($reg_name, $reg_phone, $reg_dob, $date, $browser, $ip, $action_type, $user_ID)
     {
         try {
