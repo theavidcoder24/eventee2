@@ -130,6 +130,12 @@ class dbObj
         try {
             $this->dbconn->beginTransaction();
 
+            $user_ID = $_GET['user_ID'];
+            $sql = "SELECT * FROM users WHERE userID = '$user_ID'"; //{$_GET[$BookID]}
+            $stmt = $this->dbconn->prepare($sql);
+            $stmt->execute();
+            $stmt->fetch(PDO::FETCH_ASSOC);
+
             /* - User Table - */
             $stmt = $this->dbconn->prepare("UPDATE users SET FullName = :log_name_e, PhoneNumber = :log_phone_e, DateOfBirth = :log_dob_e WHERE user_ID = :user_ID");
             // bind values
