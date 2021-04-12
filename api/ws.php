@@ -158,7 +158,7 @@ if (isset($_GET["action"])) {
                 $date = date('Y-m-d H:i:s');
                 $browser = $_SERVER['HTTP_USER_AGENT'];
                 $ip = $_SERVER['REMOTE_ADDR'];
-                $action_type = $_POST['update_user'];
+                $action_type = $_POST['updateUser'];
                 $db->updateUser($reg_name, $reg_phone, $date, $browser, $ip, $action_type);
                 http_response_code(202);
             } else {

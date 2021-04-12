@@ -489,34 +489,36 @@
                         <img id="prof_pic" class="circle" src="src/images/blank-profile.png">
                         <!-- <h6>User Details</h6> -->
                         <div class="row">
-                            <div class="input-field col s12">
-                                <i class="material-icons prefix">account_circle</i>
-                                <input id="log_name_e" type="text" class="validate" placeholder="Name"
-                                    onblur="saveName(this)">
-                                <span class="helper-text" data-error="Please enter a valid name"
-                                    data-success="Correct"></span>
-                            </div>
-                            <div class="input-field col s12">
-                                <i class="material-icons prefix">email</i>
-                                <input id="log_email_e" type="email" class="validate" placeholder="Email"
+                            <form action="api/ws.php" method="POST" novalidate>
+                                <div class="input-field col s12">
+                                    <i class="material-icons prefix">account_circle</i>
+                                    <input id="log_name_e" type="text" class="validate" placeholder="Name"
+                                        onblur="saveName(this)">
+                                    <span class="helper-text" data-error="Please enter a valid name"
+                                        data-success="Correct"></span>
+                                </div>
+                                <!-- <div class="input-field col s12">
+                                    <i class="material-icons prefix">email</i>
+                                    <input id="log_email_e" type="email" class="validate" placeholder="Email"
                                     onblur="saveEmail(this)">
-                                <span class="helper-text" data-error="Please enter a valid email"
+                                    <span class="helper-text" data-error="Please enter a valid email"
                                     data-success="Correct"></span>
-                            </div>
-                            <div class="input-field col s12">
-                                <i class="material-icons prefix">phone</i>
-                                <input id="log_phone_e" type="text" class="validate" placeholder="Phone Number"
-                                    onblur="savePhone(this)">
-                                <span class="helper-text" data-error="Please enter a valid email"
-                                    data-success="Correct"></span>
-                            </div>
-                            <div class="input-field col s12">
+                                </div> -->
+                                <div class="input-field col s12">
+                                    <i class="material-icons prefix">phone</i>
+                                    <input id="log_phone_e" type="text" class="validate" placeholder="Phone Number"
+                                        onblur="savePhone(this)">
+                                    <span class="helper-text" data-error="Please enter a valid email"
+                                        data-success="Correct"></span>
+                                </div>
+                                <!-- <div class="input-field col s12">
                                 <i class="material-icons prefix">vpn_key</i>
                                 <input id="log_pass_e" type="password" class="validate" placeholder="Password"
-                                    onblur="savePass(this)">
+                                onblur="savePass(this)">
                                 <span class="helper-text" data-error="Please enter a valid password"
-                                    data-success="Correct" max="20"></span>
-                            </div>
+                                data-success="Correct" max="20"></span>
+                            </div> -->
+                            </form>
                         </div>
                         <div id="checkbox">
                             <p>
