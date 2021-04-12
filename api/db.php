@@ -140,7 +140,7 @@ class dbObj
             $this->dbconn->beginTransaction();
 
             $user_ID = $_GET['user_ID'];
-            $sql = "SELECT * FROM users WHERE userID = '$user_ID'"; //{$_GET[$BookID]}
+            $sql = "SELECT * FROM users WHERE userID = '$user_ID'";
             $stmt = $this->dbconn->prepare($sql);
             $stmt->execute();
             $stmt->fetch(PDO::FETCH_ASSOC);
