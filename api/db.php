@@ -132,6 +132,7 @@ class dbObj
             /* - User Table - */
             $stmt = $this->dbconn->prepare("UPDATE users SET FullName = :log_name_e, PhoneNumber = :log_phone_e WHERE user_ID = :user_ID");
             // bind values
+            
             $stmt->bindValue(':log_name_e', $reg_name);
             $stmt->bindValue(':log_phone_e', $reg_phone);
             // Execute the update statement

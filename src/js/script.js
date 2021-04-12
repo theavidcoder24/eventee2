@@ -492,12 +492,10 @@ function userLogout() {
 function updateUserInfo() {
   loadPage();
   var log_name_e = document.getElementById("log_name_e");
-  var log_email_e = document.getElementById("log_email_e");
   var log_phone_e = document.getElementById("log_phone_e");
   var updateuserfd = new FormData();
   updateuserfd.append('action', 'updateUser');
   updateuserfd.append('log_name_e', log_name_e);
-  updateuserfd.append('log_email_e', log_email_e);
   updateuserfd.append('log_phone_e', log_phone_e);
   // updateuserfd.append('userid', userid);
   updateuserfd.append('updateUser', updateUser.value);

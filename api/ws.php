@@ -154,7 +154,6 @@ if (isset($_GET["action"])) {
             if (isset($_POST["action"])) {
                 $reg_name = $_POST['log_name_e'];
                 $reg_phone = $_POST['log_phone_e'];
-                // $log_email = $_POST['log_email_e'];
                 $date = date('Y-m-d H:i:s');
                 $browser = $_SERVER['HTTP_USER_AGENT'];
                 $ip = $_SERVER['REMOTE_ADDR'];
