@@ -3,8 +3,8 @@
 Eventee, an event planning web app that allows the user to search for events nearby using the user’s location and import events from Facebook.
 It uses inbuilt categories to separate events that will be imported from Facebook and see the current events around you in map view making it easier to navigate instead of seeing it in list view.
 
-Email: 
-Password: 
+Email:
+Password:
 
 # Github Repository
 
@@ -20,8 +20,8 @@ deployScript.sh
 Install the client and api folders into a web server like MAMP or WAMP. The folders need to be installed into the www folder if you're using Wamp for example. Update the database connection settings found within the db.php file with the username and password needed to access the database.
 
 Emails & Passwords
-Email: 
-Password: 
+Email:
+Password:
 
 You can view the project in the browser by using these addresses
 Local: http://localhost:3000
@@ -31,6 +31,10 @@ http://localhost:3000/dashboard
 ## Admin Panel
 
 If installing on a new development environment be sure to run the command below if you don't see a node_modueles folder in the repo
+
+#### cd react-admin
+
+Directs user to the right folder to install dependencies
 
 #### npm install
 
@@ -111,4 +115,3 @@ If installing on a new development environment be sure to run the command below 
 | Delete Event (Admin)  |        |      | \*     | \*     |         |
 | Manage Users (Admin)  | \*     | \*   | \*     | \*     |         |
 | Manage Events (Admin) | \*     | \*   | \*     | \*     |         |
-
