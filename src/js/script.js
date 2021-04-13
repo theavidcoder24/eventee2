@@ -500,7 +500,6 @@ function postdisplayUser() {
     credentials: 'include'
   })
     .then(function (response) {
-
       response.json().then(function (data) {
         console.log(data)
         // Display data as output
@@ -537,15 +536,16 @@ function postdisplayUser() {
       </div>`
         })
         // Data Output at Specific page/location
+        // console.log(row.UserID);
         document.getElementById('profilesection').innerHTML = output;
         document.getElementById('user-update-form').innerHTML = output2;
       })
     })
   // Send back error into console log
-  response.text().then((text) => {
-    console.log(text)
-  })
-  return false;
+  // response.text().then((text) => {
+  //   console.log(text)
+  // })
+  // return false;
 }
 // User Update Function that sends the values from  each the input ID in the update form to API.php/WS.php
 function postUpdateUser() {
