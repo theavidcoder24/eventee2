@@ -163,6 +163,7 @@ if (isset($_GET["action"])) {
                     // If the database can fetch the profile
                 } else {
                     http_response_code(201);
+                    echo $row['userID'];
                     echo json_encode($result);
                 }
                 // if the user is not logged in
