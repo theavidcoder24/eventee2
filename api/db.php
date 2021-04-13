@@ -208,21 +208,20 @@ class dbObj
     }
     // User update with values retrieved from update form
     function updateUser(
-        $firstnameupdt,
-        $phoneupdt,
-        $dateofbirthupdt
+        $log_name_e,
+        $log_phone_e,
+        $log_dob_e
     ) {
-        $mysql = "UPDATE users SET firstname = :firstnameupdt, lastname = :lastnameupdt, dateofbirth = :dateofbirthupdt, 
-            email = :emailupdt, phone = :phoneupdt, username = :usernameupdt, password = :passwordupdt 
-            WHERE userID = :userid";
+        $mysql = "UPDATE users SET FullName = :log_name_e, PhoneNumber = :log_phone_e, DateOfBirth = :log_dob_e
+            WHERE user_ID = :userid";
         $stmt = $this->dbconn->prepare($mysql);
         $stmt->bindValue(':userid', $_SESSION['user_ID']);
-        $stmt->bindValue(':firstnameupdt', $firstnameupdt);
-        $stmt->bindValue(':dateofbirthupdt', $dateofbirthupdt);
-        $stmt->bindValue(':phoneupdt', $phoneupdt);
+        $stmt->bindValue(':log_name_e', $log_name_e);
+        $stmt->bindValue(':log_dob_e', $log_dob_e);
+        $stmt->bindValue(':log_phone_e', $log_phone_e);
 
         // if user did not insert phone number, stop data insertion into MySQL database
-        if (!preg_match("/^[0-9]{10}$/", $phoneupdt)) {
+        if (!preg_match("/^[0-9]{10}$/", $log_phone_e)) {
             die;
             return false;
         }

@@ -177,23 +177,23 @@ if (isset($_GET["action"])) {
             // Checking if the user is logged in
             if ($_SESSION['se']->is_logged_in()) {
                 $objreg = json_decode(file_get_contents("php://input"), true);
-                $firstnameupdt = testInput($objreg['firstname-updt']);
-                $phoneupdt = testInput($objreg['phone-updt']);
-                $dateofbirthupdt = testInput($objreg['dateofbirth-updt']);
+                $log_name_e = testInput($objreg['log_name_e']);
+                $log_phone_e = testInput($objreg['log_phone_e']);
+                $log_dob_e = testInput($objreg['log_dob_e']);
                 // Reject data insert if the form is not fully filled
                 if (
-                    empty($objreg['firstname-updt'])
-                    && empty($objreg['phone-updt'])
-                    && empty($objreg['dateofbirth-updt'])
+                    empty($objreg['log_name_e'])
+                    && empty($objreg['log_phone_e'])
+                    && empty($objreg['log_dob_e'])
                 ) {
                     http_response_code(406);
                     echo 'HTTP ERROR 406 - Server Error Response: Not Accepted.';
                     die;
                 } else {
                     if ($db->updateUser(
-                        $firstname,
-                        $phoneupdt,
-                        $dateofbirthupdt
+                        $log_name_e,
+                        $log_phone_e,
+                        $log_dob_e
                     )) {
                         // If the user fully filled in the form
                         http_response_code(202);
