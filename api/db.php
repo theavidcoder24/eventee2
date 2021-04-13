@@ -195,10 +195,10 @@ class dbObj
     function displayUser()
     {
         try {
-            $mysql = "SELECT user_ID, FullName, PhoneNumber, DateOfBirth FROM users 
-            WHERE user_ID = :userid";
+            $mysql = "SELECT userID, FullName, PhoneNumber, DateOfBirth FROM users 
+            WHERE userID = :userid";
             $stmt = $this->dbconn->prepare($mysql);
-            $stmt->bindValue(':userid', $_SESSION['user_ID']);
+            $stmt->bindValue(':userid', $_SESSION['userID']);
             $stmt->execute();
             $result = $stmt->fetchAll();
             return $result;
@@ -213,9 +213,9 @@ class dbObj
         $log_dob_e
     ) {
         $mysql = "UPDATE users SET FullName = :log_name_e, PhoneNumber = :log_phone_e, DateOfBirth = :log_dob_e
-            WHERE user_ID = :userid";
+            WHERE userID = :userid";
         $stmt = $this->dbconn->prepare($mysql);
-        $stmt->bindValue(':userid', $_SESSION['user_ID']);
+        $stmt->bindValue(':userid', $_SESSION['userID']);
         $stmt->bindValue(':log_name_e', $log_name_e);
         $stmt->bindValue(':log_dob_e', $log_dob_e);
         $stmt->bindValue(':log_phone_e', $log_phone_e);

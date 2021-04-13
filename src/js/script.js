@@ -5,7 +5,7 @@
 window.onload = function () {
   // loadPage();
   console.log(localStorage.getItem("login"));
-  // console.log(localStorage.getItem("LoginEmail"));
+  console.log(localStorage.getItem("LoginEmail"));
   if (localStorage.getItem('login') == 'true') {
     isLogged();
   }
@@ -495,7 +495,7 @@ function postdisplayUser() {
   var output = '';
   var output2 = '';
 
-  fetch('api.php?action=displayuser', {
+  fetch('api/ws.php?action=displayuser', {
     method: "GET",
     credentials: 'include'
   })
@@ -512,7 +512,7 @@ function postdisplayUser() {
             `<div><br><h6>DateOfBirth<h6></div>` + row.DateOfBirth +
 
             `<div class="profilebttn-reposition">
-                  <button class="waves-effect waves-light btn" href="#" onclick="return postLogout()">Log Out</button> 
+                  <button class="waves-effect waves-light btn" href="#" onclick="return userLogout()">Log Out</button> 
                   <button data-target="updateprofilemodal" class="waves-effect waves-light btn modal-trigger">Edit</button>
                   <button data-target="userdeleteconfirmModal" class="waves-effect waves-light btn modal-trigger">Delete</button>
               </div>`
@@ -534,11 +534,7 @@ function postdisplayUser() {
           <i class="material-icons prefix">cake</i>
           <input type="date" id="dateofbirth-updt" name="dateofbirth-updt" 
               value="`+ row.DateOfBirth + `" placeholder="Date of Birth">
-      </div>
-          <div class="input-field">
-              <i class="material-icons prefix">lock</i>
-              <input class="validate" type="text" id="password-updt" name="password-updt" placeholder="Password">
-          </div>`
+      </div>`
         })
         // Data Output at Specific page/location
         document.getElementById('profilesection').innerHTML = output;
@@ -554,12 +550,12 @@ function postdisplayUser() {
 // User Update Function that sends the values from  each the input ID in the update form to API.php/WS.php
 function postUpdateUser() {
   var userUpdate = {
-    'firstname-updt': document.getElementById("firstname-updt").value,
-    'dateofbirth-updt': document.getElementById("dateofbirth-updt").value,
-    'phone-updt': document.getElementById("phone-updt").value
+    'log_name_e': document.getElementById("log_name_e").value,
+    'log_phone_e': document.getElementById("log_phone_e").value,
+    'log_dob_e': document.getElementById("log_dob_e").value
   }
 
-  fetch('api.php?action=updateuser', {
+  fetch('api/ws.php?action=updateuser', {
     method: "POST",
     body: JSON.stringify(userUpdate),
     credentials: 'include'
