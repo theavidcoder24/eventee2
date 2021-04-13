@@ -490,50 +490,146 @@ function userLogout() {
 
 
 /* - Edit Profile - */
-function updateUserInfo() {
-  loadPage();
-  var log_name_e = document.getElementById("log_name_e");
-  var log_phone_e = document.getElementById("log_phone_e");
-  var log_phone_e = document.getElementById("log_dob_e");
-  var updateuserfd = new FormData();
-  updateuserfd.append('action', 'updateUser');
-  updateuserfd.append('log_name_e', log_name_e);
-  updateuserfd.append('log_phone_e', log_phone_e);
-  updateuserfd.append('log_dob_e', log_dob_e);
-  // updateuserfd.append('user_ID', user_ID);
-  updateuserfd.append('updateUser', updateUser.value);
-  fetch('api/ws.php?action=updateUser', {
-    method: 'POST',
-    body: updateuserfd,
+function postdisplayUser() {
+  // Preparing the output
+  var output = '';
+  var output2 = '';
+
+  fetch('api.php?action=displayuser', {
+    method: "GET",
+    credentials: 'include'
   })
-    // Force error into console
     .then(function (response) {
-      response.text().then(function (text) {
-        console.log(text);
-      });
-      // HTTP Response Codes
-      if (response.status === 202) {
-        console.log('Creation Successful');
-        successmessage("Success: User Profile Updated!");
-        return;
-      }
-      if (response.status === 400) {
-        console.log('Bad Request');
-        errormessage('Error: Bad Request');
-        return;
-      }
-      if (response.status === 401) {
-        console.log('Not permitted');
-        errormessage('Error: Not Permitted');
-        return;
-      }
-      if (response.status === 501) {
-        console.log('Not implemented :(');
-        errormessage('Error: Not Implemented');
-        return;
-      }
-    });
+
+      response.json().then(function (data) {
+        console.log(data)
+        // Display data as output
+        data.forEach(row => {
+          // User Profile Output
+          output =
+            `<div><h6>FullName<h6></div>` + row.FullName +
+            `<div><br><h6>PhoneNumber<h6></div>` + row.PhoneNumber +
+            `<div><br><h6>DateOfBirth<h6></div>` + row.DateOfBirth +
+
+            `<div class="profilebttn-reposition">
+                  <button class="waves-effect waves-light btn" href="#" onclick="return postLogout()">Log Out</button> 
+                  <button data-target="updateprofilemodal" class="waves-effect waves-light btn modal-trigger">Edit</button>
+                  <button data-target="userdeleteconfirmModal" class="waves-effect waves-light btn modal-trigger">Delete</button>
+              </div>`
+
+          output2 =
+            // This output allows pre-fill in update form
+            `<div class="input-field">
+              <i class="material-icons prefix">person</i>
+              <input type="text" id="firstname-updt" name="firstname-updt" 
+                  value="`+ row.FullName + `" placeholder="First Name">
+          </div>
+          <div class="input-field">
+              <i class="material-icons prefix">local_phone</i>
+              <input class="validate" type="tel" id="phone-updt" name="phone-updt" 
+                  value="`+ row.PhoneNumber + `" pattern ="[0-9]{10}" placeholder="Mobile Phone">
+                  <span class="helper-text" data-error="wrong" data-success="right"></span>
+          </div>
+          <div class="input-field">
+          <i class="material-icons prefix">cake</i>
+          <input type="date" id="dateofbirth-updt" name="dateofbirth-updt" 
+              value="`+ row.DateOfBirth + `" placeholder="Date of Birth">
+      </div>
+          <div class="input-field">
+              <i class="material-icons prefix">lock</i>
+              <input class="validate" type="text" id="password-updt" name="password-updt" placeholder="Password">
+          </div>`
+        })
+        // Data Output at Specific page/location
+        document.getElementById('profilesection').innerHTML = output;
+        document.getElementById('user-update-form').innerHTML = output2;
+      })
+    })
+  // Send back error into console log
+  response.text().then((text) => {
+    console.log(text)
+  })
+  return false;
 }
+// User Update Function that sends the values from  each the input ID in the update form to API.php/WS.php
+function postUpdateUser() {
+  var userUpdate = {
+    'firstname-updt': document.getElementById("firstname-updt").value,
+    'dateofbirth-updt': document.getElementById("dateofbirth-updt").value,
+    'phone-updt': document.getElementById("phone-updt").value
+  }
+
+  fetch('api.php?action=updateuser', {
+    method: "POST",
+    body: JSON.stringify(userUpdate),
+    credentials: 'include'
+  })
+    .then(function (response) {
+      if (response.status == 406) {
+        // Will not accept the new update information if they are not filled fully or correctly
+        console.log('unaccepted');
+        console.log('Form not fully filled');
+        alert('It appears that the registration form does not contains the required values. Please fully fill in the form.');
+        return;
+      }
+      if (response.status == 202) {
+        console.log('success');
+        // Upon successful update, the profile page will be refreshed by reusing the display profile function
+        if (!alert('Your profile information has been successfully updated!')) { postdisplayUser(); }
+        return;
+      }
+      // Send back error into console log
+      response.text().then((text) => {
+        console.log(text)
+      })
+    })
+  return false;
+}
+
+// function updateUserInfo() {
+//   loadPage();
+//   var log_name_e = document.getElementById("log_name_e");
+//   var log_phone_e = document.getElementById("log_phone_e");
+//   var log_phone_e = document.getElementById("log_dob_e");
+//   var updateuserfd = new FormData();
+//   updateuserfd.append('action', 'updateUser');
+//   updateuserfd.append('log_name_e', log_name_e);
+//   updateuserfd.append('log_phone_e', log_phone_e);
+//   updateuserfd.append('log_dob_e', log_dob_e);
+//   // updateuserfd.append('user_ID', user_ID);
+//   updateuserfd.append('updateUser', updateUser.value);
+//   fetch('api/ws.php?action=updateUser', {
+//     method: 'POST',
+//     body: updateuserfd,
+//   })
+//     // Force error into console
+//     .then(function (response) {
+//       response.text().then(function (text) {
+//         console.log(text);
+//       });
+//       // HTTP Response Codes
+//       if (response.status === 202) {
+//         console.log('Creation Successful');
+//         successmessage("Success: User Profile Updated!");
+//         return;
+//       }
+//       if (response.status === 400) {
+//         console.log('Bad Request');
+//         errormessage('Error: Bad Request');
+//         return;
+//       }
+//       if (response.status === 401) {
+//         console.log('Not permitted');
+//         errormessage('Error: Not Permitted');
+//         return;
+//       }
+//       if (response.status === 501) {
+//         console.log('Not implemented :(');
+//         errormessage('Error: Not Implemented');
+//         return;
+//       }
+//     });
+// }
 
 /* - Create Events - */
 function postCreateEvents() {

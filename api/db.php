@@ -125,6 +125,8 @@ class dbObj
         }
     }
 
+
+
     // function getUsers()
     // {
     //     $user_ID = $_GET['user_ID'];
@@ -134,60 +136,98 @@ class dbObj
     //     $stmt->fetch(PDO::FETCH_ASSOC);
     // }
 
-    public function updateUser($reg_name, $reg_phone, $reg_dob, $date, $browser, $ip, $action_type, $user_ID)
-    {
-        try {
-            $this->dbconn->beginTransaction();
+    // public function updateUser($reg_name, $reg_phone, $reg_dob, $date, $browser, $ip, $action_type, $user_ID)
+    // {
+    //     try {
+    //         $this->dbconn->beginTransaction();
 
-            $user_ID = $_GET['user_ID'];
-            $sql = "SELECT * FROM users WHERE userID = '$user_ID'";
-            $stmt = $this->dbconn->prepare($sql);
-            $stmt->execute();
-            $stmt->fetch(PDO::FETCH_ASSOC);
+    //         $user_ID = $_GET['user_ID'];
+    //         $sql = "SELECT * FROM users WHERE userID = '$user_ID'";
+    //         $stmt = $this->dbconn->prepare($sql);
+    //         $stmt->execute();
+    //         $stmt->fetch(PDO::FETCH_ASSOC);
 
-            /* - User Table - */
-            $stmt = $this->dbconn->prepare("UPDATE users SET FullName = :log_name_e, PhoneNumber = :log_phone_e, DateOfBirth = :log_dob_e WHERE user_ID = :user_ID");
-            // bind values
+    //         /* - User Table - */
+    //         $stmt = $this->dbconn->prepare("UPDATE users SET FullName = :log_name_e, PhoneNumber = :log_phone_e, DateOfBirth = :log_dob_e WHERE user_ID = :user_ID");
+    //         // bind values
 
-            $stmt->bindValue(':log_name_e', $reg_name);
-            $stmt->bindValue(':log_phone_e', $reg_phone);
-            $stmt->bindValue(':log_dob_e', $reg_dob);
-            $stmt->bindValue(':user_ID', $user_ID);
-            // Execute the update statement
-            $stmt->execute();
+    //         $stmt->bindValue(':log_name_e', $reg_name);
+    //         $stmt->bindValue(':log_phone_e', $reg_phone);
+    //         $stmt->bindValue(':log_dob_e', $reg_dob);
+    //         $stmt->bindValue(':user_ID', $user_ID);
+    //         // Execute the update statement
+    //         $stmt->execute();
 
-            // last User ID
-            // $lastuserID = $this->dbconn->lastInsertId();
+    //         // last User ID
+    //         // $lastuserID = $this->dbconn->lastInsertId();
 
-            /* -  Login Table - */
-            // $stmt = $this->dbconn->prepare("UPDATE login SET Email = :log_email_e WHERE loginID = :login_ID");
-            // // bind values
-            // $stmt->bindValue(':log_email_e', $log_email);
-            // $stmt->bindValue(':log_pass_e', $log_pass);
-            // $stmt->bindValue(':user_ID', $lastuserID);
-            // // Execute the update statement
-            // $stmt->execute();
+    //         /* -  Login Table - */
+    //         // $stmt = $this->dbconn->prepare("UPDATE login SET Email = :log_email_e WHERE loginID = :login_ID");
+    //         // // bind values
+    //         // $stmt->bindValue(':log_email_e', $log_email);
+    //         // $stmt->bindValue(':log_pass_e', $log_pass);
+    //         // $stmt->bindValue(':user_ID', $lastuserID);
+    //         // // Execute the update statement
+    //         // $stmt->execute();
 
-            /* - Changelog Table - */
-            $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type) VALUES (:date, :browser, :ip, :action_type)");
-            $stmt->bindValue(':date', $date);
-            $stmt->bindValue(':browser', $browser);
-            $stmt->bindValue(':ip', $ip);
-            $stmt->bindValue(':action_type', $action_type);
-            $stmt->execute();
+    //         /* - Changelog Table - */
+    //         $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type) VALUES (:date, :browser, :ip, :action_type)");
+    //         $stmt->bindValue(':date', $date);
+    //         $stmt->bindValue(':browser', $browser);
+    //         $stmt->bindValue(':ip', $ip);
+    //         $stmt->bindValue(':action_type', $action_type);
+    //         $stmt->execute();
 
-            // Commit changes here //
-            $this->dbconn->commit();
-        } catch (PDOException $ex) {
-            throw $ex;
-        }
-    }
+    //         // Commit changes here //
+    //         $this->dbconn->commit();
+    //     } catch (PDOException $ex) {
+    //         throw $ex;
+    //     }
+    // }
 
     /* -- Check if user account exists -- */
     // function checkUserAccount()
     // {
     //     return "['account': 'exists']";
     // }
+
+    // Display user profile by userID
+    function displayUser()
+    {
+        try {
+            $mysql = "SELECT user_ID, FullName, PhoneNumber, DateOfBirth FROM users 
+            WHERE user_ID = :userid";
+            $stmt = $this->dbconn->prepare($mysql);
+            $stmt->bindValue(':userid', $_SESSION['user_ID']);
+            $stmt->execute();
+            $result = $stmt->fetchAll();
+            return $result;
+        } catch (PDOException $ex) {
+            throw $ex;
+        }
+    }
+    // User update with values retrieved from update form
+    function updateUser(
+        $firstnameupdt,
+        $phoneupdt,
+        $dateofbirthupdt
+    ) {
+        $mysql = "UPDATE users SET firstname = :firstnameupdt, lastname = :lastnameupdt, dateofbirth = :dateofbirthupdt, 
+            email = :emailupdt, phone = :phoneupdt, username = :usernameupdt, password = :passwordupdt 
+            WHERE userID = :userid";
+        $stmt = $this->dbconn->prepare($mysql);
+        $stmt->bindValue(':userid', $_SESSION['user_ID']);
+        $stmt->bindValue(':firstnameupdt', $firstnameupdt);
+        $stmt->bindValue(':dateofbirthupdt', $dateofbirthupdt);
+        $stmt->bindValue(':phoneupdt', $phoneupdt);
+
+        // if user did not insert phone number, stop data insertion into MySQL database
+        if (!preg_match("/^[0-9]{10}$/", $phoneupdt)) {
+            die;
+            return false;
+        }
+        return $stmt->execute();
+    }
 
     /* -- Create Events Function -- */
     public function createEvents($event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time, $date, $browser, $ip, $action_type)

@@ -150,22 +150,76 @@ if (isset($_GET["action"])) {
             http_response_code(202);
             break;
             /* - Update User - */
-        case "updateUser":
-            if (isset($_POST["action"])) {
-                $reg_name = $_POST['log_name_e'];
-                $reg_phone = $_POST['log_phone_e'];
-                $reg_dob = $_POST['log_dob_e'];
-                $user_ID = $_GET['user_ID'];
-                $date = date('Y-m-d H:i:s');
-                $browser = $_SERVER['HTTP_USER_AGENT'];
-                $ip = $_SERVER['REMOTE_ADDR'];
-                $action_type = $_POST['updateUser'];
-                $db->updateUser($reg_name, $reg_phone, $reg_dob, $date, $browser, $ip, $action_type, $user_ID);
-                http_response_code(202);
+            /* Display User Details action */
+        case 'displayuser':
+            // A super global variable which is used to collect data from REQUEST METHOD that is GET
+            $_SERVER['REQUEST_METHOD'] == 'GET';
+            // Check if the user is logged in
+            if ($_SESSION['se']->is_logged_in()) {
+                $result = $db->displayUser();
+                // If the database cannot fetch the profile
+                if ($result == false) {
+                    http_response_code(503);
+                    // If the database can fetch the profile
+                } else {
+                    http_response_code(201);
+                    echo json_encode($result);
+                }
+                // if the user is not logged in
             } else {
-                http_response_code(501);
+                http_response_code(401);
             }
             break;
+            //------------------------------------------------ Update User Details action -----------------------------------------
+        case 'updateuser':
+            // A super global variable which is used to collect data from REQUEST METHOD that is POST
+            $_SERVER['REQUEST_METHOD'] == 'POST';
+            // Checking if the user is logged in
+            if ($_SESSION['se']->is_logged_in()) {
+                $objreg = json_decode(file_get_contents("php://input"), true);
+                $firstnameupdt = testInput($objreg['firstname-updt']);
+                $phoneupdt = testInput($objreg['phone-updt']);
+                $dateofbirthupdt = testInput($objreg['dateofbirth-updt']);
+                // Reject data insert if the form is not fully filled
+                if (
+                    empty($objreg['firstname-updt'])
+                    && empty($objreg['phone-updt'])
+                    && empty($objreg['dateofbirth-updt'])
+                ) {
+                    http_response_code(406);
+                    echo 'HTTP ERROR 406 - Server Error Response: Not Accepted.';
+                    die;
+                } else {
+                    if ($db->updateUser(
+                        $firstname,
+                        $phoneupdt,
+                        $dateofbirthupdt
+                    )) {
+                        // If the user fully filled in the form
+                        http_response_code(202);
+                    }
+                }
+                // If the user is not logged in   
+            } else {
+                http_response_code(401);
+            }
+            break;
+            // case "updateUser":
+            //     if (isset($_POST["action"])) {
+            //         $reg_name = $_POST['log_name_e'];
+            //         $reg_phone = $_POST['log_phone_e'];
+            //         $reg_dob = $_POST['log_dob_e'];
+            //         $user_ID = $_GET['user_ID'];
+            //         $date = date('Y-m-d H:i:s');
+            //         $browser = $_SERVER['HTTP_USER_AGENT'];
+            //         $ip = $_SERVER['REMOTE_ADDR'];
+            //         $action_type = $_POST['updateUser'];
+            //         $db->updateUser($reg_name, $reg_phone, $reg_dob, $date, $browser, $ip, $action_type, $user_ID);
+            //         http_response_code(202);
+            //     } else {
+            //         http_response_code(501);
+            //     }
+            //     break;
             /* - Create Events - */
         case "createEvents":
             if (isset($_POST["action"])) {

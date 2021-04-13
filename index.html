@@ -472,8 +472,95 @@
         </div>
 
         <!---- Edit Profile ---->
+        <!------------------------------------------------------ USER PROFILE PAGE HTML SECTION ------------------------------------------------------->
         <div id="edit_prof" class="menu_link">
             <br>
+            <nav class="clean">
+                <div class="nav-wrapper">
+                    <div class="col s12">
+                        <a href="#home" class="breadcrumb" onclick="hideAll(); loadPage()">Home</a>
+                        <a href="#!" class="breadcrumb blue-text accent-3">Edit Profile</a>
+                    </div>
+                </div>
+            </nav>
+            <div id="profilepage" class="pagecontent">
+                <div class="profile">
+                    <div class="profile-info">
+                        <h4>User Profile</h4>
+                        <div id="profilepicture">
+                            <!-- <i class="large material-icons white-text">account_circle</i> -->
+                        </div>
+                        <div id="defaultprofile">
+                            <img src="img/defaultprofile.JPG">
+                        </div>
+                        <div id="profilesection">
+                            <div class="profilebttn-reposition">
+                                <button class="waves-effect waves-light btn" onclick="return postLogout()">Log
+                                    Out</button>
+                                <button data-target="updateprofilemodal"
+                                    class="waves-effect waves-light btn modal-trigger">Edit</button>
+                                <button data-target="userdeleteconfirmModal"
+                                    class="waves-effect waves-light btn modal-trigger">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- User Update Form in Materialize CSS modal -->
+                <div id="updateprofilemodal" class="modal">
+                    <div class="modal-content">
+                        <h4>Update Profile Info</h4>
+                        <form id="user-update-form">
+                            <div class="input-field">
+                                <i class="material-icons prefix">person</i>
+                                <input type="text" id="firstname-updt" name="firstname-updt" placeholder="First Name">
+                            </div>
+
+                            <div class="input-field">
+                                <i class="material-icons prefix">person</i>
+                                <input type="text" id="lastname-updt" name="lastname-updt" placeholder="Last Name">
+                            </div>
+
+                            <div class="input-field">
+                                <i class="material-icons prefix">cake</i>
+                                <input type="date" id="dateofbirth-updt" name="dateofbirth-updt"
+                                    placeholder="Date Of Birth">
+                            </div>
+
+                            <div class="input-field">
+                                <i class="material-icons prefix">email</i>
+                                <input class="validate" type="email" id="email-updt" name="email-updt"
+                                    placeholder="Email">
+                                <span class="helper-text" data-error="wrong" data-success="right"></span>
+                            </div>
+
+                            <div class="input-field">
+                                <i class="material-icons prefix">local_phone</i>
+                                <input class="validate" type="tel" id="phone-updt" name="phone-updt" pattern="[0-9]{10}"
+                                    placeholder="Mobile Number">
+                                <span class="helper-text" data-error="wrong" data-success="right"></span>
+                            </div>
+
+                            <div class="input-field">
+                                <i class="material-icons prefix">perm_identity</i>
+                                <input type="text" id="username-updt" name="username-updt" placeholder="Username">
+                            </div>
+
+                            <div class="input-field">
+                                <i class="material-icons prefix">lock</i>
+                                <input type="text" id="password-updt" name="password-updt" placeholder="Password">
+                            </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" id="reloadprofile" class="modal-close btn-small waves-effect waves-green"
+                            onclick="return postUpdateUser()">Update</button>
+                        <a class="modal-close btn waves-effect waves-green">Close</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div id="edit_prof" class="menu_link">
+                    <br>
             <nav class="clean">
                 <div class="nav-wrapper">
                     <div class="col s12">
@@ -488,7 +575,7 @@
                     <div class="content">
                         <img id="prof_pic" class="circle" src="src/images/blank-profile.png">
                         <!-- <h6>User Details</h6> -->
-                        <div class="row">
+        <!-- <div class="row">
                             <form action="api/ws.php" method="POST" novalidate>
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">account_circle</i>
@@ -504,7 +591,7 @@
                                     <span class="helper-text" data-error="Please enter a valid email"
                                     data-success="Correct"></span>
                                 </div> -->
-                                <div class="input-field col s12">
+        <!-- <div class="input-field col s12">
                                     <i class="material-icons prefix">phone</i>
                                     <input id="log_phone_e" type="text" class="validate" placeholder="Phone Number"
                                         onblur="savePhone(this)">
@@ -517,15 +604,15 @@
                                         placeholder="Date of Birth *" onblur="saveDOB(this)">
                                     <span class="helper-text" data-error="Please enter a valid date of birth"
                                         data-success="Correct" max="20"></span>
-                                </div>
-                                <!-- <div class="input-field col s12">
+                                </div> -->
+        <!-- <div class="input-field col s12">
                                 <i class="material-icons prefix">vpn_key</i>
                                 <input id="log_pass_e" type="password" class="validate" placeholder="Password"
                                 onblur="savePass(this)">
                                 <span class="helper-text" data-error="Please enter a valid password"
                                 data-success="Correct" max="20"></span>
                             </div> -->
-                            </form>
+        <!-- </form>
                         </div>
                         <div id="checkbox">
                             <p>
@@ -546,7 +633,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>  -->
 
         <!---- My Events ---->
         <div id="my_events" class="menu_link">
@@ -836,7 +923,7 @@
                             qui dicta,
                             veniam natus nulla et voluptatibus porro quos enim, ipsa nam quod animi delectus nobis fuga
                             deleniti!</p>
-                            <br>
+                        <br>
                         <h6><strong>❓ How do you see specific events on the map?</strong></h6>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, doloribus natus. Corporis
                             deleniti
