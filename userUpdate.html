@@ -1,0 +1,78 @@
+<html>
+  <head>
+  </head>
+  
+  <body>
+  <!------------------------------------------------------ USER PROFILE PAGE HTML SECTION ------------------------------------------------------->
+        <div id="profilepage" class="pagecontent" style="display: none">
+            <div class ="profile">
+                <div class="profile-info">
+                    <h4>User Profile</h4>
+                    <div id="profilepicture" style="display: none"> 
+                        <!-- <i class="large material-icons white-text">account_circle</i> -->
+                    </div>
+                    <div id="defaultprofile">
+                        <img src="img/defaultprofile.JPG">
+                    </div>
+                    <div id="profilesection">
+                        <div class="profilebttn-reposition">
+                            <button class="waves-effect waves-light btn" onclick="return postLogout()">Log Out</button> 
+                            <button data-target="updateprofilemodal" class="waves-effect waves-light btn modal-trigger">Edit</button>
+                            <button data-target="userdeleteconfirmModal" class="waves-effect waves-light btn modal-trigger">Delete</button>
+                        </div>
+                    </div>    
+                </div>  
+            </div>
+                                                                  <!-- User Update Form in Materialize CSS modal -->
+            <div id="updateprofilemodal" class="modal">
+                <div class="modal-content">
+                    <h4>Update Profile Info</h4>
+                        <form id="user-update-form">
+                            <div class="input-field">
+                                <i class="material-icons prefix">person</i>
+                                <input type="text" id="firstname-updt" name="firstname-updt" placeholder="First Name">
+                            </div>
+
+                            <div class="input-field">
+                                <i class="material-icons prefix">person</i>
+                                <input type="text" id="lastname-updt" name="lastname-updt" placeholder="Last Name">
+                            </div>
+
+                            <div class="input-field">
+                                <i class="material-icons prefix">cake</i>
+                                <input type="date" id="dateofbirth-updt" name="dateofbirth-updt" placeholder="Date Of Birth">
+                            </div>
+
+                            <div class="input-field">
+                                <i class="material-icons prefix">email</i>
+                                <input class="validate" type="email" id="email-updt" name="email-updt" placeholder="Email">
+                                <span class="helper-text" data-error="wrong" data-success="right"></span>
+                            </div>
+
+                            <div class="input-field">
+                                <i class="material-icons prefix">local_phone</i>
+                                <input class="validate" type="tel" id="phone-updt" name="phone-updt" pattern ="[0-9]{10}" placeholder="Mobile Number">
+                                <span class="helper-text" data-error="wrong" data-success="right"></span>
+                            </div>
+
+                            <div class="input-field">
+                                <i class="material-icons prefix">perm_identity</i>
+                                <input type="text" id="username-updt" name="username-updt" placeholder="Username">
+                            </div>
+
+                            <div class="input-field">
+                                <i class="material-icons prefix">lock</i>
+                                <input type="text" id="password-updt" name="password-updt" placeholder="Password">
+                            </div>
+                </div>
+
+                <div class="modal-footer">
+                  <button type="button" id="reloadprofile" class="modal-close btn-small waves-effect waves-green" 
+                        onclick="return postUpdateUser()">Update</button>
+                  <a class="modal-close btn waves-effect waves-green">Close</a>
+                </div>
+            </div>
+        </div>
+   </body>       
+</html>
+  
