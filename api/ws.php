@@ -182,23 +182,13 @@ if (isset($_GET["action"])) {
                 $log_name_e = testInput($objreg['log_name_e']);
                 $log_phone_e = testInput($objreg['log_phone_e']);
                 $log_dob_e = testInput($objreg['log_dob_e']);
-                // Reject data insert if the form is not fully filled
-                if (
-                    empty($objreg['log_name_e'])
-                    && empty($objreg['log_phone_e'])
-                    && empty($objreg['log_dob_e'])
-                ) {
-                    http_response_code(401);
-                    die;
-                } else {
-                    if ($db->updateUser(
-                        $log_name_e,
-                        $log_phone_e,
-                        $log_dob_e
-                    )) {
-                        // If the user fully filled in the form
-                        http_response_code(202);
-                    }
+                if ($db->updateUser(
+                    $log_name_e,
+                    $log_phone_e,
+                    $log_dob_e
+                )) {
+                    // If the user fully filled in the form
+                    http_response_code(202);
                 }
                 // If the user is not logged in   
             } else {
