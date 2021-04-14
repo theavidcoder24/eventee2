@@ -188,8 +188,7 @@ if (isset($_GET["action"])) {
                     && empty($objreg['log_phone_e'])
                     && empty($objreg['log_dob_e'])
                 ) {
-                    http_response_code(406);
-                    echo 'HTTP ERROR 406 - Server Error Response: Not Accepted.';
+                    http_response_code(401);
                     die;
                 } else {
                     if ($db->updateUser(

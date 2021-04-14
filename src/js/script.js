@@ -520,18 +520,18 @@ function postdisplayUser() {
             // This output allows pre-fill in update form
             `<div class="input-field">
               <i class="material-icons prefix">person</i>
-              <input type="text" id="firstname-updt" name="firstname-updt" 
+              <input type="text" id="log_name_e" name="log_name_e" 
                   value="`+ row.FullName + `" placeholder="First Name">
           </div>
           <div class="input-field">
               <i class="material-icons prefix">local_phone</i>
-              <input class="validate" type="tel" id="phone-updt" name="phone-updt" 
+              <input class="validate" type="tel" id="log_phone_e" name="log_phone_e" 
                   value="`+ row.PhoneNumber + `" pattern ="[0-9]{10}" placeholder="Mobile Phone">
                   <span class="helper-text" data-error="wrong" data-success="right"></span>
           </div>
           <div class="input-field">
           <i class="material-icons prefix">cake</i>
-          <input type="date" id="dateofbirth-updt" name="dateofbirth-updt" 
+          <input type="date" id="log_dob_e" name="log_dob_e" 
               value="`+ row.DateOfBirth + `" placeholder="Date of Birth">
       </div>`
         })
