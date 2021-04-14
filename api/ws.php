@@ -202,7 +202,7 @@ if (isset($_GET["action"])) {
                 }
                 // If the user is not logged in   
             } else {
-                http_response_code(401);
+                http_response_code(501);
             }
             break;
             // case "updateUser":
