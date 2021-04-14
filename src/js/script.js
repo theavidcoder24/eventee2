@@ -362,7 +362,7 @@ function postLoginFetch() {
         login_details.append('log_email', log_email.value);
         login_details.append('log_pass', log_pass.value);
         localStorage.setItem('LoginEmail', log_email.value);
-        sessionStorage.setItem("currentloggedin", log_email);
+        // sessionStorage.setItem("userID", userID);
         console.log('Login Successful');
       }
       if (response.status === 401) {
@@ -405,7 +405,7 @@ function isLogged() {
         localStorage.setItem('LoginEmail', log_email);
         if (localStorage.getItem('login') == 'true') {
           console.log('Logged In!!');
-          sessionStorage.setItem("currentloggedin", log_email);
+          sessionStorage.setItem("login", "true");
           // document.getElementById("result").innerHTML = sessionStorage.getItem("currentloggedin");
           // LoginEmail - localstorage
           // Check browser support

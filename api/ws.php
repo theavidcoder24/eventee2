@@ -18,24 +18,24 @@ $db = new dbObj;
 require('session.php');
 
 // Starts the session
-session_start();
+// session_start();
 
 // Checks if session is set if it's not then creates new session
 if (!isset($_SESSION['se'])) {
     $_SESSION['se'] = new sessObj;
 }
 
-/* -- Rate Limit 24 Hour Check -- */
-if ($_SESSION['se']->Rate24HourCheck() === false) {
-    http_response_code(429); // Too Many Requests!
-    die();
-}
+// /* -- Rate Limit 24 Hour Check -- */
+// if ($_SESSION['se']->Rate24HourCheck() === false) {
+//     http_response_code(429); // Too Many Requests!
+//     die();
+// }
 
-/* -- Referrer -- */
-if ($_SESSION['se']->is_referrer() == false) {
-    http_response_code(400);
-    die();
-}
+// /* -- Referrer -- */
+// if ($_SESSION['se']->is_referrer() == false) {
+//     http_response_code(400);
+//     die();
+// }
 
 function testInput($data)
 {
@@ -129,6 +129,7 @@ if (isset($_GET["action"])) {
                 //     }
                 // }
                 $db->login($log_email, $log_pass, $date, $browser, $ip, $action_type);
+                // echo "Welcome " . $_SESSION['userID'];
                 http_response_code(202);
             } else {
                 http_response_code(401);

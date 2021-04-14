@@ -104,15 +104,16 @@ class dbObj
             if (password_verify($log_pass, $row['UserPassword'])) {
                 /* Set the session variables for each user that logs in to also record what the users will interact with */
                 /* Define the session variables for login */
-                $_SESSION['currentloggedin'] = $log_email;
+                // $_SESSION['currentloggedin'] = $log_email;
                 $_SESSION["login"] = 'true';
-                $_SESSION["access_rights"] = $row["access_rights"];
-                $_SESSION['loginID'] = $row['loginID'];
+                // $_SESSION["access_rights"] = $row["access_rights"];
+                // $_SESSION['loginID'] = $row['loginID'];
                 $_SESSION['userID'] = $row['userID'];
                 $_SESSION['time_start_login'] = time();
                 time('H:i:s');
 
                 // echo "Welcome " . $_SESSION['currentloggedin'];
+                echo "Welcome " . $_SESSION['userID'];
 
                 /* - Changelog Table - */
                 $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type) VALUES (:date, :browser, :ip, :action_type)");
@@ -205,9 +206,9 @@ class dbObj
     {
         try {
             $mysql = "SELECT userID, FullName, PhoneNumber, DateOfBirth, Email, UserPassword FROM users2 
-            WHERE userID = :user_ID";
+            WHERE userID = :userID";
             $stmt = $this->dbconn->prepare($mysql);
-            $stmt->bindValue(':user_ID', $_SESSION['userID']);
+            $stmt->bindValue(':userID', $_SESSION['userID']);
             $stmt->execute();
             $result = $stmt->fetchAll();
             return $result;
@@ -222,9 +223,9 @@ class dbObj
         $log_dob_e
     ) {
         $mysql = "UPDATE users2 SET FullName = :log_name_e, PhoneNumber = :log_phone_e, DateOfBirth = :log_dob_e
-            WHERE userID = :user_ID";
+            WHERE userID = :userID";
         $stmt = $this->dbconn->prepare($mysql);
-        $stmt->bindValue(':user_ID', $_SESSION['userID']);
+        $stmt->bindValue(':userID', $_SESSION['userID']);
         $stmt->bindValue(':log_name_e', $log_name_e);
         $stmt->bindValue(':log_dob_e', $log_dob_e);
         $stmt->bindValue(':log_phone_e', $log_phone_e);
