@@ -43,26 +43,35 @@ class dbObj
         try {
             $this->dbconn->beginTransaction();
 
-            /* - Users Table - */
-            $stmt = $this->dbconn->prepare("INSERT INTO users(FullName, PhoneNumber, DateOfBirth) VALUES(:reg_name, :reg_phone, :reg_dob)");
+            $stmt = $this->dbconn->prepare("INSERT INTO users2(FullName, PhoneNumber, DateOfBirth, Email, UserPassword) VALUES(:reg_name, :reg_phone, :reg_dob, :reg_email, :reg_pass)");
             $stmt->bindValue(':reg_name', $reg_name);
             $stmt->bindValue(':reg_phone', $reg_phone);
             $stmt->bindValue(':reg_dob', $reg_dob);
-            $row = $stmt->fetch();
-            $stmt->execute();
-
-            // last User ID
-            $lastuserID = $this->dbconn->lastInsertId();
-
-            /* - Login Table - */
-            $reg_pass = password_hash($reg_pass, PASSWORD_DEFAULT);
-            $stmt = $this->dbconn->prepare("INSERT INTO login(Email, Password, userID) VALUES(:reg_email, :reg_pass, :user_ID)");
-            // hashing the password with PASSWORD_HASH()
             $stmt->bindValue(':reg_email', $reg_email);
             $stmt->bindValue(':reg_pass', $reg_pass);
-            $stmt->bindValue(':user_ID', $lastuserID);
             $row = $stmt->fetch();
             $stmt->execute();
+
+            /* - Users Table - */
+            // $stmt = $this->dbconn->prepare("INSERT INTO users(FullName, PhoneNumber, DateOfBirth) VALUES(:reg_name, :reg_phone, :reg_dob)");
+            // $stmt->bindValue(':reg_name', $reg_name);
+            // $stmt->bindValue(':reg_phone', $reg_phone);
+            // $stmt->bindValue(':reg_dob', $reg_dob);
+            // $row = $stmt->fetch();
+            // $stmt->execute();
+
+            // // last User ID
+            // $lastuserID = $this->dbconn->lastInsertId();
+
+            // /* - Login Table - */
+            // $reg_pass = password_hash($reg_pass, PASSWORD_DEFAULT);
+            // $stmt = $this->dbconn->prepare("INSERT INTO login(Email, Password, userID) VALUES(:reg_email, :reg_pass, :user_ID)");
+            // // hashing the password with PASSWORD_HASH()
+            // $stmt->bindValue(':reg_email', $reg_email);
+            // $stmt->bindValue(':reg_pass', $reg_pass);
+            // $stmt->bindValue(':user_ID', $lastuserID);
+            // $row = $stmt->fetch();
+            // $stmt->execute();
 
 
             /* - Changelog Table - */
@@ -88,18 +97,18 @@ class dbObj
             $this->dbconn->beginTransaction();
             $log_email = ($_POST['log_email']);
             $log_pass = ($_POST['log_pass']);
-            $stmt = $this->dbconn->prepare("SELECT * FROM login INNER JOIN users on login.userID = users.userID WHERE login.Email =:log_email");
+            $stmt = $this->dbconn->prepare("SELECT * FROM users2 WHERE Email = :log_email");
             $stmt->bindValue(':log_email', $log_email);
             $stmt->execute();
             $row = $stmt->fetch();
-            if (password_verify($log_pass, $row['Password'])) {
+            if (password_verify($log_pass, $row['UserPassword'])) {
                 /* Set the session variables for each user that logs in to also record what the users will interact with */
                 /* Define the session variables for login */
                 $_SESSION['currentloggedin'] = $log_email;
                 $_SESSION["login"] = 'true';
                 $_SESSION["access_rights"] = $row["access_rights"];
                 $_SESSION['loginID'] = $row['loginID'];
-                $_SESSION['user_ID'] = $row['user_ID'];
+                $_SESSION['userID'] = $row['userID'];
                 $_SESSION['time_start_login'] = time();
                 time('H:i:s');
 
@@ -192,13 +201,13 @@ class dbObj
     // }
 
     // Display user profile by userID
-    function displayUser()
+    public function displayUser()
     {
         try {
-            $mysql = "SELECT userID, FullName, PhoneNumber, DateOfBirth FROM users 
-            WHERE userID = :userid";
+            $mysql = "SELECT userID, FullName, PhoneNumber, DateOfBirth, Email, UserPassword FROM users2 
+            WHERE userID = :user_ID";
             $stmt = $this->dbconn->prepare($mysql);
-            $stmt->bindValue(':userid', $_SESSION['userID']);
+            $stmt->bindValue(':user_ID', $_SESSION['userID']);
             $stmt->execute();
             $result = $stmt->fetchAll();
             return $result;
@@ -207,15 +216,15 @@ class dbObj
         }
     }
     // User update with values retrieved from update form
-    function updateUser(
+    public function updateUser(
         $log_name_e,
         $log_phone_e,
         $log_dob_e
     ) {
-        $mysql = "UPDATE users SET FullName = :log_name_e, PhoneNumber = :log_phone_e, DateOfBirth = :log_dob_e
-            WHERE userID = :userid";
+        $mysql = "UPDATE users2 SET FullName = :log_name_e, PhoneNumber = :log_phone_e, DateOfBirth = :log_dob_e
+            WHERE userID = :user_ID";
         $stmt = $this->dbconn->prepare($mysql);
-        $stmt->bindValue(':userid', $_SESSION['userID']);
+        $stmt->bindValue(':user_ID', $_SESSION['userID']);
         $stmt->bindValue(':log_name_e', $log_name_e);
         $stmt->bindValue(':log_dob_e', $log_dob_e);
         $stmt->bindValue(':log_phone_e', $log_phone_e);

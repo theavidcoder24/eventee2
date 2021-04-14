@@ -160,6 +160,7 @@ if (isset($_GET["action"])) {
                 // If the database cannot fetch the profile
                 if ($result == false) {
                     http_response_code(503);
+                    // echo $row['userID'];
                     // If the database can fetch the profile
                 } else {
                     http_response_code(201);
