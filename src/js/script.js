@@ -506,15 +506,10 @@ function postdisplayUser() {
         data.forEach(row => {
           // User Profile Output
           output =
+            `<div><h6>FullName<h6></div>` + row.UserID +
             `<div><h6>FullName<h6></div>` + row.FullName +
             `<div><br><h6>PhoneNumber<h6></div>` + row.PhoneNumber +
-            `<div><br><h6>DateOfBirth<h6></div>` + row.DateOfBirth +
-
-            `<div class="profilebttn-reposition">
-                  <button class="waves-effect waves-light btn" href="#" onclick="return userLogout()">Log Out</button> 
-                  <button data-target="updateprofilemodal" class="waves-effect waves-light btn modal-trigger">Edit</button>
-                  <button data-target="userdeleteconfirmModal" class="waves-effect waves-light btn modal-trigger">Delete</button>
-              </div>`
+            `<div><br><h6>DateOfBirth<h6></div>` + row.DateOfBirth
 
           output2 =
             // This output allows pre-fill in update form
