@@ -165,7 +165,7 @@ if (isset($_GET["action"])) {
                     // If the database can fetch the profile
                 } else {
                     http_response_code(201);
-                    echo $row['userID'];
+                    // echo $row['userID'];
                     echo json_encode($result);
                 }
                 // if the user is not logged in
@@ -182,10 +182,12 @@ if (isset($_GET["action"])) {
                 $objreg = json_decode(file_get_contents("php://input"), true);
                 $log_name_e = testInput($objreg['log_name_e']);
                 $log_phone_e = testInput($objreg['log_phone_e']);
+                $log_email_e = testInput($objreg['log_email_e']);
                 $log_dob_e = testInput($objreg['log_dob_e']);
                 if ($db->updateUser(
                     $log_name_e,
                     $log_phone_e,
+                    $log_email_e,
                     $log_dob_e
                 )) {
                     // If the user fully filled in the form

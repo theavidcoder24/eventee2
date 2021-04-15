@@ -9,7 +9,7 @@ class sessObj
         db_connection();
         if ("login" == true) {
             if (!isset($_SESSION['login']) == true) {
-                // echo "Welcome " . $_SESSION['currentloggedin'];
+                echo "Welcome " . $_SESSION['userID'];
                 return true;
             }
         } elseif ("login" == false) {

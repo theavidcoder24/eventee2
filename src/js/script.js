@@ -506,8 +506,9 @@ function postdisplayUser() {
         data.forEach(row => {
           // User Profile Output
           output =
-            `<div><h6>FullName<h6></div>` + row.UserID +
+            `<div><h6>UserID<h6></div>` + row.UserID +
             `<div><h6>FullName<h6></div>` + row.FullName +
+            `<div><h6>Email<h6></div>` + row.Email +
             `<div><br><h6>PhoneNumber<h6></div>` + row.PhoneNumber +
             `<div><br><h6>DateOfBirth<h6></div>` + row.DateOfBirth
 
@@ -517,6 +518,11 @@ function postdisplayUser() {
               <i class="material-icons prefix">person</i>
               <input type="text" id="log_name_e" name="log_name_e" 
                   value="`+ row.FullName + `" placeholder="First Name">
+          </div>
+          <div class="input-field">
+              <i class="material-icons prefix">person</i>
+              <input type="text" id="log_email_e" name="log_email_e" 
+                  value="`+ row.Email + `" placeholder="Email">
           </div>
           <div class="input-field">
               <i class="material-icons prefix">local_phone</i>
@@ -547,7 +553,8 @@ function postUpdateUser() {
   var userUpdate = {
     'log_name_e': document.getElementById("log_name_e").value,
     'log_phone_e': document.getElementById("log_phone_e").value,
-    'log_dob_e': document.getElementById("log_dob_e").value
+    'log_dob_e': document.getElementById("log_dob_e").value,
+    'log_email_e': document.getElementById("log_email_e").value
   }
 
   fetch('api/ws.php?action=updateuser', {
@@ -558,13 +565,13 @@ function postUpdateUser() {
     .then(function (response) {
       if (response.status == 406) {
         // Will not accept the new update information if they are not filled fully or correctly
-        console.log('unaccepted');
+        console.log('Not updated');
         console.log('Form not fully filled');
         alert('It appears that the registration form does not contains the required values. Please fully fill in the form.');
         return;
       }
       if (response.status == 202) {
-        console.log('success');
+        console.log('Success!');
         // Upon successful update, the profile page will be refreshed by reusing the display profile function
         if (!alert('Your profile information has been successfully updated!')) { postdisplayUser(); }
         return;
@@ -1002,45 +1009,45 @@ function deleteRemoveEvent(eventid) {
 }
 
 /* ==== User Profile Local Storage ==== */
-window.addEventListener("load", function () {
-  log_name_e.value = localStorage.getItem("log_name_e");
-  // log_email_e.value = localStorage.getItem("log_email_e");
-  log_phone_e.value = localStorage.getItem("log_phone_e");
-  log_dob_e.value = localStorage.getItem("log_dob_e");
-  // log_pass_e.value = localStorage.getItem("log_pass_e");
-  if (localStorage.getItem("log_name_e", "log_phone_e", "log_dob_e") == null) {
-    checkProf.checked = false;
-  } else {
-    checkProf.checked = true;
-  }
-})
+// window.addEventListener("load", function () {
+//   log_name_e.value = localStorage.getItem("log_name_e");
+//   // log_email_e.value = localStorage.getItem("log_email_e");
+//   log_phone_e.value = localStorage.getItem("log_phone_e");
+//   log_dob_e.value = localStorage.getItem("log_dob_e");
+//   // log_pass_e.value = localStorage.getItem("log_pass_e");
+//   if (localStorage.getItem("log_name_e", "log_phone_e", "log_dob_e") == null) {
+//     checkProf.checked = false;
+//   } else {
+//     checkProf.checked = true;
+//   }
+// })
 
-function setLocal() {
-  if (checkProf.checked == true) {
-    localStorage.setItem("log_name_e", log_name_e.value);
-    // localStorage.setItem("log_email_e", log_email_e.value);
-    localStorage.setItem("log_phone_e", log_phone_e.value);
-    localStorage.setItem("log_dob_e", log_dob_e.value);
-    // localStorage.setItem("log_pass_e", log_pass_e.value);
+// function setLocal() {
+//   if (checkProf.checked == true) {
+//     localStorage.setItem("log_name_e", log_name_e.value);
+//     localStorage.setItem("log_email_e", log_email_e.value);
+//     localStorage.setItem("log_phone_e", log_phone_e.value);
+//     localStorage.setItem("log_dob_e", log_dob_e.value);
+//     // localStorage.setItem("log_pass_e", log_pass_e.value);
 
-  } else {
-    localStorage.removeItem("log_name_e");
-    // localStorage.removeItem("log_email_e");
-    localStorage.removeItem("log_phone_e");
-    localStorage.removeItem("log_dob_e");
-    // localStorage.removeItem("log_pass_e");
-  }
-}
+//   } else {
+//     localStorage.removeItem("log_name_e");
+//     localStorage.removeItem("log_email_e");
+//     localStorage.removeItem("log_phone_e");
+//     localStorage.removeItem("log_dob_e");
+//     // localStorage.removeItem("log_pass_e");
+//   }
+// }
 
-/* Saves the user's name input */
-function saveName(checkProf) {
-  if (checkProf.checked == true) {
-    var save = document.getElementById("log_name_e");
-    localStorage.setItem("log_name_e", log_name_e.value);
-  }
-}
+// /* Saves the user's name input */
+// function saveName(checkProf) {
+//   if (checkProf.checked == true) {
+//     var save = document.getElementById("log_name_e");
+//     localStorage.setItem("log_name_e", log_name_e.value);
+//   }
+// }
 
-/* Saves the user's email input */
+// /* Saves the user's email input */
 // function saveEmail(checkProf) {
 //   if (checkProf.checked == true) {
 //     var save = document.getElementById("log_email_e");
@@ -1048,21 +1055,21 @@ function saveName(checkProf) {
 //   }
 // }
 
-/* Saves the user's phone input */
-function savePhone(checkProf) {
-  if (checkProf.checked == true) {
-    var save = document.getElementById("log_phone_e");
-    localStorage.setItem("log_phone_e", log_phone_e.value);
-  }
-}
+// /* Saves the user's phone input */
+// function savePhone(checkProf) {
+//   if (checkProf.checked == true) {
+//     var save = document.getElementById("log_phone_e");
+//     localStorage.setItem("log_phone_e", log_phone_e.value);
+//   }
+// }
 
-/* Saves the user's date of birth input */
-function saveDOB(checkProf) {
-  if (checkProf.checked == true) {
-    var save = document.getElementById("log_dob_e");
-    localStorage.setItem("log_dob_e", log_dob_e.value);
-  }
-}
+// /* Saves the user's date of birth input */
+// function saveDOB(checkProf) {
+//   if (checkProf.checked == true) {
+//     var save = document.getElementById("log_dob_e");
+//     localStorage.setItem("log_dob_e", log_dob_e.value);
+//   }
+// }
 
 /* Saves the user's password input */
 // function savePass(checkProf) {
