@@ -7,7 +7,6 @@ class App extends React.Component {
         super(props);
     }
 
-
     /* - Login - */
     postLoginFetch() {
         loadPage();
