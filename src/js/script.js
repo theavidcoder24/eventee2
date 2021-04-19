@@ -333,10 +333,11 @@ function postRegFetch() {
 /* - Login - */
 function postLoginFetch() {
   loadPage();
-  var log_email = document.getElementById("log_email");
-  var log_pass = document.getElementById("log_pass");
+  var log_email = document.getElementById("log_email").value;
+  var log_pass = document.getElementById("log_pass").value;
   var login_details = new FormData();
   login_details.append('action', 'login_user');
+  login_details.append('userID', userID.value);
   login_details.append('log_email', log_email.value);
   login_details.append('log_pass', log_pass.value);
   login_details.append('login_user', login_user.value);

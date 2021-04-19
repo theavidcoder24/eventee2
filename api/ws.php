@@ -4,8 +4,8 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Credentials: true');
 
 // All echo statements will be json_encoded
-header("Access-Control-Allow-Headers", "content-type");
-header('Content-Type: application/json');
+// header("Access-Control-Allow-Headers", "content-type");
+// header('Content-Type: application/json');
 
 // Set the timezone to Australia 
 date_default_timezone_set('Australia/Brisbane');
@@ -100,13 +100,15 @@ if (isset($_GET["action"])) {
             break;
             /* - User Login - */
         case "login":
-            if (isset($_POST["action"])) {
+            if ($db->login($log_email, $log_pass)) {
+                $userID = $_POST['userID'];
+                echo $userID;
                 $log_email = $_POST['log_email'];
                 $log_pass = $_POST['log_pass'];
-                $date = date('Y-m-d H:i:s');
-                $browser = $_SERVER['HTTP_USER_AGENT'];
-                $ip = $_SERVER['REMOTE_ADDR'];
-                $action_type = $_POST['login_user'];
+                // $date = date('Y-m-d H:i:s');
+                // $browser = $_SERVER['HTTP_USER_AGENT'];
+                // $ip = $_SERVER['REMOTE_ADDR'];
+                // $action_type = $_POST['login_user'];
                 /* - Server Validation - */
                 // Check if input field is empty
                 // if ($log_email == "") {
@@ -128,7 +130,7 @@ if (isset($_GET["action"])) {
                 //         echo 'HII Admin';
                 //     }
                 // }
-                $db->login($log_email, $log_pass, $date, $browser, $ip, $action_type);
+                // $db->login($log_email, $log_pass, $date, $browser, $ip, $action_type);
                 // echo "Welcome " . $_SESSION['userID'];
                 http_response_code(202);
             } else {
