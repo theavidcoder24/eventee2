@@ -307,9 +307,7 @@ if (isset($_GET["action"])) {
             break;
             /* - Update the User Event - */
         case "updateEvent":
-          
             if (isset($_GET["action"])) {
-                // $evid = $_GET['evid'];
                 $_SERVER['REQUEST_METHOD'] == 'POST';
                 $objreg = json_decode(file_get_contents("php://input"), true);
                 $evid = testInput($objreg['eventid']);
@@ -326,7 +324,6 @@ if (isset($_GET["action"])) {
             } else {
                 http_response_code(400);
             }
-            // if ($_POST["eventid"] == null)
             break;
             /* - Remove User Event - */
         case "removeEvent":

@@ -887,24 +887,6 @@ function postUpdateEvent() {
   var eventid = document.getElementById("eventid").value;
   console.log("Update event with id " + eventid);
 
-  // events = JSON.parse(localStorage.getItem("events"));
-
-  // selectedEvent = events.filter(event => event[0] == eventid)[0];
-
-  // var eventid = "eventid";
-
-  // if (selectedEvent != null) {
-  //   console.log(selectedEvent);
-  //   document.getElementById("update_ev_name").value = selectedEvent[1];
-  //   document.getElementById("update_ev_desc").value = selectedEvent[2];
-  //   document.getElementById("update_ev_cat").value = selectedEvent[3];
-  //   document.getElementById("update_ev_address").value = selectedEvent[4];
-  //   document.getElementById("update_ev_loc").value = selectedEvent[5];
-  //   document.getElementById("update_ev_date").value = selectedEvent[6];
-  //   document.getElementById("update_ev_time").value = selectedEvent[7];
-  //   // document.getElementById("eventid").value = selectedEvent[8];
-  // }
-
   var userUpdate = {
     'eventid': document.getElementById("eventid").value,
     'update_ev_name': document.getElementById("update_ev_name").value,
@@ -916,27 +898,15 @@ function postUpdateEvent() {
     'update_ev_time': document.getElementById("update_ev_time").value
   }
 
-  // var updatefd = new FormData();
-  // updatefd.append('action', 'update');
-  // updatefd.append('eventid', eventid.value);
-  // updatefd.append('update_ev_name', update_ev_name.value);
-  // updatefd.append('update_ev_desc', update_ev_desc.value);
-  // updatefd.append('update_ev_cat', update_ev_cat.value);
-  // updatefd.append('update_ev_address', update_ev_address.value);
-  // updatefd.append('update_ev_loc', update_ev_loc.value);
-  // updatefd.append('update_ev_date', update_ev_date.value);
-  // updatefd.append('update_ev_time', update_ev_time.value);
-  // updatefd.append('updateEvent', updateEvent.value);
   fetch('api/ws.php?action=updateEvent', {
     method: "POST",
     body: JSON.stringify(userUpdate),
     credentials: 'include',
-    // body: updatefd,
   })
     // Force error into console
     .then(function (response) {
       response.text().then(function (text) {
-        console.log("output " + text + " end");
+        console.log(text);
       });
       // HTTP Response Codes
       if (response.status === 200) {
@@ -949,7 +919,7 @@ function postUpdateEvent() {
       if (response.status === 400) {
         errormessage('Error: Bad Request');
         console.log('Bad Request');
-      
+
         // console.log(eventid.value);
         return;
       }

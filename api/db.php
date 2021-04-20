@@ -302,23 +302,23 @@ class dbObj
         return $result;
     }
 
-    public function updateAttend($evid, $answer)
-    {
-        db_connection();
-        try {
-            $this->dbconn->beginTransaction();
-            $stmt = $this->dbconn->prepare("UPDATE attendees SET attending = :answer WHERE events.eventID = :questionid");
-            $stmt->bindValue(":eid", $evid);
-            $stmt->bindValue(':answer', $answer);
+    // public function updateAttend($evid, $answer)
+    // {
+    //     db_connection();
+    //     try {
+    //         $this->dbconn->beginTransaction();
+    //         $stmt = $this->dbconn->prepare("UPDATE attendees SET attending = :answer WHERE events.eventID = :questionid");
+    //         $stmt->bindValue(":eid", $evid);
+    //         $stmt->bindValue(':answer', $answer);
 
-            $stmt->execute();
+    //         $stmt->execute();
 
-            $this->dbconn->commit();
-        } catch (PDOException $ex) {
-            $this->dbconn->rollBack();
-            throw $ex;
-        }
-    }
+    //         $this->dbconn->commit();
+    //     } catch (PDOException $ex) {
+    //         $this->dbconn->rollBack();
+    //         throw $ex;
+    //     }
+    // }
 
     /* - Autofill the Update Event Form - */
     function get_details($evid)
@@ -333,7 +333,6 @@ class dbObj
     /* -- Update Events Function -- */
     public function updateEvent($evid, $update_ev_name, $update_ev_desc, $update_ev_cat, $update_ev_address, $update_ev_loc, $update_ev_date, $update_ev_time)
     {
-        print_r("hello");
         db_connection();
         try {
             $this->dbconn->beginTransaction();
