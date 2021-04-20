@@ -220,6 +220,7 @@ class dbObj
             throw $ex;
         }
     }
+    
     // User update with values retrieved from update form
     public function updateUser(
         $log_name_e,

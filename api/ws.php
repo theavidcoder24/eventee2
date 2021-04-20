@@ -102,7 +102,7 @@ if (isset($_GET["action"])) {
         case "login":
             if ("login" == true) {
                 $userID = $_POST['userID'];
-                echo $userID;
+                // echo $userID;
                 $log_email = $_POST['log_email'];
                 $log_pass = $_POST['log_pass'];
                 // $date = date('Y-m-d H:i:s');
@@ -319,7 +319,6 @@ if (isset($_GET["action"])) {
                 $update_ev_date = testInput($objreg['update_ev_date']);
                 $update_ev_time = testInput($objreg['update_ev_time']);
                 $db->updateEvent($evid, $update_ev_name, $update_ev_desc, $update_ev_cat, $update_ev_address, $update_ev_loc, $update_ev_date, $update_ev_time);
-                // echo "Record updated successfully";
                 http_response_code(202);
             } else {
                 http_response_code(400);

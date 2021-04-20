@@ -473,8 +473,8 @@
 
         <!---- Edit Profile ---->
         <!------------------------------------------------------ USER PROFILE PAGE HTML SECTION ------------------------------------------------------->
-        <div id="edit_prof" class="menu_link">
-            <br>
+        <!-- <div id="edit_prof" class="menu_link"> -->
+            <!-- <br>
             <nav class="clean">
                 <div class="nav-wrapper">
                     <div class="col s12">
@@ -488,10 +488,8 @@
                     <div class="profile-info">
                         <h4>User Profile</h4>
                         <div id="profilepicture">
-                            <!-- <i class="large material-icons white-text">account_circle</i> -->
                         </div>
                         <div id="defaultprofile">
-                            <!-- <img src="img/defaultprofile.JPG"> -->
                         </div>
                         <div id="profilesection">
                             <div class="profilebttn-reposition">
@@ -504,9 +502,9 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!-- User Update Form in Materialize CSS modal -->
-                <div id="updateprofilemodal" class="modal">
+                <!-- <div id="updateprofilemodal" class="modal">
                     <div class="modal-content">
                         <h4>Update Profile Info</h4>
                         <form id="user-update-form">
@@ -536,10 +534,11 @@
                         <a class="modal-close btn waves-effect waves-green">Close</a>
                     </div>
                 </div>
-            </div>
-        </div>
-        <!-- <div id="edit_prof" class="menu_link">
-                    <br>
+            </div> -->
+        <!-- </div> -->
+
+        <div id="edit_prof" class="menu_link">
+            <br>
             <nav class="clean">
                 <div class="nav-wrapper">
                     <div class="col s12">
@@ -553,8 +552,8 @@
                     <h5>Edit Profile</h5>
                     <div class="content">
                         <img id="prof_pic" class="circle" src="src/images/blank-profile.png">
-                         <h6>User Details</h6> -->
-        <!-- <div class="row">
+                        <h6>User Details</h6> 
+                        <div class="row">
                             <form action="api/ws.php" method="POST" novalidate>
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">account_circle</i>
@@ -563,14 +562,14 @@
                                     <span class="helper-text" data-error="Please enter a valid name"
                                         data-success="Correct"></span>
                                 </div>
-                                 <div class="input-field col s12">
+                                <div class="input-field col s12">
                                     <i class="material-icons prefix">email</i>
                                     <input id="log_email_e" type="email" class="validate" placeholder="Email"
-                                    onblur="saveEmail(this)">
+                                        onblur="saveEmail(this)">
                                     <span class="helper-text" data-error="Please enter a valid email"
-                                    data-success="Correct"></span>
-                                </div> -->
-        <!-- <div class="input-field col s12">
+                                        data-success="Correct"></span>
+                                </div>
+                                <div class="input-field col s12">
                                     <i class="material-icons prefix">phone</i>
                                     <input id="log_phone_e" type="text" class="validate" placeholder="Phone Number"
                                         onblur="savePhone(this)">
@@ -583,15 +582,15 @@
                                         placeholder="Date of Birth *" onblur="saveDOB(this)">
                                     <span class="helper-text" data-error="Please enter a valid date of birth"
                                         data-success="Correct" max="20"></span>
-                                </div> -->
-        <!-- <div class="input-field col s12">
-                                <i class="material-icons prefix">vpn_key</i>
-                                <input id="log_pass_e" type="password" class="validate" placeholder="Password"
-                                onblur="savePass(this)">
-                                <span class="helper-text" data-error="Please enter a valid password"
-                                data-success="Correct" max="20"></span>
-                            </div> -->
-        <!-- </form>
+                                </div>
+                                <div class="input-field col s12">
+                                    <i class="material-icons prefix">vpn_key</i>
+                                    <input id="log_pass_e" type="password" class="validate" placeholder="Password"
+                                        onblur="savePass(this)">
+                                    <span class="helper-text" data-error="Please enter a valid password"
+                                        data-success="Correct" max="20"></span>
+                                </div>
+                            </form>
                         </div>
                         <div id="checkbox">
                             <p>
@@ -612,7 +611,7 @@
                     </div>
                 </div>
             </div>
-        </div>  -->
+        </div>
 
         <!---- My Events ---->
         <div id="my_events" class="menu_link">
@@ -771,7 +770,7 @@
         <!-- Modal Structure -->
         <div id="update_events" class="modal">
             <h5 class="modal-close right" onclick="closeModal()">&#10005;</h5>
-            <div class="modal-content">
+            <!-- <div class="modal-content"> -->
                 <!-- <h4>Update Events</h4>
                 <form action="api/ws.php" method="POST" onclick="return preventDefault()" novalidate>
                     <div class="input-field">
@@ -808,7 +807,7 @@
                     <button class="btn waves-effect waves-light" type="submit" onclick="postUpdateEvent(eventid)">Update
                         Event</button>
                 </form> -->
-            </div>
+            <!-- </div> -->
         </div>
 
         <!---- Community Section ---->
