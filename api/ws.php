@@ -100,7 +100,7 @@ if (isset($_GET["action"])) {
             break;
             /* - User Login - */
         case "login":
-            if ($db->login($log_email, $log_pass)) {
+            if ("login" == true) {
                 $userID = $_POST['userID'];
                 echo $userID;
                 $log_email = $_POST['log_email'];
@@ -307,11 +307,12 @@ if (isset($_GET["action"])) {
             break;
             /* - Update the User Event - */
         case "updateEvent":
-            if (isset($_POST["action"])) {
+          
+            if (isset($_GET["action"])) {
                 // $evid = $_GET['evid'];
                 $_SERVER['REQUEST_METHOD'] == 'POST';
                 $objreg = json_decode(file_get_contents("php://input"), true);
-                $evid = testInput($objreg['evid']);
+                $evid = testInput($objreg['eventid']);
                 $update_ev_name = testInput($objreg['update_ev_name']);
                 $update_ev_desc = testInput($objreg['update_ev_desc']);
                 $update_ev_cat = testInput($objreg['update_ev_cat']);

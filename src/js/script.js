@@ -337,12 +337,14 @@ function postLoginFetch() {
   var log_pass = document.getElementById("log_pass").value;
   // console.log(log_email);
   console.log(log_pass);
+  // console.log(log_email);
   var login_details = new FormData();
   login_details.append('action', 'login_user');
-  login_details.append('userID', userID.value);
-  login_details.append('log_email', log_email.value);
-  login_details.append('log_pass', log_pass.value);
-  login_details.append('login_user', login_user.value);
+  // login_details.append('userID', userID);
+  // console.log(userID);
+  login_details.append('log_email', log_email);
+  login_details.append('log_pass', log_pass);
+  login_details.append('login_user', login_user);
   console.log(log_email);
 
   // each form element goes into the login_details object ^
@@ -782,7 +784,7 @@ function displayEvents() {
                     </div>
                     <input type="hidden" name="eventid" value="`+ row.eventID + `" id="eventid">
                     <input type="hidden" name="action" value="update" id="updateEvent">
-                    <button class="btn waves-effect waves-light" type="submit" onclick="postUpdateEvent(`+ row.eventID + `)">Update
+                    <button class="btn waves-effect waves-light" type="submit" onclick="postUpdateEvent()">Update
                         Event</button>
                 </form>
             </div>`
@@ -803,60 +805,60 @@ function displayEvents() {
 // }
 
 // Add user to event
-function attendEvent() {
-  if (checkAnswer.checked == true) {
-    loadPage();
-    var fd = new FormData();
-    var reg_name = document.getElementById("reg_name");
-    var reg_phone = document.getElementById("reg_phone");
-    var reg_email = document.getElementById("reg_email");
-    fd.append('reg_name', reg_name.value);
-    fd.append('reg_phone', reg_phone.value);
-    fd.append('reg_email', reg_email.value);
-    fd.append('event_name', event_name.value);
-    fd.append('action', 'attendEvent');
-    // each form element goes into the fd object ^
-    fetch('api/ws.php?action=attendEvent', {
-      method: 'UPDATE',
-      body: fd,
-      credentials: 'include'
-    })
-      // Force error into console
-      .then(function (response) {
-        response.text().then(function (text) {
-          console.log(text);
-        });
-        // HTTP Response Codes
-        if (response.status === 202) {
-          console.log('Successful Attendance Recorded');
-          successmessage("Success: Attendance Recorded");
-          return;
-          // if (checkAnswer > 5) {
+// function attendEvent() {
+//   if (checkAnswer.checked == true) {
+//     loadPage();
+//     var fd = new FormData();
+//     var reg_name = document.getElementById("reg_name");
+//     var reg_phone = document.getElementById("reg_phone");
+//     var reg_email = document.getElementById("reg_email");
+//     fd.append('reg_name', reg_name.value);
+//     fd.append('reg_phone', reg_phone.value);
+//     fd.append('reg_email', reg_email.value);
+//     fd.append('event_name', event_name.value);
+//     fd.append('action', 'attendEvent');
+//     // each form element goes into the fd object ^
+//     fetch('api/ws.php?action=attendEvent', {
+//       method: 'UPDATE',
+//       body: fd,
+//       credentials: 'include'
+//     })
+//       // Force error into console
+//       .then(function (response) {
+//         response.text().then(function (text) {
+//           console.log(text);
+//         });
+//         // HTTP Response Codes
+//         if (response.status === 202) {
+//           console.log('Successful Attendance Recorded');
+//           successmessage("Success: Attendance Recorded");
+//           return;
+//           // if (checkAnswer > 5) {
 
-          // } elseif (checkAnswer < 5) {
+//           // } elseif (checkAnswer < 5) {
 
-          // }
-        }
-        if (response.status === 400) {
-          console.log('Bad Request');
-          errormessage('Error: Bad Request');
-          return;
-        }
-        if (response.status === 401) {
-          console.log('Not permitted');
-          errormessage('Error: Not Permitted');
-          return;
-        }
-        if (response.status === 501) {
-          console.log('Not implemented :(');
-          errormessage('Error: Not Implemented');
-          return;
-        }
-      });
-    return false;
-  } else {
-  }
-}
+//           // }
+//         }
+//         if (response.status === 400) {
+//           console.log('Bad Request');
+//           errormessage('Error: Bad Request');
+//           return;
+//         }
+//         if (response.status === 401) {
+//           console.log('Not permitted');
+//           errormessage('Error: Not Permitted');
+//           return;
+//         }
+//         if (response.status === 501) {
+//           console.log('Not implemented :(');
+//           errormessage('Error: Not Implemented');
+//           return;
+//         }
+//       });
+//     return false;
+//   } else {
+//   }
+// }
 
 /* - Autofill Update Form - */
 function fillUpdate(eventid) {
@@ -869,6 +871,7 @@ function fillUpdate(eventid) {
 
   if (selectedEvent != null) {
     console.log(selectedEvent);
+    document.getElementById("eventid").value = selectedEvent[0];
     document.getElementById("update_ev_name").value = selectedEvent[1];
     document.getElementById("update_ev_desc").value = selectedEvent[2];
     document.getElementById("update_ev_cat").value = selectedEvent[3];
@@ -876,33 +879,34 @@ function fillUpdate(eventid) {
     document.getElementById("update_ev_loc").value = selectedEvent[5];
     document.getElementById("update_ev_date").value = selectedEvent[6];
     document.getElementById("update_ev_time").value = selectedEvent[7];
-    // document.getElementById("eventid").value = selectedEvent[8];
   }
 }
 
 /* - Update Events - */
-function postUpdateEvent(eventid) {
+function postUpdateEvent() {
+  var eventid = document.getElementById("eventid").value;
   console.log("Update event with id " + eventid);
 
-  events = JSON.parse(localStorage.getItem("events"));
+  // events = JSON.parse(localStorage.getItem("events"));
 
-  selectedEvent = events.filter(event => event[0] == eventid)[0];
+  // selectedEvent = events.filter(event => event[0] == eventid)[0];
 
-  var eventid = "eventid";
+  // var eventid = "eventid";
 
-  if (selectedEvent != null) {
-    console.log(selectedEvent);
-    document.getElementById("update_ev_name").value = selectedEvent[1];
-    document.getElementById("update_ev_desc").value = selectedEvent[2];
-    document.getElementById("update_ev_cat").value = selectedEvent[3];
-    document.getElementById("update_ev_address").value = selectedEvent[4];
-    document.getElementById("update_ev_loc").value = selectedEvent[5];
-    document.getElementById("update_ev_date").value = selectedEvent[6];
-    document.getElementById("update_ev_time").value = selectedEvent[7];
-    // document.getElementById("eventid").value = selectedEvent[8];
-  }
+  // if (selectedEvent != null) {
+  //   console.log(selectedEvent);
+  //   document.getElementById("update_ev_name").value = selectedEvent[1];
+  //   document.getElementById("update_ev_desc").value = selectedEvent[2];
+  //   document.getElementById("update_ev_cat").value = selectedEvent[3];
+  //   document.getElementById("update_ev_address").value = selectedEvent[4];
+  //   document.getElementById("update_ev_loc").value = selectedEvent[5];
+  //   document.getElementById("update_ev_date").value = selectedEvent[6];
+  //   document.getElementById("update_ev_time").value = selectedEvent[7];
+  //   // document.getElementById("eventid").value = selectedEvent[8];
+  // }
 
   var userUpdate = {
+    'eventid': document.getElementById("eventid").value,
     'update_ev_name': document.getElementById("update_ev_name").value,
     'update_ev_desc': document.getElementById("update_ev_desc").value,
     'update_ev_cat': document.getElementById("update_ev_cat").value,
@@ -932,7 +936,7 @@ function postUpdateEvent(eventid) {
     // Force error into console
     .then(function (response) {
       response.text().then(function (text) {
-        console.log(text);
+        console.log("output " + text + " end");
       });
       // HTTP Response Codes
       if (response.status === 200) {
@@ -945,7 +949,8 @@ function postUpdateEvent(eventid) {
       if (response.status === 400) {
         errormessage('Error: Bad Request');
         console.log('Bad Request');
-        console.log(eventid.value);
+      
+        // console.log(eventid.value);
         return;
       }
       if (response.status === 401) {
@@ -957,9 +962,6 @@ function postUpdateEvent(eventid) {
         console.log('Not implemented :(');
         return;
       }
-      response.text().then(function (text) {
-        console.log(text);
-      });
     });
 }
 
