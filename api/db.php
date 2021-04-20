@@ -103,13 +103,13 @@ class dbObj
             $stmt->bindValue(':log_email', $log_email);
             $stmt->execute();
             $row = $stmt->fetch();
-            if (password_verify($log_pass, ['UserPassword'])) {
+            if (password_verify($log_pass, $row['UserPassword'])) {
                 /* Set the session variables for each user that logs in to also record what the users will interact with */
                 /* Define the session variables for login */
                 // $_SESSION['currentloggedin'] = $log_email;
                 $_SESSION["login"] = 'true';
+                $_SESSION['EventeeUser'] = $log_email;
                 // $_SESSION["access_rights"] = $row["access_rights"];
-                // $_SESSION['loginID'] = $row['loginID'];
                 $_SESSION['userID'] = $row['userID'];
                 $_SESSION['time_start_login'] = time();
                 time('H:i:s');
