@@ -42,7 +42,8 @@ class dbObj
         db_connection();
         try {
             $this->dbconn->beginTransaction();
-
+            // hashing the password with PASSWORD_HASH()
+            // $reg_pass = password_hash($reg_pass, PASSWORD_DEFAULT);
             $stmt = $this->dbconn->prepare("INSERT INTO users2(FullName, PhoneNumber, DateOfBirth, Email, UserPassword) VALUES(:reg_name, :reg_phone, :reg_dob, :reg_email, :reg_pass)");
             $stmt->bindValue(':reg_name', $reg_name);
             $stmt->bindValue(':reg_phone', $reg_phone);
