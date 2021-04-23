@@ -332,17 +332,13 @@ function postRegFetch() {
 /* - Login - */
 function postLoginFetch() {
   loadPage();
-  var log_email = document.getElementById("log_email").value;
-  var log_pass = document.getElementById("log_pass").value;
-  console.log(log_pass);
+  var log_email = document.getElementById("log_email");
+  var log_pass = document.getElementById("log_pass");
   var login_details = new FormData();
   login_details.append('action', 'login_user');
-  // login_details.append('userID', userID);
-  // console.log(userID);
-  login_details.append('log_email', log_email);
-  login_details.append('log_pass', log_pass);
-  login_details.append('login_user', login_user);
-  console.log(log_email);
+  login_details.append('log_email', log_email.value);
+  login_details.append('log_pass', log_pass.value);
+  login_details.append('login_user', login_user.value);
 
   // each form element goes into the login_details object ^
   fetch('api/ws.php?action=login', {
@@ -360,13 +356,7 @@ function postLoginFetch() {
         localStorage.setItem('login', "true");
         successmessage('Yay Successfully Logged in!');
         displayUserInfo();
-        // var log_email = document.getElementById("log_email");
-        // var log_pass = document.getElementById("log_pass");
-        var login_details = new FormData();
-        login_details.append('log_email', log_email.value);
-        login_details.append('log_pass', log_pass.value);
-        localStorage.setItem('LoginEmail', log_email.value);
-        // sessionStorage.setItem("userID", userID);
+        // sessionStorage.setItem("UserID", UserID);
         console.log('Login Successful');
       }
       if (response.status === 401) {

@@ -53,28 +53,6 @@ class dbObj
             $row = $stmt->fetch();
             $stmt->execute();
 
-            /* - Users Table - */
-            // $stmt = $this->dbconn->prepare("INSERT INTO users(FullName, PhoneNumber, DateOfBirth) VALUES(:reg_name, :reg_phone, :reg_dob)");
-            // $stmt->bindValue(':reg_name', $reg_name);
-            // $stmt->bindValue(':reg_phone', $reg_phone);
-            // $stmt->bindValue(':reg_dob', $reg_dob);
-            // $row = $stmt->fetch();
-            // $stmt->execute();
-
-            // // last User ID
-            // $lastuserID = $this->dbconn->lastInsertId();
-
-            // /* - Login Table - */
-            // $reg_pass = password_hash($reg_pass, PASSWORD_DEFAULT);
-            // $stmt = $this->dbconn->prepare("INSERT INTO login(Email, Password, userID) VALUES(:reg_email, :reg_pass, :user_ID)");
-            // // hashing the password with PASSWORD_HASH()
-            // $stmt->bindValue(':reg_email', $reg_email);
-            // $stmt->bindValue(':reg_pass', $reg_pass);
-            // $stmt->bindValue(':user_ID', $lastuserID);
-            // $row = $stmt->fetch();
-            // $stmt->execute();
-
-
             /* - Changelog Table - */
             $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type) VALUES (:date, :browser, :ip, :action_type)");
             $stmt->bindValue(':date', $date);
@@ -97,27 +75,24 @@ class dbObj
         db_connection();
         try {
             $this->dbconn->beginTransaction();
-            // $userID = ($_POST['userID']);
             $log_email = ($_POST['log_email']);
             $log_pass = ($_POST['log_pass']);
             $stmt = $this->dbconn->prepare("SELECT * FROM users2 WHERE Email = :log_email");
             $stmt->bindValue(':log_email', $log_email);
-            // $stmt->bindValue(':userID', $userID);
+
             $stmt->execute();
             $row = $stmt->fetch();
             if (password_verify($log_pass, $row['UserPassword'])) {
                 /* Set the session variables for each user that logs in to also record what the users will interact with */
                 /* Define the session variables for login */
-                // $_SESSION['currentloggedin'] = $log_email;
                 $_SESSION["login"] = 'true';
-                $_SESSION['EventeeUser'] = $log_email;
+                $_SESSION['UserID'] = $row['UserID'];
+                $_SESSION['LoginEmail'] = $row['Email'];
                 // $_SESSION["access_rights"] = $row["access_rights"];
-                $_SESSION['userID'] = $row['userID'];
                 $_SESSION['time_start_login'] = time();
                 time('H:i:s');
 
-                // echo "Welcome " . $_SESSION['currentloggedin'];
-                echo "Welcome " . $_SESSION['userID'];
+                // echo "Welcome " . $_SESSION['UserID'];
 
                 /* - Changelog Table - */
                 // $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type) VALUES (:date, :browser, :ip, :action_type)");
@@ -139,66 +114,6 @@ class dbObj
         }
     }
 
-
-
-    // function getUsers()
-    // {
-    //     $user_ID = $_GET['user_ID'];
-    //     $sql = "SELECT * FROM users WHERE userID = '$user_ID'"; //{$_GET[$BookID]}
-    //     $stmt = $this->dbconn->prepare($sql);
-    //     $stmt->execute();
-    //     $stmt->fetch(PDO::FETCH_ASSOC);
-    // }
-
-    // public function updateUser($reg_name, $reg_phone, $reg_dob, $date, $browser, $ip, $action_type, $user_ID)
-    // {
-    //     try {
-    //         $this->dbconn->beginTransaction();
-
-    //         $user_ID = $_GET['user_ID'];
-    //         $sql = "SELECT * FROM users WHERE userID = '$user_ID'";
-    //         $stmt = $this->dbconn->prepare($sql);
-    //         $stmt->execute();
-    //         $stmt->fetch(PDO::FETCH_ASSOC);
-
-    //         /* - User Table - */
-    //         $stmt = $this->dbconn->prepare("UPDATE users SET FullName = :log_name_e, PhoneNumber = :log_phone_e, DateOfBirth = :log_dob_e WHERE user_ID = :user_ID");
-    //         // bind values
-
-    //         $stmt->bindValue(':log_name_e', $reg_name);
-    //         $stmt->bindValue(':log_phone_e', $reg_phone);
-    //         $stmt->bindValue(':log_dob_e', $reg_dob);
-    //         $stmt->bindValue(':user_ID', $user_ID);
-    //         // Execute the update statement
-    //         $stmt->execute();
-
-    //         // last User ID
-    //         // $lastuserID = $this->dbconn->lastInsertId();
-
-    //         /* -  Login Table - */
-    //         // $stmt = $this->dbconn->prepare("UPDATE login SET Email = :log_email_e WHERE loginID = :login_ID");
-    //         // // bind values
-    //         // $stmt->bindValue(':log_email_e', $log_email);
-    //         // $stmt->bindValue(':log_pass_e', $log_pass);
-    //         // $stmt->bindValue(':user_ID', $lastuserID);
-    //         // // Execute the update statement
-    //         // $stmt->execute();
-
-    //         /* - Changelog Table - */
-    //         $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type) VALUES (:date, :browser, :ip, :action_type)");
-    //         $stmt->bindValue(':date', $date);
-    //         $stmt->bindValue(':browser', $browser);
-    //         $stmt->bindValue(':ip', $ip);
-    //         $stmt->bindValue(':action_type', $action_type);
-    //         $stmt->execute();
-
-    //         // Commit changes here //
-    //         $this->dbconn->commit();
-    //     } catch (PDOException $ex) {
-    //         throw $ex;
-    //     }
-    // }
-
     /* -- Check if user account exists -- */
     // function checkUserAccount()
     // {
@@ -209,10 +124,10 @@ class dbObj
     public function displayUser()
     {
         try {
-            $mysql = "SELECT userID, FullName, PhoneNumber, DateOfBirth, Email, UserPassword FROM users2 
-            WHERE userID = :userID";
+            $mysql = "SELECT UserID, FullName, PhoneNumber, DateOfBirth, Email, UserPassword FROM users2 
+            WHERE UserID = :UserID";
             $stmt = $this->dbconn->prepare($mysql);
-            $stmt->bindValue(':userID', $_SESSION['userID']);
+            $stmt->bindValue(':UserID', $_SESSION['UserID']);
             $stmt->execute();
             $result = $stmt->fetchAll();
             return $result;
@@ -220,7 +135,7 @@ class dbObj
             throw $ex;
         }
     }
-    
+
     // User update with values retrieved from update form
     public function updateUser(
         $log_name_e,
@@ -229,9 +144,9 @@ class dbObj
         $log_email_e
     ) {
         $mysql = "UPDATE users2 SET FullName = :log_name_e, PhoneNumber = :log_phone_e, DateOfBirth = :log_dob_e, Email = :log_email_e
-            WHERE userID = :userID";
+            WHERE UserID = :UserID";
         $stmt = $this->dbconn->prepare($mysql);
-        $stmt->bindValue(':userID', $_SESSION['userID']);
+        $stmt->bindValue(':UserID', $_SESSION['UserID']);
         $stmt->bindValue(':log_name_e', $log_name_e);
         $stmt->bindValue(':log_phone_e', $log_phone_e);
         $stmt->bindValue(':log_dob_e', $log_dob_e);
@@ -295,7 +210,7 @@ class dbObj
     function checkAttendance($evid)
     {
         db_connection();
-        $stmt = $this->dbconn->prepare("SELECT * FROM attendance INNER JOIN events on attendance.userID = events.userID WHERE events.EventID =:eid");
+        $stmt = $this->dbconn->prepare("SELECT * FROM attendance INNER JOIN events on attendance.UserID = events.UserID WHERE events.EventID =:eid");
         // $stmt->bindValue(':', $);
         $stmt->bindValue(":eid", $evid);
         $stmt->execute();

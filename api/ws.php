@@ -100,9 +100,9 @@ if (isset($_GET["action"])) {
             break;
             /* - User Login - */
         case "login":
-            if ("login" == true) {
-                $userID = $_POST['userID'];
-                // echo $userID;
+            if (isset($_GET["action"])) {
+                // $UserID = $_GET['UserID'];
+                // echo $UserID;
                 $log_email = $_POST['log_email'];
                 $log_pass = $_POST['log_pass'];
                 // $date = date('Y-m-d H:i:s');
@@ -130,11 +130,13 @@ if (isset($_GET["action"])) {
                 //         echo 'HII Admin';
                 //     }
                 // }
-                // $db->login($log_email, $log_pass, $date, $browser, $ip, $action_type);
-                // echo "Welcome " . $_SESSION['userID'];
-                http_response_code(202);
-            } else {
-                http_response_code(401);
+                if ("login" == true) {
+                    $db->login($log_email, $log_pass);
+                    // echo "Welcome " . $_SESSION['UserID'];
+                    http_response_code(202);
+                } else {
+                    http_response_code(501);
+                }
             }
             break;
             /* - Check if user is logged in/status of login - */
