@@ -69,8 +69,7 @@ class dbObj
     }
 
     /* -- Login Function -- */
-    public function login($log_email, $log_pass)
-    // $date, $browser, $ip, $action_type)
+    public function login($log_email, $log_pass, $date, $browser, $ip, $action_type)
     {
         db_connection();
         try {
@@ -95,12 +94,12 @@ class dbObj
                 // echo "Welcome " . $_SESSION['UserID'];
 
                 /* - Changelog Table - */
-                // $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type) VALUES (:date, :browser, :ip, :action_type)");
-                // $stmt->bindValue(':date', $date);
-                // $stmt->bindValue(':browser', $browser);
-                // $stmt->bindValue(':ip', $ip);
-                // $stmt->bindValue(':action_type', $action_type);
-                // $stmt->execute();
+                $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type) VALUES (:date, :browser, :ip, :action_type)");
+                $stmt->bindValue(':date', $date);
+                $stmt->bindValue(':browser', $browser);
+                $stmt->bindValue(':ip', $ip);
+                $stmt->bindValue(':action_type', $action_type);
+                $stmt->execute();
 
                 $this->dbconn->commit();
 

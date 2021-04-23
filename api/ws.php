@@ -105,10 +105,10 @@ if (isset($_GET["action"])) {
                 // echo $UserID;
                 $log_email = $_POST['log_email'];
                 $log_pass = $_POST['log_pass'];
-                // $date = date('Y-m-d H:i:s');
-                // $browser = $_SERVER['HTTP_USER_AGENT'];
-                // $ip = $_SERVER['REMOTE_ADDR'];
-                // $action_type = $_POST['login_user'];
+                $date = date('Y-m-d H:i:s');
+                $browser = $_SERVER['HTTP_USER_AGENT'];
+                $ip = $_SERVER['REMOTE_ADDR'];
+                $action_type = $_POST['login_user'];
                 /* - Server Validation - */
                 // Check if input field is empty
                 // if ($log_email == "") {
@@ -131,7 +131,7 @@ if (isset($_GET["action"])) {
                 //     }
                 // }
                 if ("login" == true) {
-                    $db->login($log_email, $log_pass);
+                    $db->login($log_email, $log_pass, $date, $browser, $ip, $action_type);
                     // echo "Welcome " . $_SESSION['UserID'];
                     http_response_code(202);
                 } else {
