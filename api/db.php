@@ -37,19 +37,20 @@ class dbObj
     }
 
     /* -- New User Function -- */
-    public function register($reg_name, $reg_phone, $reg_email, $reg_dob, $reg_pass, $date, $browser, $ip, $action_type)
+    public function register($reg_name, $reg_phone, $reg_email, $reg_dob, $reg_pass, $access_rights, $date, $browser, $ip, $action_type)
     {
         db_connection();
         try {
             $this->dbconn->beginTransaction();
             // hashing the password with PASSWORD_HASH()
             // $reg_pass = password_hash($reg_pass, PASSWORD_DEFAULT);
-            $stmt = $this->dbconn->prepare("INSERT INTO users2(FullName, PhoneNumber, DateOfBirth, Email, UserPassword) VALUES(:reg_name, :reg_phone, :reg_dob, :reg_email, :reg_pass)");
+            $stmt = $this->dbconn->prepare("INSERT INTO users2(FullName, PhoneNumber, DateOfBirth, Email, UserPassword, AccessRights) VALUES(:reg_name, :reg_phone, :reg_dob, :reg_email, :reg_pass, :access_rights)");
             $stmt->bindValue(':reg_name', $reg_name);
             $stmt->bindValue(':reg_phone', $reg_phone);
             $stmt->bindValue(':reg_dob', $reg_dob);
             $stmt->bindValue(':reg_email', $reg_email);
             $stmt->bindValue(':reg_pass', $reg_pass);
+            $stmt->bindValue(':access_rights', $access_rights);
             $row = $stmt->fetch();
             $stmt->execute();
 
@@ -87,7 +88,7 @@ class dbObj
                 $_SESSION["login"] = 'true';
                 $_SESSION['UserID'] = $row['UserID'];
                 $_SESSION['LoginEmail'] = $row['Email'];
-                // $_SESSION["access_rights"] = $row["access_rights"];
+                $_SESSION["access_rights"] = $row["access_rights"];
                 $_SESSION['time_start_login'] = time();
                 time('H:i:s');
 

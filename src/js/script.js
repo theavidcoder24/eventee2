@@ -279,12 +279,14 @@ function postRegFetch() {
   var reg_email = document.getElementById("reg_email");
   var reg_dob = document.getElementById("reg_dob");
   var reg_pass = document.getElementById("reg_pass");
+  var access_rights = document.getElementById("access_rights");
   fd.append('action', 'register');
   fd.append('reg_name', reg_name.value);
   fd.append('reg_phone', reg_phone.value);
   fd.append('reg_email', reg_email.value);
   fd.append('reg_dob', reg_dob.value);
   fd.append('reg_pass', reg_pass.value);
+  fd.append('access_rights', access_rights.value);
   fd.append('register_user', register_user.value);
   // each form element goes into the fd object ^
   fetch('api/ws.php?action=register', {
@@ -319,9 +321,9 @@ function postRegFetch() {
         successmessage('Yay Successfully Registered!');
         return;
       }
-      response.json().then(function (data) {
-        localStorage.setItem('credentials', JSON.stringify(data));
-      })
+      // response.json().then(function (data) {
+      //   localStorage.setItem('credentials', JSON.stringify(data));
+      // })
     })
     .catch(function (err) {
       console.log(err);

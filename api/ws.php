@@ -58,6 +58,7 @@ if (isset($_GET["action"])) {
                 $reg_email = $_POST['reg_email'];
                 $reg_dob = $_POST['reg_dob'];
                 $reg_pass = $_POST['reg_pass'];
+                $access_rights = $_POST['access_rights'];
                 $date = date('Y-m-d H:i:s');
                 $browser = $_SERVER['HTTP_USER_AGENT'];
                 $ip = $_SERVER['REMOTE_ADDR'];
@@ -92,7 +93,7 @@ if (isset($_GET["action"])) {
                 //     $errorMsg = "Error: Password Field is Empty";
                 //     die;
                 // }
-                $db->register($reg_name, $reg_phone, $reg_email, $reg_dob, $reg_pass, $date, $browser, $ip, $action_type);
+                $db->register($reg_name, $reg_phone, $reg_email, $reg_dob, $reg_pass, $access_rights, $date, $browser, $ip, $action_type);
                 http_response_code(202);
             } else {
                 http_response_code(501);
@@ -125,13 +126,13 @@ if (isset($_GET["action"])) {
                 //     $errorMsg = "Error: Password Field is Empty";
                 //     die;
                 // }
-                // if (isset($_SESSION['access_rights'])) {
-                //     if ($_SESSION['access_rights'] == 'Admin') {
-                //         echo 'HII Admin';
-                //     }
-                // }
                 if ("login" == true) {
                     $db->login($log_email, $log_pass, $date, $browser, $ip, $action_type);
+                    if (isset($_SESSION['access_rights'])) {
+                        if ($_SESSION['access_rights'] == 'Admin') {
+                            echo 'HII Admin';
+                        }
+                    }
                     // echo "Welcome " . $_SESSION['UserID'];
                     http_response_code(202);
                 } else {
@@ -179,8 +180,6 @@ if (isset($_GET["action"])) {
             break;
             //------------------------------------------------ Update User Details action -----------------------------------------
         case 'updateuser':
-            // A super global variable which is used to collect data from REQUEST METHOD that is POST
-            $_SERVER['REQUEST_METHOD'] == 'POST';
             // Checking if the user is logged in
             if ($_SESSION['se']->is_logged_in()) {
                 $objreg = json_decode(file_get_contents("php://input"), true);
