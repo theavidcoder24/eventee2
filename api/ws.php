@@ -65,34 +65,34 @@ if (isset($_GET["action"])) {
                 $action_type = $_POST['register_user'];
                 /* - Server Validation - */
                 // Check if input field is empty
-                // if ($reg_name == "") {
-                //     $errorMsg = "Error: Full Name Field is Empty";
-                //     die;
-                // }
-                // if ($reg_phone == "") {
-                //     $errorMsg = "Error: Phone Number Field is Empty";
-                //     die;
-                // }
-                // // Check if the phone number field is numeric
-                // elseif (is_numeric(trim($reg_ph)) == false) {
-                //     $errorMsg = "Error: Please enter numeric value";
-                //     die;
-                // }
-                // if ($reg_dob == "") {
-                //     $errorMsg = "Error: Date of Birth Field is Empty";
-                //     die;
-                // }
-                // if ($reg_email == "") {
-                //     $errorMsg = "Error: Email Field is Empty";
-                //     die;
-                // } elseif (!preg_match("/^[_\.0-9a-zA-Z-]+@([0-9a-zA-Z][0-9a-zA-Z-]+\.)+[a-zA-Z]{2,50}/i", $reg_email)) {
-                //     $errorMsg = 'error : You did not enter a valid email.';
-                //     die;
-                // }
-                // if ($reg_pass == "") {
-                //     $errorMsg = "Error: Password Field is Empty";
-                //     die;
-                // }
+                if ($reg_name == "") {
+                    $errorMsg = "Error: Full Name Field is Empty";
+                    die;
+                }
+                if ($reg_phone == "") {
+                    $errorMsg = "Error: Phone Number Field is Empty";
+                    die;
+                }
+                // Check if the phone number field is numeric
+                elseif (is_numeric(trim($reg_phone)) == false) {
+                    $errorMsg = "Error: Please enter numeric value";
+                    die;
+                }
+                if ($reg_dob == "") {
+                    $errorMsg = "Error: Date of Birth Field is Empty";
+                    die;
+                }
+                if ($reg_email == "") {
+                    $errorMsg = "Error: Email Field is Empty";
+                    die;
+                } elseif (!preg_match("/^[_\.0-9a-zA-Z-]+@([0-9a-zA-Z][0-9a-zA-Z-]+\.)+[a-zA-Z]{2,50}/i", $reg_email)) {
+                    $errorMsg = 'error : You did not enter a valid email.';
+                    die;
+                }
+                if ($reg_pass == "") {
+                    $errorMsg = "Error: Password Field is Empty";
+                    die;
+                }
                 $db->register($reg_name, $reg_phone, $reg_email, $reg_dob, $reg_pass, $access_rights, $date, $browser, $ip, $action_type);
                 http_response_code(202);
             } else {
@@ -112,20 +112,20 @@ if (isset($_GET["action"])) {
                 $action_type = $_POST['login_user'];
                 /* - Server Validation - */
                 // Check if input field is empty
-                // if ($log_email == "") {
-                //     $errorMsg = "Error: Email Field is Empty";
-                //     die;
-                // }
-                // // Check if email field is valid
-                // elseif (!preg_match("/^[_\.0-9a-zA-Z-]+@([0-9a-zA-Z][0-9a-zA-Z-]+\.)+[a-zA-Z]{2,50}/i", $log_email)) {
-                //     $errorMsg = 'error : You did not enter a valid email.';
-                //     die;
-                // }
-                // // Check if input field is empty
-                // if ($log_pass == "") {
-                //     $errorMsg = "Error: Password Field is Empty";
-                //     die;
-                // }
+                if ($log_email == "") {
+                    $errorMsg = "Error: Email Field is Empty";
+                    die;
+                }
+                // Check if email field is valid
+                elseif (!preg_match("/^[_\.0-9a-zA-Z-]+@([0-9a-zA-Z][0-9a-zA-Z-]+\.)+[a-zA-Z]{2,50}/i", $log_email)) {
+                    $errorMsg = 'error : You did not enter a valid email.';
+                    die;
+                }
+                // Check if input field is empty
+                if ($log_pass == "") {
+                    $errorMsg = "Error: Password Field is Empty";
+                    die;
+                }
                 if ("login" == true) {
                     $db->login($log_email, $log_pass, $date, $browser, $ip, $action_type);
                     if (isset($_SESSION['access_rights'])) {
@@ -201,22 +201,6 @@ if (isset($_GET["action"])) {
                 http_response_code(501);
             }
             break;
-            // case "updateUser":
-            //     if (isset($_POST["action"])) {
-            //         $reg_name = $_POST['log_name_e'];
-            //         $reg_phone = $_POST['log_phone_e'];
-            //         $reg_dob = $_POST['log_dob_e'];
-            //         $user_ID = $_GET['user_ID'];
-            //         $date = date('Y-m-d H:i:s');
-            //         $browser = $_SERVER['HTTP_USER_AGENT'];
-            //         $ip = $_SERVER['REMOTE_ADDR'];
-            //         $action_type = $_POST['updateUser'];
-            //         $db->updateUser($reg_name, $reg_phone, $reg_dob, $date, $browser, $ip, $action_type, $user_ID);
-            //         http_response_code(202);
-            //     } else {
-            //         http_response_code(501);
-            //     }
-            //     break;
             /* - Create Events - */
         case "createEvents":
             if (isset($_POST["action"])) {
