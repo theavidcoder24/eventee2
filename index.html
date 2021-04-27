@@ -469,72 +469,6 @@
             </div>
         </div>
 
-        <!---- Edit Profile ---->
-        <!------------------------------------------------------ USER PROFILE PAGE HTML SECTION ------------------------------------------------------->
-        <!-- <div id="edit_prof" class="menu_link"> -->
-        <!-- <br>
-            <nav class="clean">
-                <div class="nav-wrapper">
-                    <div class="col s12">
-                        <a href="#home" class="breadcrumb" onclick="hideAll(); loadPage()">Home</a>
-                        <a href="#!" class="breadcrumb blue-text accent-3">Edit Profile</a>
-                    </div>
-                </div>
-            </nav>
-            <div id="profilepage" class="pagecontent">
-                <div class="profile">
-                    <div class="profile-info">
-                        <h4>User Profile</h4>
-                        <div id="profilepicture">
-                        </div>
-                        <div id="defaultprofile">
-                        </div>
-                        <div id="profilesection">
-                            <div class="profilebttn-reposition">
-                                <button class="waves-effect waves-light btn" onclick="return userLogout()">Log
-                                    Out</button>
-                                <button data-target="updateprofilemodal"
-                                    class="waves-effect waves-light btn modal-trigger">Edit</button>
-                                <button data-target="userdeleteconfirmModal"
-                                    class="waves-effect waves-light btn modal-trigger">Delete</button>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-        <!-- User Update Form in Materialize CSS modal -->
-        <!-- <div id="updateprofilemodal" class="modal">
-                    <div class="modal-content">
-                        <h4>Update Profile Info</h4>
-                        <form id="user-update-form">
-                            <div class="input-field">
-                                <i class="material-icons prefix">person</i>
-                                <input type="text" id="log_name_e" name="log_name_e" placeholder="Full Name">
-                            </div>
-                            <div class="input-field">
-                                <i class="material-icons prefix">local_phone</i>
-                                <input class="validate" type="tel" id="log_phone_e" name="log_phone_e"
-                                    pattern="[0-9]{10}" placeholder="Mobile Number">
-                                <span class="helper-text" data-error="wrong" data-success="right"></span>
-                            </div>
-                            <div class="input-field">
-                                <i class="material-icons prefix">email</i>
-                                <input type="text" id="log_email_e" name="log_email_e" placeholder="Email">
-                            </div>
-                            <div class="input-field">
-                                <i class="material-icons prefix">cake</i>
-                                <input type="date" id="log_dob_e" name="log_dob_e" placeholder="Date Of Birth">
-                            </div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" id="reloadprofile" class="modal-close btn-small waves-effect waves-green"
-                            onclick="return postUpdateUser()">Update</button>
-                        <a class="modal-close btn waves-effect waves-green">Close</a>
-                    </div>
-                </div>
-            </div> -->
-        <!-- </div> -->
-
         <div id="edit_prof" class="menu_link">
             <br>
             <nav class="clean">
@@ -768,44 +702,6 @@
         <!-- Modal Structure -->
         <div id="update_events" class="modal">
             <h5 class="modal-close right" onclick="closeModal()">&#10005;</h5>
-            <!-- <div class="modal-content"> -->
-            <!-- <h4>Update Events</h4>
-                <form action="api/ws.php" method="POST" onclick="return preventDefault()" novalidate>
-                    <div class="input-field">
-                        <i class="material-icons prefix">title</i>
-                        <input id="update_ev_name" placeholder="Event Name" type="text">
-                    </div>
-                    <div class="input-field">
-                        <i class="material-icons prefix">notes</i>
-                        <textarea id="update_ev_desc" class="materialize-textarea"
-                            placeholder="Event Description"></textarea>
-                    </div>
-                    <div class="input-field">
-                        <i class="material-icons prefix">category</i>
-                        <input type="text" id="update_ev_cat" placeholder="Enter Your Event Type">
-                    </div>
-                    <div class="input-field col s6">
-                        <i class="material-icons prefix">map</i>
-                        <input type="text" id="update_ev_address" placeholder="Enter Your Address">
-                    </div>
-                    <div class="input-field col s6">
-                        <i class="material-icons prefix">flag</i>
-                        <input type="text" id="update_ev_loc" placeholder="Event Location">
-                    </div>
-                    <div class="input-field col s6">
-                        <i class="material-icons prefix">date_range</i>
-                        <input type="text" id="update_ev_date" class="datepicker" placeholder="Event Date">
-                    </div>
-                    <div class="input-field col s6">
-                        <i class="material-icons prefix">schedule</i>
-                        <input type="text" id="update_ev_time" class="timepicker" placeholder="Event Time">
-                    </div>
-                    <input type="hidden" name="eventid" value="" id="eventid">
-                    <input type="hidden" name="action" value="update" id="updateEvent">
-                    <button class="btn waves-effect waves-light" type="submit" onclick="postUpdateEvent(eventid)">Update
-                        Event</button>
-                </form> -->
-            <!-- </div> -->
         </div>
 
         <!---- Community Section ---->
