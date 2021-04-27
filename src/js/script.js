@@ -468,59 +468,59 @@ function userLogout() {
 
 
 /* - Edit Profile - */
-function postdisplayUser() {
-  // Preparing the output
-  var output = '';
-  var output2 = '';
+// function postdisplayUser() {
+//   // Preparing the output
+//   var output = '';
+//   var output2 = '';
 
-  fetch('api/ws.php?action=displayuser', {
-    method: "GET",
-    credentials: 'include'
-  })
-    .then(function (response) {
-      response.json().then(function (data) {
-        console.log(data)
-        // Display data as output
-        data.forEach(row => {
-          // User Profile Output
-          output =
-            `<div><h6>UserID<h6></div>` + row.UserID +
-            `<div><h6>FullName<h6></div>` + row.FullName +
-            `<div><h6>Email<h6></div>` + row.Email +
-            `<div><br><h6>PhoneNumber<h6></div>` + row.PhoneNumber +
-            `<div><br><h6>DateOfBirth<h6></div>` + row.DateOfBirth
+//   fetch('api/ws.php?action=displayuser', {
+//     method: "GET",
+//     credentials: 'include'
+//   })
+//     .then(function (response) {
+//       response.json().then(function (data) {
+//         console.log(data)
+//         // Display data as output
+//         data.forEach(row => {
+//           // User Profile Output
+//           output =
+//             `<div><h6>UserID<h6></div>` + row.UserID +
+//             `<div><h6>FullName<h6></div>` + row.FullName +
+//             `<div><h6>Email<h6></div>` + row.Email +
+//             `<div><br><h6>PhoneNumber<h6></div>` + row.PhoneNumber +
+//             `<div><br><h6>DateOfBirth<h6></div>` + row.DateOfBirth
 
-          output2 =
-            // This output allows pre-fill in update form
-            `<div class="input-field">
-              <i class="material-icons prefix">person</i>
-              <input type="text" id="log_name_e" name="log_name_e" 
-                  value="`+ row.FullName + `" placeholder="First Name">
-          </div>
-          <div class="input-field">
-              <i class="material-icons prefix">person</i>
-              <input type="text" id="log_email_e" name="log_email_e" 
-                  value="`+ row.Email + `" placeholder="Email">
-          </div>
-          <div class="input-field">
-              <i class="material-icons prefix">local_phone</i>
-              <input class="validate" type="tel" id="log_phone_e" name="log_phone_e" 
-                  value="`+ row.PhoneNumber + `" pattern ="[0-9]{10}" placeholder="Mobile Phone">
-                  <span class="helper-text" data-error="wrong" data-success="right"></span>
-          </div>
-          <div class="input-field">
-          <i class="material-icons prefix">cake</i>
-          <input type="date" id="log_dob_e" name="log_dob_e" 
-              value="`+ row.DateOfBirth + `" placeholder="Date of Birth">
-      </div>`
-        })
-        // Data Output at Specific page/location
-        // console.log(row.UserID);
-        document.getElementById('profilesection').innerHTML = output;
-        document.getElementById('user-update-form').innerHTML = output2;
-      })
-    })
-}
+//           output2 =
+//             // This output allows pre-fill in update form
+//             `<div class="input-field">
+//               <i class="material-icons prefix">person</i>
+//               <input type="text" id="log_name_e" name="log_name_e" 
+//                   value="`+ row.FullName + `" placeholder="First Name">
+//           </div>
+//           <div class="input-field">
+//               <i class="material-icons prefix">person</i>
+//               <input type="text" id="log_email_e" name="log_email_e" 
+//                   value="`+ row.Email + `" placeholder="Email">
+//           </div>
+//           <div class="input-field">
+//               <i class="material-icons prefix">local_phone</i>
+//               <input class="validate" type="tel" id="log_phone_e" name="log_phone_e" 
+//                   value="`+ row.PhoneNumber + `" pattern ="[0-9]{10}" placeholder="Mobile Phone">
+//                   <span class="helper-text" data-error="wrong" data-success="right"></span>
+//           </div>
+//           <div class="input-field">
+//           <i class="material-icons prefix">cake</i>
+//           <input type="date" id="log_dob_e" name="log_dob_e" 
+//               value="`+ row.DateOfBirth + `" placeholder="Date of Birth">
+//       </div>`
+//         })
+//         // Data Output at Specific page/location
+//         // console.log(row.UserID);
+//         document.getElementById('profilesection').innerHTML = output;
+//         document.getElementById('user-update-form').innerHTML = output2;
+//       })
+//     })
+// }
 // User Update Function that sends the values from  each the input ID in the update form to API.php/WS.php
 function postUpdateUser() {
   var userUpdate = {
@@ -717,6 +717,7 @@ function displayEvents() {
             '</td></tr>';
           outStr2 =
             `<div class="modal-content">
+            <h5 class="modal-close right" onclick="closeModal()">&#10005;</h5>
               <h4>Update Events</h4>
                 <form action="api/ws.php" method="POST" onclick="return preventDefault()" novalidate>
                     <div class="input-field">
