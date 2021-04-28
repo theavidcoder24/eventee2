@@ -100,7 +100,7 @@ button {
 
 
 /* Admin Access Rights Option */
-#rights_container {
+#access_rights {
     display: none;
 }
 
