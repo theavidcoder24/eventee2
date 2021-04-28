@@ -11,6 +11,11 @@ class sessObj
             if (!isset($_SESSION['login']) == true) {
                 // echo "Welcome " . $_SESSION['LoginEmail'];
                 return true;
+                if (isset($_SESSION['access_rights'])) {
+                    if ($_SESSION['access_rights'] == 'Admin') {
+                        echo '<a href="view/pages/register.html">Create New User</a>';
+                    }
+                }
             }
         } elseif ("login" == false) {
             return false;
