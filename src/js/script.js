@@ -334,10 +334,10 @@ function postLoginFetch() {
   var log_email = document.getElementById("log_email");
   var log_pass = document.getElementById("log_pass");
   var login_details = new FormData();
-  login_details.append('action', 'login_user');
-  login_details.append('log_email', log_email.value);
-  login_details.append('log_pass', log_pass.value);
-  login_details.append('login_user', login_user.value);
+  login_details.set('action', 'login_user');
+  login_details.set('log_email', log_email.value);
+  login_details.set('log_pass', log_pass.value);
+  login_details.set('login_user', login_user.value);
 
   // each form element goes into the login_details object ^
   fetch('api/ws.php?action=login', {
