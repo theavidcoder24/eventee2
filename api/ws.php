@@ -126,15 +126,15 @@ if (isset($_GET["action"])) {
                     $errorMsg = "Error: Password Field is Empty";
                     die;
                 }
-                if ("login" == true) {
+                if (isset($log_email)) {
                     $db->login($log_email, $log_pass, $date, $browser, $ip, $action_type);
                     if (isset($_SESSION['access_rights'])) {
                         if ($_SESSION['access_rights'] == 'Admin') {
                             echo 'HII Admin';
                         }
                     }
-                    // echo "Welcome " . $_SESSION['UserID'];
                     http_response_code(202);
+                    echo "Welcome " . $_SESSION['UserID'];
                 } else {
                     http_response_code(501);
                 }

@@ -361,18 +361,18 @@ function postLoginFetch() {
       if (response.status === 401) {
         console.log('Not permitted');
         errormessage("Error: Not implemented");
-        localStorage.setItem('login', "false");
-        fetch('api/ws.php?action=logout', {
-          method: 'GET'
-        })
+        // localStorage.setItem('login', "false");
+        // fetch('api/ws.php?action=logout', {
+        //   method: 'GET'
+        // })
       }
       if (response.status === 501) {
         console.log('Not implemented');
         errormessage("Error: Not implemented");
-        localStorage.setItem('login', "false");
-        fetch('api/ws.php?action=logout', {
-          method: 'GET'
-        })
+        // localStorage.setItem('login', "false");
+        // fetch('api/ws.php?action=logout', {
+        //   method: 'GET'
+        // })
       }
     })
     .catch(function (err) {
