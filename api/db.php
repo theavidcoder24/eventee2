@@ -42,9 +42,9 @@ class dbObj
         db_connection();
         try {
             $this->dbconn->beginTransaction();
-            // hashing the password with PASSWORD_HASH()
-            // $reg_pass = password_hash($reg_pass, PASSWORD_DEFAULT);
             $stmt = $this->dbconn->prepare("INSERT INTO users2(FullName, PhoneNumber, DateOfBirth, Email, UserPassword, AccessRights) VALUES(:reg_name, :reg_phone, :reg_dob, :reg_email, :reg_pass, :access_rights)");
+            // hashing the password with PASSWORD_HASH()
+            $reg_pass = password_hash($reg_pass, PASSWORD_DEFAULT);
             $stmt->bindValue(':reg_name', $reg_name);
             $stmt->bindValue(':reg_phone', $reg_phone);
             $stmt->bindValue(':reg_dob', $reg_dob);
@@ -83,7 +83,7 @@ class dbObj
             $row = $stmt->fetch();
             if (password_verify($log_pass, $row['UserPassword'])) {
                 /* Set the session variables for each user that logs in to also record what the users will interact with */
-                /* Define the session variables */
+                /* Assign the session variables */
                 $_SESSION["login"] = 'true';
                 $_SESSION['UserID'] = $row['UserID'];
                 $_SESSION['LoginEmail'] = $row['Email'];
@@ -92,21 +92,22 @@ class dbObj
                 time('H:i:s');
 
                 // echo "Welcome " . $_SESSION['LoginEmail'];
-                $UserID = $_SESSION["UserID"];
+                // $UserID = $_SESSION["UserID"];
 
                 /* - Changelog Table - */
-                $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type, UserID) VALUES (:date, :browser, :ip, :action_type, :UserID)");
+                $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type) VALUES (:date, :browser, :ip, :action_type)");
                 $stmt->bindValue(':date', $date);
                 $stmt->bindValue(':browser', $browser);
                 $stmt->bindValue(':ip', $ip);
                 $stmt->bindValue(':action_type', $action_type);
-                $stmt->bindValue(':UserID', $UserID);
+                // $stmt->bindValue(':UserID', $UserID);
                 $stmt->execute();
 
                 $this->dbconn->commit();
 
                 return true;
             } else {
+                // echo "Login credentials are incorrect";
                 return false;
             }
         } catch (PDOException $ex) {
