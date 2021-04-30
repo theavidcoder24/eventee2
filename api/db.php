@@ -75,8 +75,8 @@ class dbObj
         db_connection();
         try {
             $this->dbconn->beginTransaction();
-            $log_email = ($_POST['log_email']);
-            $log_pass = ($_POST['log_pass']);
+            // $log_email = ($_POST['log_email']);
+            // $log_pass = ($_POST['log_pass']);
             $stmt = $this->dbconn->prepare("SELECT * FROM users2 WHERE Email = :log_email");
             $stmt->bindValue(':log_email', $log_email);
             $stmt->execute();
