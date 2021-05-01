@@ -8,6 +8,9 @@ window.onload = function () {
   if (localStorage.getItem('login') == 'true') {
     isLogged();
   }
+  if (localStorage.getItem('access_rights') == 'Admin') {
+    document.getElementById("#admin_logo").style.display = 'block';
+  }
   // if (localStorage.getItem('login') == 'false') {
   //   userLogout();
   // }
