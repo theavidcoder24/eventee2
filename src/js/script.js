@@ -340,7 +340,7 @@ function postLoginFetch() {
   var log_email = document.getElementById("log_email");
   var log_pass = document.getElementById("log_pass");
   var login_details = new FormData();
-  login_details.set('action', 'login_user');
+  login_details.set('action', 'login');
   login_details.set('log_email', log_email.value);
   login_details.set('log_pass', log_pass.value);
   login_details.set('login_user', login_user.value);
@@ -391,10 +391,11 @@ function postAdminLogin() {
   var log_pass = document.getElementById("log_pass");
   var access_rights = document.getElementById("access_rights");
   var admin_details = new FormData();
-  admin_details.set('action', 'login_user');
+  admin_details.set('action', 'login_admin');
   admin_details.set('log_email', log_email.value);
   admin_details.set('log_pass', log_pass.value);
-  admin_details.set('login_user', login_user.value);
+  admin_details.set('access_rights', access_rights.value);
+  admin_details.set('login_admin', login_admin.value);
   // each form element goes into the admin_details object ^
   fetch('api/ws.php?action=adminLogin', {
     method: 'POST',
