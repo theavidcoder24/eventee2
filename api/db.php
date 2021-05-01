@@ -82,6 +82,7 @@ class dbObj
             $stmt->execute();
             $row = $stmt->fetch();
             if (password_verify($log_pass, $row['UserPassword'])) {
+                echo 'Password is valid!';
                 /* Set the session variables for each user that logs in to also record what the users will interact with */
                 /* Assign the session variables */
                 $_SESSION["login"] = 'true';
@@ -91,7 +92,6 @@ class dbObj
                 $_SESSION['time_start_login'] = time();
                 time('H:i:s');
 
-                // echo "Welcome " . $_SESSION['LoginEmail'];
                 // $UserID = $_SESSION["UserID"];
 
                 /* - Changelog Table - */
@@ -107,7 +107,7 @@ class dbObj
 
                 return true;
             } else {
-                // echo "Login credentials are incorrect";
+                echo "Login credentials are incorrect";
                 return false;
             }
         } catch (PDOException $ex) {
