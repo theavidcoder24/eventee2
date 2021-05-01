@@ -153,8 +153,6 @@ if (isset($_GET["action"])) {
             /* - Update User - */
             /* Display User Details action */
         case 'displayuser':
-            // A super global variable which is used to collect data from REQUEST METHOD that is GET
-            $_SERVER['REQUEST_METHOD'] == 'GET';
             // Check if the user is logged in
             if ($_SESSION['se']->is_logged_in()) {
                 $result = $db->displayUser();
@@ -254,7 +252,7 @@ if (isset($_GET["action"])) {
             break;
             /* - Display User Events - */
         case "displayEvents":
-            // if ($_SESSION['se']->is_logged_in()) {
+            if ($_SESSION['se']->is_logged_in()) {
             $result = $db->displayEvents();
             if ($result == false) {
                 http_response_code(501);
@@ -262,9 +260,9 @@ if (isset($_GET["action"])) {
                 http_response_code(202);
                 echo json_encode($result);
             }
-            // } else {
-            //     http_response_code(401);
-            // }
+            } else {
+                http_response_code(401);
+            }
             break;
         case "attendEvent":
 
