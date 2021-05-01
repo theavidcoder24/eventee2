@@ -28,6 +28,9 @@ Local: http://localhost:3000
 On Your Network: http://(Insert IP address):3000
 http://localhost:3000/dashboard
 
+  Local:            http://localhost:3000/react-admin-dashboard   
+  On Your Network:  http://192.168.43.2:3000/react-admin-dashboard
+
 ## Admin Panel
 
 If installing on a new development environment be sure to run the command below if you don't see a node_modueles folder in the repo
