@@ -137,30 +137,6 @@ class dbObj
         }
     }
 
-    // User update with values retrieved from update form
-    public function updateUser(
-        $log_name_e,
-        $log_phone_e,
-        $log_dob_e,
-        $log_email_e
-    ) {
-        $mysql = "UPDATE users2 SET FullName = :log_name_e, PhoneNumber = :log_phone_e, DateOfBirth = :log_dob_e, Email = :log_email_e
-            WHERE UserID = :UserID";
-        $stmt = $this->dbconn->prepare($mysql);
-        $stmt->bindValue(':UserID', $_SESSION['UserID']);
-        $stmt->bindValue(':log_name_e', $log_name_e);
-        $stmt->bindValue(':log_phone_e', $log_phone_e);
-        $stmt->bindValue(':log_dob_e', $log_dob_e);
-        $stmt->bindValue(':log_email_e', $log_email_e);
-
-        // if user did not insert phone number, stop data insertion into MySQL database
-        if (!preg_match("/^[0-9]{10}$/", $log_phone_e)) {
-            die;
-            return false;
-        }
-        return $stmt->execute();
-    }
-
     /* -- Create Events Function -- */
     public function createEvents($event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time, $date, $browser, $ip, $action_type)
     {

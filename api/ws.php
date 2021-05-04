@@ -1,5 +1,8 @@
 <?php
 header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Origin: http://localhost:3000/react-admin');
+header('Access-Control-Allow-Origin: http://malloriecini.com/');
+
 // allow react admin localhost :0000 ^ 
 header('Access-Control-Allow-Credentials: true');
 
@@ -156,42 +159,17 @@ if (isset($_GET["action"])) {
             // Check if the user is logged in
             if ($_SESSION['se']->is_logged_in()) {
                 $result = $db->displayUser();
-                // If the database cannot fetch the profile
                 if ($result == false) {
                     http_response_code(503);
                     // echo $row['userID'];
-                    // If the database can fetch the profile
                 } else {
                     http_response_code(201);
                     // echo $row['userID'];
                     echo json_encode($result);
                 }
-                // if the user is not logged in
+                // 
             } else {
                 http_response_code(401);
-            }
-            break;
-            //------------------------------------------------ Update User Details action -----------------------------------------
-        case 'updateuser':
-            // Checking if the user is logged in
-            if ($_SESSION['se']->is_logged_in()) {
-                $objreg = json_decode(file_get_contents("php://input"), true);
-                $log_name_e = testInput($objreg['log_name_e']);
-                $log_phone_e = testInput($objreg['log_phone_e']);
-                $log_email_e = testInput($objreg['log_email_e']);
-                $log_dob_e = testInput($objreg['log_dob_e']);
-                if ($db->updateUser(
-                    $log_name_e,
-                    $log_phone_e,
-                    $log_email_e,
-                    $log_dob_e
-                )) {
-                    // If the user fully filled in the form
-                    http_response_code(202);
-                }
-                // If the user is not logged in   
-            } else {
-                http_response_code(501);
             }
             break;
             /* - Create Events - */
@@ -253,13 +231,13 @@ if (isset($_GET["action"])) {
             /* - Display User Events - */
         case "displayEvents":
             if ($_SESSION['se']->is_logged_in()) {
-            $result = $db->displayEvents();
-            if ($result == false) {
-                http_response_code(501);
-            } else {
-                http_response_code(202);
-                echo json_encode($result);
-            }
+                $result = $db->displayEvents();
+                if ($result == false) {
+                    http_response_code(501);
+                } else {
+                    http_response_code(202);
+                    echo json_encode($result);
+                }
             } else {
                 http_response_code(401);
             }
