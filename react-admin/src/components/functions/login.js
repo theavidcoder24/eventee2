@@ -34,7 +34,6 @@ class App extends React.Component {
                     localStorage.setItem('login', "true");
                     successmessage('Yay Successfully Logged in!');
                     displayUserInfo();
-                    // sessionStorage.setItem("UserID", UserID);
                     console.log('Login Successful');
                 }
                 if (response.status === 401) {
@@ -66,30 +65,35 @@ class App extends React.Component {
                     <p className="error"> {this.state.errorMessage} </p>
                 )}
                 <form>
-                    <div className="namel">
-                        <label>Username</label>
+                    <div className="log_email">
+                        <label>Email</label>
                         <input
                             type="text"
                             autoFocus
-                            name="namel"
-                            id={this.state.namel}
+                            name="log_email"
+                            id={this.state.log_email}
                             onChange={this.set}
                         />
                     </div>
-                    <div className="passwordl">
+                    <div className="log_pass">
                         <label>Password</label>
                         <input
                             type="password"
-                            name="passwordl"
-                            value={this.state.passwordl}
+                            name="log_pass"
+                            value={this.state.log_pass}
                             type="password"
                             onChange={this.set}
                         />
                     </div>
+                    <input
+                        type="hidden"
+                        name="action"
+                        value="login"
+                        id={this.state.login_admin}></input>
                     <button
                         className="submit-btn"
                         type="submit"
-                        name="action"
+                        name="login"
                         onClick={this.login}
                     >
                         Login
