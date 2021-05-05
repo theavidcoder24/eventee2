@@ -1,5 +1,8 @@
+import "materialize-css/dist/css/materialize.min.css";
+// import M from "materialize-css/dist/js/materialize.min.js";
 import React from "react";
 // import ReactDOM from "react-dom";
+import "materialize-css";
 
 
 class App extends React.Component {
@@ -30,138 +33,96 @@ class App extends React.Component {
         }, 7000)
     }
 
-    postRegFetch() {
-        // loadPage();
-        var errStr = "";
-        if (reg_name.checkValidity() === false) {
-            errStr += "Please type a valid name ";
-            console.log("Error: Full Name");
-            return;
-        }
-        if (reg_phone.checkValidity() === false) {
-            errStr += "Please type a valid phone number ";
-            console.log("Error: Phone Number");
-            return;
-        }
-        if (reg_dob.checkValidity() === false) {
-            errStr += "Please insert a valid date of birth ";
-            console.log("Error: Date of Birth");
-            return;
-        }
-        if (reg_email.checkValidity() === false) {
-            errStr += "Please type in a valid email ";
-            console.log("Error: Email");
-            return;
-        }
-        if (reg_pass.checkValidity() === false) {
-            errStr += "Please type in a valid password ";
-            console.log("Error: Password");
-            return;
-        }
-        var fd = new FormData();
-        var reg_name = document.getElementById("reg_name");
-        var reg_phone = document.getElementById("reg_phone");
-        var reg_email = document.getElementById("reg_email");
-        var reg_dob = document.getElementById("reg_dob");
-        var reg_pass = document.getElementById("reg_pass");
-        var access_rights = document.getElementById("access_rights");
-        fd.append('action', 'register');
-        fd.append('reg_name', reg_name.value);
-        fd.append('reg_phone', reg_phone.value);
-        fd.append('reg_email', reg_email.value);
-        fd.append('reg_dob', reg_dob.value);
-        fd.append('reg_pass', reg_pass.value);
-        fd.append('access_rights', access_rights.value);
-        fd.append('register_user', register_user.value);
-        // each form element goes into the fd object ^
-        fetch('api/ws.php?action=register', {
-            method: 'POST',
-            body: fd,
-            credentials: 'include',
-        })
-            .then(function (response) {
-                // Force error into console
-                response.text().then(function (text) {
-                    console.log(text);
-                });
-                // HTTP Response Codes
-                if (response.status === 400) {
-                    console.log('Bad Request');
-                    errormessage("Bad Request");
-                    return;
-                }
-                if (response.status === 401) {
-                    console.log('Not permitted');
-                    errormessage("Not Permitted");
-                    return;
-                }
-                if (response.status === 501) {
-                    console.log('Not implemented');
-                    errormessage("Server Error Try Again");
-                    return;
-                }
-                if (response.status === 202) {
-                    // loadPage();
-                    console.log('Registration Successful');
-                    successmessage('Yay Successfully Registered!');
-                    return;
-                }
-            })
-            .catch(function (err) {
-                console.log(err);
-            });
-    }
 
-    postLoginFetch() {
-        loadPage();
-        var log_email = document.getElementById("log_email");
-        var log_pass = document.getElementById("log_pass");
-        var login_details = new FormData();
-        login_details.set('action', 'login');
-        login_details.set('log_email', log_email.value);
-        login_details.set('log_pass', log_pass.value);
-        login_details.set('login_user', login_user.value);
-        // each form element goes into the login_details object ^
-        fetch('api/ws.php?action=login', {
-            method: 'POST',
-            body: login_details,
-            credentials: 'include',
-        })
-            .then(function (response) {
-                // Force error into console
-                response.text().then(function (text) {
-                    console.log(text);
-                });
-                // HTTP Response Codes
-                if (response.status === 202) {
-                    localStorage.setItem('login', "true");
-                    successmessage('Yay Successfully Logged in!');
-                    displayUserInfo();
-                    // sessionStorage.setItem("UserID", UserID);
-                    console.log('Login Successful');
-                }
-                if (response.status === 401) {
-                    console.log('Not permitted');
-                    errormessage("Error: Not implemented");
-                    // localStorage.setItem('login', "false");
-                    // fetch('api/ws.php?action=logout', {
-                    //   method: 'GET'
-                    // })
-                }
-                if (response.status === 501) {
-                    console.log('Not implemented');
-                    errormessage("Error: Not implemented");
-                    // localStorage.setItem('login', "false");
-                    // fetch('api/ws.php?action=logout', {
-                    //   method: 'GET'
-                    // })
-                }
-            })
-            .catch(function (err) {
-                console.log("Connection unavailable");
-                console.log(err);
-            });
-    }
+    // postLoginFetch() {
+    //     loadPage();
+    //     var log_email = document.getElementById("log_email");
+    //     var log_pass = document.getElementById("log_pass");
+    //     var login_details = new FormData();
+    //     login_details.set('action', 'login');
+    //     login_details.set('log_email', log_email.value);
+    //     login_details.set('log_pass', log_pass.value);
+    //     login_details.set('login_user', login_user.value);
+    //     // each form element goes into the login_details object ^
+    //     fetch('api/ws.php?action=login', {
+    //         method: 'POST',
+    //         body: login_details,
+    //         credentials: 'include',
+    //     })
+    //         .then(function (response) {
+    //             // Force error into console
+    //             response.text().then(function (text) {
+    //                 console.log(text);
+    //             });
+    //             // HTTP Response Codes
+    //             if (response.status === 202) {
+    //                 localStorage.setItem('login', "true");
+    //                 successmessage('Yay Successfully Logged in!');
+    //                 displayUserInfo();
+    //                 // sessionStorage.setItem("UserID", UserID);
+    //                 console.log('Login Successful');
+    //             }
+    //             if (response.status === 401) {
+    //                 console.log('Not permitted');
+    //                 errormessage("Error: Not implemented");
+    //                 // localStorage.setItem('login', "false");
+    //                 // fetch('api/ws.php?action=logout', {
+    //                 //   method: 'GET'
+    //                 // })
+    //             }
+    //             if (response.status === 501) {
+    //                 console.log('Not implemented');
+    //                 errormessage("Error: Not implemented");
+    //                 // localStorage.setItem('login', "false");
+    //                 // fetch('api/ws.php?action=logout', {
+    //                 //   method: 'GET'
+    //                 // })
+    //             }
+    //         })
+    //         .catch(function (err) {
+    //             console.log("Connection unavailable");
+    //             console.log(err);
+    //         });
+    // }
+    // render() {
+    //     return (
+    //       <div className="Login">
+    //         {this.state.errorMessage && (
+    //           <p className="error"> {this.state.errorMessage} </p>
+    //         )}
+    //         <form>
+    //           <div className="namel">
+    //             <label>Username</label>
+    //             <input
+    //               type="text"
+    //               autoFocus
+    //               name="namel"
+    //               id={this.state.namel}
+    //               onChange={this.set}
+    //             />
+    //           </div>
+    //           <div className="passwordl">
+    //             <label>Password</label>
+    //             <input
+    //               type="password"
+    //               name="passwordl"
+    //               value={this.state.passwordl}
+    //               type="password"
+    //               onChange={this.set}
+    //             />
+    //           </div>
+    //           <button
+    //             className="submit-btn"
+    //             type="submit"
+    //             name="action"
+    //             onClick={this.login}
+    //           >
+    //             Login
+    //           </button>
+    //         </form>
+    //       </div>
+    //     );
+    //   }
 
     isLogged() {
         loadPage();

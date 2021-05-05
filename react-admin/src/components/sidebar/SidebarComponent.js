@@ -4,10 +4,10 @@ import { useHistory } from 'react-router-dom';
 import SLUGS from 'resources/slugs';
 import {
     IconAgents,
-    IconArticles,
-    IconContacts,
+    // IconArticles,
+    // IconContacts,
     IconLogout,
-    IconOverview,
+    // IconOverview,
     IconSettings,
     IconSubscription,
     IconTickets
@@ -51,7 +51,7 @@ function SidebarComponent() {
                 icon={IconSubscription}
                 onClick={() => onClick(SLUGS.dashboard)}
             />
-            <MenuItem
+            {/* <MenuItem
                 id={SLUGS.overview}
                 items={[SLUGS.overviewTwo, SLUGS.overviewThree]}
                 title='Overview'
@@ -78,7 +78,7 @@ function SidebarComponent() {
                     icon={IconArticles}
                     onClick={() => onClick(SLUGS.overviewThree)}
                 />
-            </MenuItem>
+            </MenuItem> */}
             <MenuItem
                 id={SLUGS.tickets}
                 title='Tickets'
@@ -120,10 +120,10 @@ function SidebarComponent() {
                 onClick={() => onClick(SLUGS.contacts)}
             /> */}
             <MenuItem
-                id={SLUGS.agents}
+                id={SLUGS.events}
                 title='Events'
                 icon={IconAgents}
-                onClick={() => onClick(SLUGS.agents)}
+                onClick={() => onClick(SLUGS.events)}
             />
             {/* <MenuItem
                 id={SLUGS.articles}

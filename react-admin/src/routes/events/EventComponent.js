@@ -22,17 +22,7 @@ function EventComponent() {
                 breakpoints={{ 768: 'column' }}
             >
             </Row>
-            <div className={classes.todayTrends}>
-                <TodayTrendsComponent />
-            </div>
-            <Row
-                horizontal='space-between'
-                className={classes.lastRow}
-                breakpoints={{ 1024: 'column' }}
-            >
-                <UnresolvedTicketsComponent containerStyles={classes.unresolvedTickets} />
-                <TasksComponent containerStyles={classes.tasks} />
-            </Row>
+            
         </Column>
     );
 }

@@ -70,19 +70,19 @@ function HeaderComponent() {
         case currentItem === SLUGS.dashboard:
             title = 'Dashboard';
             break;
-        case [SLUGS.overview, SLUGS.overviewTwo, SLUGS.overviewThree].includes(currentItem):
-            title = 'Overview';
-            break;
+        // case [SLUGS.overview, SLUGS.overviewTwo, SLUGS.overviewThree].includes(currentItem):
+        //     title = 'Overview';
+        //     break;
         case currentItem === SLUGS.tickets:
             title = 'Tickets';
             break;
-        case [SLUGS.ideas, SLUGS.ideasTwo, SLUGS.ideasThree].includes(currentItem):
-            title = 'Ideas';
-            break;
+        // case [SLUGS.ideas, SLUGS.ideasTwo, SLUGS.ideasThree].includes(currentItem):
+        //     title = 'Ideas';
+        //     break;
         // case currentItem === SLUGS.contacts:
         //     title = 'Contacts';
         //     break;
-        case currentItem === SLUGS.agents:
+        case currentItem === SLUGS.events:
             title = 'Events';
             break;
         // case currentItem === SLUGS.articles:
@@ -100,6 +100,10 @@ function HeaderComponent() {
 
     function onSettingsClick() {
         push(SLUGS.settings);
+    }
+
+    function onLoginClick() {
+        push(SLUGS.login);
     }
 
     return (
@@ -152,6 +156,10 @@ function HeaderComponent() {
                         {
                             label: 'Settings',
                             onClick: onSettingsClick
+                        },
+                        {
+                            label: 'Login',
+                            onClick: onLoginClick
                         },
                         {
                             label: 'Logout',

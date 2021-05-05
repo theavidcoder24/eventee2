@@ -10,15 +10,15 @@ function PrivateRoutes() {
         <Suspense fallback={<LoadingComponent loading />}>
             <Switch>
                 <Route exact path={SLUGS.dashboard} component={DashboardComponent} />
-                <Route exact path={SLUGS.overviewTwo} render={() => <div>overviewTwo</div>} />
+                {/* <Route exact path={SLUGS.overviewTwo} render={() => <div>overviewTwo</div>} />
                 <Route exact path={SLUGS.overviewThree} render={() => <div>overviewThree</div>} />
-                <Route exact path={SLUGS.overview} render={() => <div>Overview</div>} />
+                <Route exact path={SLUGS.overview} render={() => <div>Overview</div>} /> */}
                 <Route exact path={SLUGS.tickets} render={() => <div>tickets</div>} />
-                <Route exact path={SLUGS.ideasTwo} render={() => <div>ideasTwo</div>} />
+                {/* <Route exact path={SLUGS.ideasTwo} render={() => <div>ideasTwo</div>} />
                 <Route exact path={SLUGS.ideasThree} render={() => <div>ideasThree</div>} />
-                <Route exact path={SLUGS.ideas} render={() => <div>ideas</div>} />
+                <Route exact path={SLUGS.ideas} render={() => <div>ideas</div>} /> */}
                 {/* <Route exact path={SLUGS.contacts} render={() => <div>contacts</div>} /> */}
-                <Route exact path={SLUGS.agents} render={() => <div><h4>All Events</h4></div>} />
+                <Route exact path={SLUGS.events} render={() => <div><h4>All Events</h4></div>} />
                 {/* <Route exact path={SLUGS.articles} render={() => <div>articles</div>} /> */}
                 <Route exact path={SLUGS.settings} render={() => <div>Settings</div>} />
                 {/* <Route exact path={SLUGS.subscription} render={() => <div>subscription</div>} /> */}
