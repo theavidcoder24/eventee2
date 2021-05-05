@@ -121,7 +121,7 @@ if (isset($_GET["action"])) {
                 }
                 // Check if email field is valid
                 elseif (!preg_match("/^[_\.0-9a-zA-Z-]+@([0-9a-zA-Z][0-9a-zA-Z-]+\.)+[a-zA-Z]{2,50}/i", $log_email)) {
-                    $errorMsg = 'error : You did not enter a valid email.';
+                    $errorMsg = 'Error : You did not enter a valid email.';
                     die;
                 }
                 // Check if input field is empty
@@ -131,6 +131,42 @@ if (isset($_GET["action"])) {
                 }
                 if (isset($log_email)) {
                     $db->login($log_email, $log_pass, $date, $browser, $ip, $action_type);
+                    http_response_code(202);
+                    // echo "Welcome " . $_SESSION['UserID'];
+                } else {
+                    http_response_code(501);
+                }
+            }
+            break;
+            /* - Admin Login - */
+        case "adminLogin":
+            if (isset($_GET["action"])) {
+                // $UserID = $_GET['UserID'];
+                // echo $UserID;
+                $log_email = $_POST['log_email'];
+                $log_pass = $_POST['log_pass'];
+                $date = date('Y-m-d H:i:s');
+                $browser = $_SERVER['HTTP_USER_AGENT'];
+                $ip = $_SERVER['REMOTE_ADDR'];
+                $action_type = $_POST['login_user'];
+                /* - Server Validation - */
+                // Check if input field is empty
+                if ($log_email == "") {
+                    $errorMsg = "Error: Email Field is Empty";
+                    die;
+                }
+                // Check if email field is valid
+                elseif (!preg_match("/^[_\.0-9a-zA-Z-]+@([0-9a-zA-Z][0-9a-zA-Z-]+\.)+[a-zA-Z]{2,50}/i", $log_email)) {
+                    $errorMsg = 'Error : You did not enter a valid email.';
+                    die;
+                }
+                // Check if input field is empty
+                if ($log_pass == "") {
+                    $errorMsg = "Error: Password Field is Empty";
+                    die;
+                }
+                if (isset($log_email)) {
+                    $db->adminLogin($log_email, $log_pass, $date, $browser, $ip, $action_type);
                     http_response_code(202);
                     // echo "Welcome " . $_SESSION['UserID'];
                 } else {
@@ -242,9 +278,9 @@ if (isset($_GET["action"])) {
                 http_response_code(401);
             }
             break;
-        case "attendEvent":
+        // case "attendEvent":
 
-            break;
+        //     break;
             /* - Autofill the update form - */
         case "fillUpdate":
             if (isset($_POST["action"])) {
