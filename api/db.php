@@ -70,19 +70,19 @@ class dbObj
     }
 
     /* -- Login Function -- */
-    public function login($log_email, $log_pass, $date, $browser, $ip, $action_type)
+    public function login($log_email, $log_pass, $date, $browser, $ip, $action_type, $UserID)
     {
         db_connection();
         try {
             $this->dbconn->beginTransaction();
             // $log_email = ($_POST['log_email']);
             // $log_pass = ($_POST['log_pass']);
-            $stmt = $this->dbconn->prepare("SELECT * FROM users2 WHERE Email = :log_email");
+            $stmt = $this->dbconn->prepare("SELECT UserID, FullName, PhoneNumber, DateOfBirth, Email, UserPassword, AccessRights FROM users2 WHERE Email=:log_email");
             $stmt->bindValue(':log_email', $log_email);
             $stmt->execute();
             $row = $stmt->fetch();
             if (password_verify($log_pass, $row['UserPassword'])) {
-                echo 'Password is valid!';
+                // echo 'Password is valid!';
                 /* Set the session variables for each user that logs in to also record what the users will interact with */
                 /* Assign the session variables */
                 $_SESSION["login"] = 'true';
@@ -92,17 +92,16 @@ class dbObj
                 $_SESSION['time_start_login'] = time();
                 time('H:i:s');
 
-                // $UserID = $_SESSION["UserID"];
+                $UserID = $_SESSION["UserID"];
 
                 /* - Changelog Table - */
-                $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type) VALUES (:date, :browser, :ip, :action_type)");
+                $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type, UserID) VALUES (:date, :browser, :ip, :action_type, :UserID)");
                 $stmt->bindValue(':date', $date);
                 $stmt->bindValue(':browser', $browser);
                 $stmt->bindValue(':ip', $ip);
                 $stmt->bindValue(':action_type', $action_type);
-                // $stmt->bindValue(':UserID', $UserID);
+                $stmt->bindValue(':UserID', $UserID);
                 $stmt->execute();
-
                 $this->dbconn->commit();
 
                 return true;
@@ -116,7 +115,7 @@ class dbObj
         }
     }
 
-    // login Admin function
+    // Login Admin function
     function adminLogin($log_email, $log_pass)
     {
         try {
@@ -156,21 +155,6 @@ class dbObj
     // {
     //     return "['account': 'exists']";
     // }
-
-    public function displayUser()
-    {
-        try {
-            $mysql = "SELECT UserID, FullName, PhoneNumber, DateOfBirth, Email, UserPassword FROM users2 
-            WHERE UserID = :UserID";
-            $stmt = $this->dbconn->prepare($mysql);
-            $stmt->bindValue(':UserID', $_SESSION['UserID']);
-            $stmt->execute();
-            $result = $stmt->fetchAll();
-            return $result;
-        } catch (PDOException $ex) {
-            throw $ex;
-        }
-    }
 
     /* -- Create Events Function -- */
     public function createEvents($event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time, $date, $browser, $ip, $action_type)

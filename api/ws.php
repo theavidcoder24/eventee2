@@ -29,16 +29,16 @@ if (!isset($_SESSION['se'])) {
 }
 
 // /* -- Rate Limit 24 Hour Check -- */
-if ($_SESSION['se']->Rate24HourCheck() === false) {
-    http_response_code(429); // Too Many Requests!
-    die();
-}
+// if ($_SESSION['se']->Rate24HourCheck() === false) {
+//     http_response_code(429); // Too Many Requests!
+//     die();
+// }
 
-/* -- Referrer -- */
-if ($_SESSION['se']->is_referrer() == false) {
-    http_response_code(400);
-    die();
-}
+// /* -- Referrer -- */
+// if ($_SESSION['se']->is_referrer() == false) {
+//     http_response_code(400);
+//     die();
+// }
 
 function testInput($data)
 {
@@ -107,6 +107,7 @@ if (isset($_GET["action"])) {
             if (isset($_GET["action"])) {
                 // $UserID = $_GET['UserID'];
                 // echo $UserID;
+                // $_SESSION['UserID'] = $row['UserID'];
                 $log_email = $_POST['log_email'];
                 $log_pass = $_POST['log_pass'];
                 $date = date('Y-m-d H:i:s');
@@ -130,7 +131,7 @@ if (isset($_GET["action"])) {
                     die;
                 }
                 if (isset($log_email)) {
-                    $db->login($log_email, $log_pass, $date, $browser, $ip, $action_type);
+                    $db->login($log_email, $log_pass, $date, $browser, $ip, $action_type, $UserID);
                     http_response_code(202);
                     // echo "Welcome " . $_SESSION['UserID'];
                 } else {
@@ -188,25 +189,6 @@ if (isset($_GET["action"])) {
         case "logout":
             session_destroy();
             http_response_code(202);
-            break;
-            /* - Update User - */
-            /* Display User Details action */
-        case 'displayuser':
-            // Check if the user is logged in
-            if ($_SESSION['se']->is_logged_in()) {
-                $result = $db->displayUser();
-                if ($result == false) {
-                    http_response_code(503);
-                    // echo $row['userID'];
-                } else {
-                    http_response_code(201);
-                    // echo $row['userID'];
-                    echo json_encode($result);
-                }
-                // 
-            } else {
-                http_response_code(401);
-            }
             break;
             /* - Create Events - */
         case "createEvents":
@@ -278,9 +260,9 @@ if (isset($_GET["action"])) {
                 http_response_code(401);
             }
             break;
-        // case "attendEvent":
+            // case "attendEvent":
 
-        //     break;
+            //     break;
             /* - Autofill the update form - */
         case "fillUpdate":
             if (isset($_POST["action"])) {

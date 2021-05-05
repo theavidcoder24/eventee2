@@ -337,8 +337,8 @@ function postRegFetch() {
 /* - Login - */
 function postLoginFetch() {
   loadPage();
-  var log_email = document.getElementById("log_email");
-  var log_pass = document.getElementById("log_pass");
+  // var log_email = document.getElementById("log_email");
+  // var log_pass = document.getElementById("log_pass");
   var login_details = new FormData();
   login_details.set('action', 'login');
   login_details.set('log_email', log_email.value);
@@ -352,9 +352,9 @@ function postLoginFetch() {
   })
     .then(function (response) {
       // Force error into console
-      response.text().then(function (text) {
-        console.log(text);
-      });
+      // response.text().then(function (text) {
+      //   console.log(text);
+      // });
       // HTTP Response Codes
       if (response.status === 202) {
         localStorage.setItem('login', "true");
@@ -511,142 +511,6 @@ function userLogout() {
       console.log(err);
     });
 }
-
-
-/* - Edit Profile - */
-// function postdisplayUser() {
-//   // Preparing the output
-//   var output = '';
-//   var output2 = '';
-
-//   fetch('api/ws.php?action=displayuser', {
-//     method: "GET",
-//     credentials: 'include'
-//   })
-//     .then(function (response) {
-//       response.json().then(function (data) {
-//         console.log(data)
-//         // Display data as output
-//         data.forEach(row => {
-//           // User Profile Output
-//           output =
-//             `<div><h6>UserID<h6></div>` + row.UserID +
-//             `<div><h6>FullName<h6></div>` + row.FullName +
-//             `<div><h6>Email<h6></div>` + row.Email +
-//             `<div><br><h6>PhoneNumber<h6></div>` + row.PhoneNumber +
-//             `<div><br><h6>DateOfBirth<h6></div>` + row.DateOfBirth
-
-//           output2 =
-//             // This output allows pre-fill in update form
-//             `<div class="input-field">
-//               <i class="material-icons prefix">person</i>
-//               <input type="text" id="log_name_e" name="log_name_e" 
-//                   value="`+ row.FullName + `" placeholder="First Name">
-//           </div>
-//           <div class="input-field">
-//               <i class="material-icons prefix">person</i>
-//               <input type="text" id="log_email_e" name="log_email_e" 
-//                   value="`+ row.Email + `" placeholder="Email">
-//           </div>
-//           <div class="input-field">
-//               <i class="material-icons prefix">local_phone</i>
-//               <input class="validate" type="tel" id="log_phone_e" name="log_phone_e" 
-//                   value="`+ row.PhoneNumber + `" pattern ="[0-9]{10}" placeholder="Mobile Phone">
-//                   <span class="helper-text" data-error="wrong" data-success="right"></span>
-//           </div>
-//           <div class="input-field">
-//           <i class="material-icons prefix">cake</i>
-//           <input type="date" id="log_dob_e" name="log_dob_e" 
-//               value="`+ row.DateOfBirth + `" placeholder="Date of Birth">
-//       </div>`
-//         })
-//         // Data Output at Specific page/location
-//         // console.log(row.UserID);
-//         document.getElementById('profilesection').innerHTML = output;
-//         document.getElementById('user-update-form').innerHTML = output2;
-//       })
-//     })
-// }
-// User Update Function that sends the values from  each the input ID in the update form to API.php/WS.php
-function postUpdateUser() {
-  var userUpdate = {
-    'log_name_e': document.getElementById("log_name_e").value,
-    'log_phone_e': document.getElementById("log_phone_e").value,
-    'log_dob_e': document.getElementById("log_dob_e").value,
-    'log_email_e': document.getElementById("log_email_e").value
-  }
-
-  fetch('api/ws.php?action=updateuser', {
-    method: "POST",
-    body: JSON.stringify(userUpdate),
-    credentials: 'include'
-  })
-    .then(function (response) {
-      if (response.status == 406) {
-        // Will not accept the new update information if they are not filled fully or correctly
-        console.log('Not updated');
-        console.log('Form not fully filled');
-        alert('It appears that the registration form does not contains the required values. Please fully fill in the form.');
-        return;
-      }
-      if (response.status == 202) {
-        console.log('Success!');
-        // Upon successful update, the profile page will be refreshed by reusing the display profile function
-        if (!alert('Your profile information has been successfully updated!')) { postdisplayUser(); }
-        return;
-      }
-      // Send back error into console log
-      response.text().then((text) => {
-        console.log(text)
-      })
-    })
-  return false;
-}
-
-// function updateUserInfo() {
-//   loadPage();
-//   var log_name_e = document.getElementById("log_name_e");
-//   var log_phone_e = document.getElementById("log_phone_e");
-//   var log_phone_e = document.getElementById("log_dob_e");
-//   var updateuserfd = new FormData();
-//   updateuserfd.append('action', 'updateUser');
-//   updateuserfd.append('log_name_e', log_name_e);
-//   updateuserfd.append('log_phone_e', log_phone_e);
-//   updateuserfd.append('log_dob_e', log_dob_e);
-//   // updateuserfd.append('user_ID', user_ID);
-//   updateuserfd.append('updateUser', updateUser.value);
-//   fetch('api/ws.php?action=updateUser', {
-//     method: 'POST',
-//     body: updateuserfd,
-//   })
-//     // Force error into console
-//     .then(function (response) {
-//       response.text().then(function (text) {
-//         console.log(text);
-//       });
-//       // HTTP Response Codes
-//       if (response.status === 202) {
-//         console.log('Creation Successful');
-//         successmessage("Success: User Profile Updated!");
-//         return;
-//       }
-//       if (response.status === 400) {
-//         console.log('Bad Request');
-//         errormessage('Error: Bad Request');
-//         return;
-//       }
-//       if (response.status === 401) {
-//         console.log('Not permitted');
-//         errormessage('Error: Not Permitted');
-//         return;
-//       }
-//       if (response.status === 501) {
-//         console.log('Not implemented :(');
-//         errormessage('Error: Not Implemented');
-//         return;
-//       }
-//     });
-// }
 
 /* - Create Events - */
 function postCreateEvents() {
@@ -809,69 +673,69 @@ function displayEvents() {
 }
 
 // Get List of attendees by Event ID
-// function getattendees() {
-// fetch('api/ws.php?action=checkAttendance', {
-//   method: '',
-//   body: fd,
-//   credentials: 'include'
-// })  
-// }
+function getattendees() {
+fetch('api/ws.php?action=checkAttendance', {
+  method: '',
+  body: fd,
+  credentials: 'include'
+})  
+}
 
 // Add user to event
-// function attendEvent() {
-//   if (checkAnswer.checked == true) {
-//     loadPage();
-//     var fd = new FormData();
-//     var reg_name = document.getElementById("reg_name");
-//     var reg_phone = document.getElementById("reg_phone");
-//     var reg_email = document.getElementById("reg_email");
-//     fd.append('reg_name', reg_name.value);
-//     fd.append('reg_phone', reg_phone.value);
-//     fd.append('reg_email', reg_email.value);
-//     fd.append('event_name', event_name.value);
-//     fd.append('action', 'attendEvent');
-//     // each form element goes into the fd object ^
-//     fetch('api/ws.php?action=attendEvent', {
-//       method: 'UPDATE',
-//       body: fd,
-//       credentials: 'include'
-//     })
-//       // Force error into console
-//       .then(function (response) {
-//         response.text().then(function (text) {
-//           console.log(text);
-//         });
-//         // HTTP Response Codes
-//         if (response.status === 202) {
-//           console.log('Successful Attendance Recorded');
-//           successmessage("Success: Attendance Recorded");
-//           return;
-//           // if (checkAnswer > 5) {
+function attendEvent() {
+  if (checkAnswer.checked == true) {
+    loadPage();
+    var fd = new FormData();
+    var reg_name = document.getElementById("reg_name");
+    var reg_phone = document.getElementById("reg_phone");
+    var reg_email = document.getElementById("reg_email");
+    fd.append('reg_name', reg_name.value);
+    fd.append('reg_phone', reg_phone.value);
+    fd.append('reg_email', reg_email.value);
+    fd.append('event_name', event_name.value);
+    fd.append('action', 'attendEvent');
+    // each form element goes into the fd object ^
+    fetch('api/ws.php?action=attendEvent', {
+      method: 'UPDATE',
+      body: fd,
+      credentials: 'include'
+    })
+      // Force error into console
+      .then(function (response) {
+        response.text().then(function (text) {
+          console.log(text);
+        });
+        // HTTP Response Codes
+        if (response.status === 202) {
+          console.log('Successful Attendance Recorded');
+          successmessage("Success: Attendance Recorded");
+          return;
+          // if (checkAnswer > 5) {
 
-//           // } elseif (checkAnswer < 5) {
+          // } elseif (checkAnswer < 5) {
 
-//           // }
-//         }
-//         if (response.status === 400) {
-//           console.log('Bad Request');
-//           errormessage('Error: Bad Request');
-//           return;
-//         }
-//         if (response.status === 401) {
-//           console.log('Not permitted');
-//           errormessage('Error: Not Permitted');
-//           return;
-//         }
-//         if (response.status === 501) {
-//           console.log('Not implemented :(');
-//           errormessage('Error: Not Implemented');
-//           return;
-//         }
-//       });
-//     return false;
-//   } else {
-//   }
-// }
+          // }
+        }
+        if (response.status === 400) {
+          console.log('Bad Request');
+          errormessage('Error: Bad Request');
+          return;
+        }
+        if (response.status === 401) {
+          console.log('Not permitted');
+          errormessage('Error: Not Permitted');
+          return;
+        }
+        if (response.status === 501) {
+          console.log('Not implemented :(');
+          errormessage('Error: Not Implemented');
+          return;
+        }
+      });
+    return false;
+  } else {
+  }
+}
 
 /* - Autofill Update Form - */
 function fillUpdate(eventid) {
