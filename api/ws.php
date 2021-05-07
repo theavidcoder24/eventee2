@@ -66,6 +66,7 @@ if (isset($_GET["action"])) {
                 $browser = $_SERVER['HTTP_USER_AGENT'];
                 $ip = $_SERVER['REMOTE_ADDR'];
                 $action_type = $_POST['register_user'];
+                // $UserID = $this->UserID;
                 /* - Server Validation - */
                 // Check if input field is empty
                 if ($reg_name == "") {
@@ -182,6 +183,15 @@ if (isset($_GET["action"])) {
                 http_response_code(202);
             }
             if ($result == false) {
+                http_response_code(401);
+            }
+            break;
+        case "userid":
+            $result = $_SESSION['se']->is_logged_in();
+            if ($result == true) {
+                $_SESSION['user_session']->userid();
+                http_response_code(202);
+            } else {
                 http_response_code(401);
             }
             break;

@@ -476,6 +476,19 @@ function isLogged() {
     });
 }
 
+function currentloginid() {
+  return fetch('api/api.php?action=userid', {
+      method: 'GET',
+  })
+      .then(function (response) {
+          return response.json();
+      })
+      .then(function (data) {
+          var userid = JSON.parse(data);
+          return userid;
+      })
+}
+
 /* - User Logout - */
 function userLogout() {
   fetch('api/ws.php?action=logout', {

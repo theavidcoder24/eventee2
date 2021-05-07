@@ -1,8 +1,10 @@
 <?php
-session_start();
+// session_start();
 
 class sessObj
 {
+    public $UserID;
+
     /* This session function checks if the user is logged in by refering to the session variable login whether it's set to true or false based on the sesssion array */
     function is_logged_in()
     {
@@ -19,6 +21,11 @@ class sessObj
         } elseif ("login" == false) {
             return false;
         }
+    }
+
+    public function userid()
+    {
+        // echo $this->UserID;
     }
 
     /* - Rate Limiting - */
