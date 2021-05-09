@@ -1,4 +1,5 @@
 // import React from 'react';
+import React, { useState } from 'react';
 // import { createUseStyles } from 'react-jss';
 
 // const useStyles = createUseStyles({
@@ -12,7 +13,9 @@
 //     }
 // });
 
-export function Login(props) {
+export function login(props) {
+    // Declare a new state variable, which we'll call "count"  
+    const [count, setCount] = useState(0);
     const handleLogin = () => {
         document.getElementById("loginmessage").innerHTML = "Loading...";
         var log_email = document.getElementById("log_email");
@@ -60,7 +63,7 @@ export function Login(props) {
             <input id="log_pass" name="log_pass" type="password" class="validate"
                 pattern="[a-zA-Z0-9_.!@#$%^&*()]{2,}" placeholder="Password"></input>
             <p id="loginmessage">Please Login</p>
-            <button type="Button" fullWidth variant="contained" color="primary" onClick={handleLogin}>Login In</button>
+            <button type="Button" onClick={() => setCount(count + 1)}>Login In</button>
             <a href="#">Forgot password?</a>
             <a to="/register">Don't have an account? Register</a>
         </form>
