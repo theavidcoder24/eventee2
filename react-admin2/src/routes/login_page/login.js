@@ -1,21 +1,16 @@
-// import React from 'react';
-import React, { useState } from 'react';
+import React from 'react';
+// import React, { useState } from 'react';
 // import { createUseStyles } from 'react-jss';
 
 // const useStyles = createUseStyles({
-//     cardsContainer: {
-//         marginRight: -30,
-//         marginTop: -30
-//     },
 //     form: {
 //         width: '100%',
-//         marginTop: theme.spacing(1),
 //     }
 // });
 
 export function Login(props) {
     // Declare a new state variable, which we'll call "count"  
-    const [count, setCount] = useState(0);
+    // const [count, setCount] = useState(0);
     document.getElementById("loginmessage").innerHTML = "Loading...";
     var log_email = document.getElementById("log_email");
     var log_pass = document.getElementById("log_pass");
@@ -55,17 +50,17 @@ export function Login(props) {
 
     return (
         <form className="LoginForm" noValidate>
-            <i class="material-icons prefix">email</i>
-            <input id="log_email" name="log_email" type="email" class="validate" placeholder="Email" required></input>
-            <i class="material-icons prefix">vpn_key</i>
-            <input id="log_pass" name="log_pass" type="password" class="validate"
+            <i className="material-icons prefix">email</i>
+            <input id="log_email" name="log_email" type="email" className="validate" placeholder="Email" required></input>
+            <i className="material-icons prefix">vpn_key</i>
+            <input id="log_pass" name="log_pass" type="password" className="validate"
                 pattern="[a-zA-Z0-9_.!@#$%^&*()]{2,}" placeholder="Password"></input>
             <p id="loginmessage">Please Login</p>
-            <button type="Button" onClick={() => setCount(count + 1)}>Login In</button>
+            {/* <button type="Button" onClick={() => setCount(count + 1)}>Login In</button> */}
             <a href="#">Forgot password?</a>
             <a to="/register">Don't have an account? Register</a>
         </form>
     );
 }
 
-// export default DashboardComponent;
+// export default Login;
