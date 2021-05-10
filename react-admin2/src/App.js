@@ -5,8 +5,8 @@ import React from "react";
 // require('dotenv').config();
 // import env from "react-dotenv";
 import './App.css';
-// import { Login } from './routes/login_page/Login';
-import { displayEvents } from './routes/display_page/displayEvents';
+import Login from './routes/login_page/Login';
+import displayEvents from './routes/display_page/displayEvents';
 // import { CreateEvents } from './routes/create_page/createEvents.js';
 
 import {
@@ -25,7 +25,7 @@ function App() {
           <nav>
             <ul>
               <li>
-                <Link to="/home">Home</Link>
+                <Link to="/">Home</Link>
               </li>
               <li>
                 <Link to="/display">Display</Link>
@@ -57,7 +57,7 @@ function App() {
             <Route path="/logout">
               <Logout />
             </Route>
-            <Route path="/home">
+            <Route path="/">
               <Home />
             </Route>
           </Switch>
@@ -72,18 +72,7 @@ function Home() {
   return (
     <div>
       <h2>Home</h2>
-      <form className="LoginForm" noValidate>
-        <i className="material-icons prefix">email</i>
-        <input id="log_email" name="log_email" type="email" className="validate" placeholder="Email" required></input>
-        <i className="material-icons prefix">vpn_key</i>
-        <input id="log_pass" name="log_pass" type="password" className="validate"
-          pattern="[a-zA-Z0-9_.!@#$%^&*()]{2,}" placeholder="Password"></input>
-        <p id="loginmessage">Please Login</p>
-        <button type="Button">Login In</button>
-        {/* onClick={() => setCount(count + 1)} */}
-        <a href="#">Forgot password?</a>
-        <a to="/register">Don't have an account? Register</a>
-      </form>
+      <Login />
     </div>
   )
 }
@@ -93,7 +82,7 @@ function Create() {
     <div>
       <h2>Events Statistics</h2>
       <h4>Create Event</h4>
-      <form action="api/ws.php" method="POST" onclick="return preventDefault()">
+      <form action="api/ws.php" method="POST" onClick="return preventDefault()">
         <div className="input-field col s12">
           <i className="material-icons prefix">title</i>
           <input id="event_name" type="text" className="validate" placeholder="Event Name"></input>
@@ -261,23 +250,7 @@ function Register() {
 function Display() {
   return (
     <div>
-      <h2>About</h2>
-      <h4>Event List</h4>
-      <button onclick="displayEvents()">Display Events</button>
-      <div className="content">
-        <table>
-          <th>Event ID</th>
-          <th>Event Name</th>
-          <th>Event Description</th>
-          <th>Event Category</th>
-          <th>Event Address</th>
-          <th>Event Location</th>
-          <th>Event Date</th>
-          <th>Event Time</th>
-          <table id="eventsTable" className="striped">
-          </table>
-        </table>
-      </div>
+      <displayEvents />
     </div>
   )
 }

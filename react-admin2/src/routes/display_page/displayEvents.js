@@ -3,21 +3,18 @@ import React from 'react';
 // import { createUseStyles } from 'react-jss';
 
 // const useStyles = createUseStyles({
-//     cardsContainer: {
-//         marginRight: -30,
-//         marginTop: -30
-//     },
 //     form: {
 //         width: '100%',
 //         marginTop: theme.spacing(1),
 //     }
 // });
+
 /* - Display Events - */
 export function displayEvents() {
   // Define output string that will display the database data
   var outStr = '';
   var outStr2 = '';
-  fetch('http://localhost/eventee2/api/ws.php?action=displayEvents', {
+  fetch('http://localhost:3000/eventee2/api/ws.php?action=displayEvents', {
     method: "GET",
     credentials: "include",
   })
@@ -84,4 +81,28 @@ export function displayEvents() {
         document.getElementById('update_events').innerHTML = outStr2;
       });
     });
+
+  return (
+    <div>
+      <h2>About</h2>
+      <h4>Event List</h4>
+      <button onclick="displayEvents()">Display Events</button>
+      <div className="content">
+        <table>
+          <th>Event ID</th>
+          <th>Event Name</th>
+          <th>Event Description</th>
+          <th>Event Category</th>
+          <th>Event Address</th>
+          <th>Event Location</th>
+          <th>Event Date</th>
+          <th>Event Time</th>
+          <table id="eventsTable" className="striped">
+          </table>
+        </table>
+      </div>
+    </div>
+  )
 }
+
+export default displayEvents;
