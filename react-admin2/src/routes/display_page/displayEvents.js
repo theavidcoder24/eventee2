@@ -1,20 +1,14 @@
 import React from 'react';
 // import React, { useState } from 'react';
 // import { createUseStyles } from 'react-jss';
-
-// const useStyles = createUseStyles({
-//     form: {
-//         width: '100%',
-//         marginTop: theme.spacing(1),
-//     }
-// });
+// import DeleteEvents from './routes/create_page/createEvents.js';
 
 /* - Display Events - */
-export function displayEvents() {
+function DisplayEvents() {
   // Define output string that will display the database data
   var outStr = '';
   var outStr2 = '';
-  fetch('http://localhost:3000/eventee2/api/ws.php?action=displayEvents', {
+  fetch('http://localhost/eventee2/api/ws.php?action=displayEvents', {
     method: "GET",
     credentials: "include",
   })
@@ -84,9 +78,9 @@ export function displayEvents() {
 
   return (
     <div>
-      <h2>About</h2>
-      <h4>Event List</h4>
-      <button onclick="displayEvents()">Display Events</button>
+      <h2>Event List</h2>
+      {/* <displayEvents /> */}
+      <button onClick={DisplayEvents()}>Display Events</button>
       <div className="content">
         <table>
           <th>Event ID</th>
@@ -105,4 +99,4 @@ export function displayEvents() {
   )
 }
 
-export default displayEvents;
+export default DisplayEvents;

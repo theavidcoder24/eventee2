@@ -1,7 +1,7 @@
 <?php
 header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Origin: http://localhost:3000/react-admin');
-header('Access-Control-Allow-Origin: http://malloriecini.com/');
+header('Access-Control-Allow-Origin: http://localhost:3000');
+// header('Access-Control-Allow-Origin: http://malloriecini.com/');
 
 // allow react admin localhost :0000 ^ 
 header('Access-Control-Allow-Credentials: true');

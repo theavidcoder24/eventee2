@@ -5,9 +5,9 @@ import React from "react";
 // require('dotenv').config();
 // import env from "react-dotenv";
 import './App.css';
-import Login from './routes/login_page/Login';
-import displayEvents from './routes/display_page/displayEvents';
-// import { CreateEvents } from './routes/create_page/createEvents.js';
+import Login from './routes/login_page/login';
+import DisplayEvents from './routes/display_page/displayEvents';
+// import CreateEvents from './routes/create_page/createEvents.js';
 
 import {
   BrowserRouter as Router,
@@ -80,8 +80,7 @@ function Home() {
 function Create() {
   return (
     <div>
-      <h2>Events Statistics</h2>
-      <h4>Create Event</h4>
+      <h2>Create Event</h2>
       <form action="api/ws.php" method="POST" onClick="return preventDefault()">
         <div className="input-field col s12">
           <i className="material-icons prefix">title</i>
@@ -160,88 +159,7 @@ function Create() {
 function Register() {
   return (
     <div>
-      <h2>Profile</h2>
-      <h5 className="center">User Details</h5>
-      <form action="api/ws.php" method="POST" onclick="return preventDefault()" novalidate>
-        <div className="row">
-          <div className="input-field col s12">
-            <i className="material-icons prefix">badge</i>
-            <select className="icons" id="access_rights">
-              <option value="" disabled selected>Access Rights</option>
-              <option value="Admin">Admin</option>
-              <option value="User">User</option>
-            </select>
-            <span className="helper-text" data-error="Please enter a valid category"
-              data-success="Correct" max="20"></span>
-          </div>
-          <div className="input-field col s12">
-            <i className="material-icons prefix">account_circle</i>
-            <input id="reg_name" type="text" className="validate tooltipped" placeholder="Full Name"
-              data-position="top" data-tooltip="Must be more than 2 characters"></input>
-            <span className="helper-text" data-error="Please enter a valid name"
-              data-success="Correct"></span>
-            <div className="errorMsg"></div>
-          </div>
-          <div className="input-field col s12">
-            <i className="material-icons prefix">phone</i>
-            <input id="reg_phone" type="tel" className="validate" placeholder="Phone Number"></input>
-            <span className="helper-text" data-error="Please enter a valid phone number"
-              data-success="Correct"></span>
-          </div>
-          <div className="input-field col s12">
-            <i className="material-icons prefix">email</i>
-            <input id="reg_email" name="reg_email" type="email" className="validate"
-              placeholder="Email"></input>
-            <span className="helper-text" data-error="Please enter a valid email"
-              data-success="Correct"></span>
-          </div>
-          <div className="input-field col s12">
-            <i className="material-icons prefix">cake</i>
-            <input type="text" id="reg_dob" className="datepicker validate"
-              placeholder="Date of Birth *"></input>
-            <span className="helper-text" data-error="Please enter a valid date of birth"
-              data-success="Correct" max="20"></span>
-          </div>
-          <div className="input-field col s12">
-            <i className="material-icons prefix">vpn_key</i>
-            <input id="reg_pass" name="reg_pass" type="password" className="validate"
-              placeholder="Password"></input>
-            <span className="helper-text" data-error="Please enter a valid password"
-              data-success="Correct" max="20"></span>
-          </div>
-          <a className="waves-effect waves-light modal-trigger" href="#agree_terms"><i
-            className="material-icons prefix">feed</i> Terms and conditions</a>
-          <div id="agree_terms" className="modal">
-            <div className="modal-content">
-              <h4>Terms and Conditions</h4>
-              <p>A bunch of text. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Nobis
-              officia minima facilis quo? Voluptatum itaque, voluptatibus tempora odit
-              ducimus
-              neque consectetur consequuntur blanditiis facilis, nostrum sunt earum vero
-              fugiat
-              exercitationem? Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Deserunt,
-              provident? Placeat quia cumque necessitatibus architecto quaerat qui vitae
-              nam
-              magnam accusantium, impedit, consequuntur quam? Dolorem labore dolore
-              blanditiis ipsam facere.</p>
-            </div>
-            <div className="modal-footer">
-              <a href="#!" className="modal-close waves-effect waves-green btn-flat">Disagree</a>
-              <a href="#!" className="modal-close waves-effect waves-green btn-flat">Agree</a>
-            </div>
-          </div>
-          <div className="center">
-            <span className="center">Already a member?<a href="#login_container"
-              onclick="displayLogin()">
-              Login</a></span>
-          </div>
-        </div>
-        <input type="hidden" name="action" value="register" id="register_user"></input>
-        <button className="btn indigo waves-effect waves-light" type="submit" name="register"
-          onclick="postRegFetch()">Join</button>
-      </form>
+      <register />
     </div>
   )
 }
@@ -251,6 +169,22 @@ function Display() {
   return (
     <div>
       <displayEvents />
+      <h2>Event List</h2>
+      {/* <button onClick="displayEvents()">Display Events</button>
+        <div className="content">
+          <table>
+            <th>Event ID</th>
+            <th>Event Name</th>
+            <th>Event Description</th>
+            <th>Event Category</th>
+            <th>Event Address</th>
+            <th>Event Location</th>
+            <th>Event Date</th>
+            <th>Event Time</th>
+            <table id="eventsTable" className="striped">
+            </table>
+          </table>
+  </div> */}
     </div>
   )
 }
