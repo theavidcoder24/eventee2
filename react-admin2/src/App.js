@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
+import React from 'react'
 // import ReactDOM from "react-dom";
 // import { useEffect, useState } from "react";
 // require('dotenv').config();
@@ -6,8 +7,9 @@ import React, { useState } from 'react';
 import './App.css';
 import Login from './routes/login_page/login';
 import PostRegFetch from './routes/login_page/register.js';
-import DisplayEvents from './routes/display_page/displayevents.js';
+import DisplayEvents from './routes/display_page/displayEvents';
 import CreateEvents from './routes/create_page/createEvents.js';
+// import DashboardComponent from './routes/dashboard/DashboardComponent';
 
 import {
   BrowserRouter as Router,
@@ -18,12 +20,12 @@ import {
 
 
 function App() {
-  const [token, setToken] = useState();
+  // const [token, setToken] = useState();
 
-  if(!token) {
-    return <Login setToken={setToken} />
-  }
-  
+  // if (!token) {
+  //   return <Login setToken={setToken} />
+  // }
+
   return (
     <div className="App">
       <Router>
@@ -57,13 +59,13 @@ function App() {
             <Route path="/create">
               <Create />
             </Route>
-            <Route path="/register">
-              <Register />
+            <Route path="/register" component={PostRegFetch}>
+              {/* <Register /> */}
             </Route>
             <Route path="/logout">
               <Logout />
             </Route>
-            <Route path="/">
+            <Route exact path="/">
               <Home />
             </Route>
           </Switch>
@@ -77,19 +79,18 @@ function App() {
 function Home() {
   return (
     <div>
-      <h2>Home</h2>
       <Login />
     </div>
   )
 }
 
-function Register() {
-  return (
-    <div>
-      <PostRegFetch />
-    </div>
-  )
-}
+// function Register() {
+//   return (
+//     <div>
+//       <PostRegFetch />
+//     </div>
+//   )
+// }
 
 function Create() {
   return (

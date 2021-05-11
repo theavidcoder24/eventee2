@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import React, { useState } from 'react';
 // import { createUseStyles } from 'react-jss';
 // import CreateEvents from './routes/create_page/createEvents.js';
 import DeleteRemoveEvent from './deleteEvent.js';
@@ -58,7 +57,7 @@ function DisplayEvents() {
             <td>{event.eventLocation}</td>,
             <td>{event.eventDate}</td>,
             <td>{event.eventTime}</td>
-            <button href="#update_events" class="modal-trigger" onclick={fillUpdate(' + row.eventID + ')} value="' + row.eventID + '"><i class="material-icons">edit</i></button>
+            {/* <button href="#update_events" class="modal-trigger" onclick={fillUpdate(' + row.eventID + ')} value="' + row.eventID + '"><i class="material-icons">edit</i></button> */}
             <div id="update_events" class="modal">
               <h5 class="modal-close right" onclick="closeModal()">&#10005;</h5>
               <div class="modal-content">
@@ -95,13 +94,13 @@ function DisplayEvents() {
                   </div>
                   <input type="hidden" name="eventid" value="`+ row.eventID + `" id="eventid"></input>
                   <input type="hidden" name="action" value="update" id="updateEvent"></input>
-                  <button class="btn waves-effect waves-light" type="submit" onClick={updateEvent()}>Update
-                        Event</button>
+                  {/* <button class="btn waves-effect waves-light" type="submit" onClick={updateEvent()}>Update
+                        Event</button> */}
                 </form>
               </div>
 
             </div>
-            <button onClick={DeleteRemoveEvent(' + row.eventID + ')} value="' + row.eventID + '"><i class="material-icons">delete</i></button>
+            {/* <button onClick={DeleteRemoveEvent(' + row.eventID + ')} value="' + row.eventID + '"><i class="material-icons">delete</i></button> */}
           </tr>
         ))}
       </div>
