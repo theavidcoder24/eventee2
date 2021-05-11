@@ -1,5 +1,4 @@
-import React from "react";
-// import React, { useState } from 'react';
+import React, { useState } from 'react';
 // import ReactDOM from "react-dom";
 // import { useEffect, useState } from "react";
 // require('dotenv').config();
@@ -19,6 +18,11 @@ import {
 
 
 function App() {
+  const [token, setToken] = useState();
+
+  if(!token) {
+    return <Login setToken={setToken} />
+  }
   return (
     <div className="App">
       <Router>

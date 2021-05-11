@@ -1,7 +1,9 @@
-import React from 'react';
-// import React, { useState } from 'react';
+// import React from 'react';
+import React, { useState } from 'react';
 // import { createUseStyles } from 'react-jss';
-
+// import {useAuth} from "";
+// import { Link } from React;
+ 
 // const useStyles = createUseStyles({
 //     form: {
 //         width: '100%',
@@ -9,6 +11,9 @@ import React from 'react';
 // });
 
 function Login(props) {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
     // Declare a new state variable, which we'll call "count"  
     // const [count, setCount] = useState(0);
     // document.getElementById("loginmessage").innerHTML = "Loading...";

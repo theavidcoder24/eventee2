@@ -1,6 +1,6 @@
 
 /* Delete Events */
-export function DeleteRemoveEvent(eventid) {
+function DeleteRemoveEvent(eventid) {
     console.log("Delete event with id " + eventid);
 
     events = JSON.parse(localStorage.getItem("events"));
@@ -19,7 +19,7 @@ export function DeleteRemoveEvent(eventid) {
     }
 
     var removefd = new FormData();
-    removefd.append('action', 'deleteRemoveEvent');
+    removefd.append('action', 'DeleteRemoveEvent');
     removefd.append('eventid', eventid);
 
     fetch('api/ws.php?action=removeEvent', {
@@ -48,3 +48,5 @@ export function DeleteRemoveEvent(eventid) {
             }
         });
 }
+
+export default DeleteRemoveEvent;
