@@ -100,12 +100,10 @@ function DisplayEvents() {
                 </form>
               </div>
 
-
             </div>
             <button onClick={DeleteRemoveEvent(' + row.eventID + ')} value="' + row.eventID + '"><i class="material-icons">delete</i></button>
           </tr>
         ))}
-
       </div>
     </div>
   )

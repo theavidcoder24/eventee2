@@ -147,12 +147,7 @@ function PostRegFetch() {
                             ducimus
                             neque consectetur consequuntur blanditiis facilis, nostrum sunt earum vero
                             fugiat
-                            exercitationem? Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                            Deserunt,
-                            provident? Placeat quia cumque necessitatibus architecto quaerat qui vitae
-                            nam
-                            magnam accusantium, impedit, consequuntur quam? Dolorem labore dolore
-         blanditiis ipsam facere.</p>
+                            exercitationem?</p>
                         </div>
                         <div className="modal-footer">
                             <a href="#!" className="modal-close waves-effect waves-green btn-flat">Disagree</a>
@@ -160,8 +155,7 @@ function PostRegFetch() {
                         </div>
                     </div>
                     <div className="center">
-                        <span className="center">Already a member?<a href="#login_container"
-                            onclick="displayLogin()">
+                        <span className="center">Already a member?<a >
                             Login</a></span>
                     </div>
                 </div>

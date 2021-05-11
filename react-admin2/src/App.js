@@ -23,6 +23,7 @@ function App() {
   if(!token) {
     return <Login setToken={setToken} />
   }
+  
   return (
     <div className="App">
       <Router>
@@ -82,14 +83,6 @@ function Home() {
   )
 }
 
-function Create() {
-  return (
-    <div>
-      <CreateEvents />
-    </div>
-  )
-}
-
 function Register() {
   return (
     <div>
@@ -98,6 +91,13 @@ function Register() {
   )
 }
 
+function Create() {
+  return (
+    <div>
+      <CreateEvents />
+    </div>
+  )
+}
 
 function Display() {
   return (
