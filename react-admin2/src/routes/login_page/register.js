@@ -2,86 +2,88 @@ import React from 'react';
 
 
 /* - Register - */
-export function postRegFetch() {
-    // loadPage();
-    var errStr = "";
-    if (reg_name.checkValidity() === false) {
-        errStr += "Please type a valid name ";
-        console.log("Error: Full Name");
-        return;
-    }
-    if (reg_phone.checkValidity() === false) {
-        errStr += "Please type a valid phone number ";
-        console.log("Error: Phone Number");
-        return;
-    }
-    if (reg_dob.checkValidity() === false) {
-        errStr += "Please insert a valid date of birth ";
-        console.log("Error: Date of Birth");
-        return;
-    }
-    if (reg_email.checkValidity() === false) {
-        errStr += "Please type in a valid email ";
-        console.log("Error: Email");
-        return;
-    }
-    if (reg_pass.checkValidity() === false) {
-        errStr += "Please type in a valid password ";
-        console.log("Error: Password");
-        return;
-    }
-    var fd = new FormData();
-    var reg_name = document.getElementById("reg_name");
-    var reg_phone = document.getElementById("reg_phone");
-    var reg_email = document.getElementById("reg_email");
-    var reg_dob = document.getElementById("reg_dob");
-    var reg_pass = document.getElementById("reg_pass");
-    var access_rights = document.getElementById("access_rights");
-    fd.append('action', 'register');
-    fd.append('reg_name', reg_name.value);
-    fd.append('reg_phone', reg_phone.value);
-    fd.append('reg_email', reg_email.value);
-    fd.append('reg_dob', reg_dob.value);
-    fd.append('reg_pass', reg_pass.value);
-    fd.append('access_rights', access_rights.value);
-    fd.append('register_user', register_user.value);
-    // each form element goes into the fd object ^
-    fetch('api/ws.php?action=register', {
-        method: 'POST',
-        body: fd,
-        credentials: 'include',
-    })
-        .then(function (response) {
-            // Force error into console
-            response.text().then(function (text) {
-                console.log(text);
-            });
-            // HTTP Response Codes
-            if (response.status === 400) {
-                console.log('Bad Request');
-                errormessage("Bad Request");
-                return;
-            }
-            if (response.status === 401) {
-                console.log('Not permitted');
-                errormessage("Not Permitted");
-                return;
-            }
-            if (response.status === 501) {
-                console.log('Not implemented');
-                errormessage("Server Error Try Again");
-                return;
-            }
-            if (response.status === 202) {
-                // loadPage();
-                console.log('Registration Successful');
-                successmessage('Yay Successfully Registered!');
-                return;
-            }
-        })
-        .catch(function (err) {
-            console.log(err);
-        });
+function PostRegFetch() {
+    // function regUser() {
+    // // loadPage();
+    // var errStr = "";
+    // if (reg_name.checkValidity() === false) {
+    //     errStr += "Please type a valid name ";
+    //     console.log("Error: Full Name");
+    //     return;
+    // }
+    // if (reg_phone.checkValidity() === false) {
+    //     errStr += "Please type a valid phone number ";
+    //     console.log("Error: Phone Number");
+    //     return;
+    // }
+    // if (reg_dob.checkValidity() === false) {
+    //     errStr += "Please insert a valid date of birth ";
+    //     console.log("Error: Date of Birth");
+    //     return;
+    // }
+    // if (reg_email.checkValidity() === false) {
+    //     errStr += "Please type in a valid email ";
+    //     console.log("Error: Email");
+    //     return;
+    // }
+    // if (reg_pass.checkValidity() === false) {
+    //     errStr += "Please type in a valid password ";
+    //     console.log("Error: Password");
+    //     return;
+    // }
+    // var fd = new FormData();
+    // var reg_name = document.getElementById("reg_name");
+    // var reg_phone = document.getElementById("reg_phone");
+    // var reg_email = document.getElementById("reg_email");
+    // var reg_dob = document.getElementById("reg_dob");
+    // var reg_pass = document.getElementById("reg_pass");
+    // var access_rights = document.getElementById("access_rights");
+    // fd.append('action', 'register');
+    // fd.append('reg_name', reg_name.value);
+    // fd.append('reg_phone', reg_phone.value);
+    // fd.append('reg_email', reg_email.value);
+    // fd.append('reg_dob', reg_dob.value);
+    // fd.append('reg_pass', reg_pass.value);
+    // fd.append('access_rights', access_rights.value);
+    // fd.append('register_user', register_user.value);
+    // // each form element goes into the fd object ^
+    // fetch('api/ws.php?action=register', {
+    //     method: 'POST',
+    //     body: fd,
+    //     credentials: 'include',
+    // })
+    //     .then(function (response) {
+    //         // Force error into console
+    //         response.text().then(function (text) {
+    //             console.log(text);
+    //         });
+    //         // HTTP Response Codes
+    //         if (response.status === 400) {
+    //             console.log('Bad Request');
+    //             errormessage("Bad Request");
+    //             return;
+    //         }
+    //         if (response.status === 401) {
+    //             console.log('Not permitted');
+    //             errormessage("Not Permitted");
+    //             return;
+    //         }
+    //         if (response.status === 501) {
+    //             console.log('Not implemented');
+    //             errormessage("Server Error Try Again");
+    //             return;
+    //         }
+    //         if (response.status === 202) {
+    //             // loadPage();
+    //             console.log('Registration Successful');
+    //             successmessage('Yay Successfully Registered!');
+    //             return;
+    //         }
+    //     })
+    //     .catch(function (err) {
+    //         console.log(err);
+    //     });
+    // }
 
     return (
         <div>
@@ -171,4 +173,4 @@ export function postRegFetch() {
     )
 }
 
-export default register;
+export default PostRegFetch;

@@ -1,6 +1,6 @@
 
 /* - Update Events - */
-function postUpdateEvent() {
+export function PostUpdateEvent() {
     var eventid = document.getElementById("eventid").value;
     console.log("Update event with id " + eventid);
 

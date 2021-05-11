@@ -1,6 +1,6 @@
 
 /* Delete Events */
-function deleteRemoveEvent(eventid) {
+export function DeleteRemoveEvent(eventid) {
     console.log("Delete event with id " + eventid);
 
     events = JSON.parse(localStorage.getItem("events"));

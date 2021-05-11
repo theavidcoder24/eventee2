@@ -1,37 +1,39 @@
-import React from 'react';
+// import React from 'react';
 // import React, { useState } from 'react';
 // import { createUseStyles } from 'react-jss';
-// import DeleteEvents from './routes/create_page/createEvents.js';
+// import CreateEvents from './routes/create_page/createEvents.js';
+// import DeleteRemoveEvent from './deleteEvent.js';
+// import PostUpdateEvent from './updateEvent.js';
 
 /* - Display Events - */
 function DisplayEvents() {
-  // Define output string that will display the database data
-  var outStr = '';
-  var outStr2 = '';
-  fetch('http://localhost/eventee2/api/ws.php?action=displayEvents', {
-    method: "GET",
-    credentials: "include",
-  })
-    .then(function (response) {
-      // loadPage();
-      response.json().then(function (data) {
-        localStorage.setItem("events", JSON.stringify(data));
-        // console.log(data);
-        data.forEach(row => {
-          outStr +=
-            '<tr><td>' + row.eventID +
-            '</td><td>' + row.eventName +
-            '</td><td>' + row.eventDescription +
-            '</td><td>' + row.eventCategory +
-            '</td><td>' + row.eventAddress +
-            '</td><td>' + row.eventLocation +
-            '</td><td>' + row.eventDate +
-            '</td><td>' + row.eventTime +
-            '</td><td><button href="#update_events" class="modal-trigger" onclick="fillUpdate(' + row.eventID + ')" value="' + row.eventID + '"><i class="material-icons">edit</i></button>' +
-            '</td><td>' + '<button onclick="deleteRemoveEvent(' + row.eventID + ')" value="' + row.eventID + '"><i class="material-icons">delete</i></button>' +
-            '</td></tr>';
-          outStr2 =
-            `<div class="modal-content">
+  function pullEvents() {
+    // Define output string that will display the database data
+    var outStr = '';
+    var outStr2 = '';
+    fetch('http://localhost/eventee2/api/ws.php?action=displayEvents', {
+      method: "GET",
+      credentials: "include",
+    })
+      .then(function (response) {
+        response.json().then(function (data) {
+          localStorage.setItem("events", JSON.stringify(data));
+          // console.log(data);
+          data.forEach(row => {
+            outStr +=
+              '<tr><td>' + row.eventID +
+              '</td><td>' + row.eventName +
+              '</td><td>' + row.eventDescription +
+              '</td><td>' + row.eventCategory +
+              '</td><td>' + row.eventAddress +
+              '</td><td>' + row.eventLocation +
+              '</td><td>' + row.eventDate +
+              '</td><td>' + row.eventTime +
+              '</td><td><button href="#update_events" class="modal-trigger" onclick="fillUpdate(' + row.eventID + ')" value="' + row.eventID + '"><i class="material-icons">edit</i></button>' +
+              '</td><td>' + '<button onclick="deleteRemoveEvent(' + row.eventID + ')" value="' + row.eventID + '"><i class="material-icons">delete</i></button>' +
+              '</td></tr>';
+            outStr2 =
+              `<div class="modal-content">
               <h5 class="modal-close right" onclick="closeModal()">&#10005;</h5>
                 <h4>Update Events</h4>
                   <form action="api/ws.php" method="POST" onclick="return preventDefault()" novalidate>
@@ -70,17 +72,17 @@ function DisplayEvents() {
                           Event</button>
                   </form>
               </div>`
+          });
+          document.getElementById('eventsTable').innerHTML = outStr;
+          document.getElementById('update_events').innerHTML = outStr2;
         });
-        document.getElementById('eventsTable').innerHTML = outStr;
-        document.getElementById('update_events').innerHTML = outStr2;
       });
-    });
+  }
 
   return (
     <div>
-      <h2>Event List</h2>
-      {/* <displayEvents /> */}
-      <button onClick={DisplayEvents()}>Display Events</button>
+      <h2>Events List</h2>
+      <button onClick={pullEvents()}>Display Events</button>
       <div className="content">
         <table>
           <th>Event ID</th>
