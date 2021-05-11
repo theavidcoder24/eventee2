@@ -1,4 +1,4 @@
-// import React from 'react';
+import React from 'react';
 // import React, { useState } from 'react';
 // import { createUseStyles } from 'react-jss';
 // import CreateEvents from './routes/create_page/createEvents.js';
@@ -30,7 +30,7 @@ function DisplayEvents() {
               '</td><td>' + row.eventDate +
               '</td><td>' + row.eventTime +
               '</td><td><button href="#update_events" class="modal-trigger" onclick="fillUpdate(' + row.eventID + ')" value="' + row.eventID + '"><i class="material-icons">edit</i></button>' +
-              '</td><td>' + '<button onclick="deleteRemoveEvent(' + row.eventID + ')" value="' + row.eventID + '"><i class="material-icons">delete</i></button>' +
+              '</td><td>' + '<button onclick="DeleteRemoveEvent(' + row.eventID + ')" value="' + row.eventID + '"><i class="material-icons">delete</i></button>' +
               '</td></tr>';
             outStr2 =
               `<div class="modal-content">
@@ -68,7 +68,7 @@ function DisplayEvents() {
                       </div>
                       <input type="hidden" name="eventid" value="`+ row.eventID + `" id="eventid">
                       <input type="hidden" name="action" value="update" id="updateEvent">
-                      <button class="btn waves-effect waves-light" type="submit" onclick="postUpdateEvent()">Update
+                      <button class="btn waves-effect waves-light" type="submit" onclick="PostUpdateEvent()">Update
                           Event</button>
                   </form>
               </div>`
