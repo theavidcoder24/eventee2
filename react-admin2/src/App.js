@@ -1,11 +1,10 @@
-// import React, { useState } from 'react';
-import React from 'react'
-// import ReactDOM from "react-dom";
+import React, { useState } from 'react';
+// import React from 'react'
 // import { useEffect, useState } from "react";
 // require('dotenv').config();
 // import env from "react-dotenv";
 import './App.css';
-import Login from './routes/login_page/login';
+import Login from './routes/login_page/login.js';
 import PostRegFetch from './routes/login_page/register.js';
 import DisplayEvents from './routes/display_page/displayEvents';
 import CreateEvents from './routes/create_page/createEvents.js';
@@ -20,7 +19,16 @@ import {
 
 
 function App() {
-  // const [token, setToken] = useState();
+
+  // const [fullname, setFullName] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [phone, setPhone] = useState("");
+  // const [dob, setDob] = useState("");
+  // const [password, setPassword] = useState("");
+
+  // const displayInfo = () => {
+  //     console.log(fullname + email + phone + dob + password);
+  // }
 
   // if (!token) {
   //   return <Login setToken={setToken} />

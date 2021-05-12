@@ -478,15 +478,15 @@ function isLogged() {
 
 function currentloginid() {
   return fetch('api/api.php?action=userid', {
-      method: 'GET',
+    method: 'GET',
   })
-      .then(function (response) {
-          return response.json();
-      })
-      .then(function (data) {
-          var userid = JSON.parse(data);
-          return userid;
-      })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      var userid = JSON.parse(data);
+      return userid;
+    })
 }
 
 /* - User Logout - */
@@ -687,11 +687,11 @@ function displayEvents() {
 
 // Get List of attendees by Event ID
 function getattendees() {
-fetch('api/ws.php?action=checkAttendance', {
-  method: '',
-  body: fd,
-  credentials: 'include'
-})  
+  fetch('api/ws.php?action=checkAttendance', {
+    method: '',
+    body: fd,
+    credentials: 'include'
+  })
 }
 
 // Add user to event

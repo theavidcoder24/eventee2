@@ -120,16 +120,16 @@ class dbObj
     {
         try {
             $this->dbconn->beginTransaction();
-            $stmt = $this->dbconn->prepare("SELECT * FROM users2 WHERE AccessRights = :access_rights");
+            $stmt = $this->dbconn->prepare("SELECT * FROM users2 WHERE AccessRights = 'Admin'");
             $stmt->bindValue(':log_email', $log_email);
             $stmt->execute();
             $row = $stmt->fetch();
 
             if (password_verify($log_pass, $row['UserPassword'])) {
-                if ($row['AccessRights'] == ("Admin")) {
+                // if ($row['AccessRights'] == ("Admin")) {
                     $_SESSION["login"] = 'true';
                     $_SESSION['UserID'] = $row['UserID'];
-                    // $_SESSION['LoginEmail'] = $row['Email'];
+                    // $_SESSION['AdminEmail'] = $row['Email'];
                     $_SESSION["access_rights"] = $row["AccessRights"];
                     $_SESSION['time_start_login'] = time();
                     time('H:i:s');
@@ -137,10 +137,10 @@ class dbObj
                     $this->dbconn->commit();
 
                     return true;
-                } else {
-                    // Not admin!
-                    return false;
-                }
+                // } else {
+                //     // Not admin!
+                //     return false;
+                // }
             } else {
                 return false;
             }

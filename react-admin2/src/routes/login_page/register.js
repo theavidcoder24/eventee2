@@ -1,9 +1,7 @@
 import React from 'react';
 
-
 /* - Register - */
 function PostRegFetch() {
-    // function regUser() {
     // // loadPage();
     // var errStr = "";
     // if (reg_name.checkValidity() === false) {
@@ -83,7 +81,6 @@ function PostRegFetch() {
     //     .catch(function (err) {
     //         console.log(err);
     //     });
-    // }
 
     return (
         <div>
@@ -161,7 +158,7 @@ function PostRegFetch() {
                 </div>
                 <input type="hidden" name="action" value="register" id="register_user"></input>
                 <button className="btn indigo waves-effect waves-light" type="submit" name="register"
-                    onclick="postRegFetch()">Join</button>
+                >Join</button>
             </form>
         </div>
     )

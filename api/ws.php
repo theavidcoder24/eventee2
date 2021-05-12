@@ -150,7 +150,7 @@ if (isset($_GET["action"])) {
                 $date = date('Y-m-d H:i:s');
                 $browser = $_SERVER['HTTP_USER_AGENT'];
                 $ip = $_SERVER['REMOTE_ADDR'];
-                $action_type = $_POST['login_user'];
+                $action_type = $_POST['login_admin'];
                 /* - Server Validation - */
                 // Check if input field is empty
                 if ($log_email == "") {
