@@ -7,6 +7,7 @@ import React from 'react';
 // import { Auth0Provider } from "@auth0/auth0-react";
 import './App.css';
 import Login from './routes/login_page/login.js';
+import isLogged from './routes/login_page/isLogged';
 // import LoginButton from './routes/login_page/LoginButton';
 // import LogoutButton from './routes/login_page/LogoutButton';
 // import Profile from './routes/login_page/UserProfile';
@@ -100,9 +101,14 @@ function Home() {
   )
 }
 
-// function Dashboard() {
-
-// }
+function Dashboard() {
+  return (
+    <div>
+      <h2>SH</h2>
+      {/* <DashboardComponent /> */}
+    </div>
+  )
+}
 
 // function Create() {
 //   return (
