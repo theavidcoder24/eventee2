@@ -343,9 +343,9 @@ function postLoginFetch() {
   login_details.set('action', 'login');
   login_details.set('log_email', log_email.value);
   login_details.set('log_pass', log_pass.value);
-  login_details.set('login_user', login_user.value);
+  login_details.set('login_admin', login_admin.value);
   // each form element goes into the login_details object ^
-  fetch('api/ws.php?action=login', {
+  fetch('api/ws.php?action=adminLogin', {
     method: 'POST',
     body: login_details,
     credentials: 'include',

@@ -116,7 +116,7 @@ class dbObj
     }
 
     // Login Admin function
-    function adminLogin($log_email, $log_pass)
+    function adminLogin($log_email, $log_pass, $date, $browser, $ip, $action_type)
     {
         try {
             $this->dbconn->beginTransaction();
@@ -126,7 +126,7 @@ class dbObj
             $row = $stmt->fetch();
 
             if (password_verify($log_pass, $row['UserPassword'])) {
-                // if ($row['AccessRights'] == ("Admin")) {
+                if ($row['AccessRights'] == ("Admin")) {
                     $_SESSION["login"] = 'true';
                     $_SESSION['UserID'] = $row['UserID'];
                     // $_SESSION['AdminEmail'] = $row['Email'];
@@ -136,11 +136,20 @@ class dbObj
                     $stmt->execute();
                     $this->dbconn->commit();
 
+                    /* - Changelog Table - */
+                    $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type) VALUES (:date, :browser, :ip, :action_type)");
+                    $stmt->bindValue(':date', $date);
+                    $stmt->bindValue(':browser', $browser);
+                    $stmt->bindValue(':ip', $ip);
+                    $stmt->bindValue(':action_type', $action_type);
+                    $stmt->execute();
+                    $this->dbconn->commit();
+
                     return true;
-                // } else {
-                //     // Not admin!
-                //     return false;
-                // }
+                } else {
+                    // Not admin!
+                    return false;
+                }
             } else {
                 return false;
             }

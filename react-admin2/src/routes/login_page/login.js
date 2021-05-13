@@ -62,18 +62,21 @@ function Login() {
 
     return (
         <div>
-            <i className="material-icons prefix">email</i>
-            <input id="log_email" name="log_email" type="email" className="validate" placeholder="Email" required></input>
-            {/* onChange={(event) => {
+            <form onSubmit={handleLogin()} method="POST">
+                <i className="material-icons prefix">email</i>
+                <input id="log_email" name="log_email" type="email" className="validate" placeholder="Email" required></input>
+                {/* onChange={(event) => {
                 setEmail(event.target.value);
             }}  */}
-            <i className="material-icons prefix">vpn_key</i>
-            <input id="log_pass" name="log_pass" type="password" className="validate"
-                pattern="[a-zA-Z0-9_.!@#$%^&*()]{2,}" placeholder="Password"></input>
-            <a href="#">Forgot password?</a>
-            <input type="hidden" name="action" value="login" id="login_admin"></input>
-            <button type="submit" name="login" onClick={handleLogin()}>Login</button>
-            <a to="/register">Don't have an account? Register</a>
+                <i className="material-icons prefix">vpn_key</i>
+                <input id="log_pass" name="log_pass" type="password" className="validate"
+                    pattern="[a-zA-Z0-9_.!@#$%^&*()]{2,}" placeholder="Password"></input>
+                <a href="#">Forgot password?</a>
+                <input type="hidden" name="action" value="login" id="login_admin"></input>
+                <button type="submit" name="login">Login</button>
+                {/* onClick={handleLogin()} */}
+                <a to="/register">Don't have an account? Register</a>
+            </form>
         </div>
     );
 }
