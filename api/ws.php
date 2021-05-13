@@ -143,8 +143,8 @@ if (isset($_GET["action"])) {
             /* - Admin Login - */
         case "adminLogin":
             if (isset($_GET["action"])) {
-                // $UserID = $_GET['UserID'];
                 // echo $UserID;
+                // $UserID = $_POST['UserID'];
                 $log_email = $_POST['log_email'];
                 $log_pass = $_POST['log_pass'];
                 $date = date('Y-m-d H:i:s');

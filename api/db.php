@@ -77,32 +77,37 @@ class dbObj
             $this->dbconn->beginTransaction();
             // $log_email = ($_POST['log_email']);
             // $log_pass = ($_POST['log_pass']);
-            $stmt = $this->dbconn->prepare("SELECT UserID, FullName, PhoneNumber, DateOfBirth, Email, UserPassword, AccessRights FROM users2 WHERE Email=:log_email");
+            $stmt = $this->dbconn->prepare("SELECT UserID, FullName, PhoneNumber, DateOfBirth, Email, UserPassword, AccessRights FROM users2 WHERE Email = :log_email");
             $stmt->bindValue(':log_email', $log_email);
             $stmt->execute();
             $row = $stmt->fetch();
+
+            $_SESSION['UserID'] = $row['UserID'];
+
+            $UserID = $_SESSION["UserID"];
+
+            /* - Changelog Table - */
+            $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type, UserID) VALUES (:date, :browser, :ip, :action_type, :UserID)");
+            $stmt->bindValue(':date', $date);
+            $stmt->bindValue(':browser', $browser);
+            $stmt->bindValue(':ip', $ip);
+            $stmt->bindValue(':action_type', $action_type);
+            $stmt->bindValue(':UserID', $UserID);
+            $stmt->execute();
+            $this->dbconn->commit();
+
             if (password_verify($log_pass, $row['UserPassword'])) {
                 // echo 'Password is valid!';
                 /* Set the session variables for each user that logs in to also record what the users will interact with */
                 /* Assign the session variables */
                 $_SESSION["login"] = 'true';
-                $_SESSION['UserID'] = $row['UserID'];
+                // $_SESSION['UserID'] = $row['UserID'];
                 $_SESSION['LoginEmail'] = $row['Email'];
                 $_SESSION["access_rights"] = $row["AccessRights"];
                 $_SESSION['time_start_login'] = time();
                 time('H:i:s');
 
                 $UserID = $_SESSION["UserID"];
-
-                /* - Changelog Table - */
-                $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type, UserID) VALUES (:date, :browser, :ip, :action_type, :UserID)");
-                $stmt->bindValue(':date', $date);
-                $stmt->bindValue(':browser', $browser);
-                $stmt->bindValue(':ip', $ip);
-                $stmt->bindValue(':action_type', $action_type);
-                $stmt->bindValue(':UserID', $UserID);
-                $stmt->execute();
-                $this->dbconn->commit();
 
                 return true;
             } else {
