@@ -24,18 +24,6 @@ function Login() {
     // const [count, setCount] = useState(0);
 
     function processLogin() {
-        // var authentication = {
-        //     'log_email': document.getElementById("log_email").value,
-        //     'log_pass': document.getElementById("log_pass").value
-        // }
-        // var log_email = document.getElementById("log_email");
-        // var log_pass = document.getElementById("log_pass");
-        // var admin_details = new FormData();
-        // admin_details.append('action', 'login');
-        // admin_details.append('log_email', log_email.value);
-        // admin_details.append('log_pass', log_pass.value);
-        // admin_details.append('login_admin', login_admin.value);
-
         var log_email = document.getElementById("log_email");
         var log_pass = document.getElementById("log_pass");
         var login_admin = document.getElementById("login_admin");
@@ -47,7 +35,6 @@ function Login() {
         // each form element goes into the login_details object ^
         fetch('http://localhost/eventee2/api/ws.php?action=adminLogin', {
             method: "POST",
-            // body: JSON.stringify(authentication),
             body: admin_details,
             credentials: 'include',
         })
@@ -82,9 +69,6 @@ function Login() {
             <form>
                 <i className="material-icons prefix">email</i>
                 <input id="log_email" name="log_email" type="text" className="validate" placeholder="Email" required></input>
-                {/* onChange={(event) => {
-            setEmail(event.target.value);
-        }}  */}
                 <i className="material-icons prefix">vpn_key</i>
                 <input id="log_pass" name="log_pass" type="password" className="validate"
                     pattern="[a-zA-Z0-9_.!@#$%^&*()]{2,}" placeholder="Password"></input>

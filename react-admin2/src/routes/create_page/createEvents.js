@@ -49,7 +49,6 @@ function CreateEvents() {
         var event_date = document.getElementById("event_date");
         var event_time = document.getElementById("event_time");
         var createEvent = document.getElementById("createEvent");
-
         var fd = new FormData();
         fd.append('action', 'createEvent');
         fd.append('event_name', event_name.value);
