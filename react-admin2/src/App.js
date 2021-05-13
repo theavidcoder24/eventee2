@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 // import React, { useState } from 'react';
 // import ReactDOM from 'react-dom';
 // import { useEffect, useState } from "react";
@@ -6,11 +6,10 @@ import React from 'react'
 // import env from "react-dotenv";
 // import { Auth0Provider } from "@auth0/auth0-react";
 import './App.css';
-// import Login from './routes/login_page/login.js';
-import LoginButton from './routes/login_page/LoginButton';
-import LogoutButton from './routes/login_page/LogoutButton';
-import Profile from './routes/login_page/Profile';
-import PostRegFetch from './routes/login_page/register.js';
+import Login from './routes/login_page/login.js';
+// import LoginButton from './routes/login_page/LoginButton';
+// import LogoutButton from './routes/login_page/LogoutButton';
+// import Profile from './routes/login_page/UserProfile';
 import DisplayEvents from './routes/display_page/displayEvents';
 import CreateEvents from './routes/create_page/createEvents.js';
 // import DashboardComponent from './routes/dashboard/DashboardComponent';
@@ -21,13 +20,15 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import { useAuth0 } from '@auth0/auth0-react';
+
+// import { useAuth0 } from '@auth0/auth0-react';
+// import CountContext from './context/countcontext';
 
 function App() {
-  const { isLoading } = useAuth0();
+  // const { isLoading } = useAuth0();
 
-  if (isLoading) return <div>Loading...</div>
-  
+  // if (isLoading) return <div>Loading...</div>
+
   // const [fullname, setFullName] = useState("");
   // const [email, setEmail] = useState("");
   // const [phone, setPhone] = useState("");
@@ -58,14 +59,13 @@ function App() {
                 <Link to="/create">Create</Link>
               </li>
               <li>
-                <Link to="/logout">Logout</Link>
+                <Link to="/profile">Logout</Link>
               </li>
               <li>
                 <Link to="/register">Register</Link>
               </li>
             </ul>
           </nav>
-
           {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
           <Switch>
@@ -75,14 +75,10 @@ function App() {
             <Route path="/create">
               <Create />
             </Route>
-            <Route path="/register" component={PostRegFetch}>
-              {/* <Register /> */}
-            </Route>
-            <Route path="/logout">
-              <Logout />
+            <Route path="/profile">
             </Route>
             <Route exact path="/">
-              <Home />
+              <Login />
             </Route>
           </Switch>
         </div>
@@ -94,20 +90,16 @@ function App() {
 
 function Home() {
   return (
-    <>
-      <LoginButton />
-      <LogoutButton />
-      <Profile />
-    </>
+    <Login />
+    // <>
+    //   <LoginButton />
+    //   <LogoutButton />
+    // </>
   )
 }
 
-// function Register() {
-//   return (
-//     <div>
-//       <PostRegFetch />
-//     </div>
-//   )
+// function Dashboard() {
+
 // }
 
 function Create() {
@@ -126,11 +118,11 @@ function Display() {
   )
 }
 
-function Logout() {
+function UserProfile() {
   return (
     <div>
-      <h2>Users</h2>
-      <a>Logout</a>
+      <h2>View Profile</h2>
+      {/* <Profile /> */}
     </div>
   )
 }
