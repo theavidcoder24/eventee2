@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 /* - Create Events - */
 function CreateEvents() {
+    useEffect(() => {
+        addEvent();
+    }, []);
     function addEvent() {
         // var errStr = "";
         // if (event_name.checkValidity() === false) {
