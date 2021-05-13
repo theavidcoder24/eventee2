@@ -1,10 +1,8 @@
-import React, { useEffect } from 'react';
+// import React, { useEffect } from 'react';
+import React from 'react';
 
 /* - Create Events - */
 function CreateEvents() {
-    useEffect(() => {
-        addEvent();
-    }, []);
     function addEvent() {
         // var errStr = "";
         // if (event_name.checkValidity() === false) {
@@ -42,27 +40,37 @@ function CreateEvents() {
         //   console.log("Error: Event Name");
         //   return;
         // }
+        var event_name = document.getElementById("event_name");
+        var event_desc = document.getElementById("event_desc");
+        var event_cat = document.getElementById("event_cat");
+        var event_address = document.getElementById("event_address");
+        var event_loc = document.getElementById("event_loc");
+        var event_date = document.getElementById("event_date");
+        var event_date = document.getElementById("event_date");
+        var event_time = document.getElementById("event_time");
+        var createEvent = document.getElementById("createEvent");
+
         var fd = new FormData();
         fd.append('action', 'createEvent');
-        // fd.append('event_name', event_name.value);
-        // fd.append('event_desc', event_desc.value);
-        // fd.append('event_cat', event_cat.value);
-        // fd.append('event_address', event_address.value);
-        // fd.append('event_loc', event_loc.value);
-        // fd.append('event_date', event_date.value);
-        // fd.append('event_time', event_time.value);
-        // fd.append('createEvent', createEvent.value);
+        fd.append('event_name', event_name.value);
+        fd.append('event_desc', event_desc.value);
+        fd.append('event_cat', event_cat.value);
+        fd.append('event_address', event_address.value);
+        fd.append('event_loc', event_loc.value);
+        fd.append('event_date', event_date.value);
+        fd.append('event_time', event_time.value);
+        fd.append('createEvent', createEvent.value);
         // each form element goes into the fd object ^
         fetch('http://localhost/eventee2/api/ws.php?action=createEvents', {
             method: 'POST',
             body: fd,
-            credentials: 'include'
+            credentials: 'include',
         })
             // Force error into console
             .then(function (response) {
-                response.text().then(function (text) {
-                    console.log(text);
-                });
+                // response.text().then(function (text) {
+                //     console.log(text);
+                // });
                 // HTTP Response Codes
                 if (response.status === 202) {
                     console.log('Creation Successful');
@@ -90,7 +98,7 @@ function CreateEvents() {
     return (
         <div>
             <h4>Create Event</h4>
-            <form action="api/ws.php" method="POST">
+            <form>
                 <div className="input-field col s12">
                     <i className="material-icons prefix">title</i>
                     <input id="event_name" type="text" className="validate" placeholder="Event Name"></input>
@@ -147,8 +155,8 @@ function CreateEvents() {
                     <span className="helper-text" data-error="Please enter a valid time" data-success="Correct" max="20"></span>
                 </div>
                 <input type="hidden" name="action" value="createEvent" id="createEvent"></input>
-                <a className="btn indigo waves-effect waves-light modal-trigger" type="submit" name="createEvent"
-                    onClick={addEvent()} href="#event_success">Create
+                <a id="createEvent" className="btn indigo waves-effect waves-light modal-trigger" type="submit" name="createEvent"
+                    onClick={addEvent}>Create
                 Event<i className="material-icons right">send</i></a>
                 <div id="event_success" className="modal bottom-sheet">
                     <div className="modal-content">

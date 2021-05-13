@@ -50,7 +50,10 @@ function App() {
           <nav>
             <ul>
               <li>
-                <Link to="/">Home</Link>
+                <Link to="/">Login</Link>
+              </li>
+              <li>
+                <Link to="/dashboard">Dashboard</Link>
               </li>
               <li>
                 <Link to="/display">Display</Link>
@@ -61,19 +64,18 @@ function App() {
               <li>
                 <Link to="/profile">Profile</Link>
               </li>
-              <li>
-                <Link to="/register">Register</Link>
-              </li>
             </ul>
           </nav>
           {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
           <Switch>
+            <Route path="/dashboard">
+            </Route>
             <Route path="/display">
               <Display />
             </Route>
             <Route path="/create">
-              <Create />
+              <CreateEvents />
             </Route>
             <Route path="/profile">
             </Route>
@@ -102,13 +104,13 @@ function Home() {
 
 // }
 
-function Create() {
-  return (
-    <div>
-      <CreateEvents />
-    </div>
-  )
-}
+// function Create() {
+//   return (
+//     <div>
+//       <CreateEvents />
+//     </div>
+//   )
+// }
 
 function Display() {
   return (

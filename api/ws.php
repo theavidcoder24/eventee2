@@ -1,13 +1,15 @@
 <?php
-header('Access-Control-Allow-Origin: *');
+// header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Origin: http://localhost:3000');
 // header('Access-Control-Allow-Origin: http://malloriecini.com/');
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 
 // allow react admin localhost :0000 ^ 
 header('Access-Control-Allow-Credentials: true');
 
 // All echo statements will be json_encoded
-header("Access-Control-Allow-Headers", "content-type");
+// header("Access-Control-Allow-Headers", "content-type");
+header("Access-Control-Allow-Headers: origin, content-type, accept");
 header('Content-Type: application/json');
 
 // Set the timezone to Australia 
@@ -186,15 +188,15 @@ if (isset($_GET["action"])) {
                 http_response_code(401);
             }
             break;
-        // case "userid":
-        //     $result = $_SESSION['se']->is_logged_in();
-        //     if ($result == true) {
-        //         $_SESSION['user_session']->userid();
-        //         http_response_code(202);
-        //     } else {
-        //         http_response_code(401);
-        //     }
-        //     break;
+            // case "userid":
+            //     $result = $_SESSION['se']->is_logged_in();
+            //     if ($result == true) {
+            //         $_SESSION['user_session']->userid();
+            //         http_response_code(202);
+            //     } else {
+            //         http_response_code(401);
+            //     }
+            //     break;
             /* - Log user out - */
         case "logout":
             session_destroy();
