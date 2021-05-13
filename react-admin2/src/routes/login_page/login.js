@@ -9,18 +9,17 @@ import React from 'react';
 //     }
 // });
 
-function Login(props) {
+function Login() {
     // const [email, setEmail] = useState("");
     // const [password, setPassword] = useState("");
     // const displayInfo = () => {
     //     console.log(email + password);
     // }
-    
+
     const handleLogin = () => {
         // const [error, setError] = useState("");
         // Declare a new state variable, which we'll call "count"  
         // const [count, setCount] = useState(0);
-        // document.getElementById("loginmessage").innerHTML = "Loading...";
         function processLogin() {
             var log_email = document.getElementById("log_email");
             var log_pass = document.getElementById("log_pass");
@@ -42,7 +41,6 @@ function Login(props) {
                     });
                     // HTTP Response Codes
                     if (response.status === 202) {
-                        // localStorage.setItem('login', "true"); document.getElementById("loginmessage").innerHTML = "Success Your Logged In";
                         // props.setCount("Logged In");
                         console.log('Login Successful');
                     }
@@ -64,20 +62,18 @@ function Login(props) {
 
     return (
         <div>
-            <form method="POST">
-                <i className="material-icons prefix">email</i>
-                <input id="log_email" name="log_email" type="email" className="validate" placeholder="Email" required></input>
-                {/* onChange={(event) => {
+            <i className="material-icons prefix">email</i>
+            <input id="log_email" name="log_email" type="email" className="validate" placeholder="Email" required></input>
+            {/* onChange={(event) => {
                 setEmail(event.target.value);
             }}  */}
-                <i className="material-icons prefix">vpn_key</i>
-                <input id="log_pass" name="log_pass" type="password" className="validate"
-                    pattern="[a-zA-Z0-9_.!@#$%^&*()]{2,}" placeholder="Password"></input>
-                <a href="#">Forgot password?</a>
-                <input type="hidden" name="action" value="login" id="login_admin"></input>
-                <button type="submit" name="login" onClick={handleLogin()}>Login</button>
-                <a to="/register">Don't have an account? Register</a>
-            </form>
+            <i className="material-icons prefix">vpn_key</i>
+            <input id="log_pass" name="log_pass" type="password" className="validate"
+                pattern="[a-zA-Z0-9_.!@#$%^&*()]{2,}" placeholder="Password"></input>
+            <a href="#">Forgot password?</a>
+            <input type="hidden" name="action" value="login" id="login_admin"></input>
+            <button type="submit" name="login" onClick={handleLogin()}>Login</button>
+            <a to="/register">Don't have an account? Register</a>
         </div>
     );
 }

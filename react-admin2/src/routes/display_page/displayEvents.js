@@ -57,7 +57,8 @@ function DisplayEvents() {
             <td>{event.eventLocation}</td>,
             <td>{event.eventDate}</td>,
             <td>{event.eventTime}</td>
-            {/* <button href="#update_events" class="modal-trigger" onclick={fillUpdate(' + row.eventID + ')} value="' + row.eventID + '"><i class="material-icons">edit</i></button> */}
+            <button href="#update_events" class="modal-trigger"  value="' + row.eventID + '"><i class="material-icons">edit</i></button>
+            {/* onClick={fillUpdate(' + row.eventID + ')} */}
             <div id="update_events" class="modal">
               <h5 class="modal-close right" onclick="closeModal()">&#10005;</h5>
               <div class="modal-content">
@@ -100,7 +101,8 @@ function DisplayEvents() {
               </div>
 
             </div>
-            {/* <button onClick={DeleteRemoveEvent(' + row.eventID + ')} value="' + row.eventID + '"><i class="material-icons">delete</i></button> */}
+            <button value="' + row.eventID + '"><i class="material-icons">delete</i></button>
+            {/* onClick={DeleteRemoveEvent(' + row.eventID + ')}  */}
           </tr>
         ))}
       </div>

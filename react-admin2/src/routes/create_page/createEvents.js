@@ -87,7 +87,7 @@ function CreateEvents() {
     return (
         <div>
             <h4>Create Event</h4>
-            <form action="api/ws.php" method="POST" onclick="return preventDefault()">
+            <form action="api/ws.php" method="POST">
                 <div className="input-field col s12">
                     <i className="material-icons prefix">title</i>
                     <input id="event_name" type="text" className="validate" placeholder="Event Name"></input>
@@ -102,7 +102,7 @@ function CreateEvents() {
                 <div className="input-field col s12">
                     <i className="material-icons prefix">category</i>
                     <select className="icons" id="event_cat">
-                        <option value="" disabled selected>Choose your Category</option>
+                        <option value="" selected disabled>Choose your Category</option>
                         <option value="Auto" data-icon="src/images/icons/round_drive_eta_black_48dp.png">
                             Auto</option>
                         <option value="Business" data-icon="src/images/icons/baseline_business_center_black_48dp.png">
@@ -145,13 +145,13 @@ function CreateEvents() {
                 </div>
                 <input type="hidden" name="action" value="createEvent" id="createEvent"></input>
                 <a className="btn indigo waves-effect waves-light modal-trigger" type="submit" name="createEvent"
-                    onclick="postCreateEvents()" href="#event_success">Create
+                    onClick={addEvent()} href="#event_success">Create
                 Event<i className="material-icons right">send</i></a>
                 <div id="event_success" className="modal bottom-sheet">
                     <div className="modal-content">
                         <h4>You've successfully created an Event!</h4>
-                        <a href="#my_events" onclick="displayMyEvents(); hideHome(); hideCreateEvent()"
-                            className="modal-close"><i className="material-icons">today</i>My Events</a>
+                        <a href="#my_events" className="modal-close"><i className="material-icons">today</i>My Events</a>
+                        {/* Re route to display events ^ */}
                     </div>
                     <div className="modal-footer">
                         <a href="#!" className="modal-close waves-effect waves-green btn-flat">Close</a>
