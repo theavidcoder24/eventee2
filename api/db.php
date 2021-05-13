@@ -122,8 +122,18 @@ class dbObj
             $this->dbconn->beginTransaction();
             $stmt = $this->dbconn->prepare("SELECT * FROM users2 WHERE AccessRights = 'Admin'");
             $stmt->bindValue(':log_email', $log_email);
+            $stmt->bindValue(':log_pass', $log_pass);
             $stmt->execute();
             $row = $stmt->fetch();
+
+            /* - Changelog Table - */
+            $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type) VALUES (:date, :browser, :ip, :action_type)");
+            $stmt->bindValue(':date', $date);
+            $stmt->bindValue(':browser', $browser);
+            $stmt->bindValue(':ip', $ip);
+            $stmt->bindValue(':action_type', $action_type);
+            $stmt->execute();
+            $this->dbconn->commit();
 
             if (password_verify($log_pass, $row['UserPassword'])) {
                 if ($row['AccessRights'] == ("Admin")) {
@@ -132,30 +142,20 @@ class dbObj
                     // $_SESSION['AdminEmail'] = $row['Email'];
                     $_SESSION["access_rights"] = $row["AccessRights"];
                     $_SESSION['time_start_login'] = time();
-                    time('H:i:s');
-                    $stmt->execute();
-                    $this->dbconn->commit();
-
-                    /* - Changelog Table - */
-                    $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type) VALUES (:date, :browser, :ip, :action_type)");
-                    $stmt->bindValue(':date', $date);
-                    $stmt->bindValue(':browser', $browser);
-                    $stmt->bindValue(':ip', $ip);
-                    $stmt->bindValue(':action_type', $action_type);
+                    // time('H:i:s');
                     $stmt->execute();
                     $this->dbconn->commit();
 
                     return true;
                 } else {
                     // Not admin!
-                    return false;
+
                 }
             } else {
                 return false;
             }
         } catch (PDOException $ex) {
-            $this->dbconn->rollback();
-            throw $ex;
+            return false;
         }
     }
 
