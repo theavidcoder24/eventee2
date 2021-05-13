@@ -59,7 +59,7 @@ function App() {
                 <Link to="/create">Create</Link>
               </li>
               <li>
-                <Link to="/profile">Logout</Link>
+                <Link to="/profile">Profile</Link>
               </li>
               <li>
                 <Link to="/register">Register</Link>
