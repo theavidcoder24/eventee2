@@ -51,8 +51,10 @@ class dbObj
             $stmt->bindValue(':reg_email', $reg_email);
             $stmt->bindValue(':reg_pass', $reg_pass);
             $stmt->bindValue(':access_rights', $access_rights);
-            $row = $stmt->fetch();
+            // $row = $stmt->fetch();
             $stmt->execute();
+
+            // $lastuserID = $this->dbconn->lastInsertID();
 
             /* - Changelog Table - */
             $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type) VALUES (:date, :browser, :ip, :action_type)");
@@ -101,7 +103,6 @@ class dbObj
                 /* Set the session variables for each user that logs in to also record what the users will interact with */
                 /* Assign the session variables */
                 $_SESSION["login"] = 'true';
-                // $_SESSION['UserID'] = $row['UserID'];
                 $_SESSION['LoginEmail'] = $row['Email'];
                 $_SESSION["access_rights"] = $row["AccessRights"];
                 $_SESSION['time_start_login'] = time();

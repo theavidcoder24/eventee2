@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
-// import React from 'react'
+import React from 'react'
+// import React, { useState } from 'react';
+// import ReactDOM from 'react-dom';
 // import { useEffect, useState } from "react";
 // require('dotenv').config();
 // import env from "react-dotenv";
+// import { Auth0Provider } from "@auth0/auth0-react";
 import './App.css';
-import Login from './routes/login_page/login.js';
+// import Login from './routes/login_page/login.js';
+import LoginButton from './routes/login_page/LoginButton';
+import LogoutButton from './routes/login_page/LogoutButton';
+import Profile from './routes/login_page/Profile';
 import PostRegFetch from './routes/login_page/register.js';
 import DisplayEvents from './routes/display_page/displayEvents';
 import CreateEvents from './routes/create_page/createEvents.js';
@@ -16,10 +21,13 @@ import {
   Route,
   Link
 } from "react-router-dom";
-
+import { useAuth0 } from '@auth0/auth0-react';
 
 function App() {
+  const { isLoading } = useAuth0();
 
+  if (isLoading) return <div>Loading...</div>
+  
   // const [fullname, setFullName] = useState("");
   // const [email, setEmail] = useState("");
   // const [phone, setPhone] = useState("");
@@ -86,9 +94,11 @@ function App() {
 
 function Home() {
   return (
-    <div>
-      <Login />
-    </div>
+    <>
+      <LoginButton />
+      <LogoutButton />
+      <Profile />
+    </>
   )
 }
 

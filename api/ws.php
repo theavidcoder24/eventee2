@@ -143,8 +143,8 @@ if (isset($_GET["action"])) {
             /* - Admin Login - */
         case "adminLogin":
             if (isset($_GET["action"])) {
+                // $UserID = $_GET['UserID'];
                 // echo $UserID;
-                // $UserID = $_POST['UserID'];
                 $log_email = $_POST['log_email'];
                 $log_pass = $_POST['log_pass'];
                 $date = date('Y-m-d H:i:s');
@@ -186,15 +186,15 @@ if (isset($_GET["action"])) {
                 http_response_code(401);
             }
             break;
-        case "userid":
-            $result = $_SESSION['se']->is_logged_in();
-            if ($result == true) {
-                $_SESSION['user_session']->userid();
-                http_response_code(202);
-            } else {
-                http_response_code(401);
-            }
-            break;
+        // case "userid":
+        //     $result = $_SESSION['se']->is_logged_in();
+        //     if ($result == true) {
+        //         $_SESSION['user_session']->userid();
+        //         http_response_code(202);
+        //     } else {
+        //         http_response_code(401);
+        //     }
+        //     break;
             /* - Log user out - */
         case "logout":
             session_destroy();
