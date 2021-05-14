@@ -8,7 +8,6 @@ class sessObj
     /* This session function checks if the user is logged in by refering to the session variable login whether it's set to true or false based on the sesssion array */
     function is_logged_in()
     {
-        db_connection();
         if ("login" == true) {
             if (!isset($_SESSION['login']) == true) {
                 // echo "Welcome " . $_SESSION['LoginEmail'];

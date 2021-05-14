@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 /* - Register - */
 function PostRegFetch() {
@@ -29,64 +30,59 @@ function PostRegFetch() {
     //     console.log("Error: Password");
     //     return;
     // }
-    // var fd = new FormData();
     // var reg_name = document.getElementById("reg_name");
     // var reg_phone = document.getElementById("reg_phone");
     // var reg_email = document.getElementById("reg_email");
     // var reg_dob = document.getElementById("reg_dob");
     // var reg_pass = document.getElementById("reg_pass");
     // var access_rights = document.getElementById("access_rights");
-    // fd.append('action', 'register');
-    // fd.append('reg_name', reg_name.value);
-    // fd.append('reg_phone', reg_phone.value);
-    // fd.append('reg_email', reg_email.value);
-    // fd.append('reg_dob', reg_dob.value);
-    // fd.append('reg_pass', reg_pass.value);
-    // fd.append('access_rights', access_rights.value);
-    // fd.append('register_user', register_user.value);
-    // // each form element goes into the fd object ^
-    // fetch('api/ws.php?action=register', {
-    //     method: 'POST',
-    //     body: fd,
-    //     credentials: 'include',
-    // })
-    //     .then(function (response) {
-    //         // Force error into console
-    //         response.text().then(function (text) {
-    //             console.log(text);
-    //         });
-    //         // HTTP Response Codes
-    //         if (response.status === 400) {
-    //             console.log('Bad Request');
-    //             errormessage("Bad Request");
-    //             return;
-    //         }
-    //         if (response.status === 401) {
-    //             console.log('Not permitted');
-    //             errormessage("Not Permitted");
-    //             return;
-    //         }
-    //         if (response.status === 501) {
-    //             console.log('Not implemented');
-    //             errormessage("Server Error Try Again");
-    //             return;
-    //         }
-    //         if (response.status === 202) {
-    //             // loadPage();
-    //             console.log('Registration Successful');
-    //             successmessage('Yay Successfully Registered!');
-    //             return;
-    //         }
-    //     })
-    //     .catch(function (err) {
-    //         console.log(err);
-    //     });
+    // var register_user = document.getElementById("register_user");
+    // var regdetails = new FormData();
+    // regdetails.append('action', 'register');
+    // regdetails.append('reg_name', reg_name.value);
+    // regdetails.append('reg_phone', reg_phone.value);
+    // regdetails.append('reg_email', reg_email.value);
+    // regdetails.append('reg_dob', reg_dob.value);
+    // regdetails.append('reg_pass', reg_pass.value);
+    // regdetails.append('access_rights', access_rights.value);
+    // regdetails.append('register_user', register_user.value);
+    // each form element goes into the fd object ^
+    fetch('api/ws.php?action=register', {
+        method: 'POST',
+        // body: regdetails,
+        credentials: 'include',
+    })
+        .then(function (response) {
+            // Force error into console
+            response.text().then(function (text) {
+                console.log(text);
+            });
+            // HTTP Response Codes
+            if (response.status === 400) {
+                console.log('Bad Request');
+                return;
+            }
+            if (response.status === 401) {
+                console.log('Not permitted');
+                return;
+            }
+            if (response.status === 501) {
+                console.log('Not implemented');
+                return;
+            }
+            if (response.status === 202) {
+                console.log('Registration Successful');
+                return;
+            }
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
 
     return (
         <div>
-            <h2>Profile</h2>
-            <h5 className="center">User Details</h5>
-            <form action="api/ws.php" method="POST" onclick="return preventDefault()" novalidate>
+            <h2 className="center">User Details</h2>
+            <form action="api/ws.php" method="POST" novalidate>
                 <div className="row">
                     <div className="input-field col s12">
                         <i className="material-icons prefix">badge</i>
@@ -152,13 +148,13 @@ function PostRegFetch() {
                         </div>
                     </div>
                     <div className="center">
-                        <span className="center">Already a member?<a >
-                            Login</a></span>
+                        <span className="center">Already a member?<Link to="/">
+                            Login</Link></span>
                     </div>
                 </div>
                 <input type="hidden" name="action" value="register" id="register_user"></input>
-                <button className="btn indigo waves-effect waves-light" type="submit" name="register"
-                >Join</button>
+                <a className="btn indigo waves-effect waves-light" onClick={PostRegFetch} type="submit" name="register"
+                >Join</a>
             </form>
         </div>
     )

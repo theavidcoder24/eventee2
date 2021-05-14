@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import isLogged from './isLogged';
+// import { Link } from 'react-router-dom';
 // import { useAuth0 } from "@auth0/auth0-react";
 // import { createUseStyles } from 'react-jss';
 // import { Link } from React;
@@ -10,18 +11,7 @@ import { Link } from 'react-router-dom';
 //     }
 // });
 
-function Login() {
-
-    // const [email, setEmail] = useState("");
-    // const [password, setPassword] = useState("");
-    // const displayInfo = () => {
-    //     console.log(email + password);
-    // }
-
-    // const handleLogin = () => {
-    // const [error, setError] = useState("");
-    // Declare a new state variable, which we'll call "count"  
-    // const [count, setCount] = useState(0);
+function Login(props) {
 
     function processLogin() {
         var log_email = document.getElementById("log_email");
@@ -45,7 +35,7 @@ function Login() {
                 // });
                 // HTTP Response Codes
                 if (response.status === 202) {
-                    // props.setCount("Logged In");
+                    props.setCount("Logged In");
                     console.log('Login Successful');
                 }
                 if (response.status === 401) {
@@ -65,6 +55,7 @@ function Login() {
 
     return (
         <div>
+            <button onClick={isLogged}></button>
             <form>
                 <i className="material-icons prefix">email</i>
                 <input id="log_email" name="log_email" type="text" className="validate" placeholder="Email" required></input>
@@ -76,7 +67,7 @@ function Login() {
                 <input type="hidden" name="action" value="login_admin" id="login_admin"></input>
                 <a id="login_admin" className="btn indigo waves-effect waves-light" type="submit" name="login_admin" onClick={processLogin}>Login</a>
                 <br></br>
-                <Link to="/register">Don't have an account? Register</Link>
+                <a>Don't have an account? Register</a>
             </form>
         </div>
     );

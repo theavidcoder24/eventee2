@@ -4,6 +4,8 @@ import React, { useEffect, useState } from 'react';
 import DeleteRemoveEvent from './deleteEvent.js';
 import fillUpdate from './updateEvent.js';
 import updateEvent from './updateEvent.js';
+import isLogged from '../login_page/isLogged';
+
 
 /* - Display Events - */
 function DisplayEvents() {
@@ -32,6 +34,7 @@ function DisplayEvents() {
 
   return (
     <div>
+      <button onClick={isLogged}></button>
       <h2>Events List</h2>
       {/* <button onClick={pullEvents()}>Display Events</button> */}
       <div className="content">
@@ -57,7 +60,7 @@ function DisplayEvents() {
             <td>{event.eventLocation}</td>,
             <td>{event.eventDate}</td>,
             <td>{event.eventTime}</td>
-            <button href="#update_events" class="modal-trigger"  value="' + row.eventID + '"><i class="material-icons">edit</i></button>
+            <button href="#update_events" class="modal-trigger" value="' + row.eventID + '"><i class="material-icons">edit</i></button>
             {/* onClick={fillUpdate(' + row.eventID + ')} */}
             <div id="update_events" class="modal">
               <h5 class="modal-close right" onclick="closeModal()">&#10005;</h5>

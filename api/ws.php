@@ -170,7 +170,7 @@ if (isset($_GET["action"])) {
                     die;
                 }
                 if (isset($log_email)) {
-                    $db->adminLogin($log_email, $log_pass, $date, $browser, $ip, $action_type);
+                    $db->adminLogin($log_email, $log_pass, $date, $browser, $ip, $action_type, $UserID);
                     http_response_code(202);
                     // echo "Welcome " . $_SESSION['UserID'];
                 } else {
@@ -188,15 +188,6 @@ if (isset($_GET["action"])) {
                 http_response_code(401);
             }
             break;
-            // case "userid":
-            //     $result = $_SESSION['se']->is_logged_in();
-            //     if ($result == true) {
-            //         $_SESSION['user_session']->userid();
-            //         http_response_code(202);
-            //     } else {
-            //         http_response_code(401);
-            //     }
-            //     break;
             /* - Log user out - */
         case "logout":
             session_destroy();

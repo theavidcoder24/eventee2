@@ -286,6 +286,7 @@ function postRegFetch() {
   var reg_dob = document.getElementById("reg_dob");
   var reg_pass = document.getElementById("reg_pass");
   var access_rights = document.getElementById("access_rights");
+  var register_user = document.getElementById("register_user");
   fd.append('action', 'register');
   fd.append('reg_name', reg_name.value);
   fd.append('reg_phone', reg_phone.value);
@@ -308,23 +309,23 @@ function postRegFetch() {
       // HTTP Response Codes
       if (response.status === 400) {
         console.log('Bad Request');
-        errormessage("Bad Request");
+        // errormessage("Bad Request");
         return;
       }
       if (response.status === 401) {
         console.log('Not permitted');
-        errormessage("Not Permitted");
+        // errormessage("Not Permitted");
         return;
       }
       if (response.status === 501) {
         console.log('Not implemented');
-        errormessage("Server Error Try Again");
+        // errormessage("Server Error Try Again");
         return;
       }
       if (response.status === 202) {
         // loadPage();
         console.log('Registration Successful');
-        successmessage('Yay Successfully Registered!');
+        // successmessage('Yay Successfully Registered!');
         return;
       }
     })

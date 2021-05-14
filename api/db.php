@@ -51,7 +51,7 @@ class dbObj
             $stmt->bindValue(':reg_email', $reg_email);
             $stmt->bindValue(':reg_pass', $reg_pass);
             $stmt->bindValue(':access_rights', $access_rights);
-            // $row = $stmt->fetch();
+            $row = $stmt->fetch();
             $stmt->execute();
 
             // $lastuserID = $this->dbconn->lastInsertID();
@@ -122,7 +122,7 @@ class dbObj
     }
 
     // Login Admin function
-    function adminLogin($log_email, $log_pass, $date, $browser, $ip, $action_type)
+    function adminLogin($log_email, $log_pass, $date, $browser, $ip, $action_type, $UserID)
     {
         try {
             $this->dbconn->beginTransaction();
@@ -132,13 +132,19 @@ class dbObj
             $stmt->execute();
             $row = $stmt->fetch();
 
+            $_SESSION['UserID'] = $row['UserID'];
+
+            $UserID = $_SESSION["UserID"];
+
             /* - Changelog Table - */
-            $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type) VALUES (:date, :browser, :ip, :action_type)");
+            $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type, UserID) VALUES (:date, :browser, :ip, :action_type, :UserID)");
             $stmt->bindValue(':date', $date);
             $stmt->bindValue(':browser', $browser);
             $stmt->bindValue(':ip', $ip);
             $stmt->bindValue(':action_type', $action_type);
+            $stmt->bindValue(':UserID', $UserID);
             $stmt->execute();
+
             $this->dbconn->commit();
 
             if (password_verify($log_pass, $row['UserPassword'])) {
@@ -155,7 +161,7 @@ class dbObj
                     return true;
                 } else {
                     // Not admin!
-
+                    return false;
                 }
             } else {
                 return false;
