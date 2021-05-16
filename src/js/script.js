@@ -165,6 +165,7 @@ function displayMyEvents() {
   hideLogin();
   hideRegister();
   hideEditProf();
+  hideCreateEvent();
   hideCommunity();
   hideSettings();
   hideFAQ();
