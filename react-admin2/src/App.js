@@ -17,6 +17,7 @@ import PostRegFetch from './routes/login_page/register';
 import DisplayEvents from './routes/display_page/displayEvents';
 import CreateEvents from './routes/create_page/createEvents.js';
 // import DashboardComponent from './routes/dashboard/DashboardComponent';
+// import CountContext from './context/countcontext';
 
 import {
   BrowserRouter as Router,
@@ -25,7 +26,6 @@ import {
   Link
 } from "react-router-dom";
 
-// import CountContext from './context/countcontext';
 
 function ProcessAdmin(props) {
 
@@ -144,14 +144,6 @@ function App() {
       </div>
     )
   }
-
-  // function Create() {
-  //   return (
-  //     <div>
-  //       <CreateEvents />
-  //     </div>
-  //   )
-  // }
 
   function Display() {
     return (

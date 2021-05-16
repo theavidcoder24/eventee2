@@ -7,10 +7,10 @@
 5. create 5 menu items that each go to their own blank component that has some unique html that render. ✅
 
 SECURE
-add event
-event list
+add event ✅
+event list ✅
 logout
 
 PUBLIC
-login
+login ✅
 register
