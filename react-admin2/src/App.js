@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 // import LoginButton from './routes/login_page/LoginButton';
 // import LogoutButton from './routes/login_page/LogoutButton';
 // import Profile from './routes/login_page/UserProfile';
+// plugin that converts state into localstorage 
 /* --------- Normal Admin --------- */
 import './App.css';
 import Login from './routes/login_page/login.js';
