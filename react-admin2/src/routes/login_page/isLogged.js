@@ -13,12 +13,10 @@ export default function isLogged() {
             }
             if (response.status === 429) {
                 console.log('Rate limit exceeded');
-                // localStorage.setItem('login', "false");
-                // if (localStorage.getItem('login') == 'false') {
             }
-            // else {
-            //     console.log('Not logged in failed');
-            // }
+            else {
+                console.log('Not logged in failed');
+            }
         })
 }
 
