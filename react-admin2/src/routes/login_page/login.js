@@ -1,9 +1,9 @@
 import React from 'react';
-// import IsLogged from './isLogged';
 // import { Link } from 'react-router-dom';
 // import { useAuth0 } from "@auth0/auth0-react";
 // import { createUseStyles } from 'react-jss';
 // import { Link } from React;
+// import IsLogged from './isLogged';
 
 // const useStyles = createUseStyles({
 //     form: {
