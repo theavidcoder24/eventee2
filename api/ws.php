@@ -69,6 +69,7 @@ if (isset($_GET["action"])) {
                 $ip = $_SERVER['REMOTE_ADDR'];
                 $action_type = $_POST['register_user'];
                 // $UserID = $this->UserID;
+                // admin123
                 /* - Server Validation - */
                 // Check if input field is empty
                 // if ($reg_name == "") {

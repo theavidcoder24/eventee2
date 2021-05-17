@@ -11,8 +11,8 @@ import { useEffect, useState } from "react";
 /* --------- Normal Admin --------- */
 import './App.css';
 import Login from './routes/login_page/login.js';
-import isLogged from './routes/login_page/isLogged';
-// import logout from './routes/login_page/logout';
+import IsLogged from './routes/login_page/isLogged';
+import UserLogout from './routes/login_page/logout';
 import PostRegFetch from './routes/login_page/register';
 import DisplayEvents from './routes/display_page/displayEvents';
 import CreateEvents from './routes/create_page/createEvents.js';
@@ -68,6 +68,9 @@ function ProcessAdmin(props) {
                 <li>
                   <Link to="/profile">Profile</Link>
                 </li>
+                <li>
+                  <Link onClick={UserLogout}>Logout</Link>
+                </li>
               </ul>
             </nav>
             {/* A <Switch> looks through its children <Route>s and
@@ -87,9 +90,6 @@ function ProcessAdmin(props) {
               <Route exact path="/">
                 <DisplayEvents />
               </Route>
-              {/* <Route exact path="/logout">
-                <Logout setCount={props.setCount} />
-              </Route> */}
             </Switch>
           </div>
         </Router>
@@ -120,7 +120,7 @@ function App() {
   }
 
   useEffect(() => {
-    isLogged(loginSuccess, loginFailed);
+    IsLogged(loginSuccess, loginFailed);
 
   }, []);
 

@@ -1,6 +1,6 @@
 
 /* - User Logout - */
-export default function userLogout(props) {
+export default function UserLogout(props) {
   fetch('api/ws.php?action=logout', {
     method: 'GET'
   })
@@ -21,10 +21,10 @@ export default function userLogout(props) {
       if (response.status === 429) {
         console.log('Rate limit exceeded');
       }
-      // else {
-      //   console.log("Na Logout")
-      //   //   errormessage("Error - Internal Server error not logged out");
-      // }
+      else {
+        console.log("Na Logout")
+        //   errormessage("Error - Internal Server error not logged out");
+      }
     })
     .catch(function (err) {
       // console.log("Connection unavailable");

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 14, 2021 at 12:08 AM
+-- Generation Time: May 17, 2021 at 02:57 AM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.3.12
 
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `changelog` (
   `UserID` int(10) UNSIGNED DEFAULT NULL,
   PRIMARY KEY (`changelogID`),
   KEY `UserID` (`UserID`)
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=97 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `changelog`
@@ -102,15 +102,63 @@ INSERT INTO `changelog` (`changelogID`, `date`, `browser`, `ip`, `action_type`, 
 (37, '2021-05-13 04:46:59.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'createEvent', NULL),
 (38, '2021-05-13 04:48:41.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'createEvent', NULL),
 (39, '2021-05-13 04:49:31.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login', 1),
-(40, '2021-05-13 04:52:33.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'createEvent', NULL),
-(41, '2021-05-13 04:56:55.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'createEvent', NULL),
-(42, '2021-05-13 04:57:46.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'createEvent', NULL),
+(40, '2021-05-13 04:52:33.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'createEvent', 2),
+(41, '2021-05-13 04:56:55.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'createEvent', 2),
+(42, '2021-05-13 04:57:46.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'createEvent', 1),
 (43, '2021-05-13 05:02:10.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login', 2),
-(44, '2021-05-13 12:02:25.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'createEvent', NULL),
-(45, '2021-05-13 12:02:59.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'createEvent', NULL),
-(46, '2021-05-13 12:03:28.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'createEvent', NULL),
-(47, '2021-05-13 12:14:53.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login_admin', NULL),
-(48, '2021-05-13 12:16:15.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login_admin', NULL);
+(44, '2021-05-13 12:02:25.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'createEvent', 2),
+(45, '2021-05-13 12:02:59.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'createEvent', 2),
+(46, '2021-05-13 12:03:28.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'createEvent', 2),
+(47, '2021-05-13 12:14:53.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login_admin', 2),
+(48, '2021-05-13 12:16:15.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login_admin', 2),
+(49, '2021-05-14 00:30:55.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login_admin', 2),
+(50, '2021-05-14 01:42:59.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login_admin', 2),
+(51, '2021-05-14 01:44:05.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login_admin', 2),
+(52, '2021-05-14 01:44:31.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login_admin', 2),
+(53, '2021-05-14 01:49:50.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login_admin', 2),
+(54, '2021-05-14 01:53:30.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login_admin', 2),
+(55, '2021-05-14 01:57:35.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login_admin', 2),
+(56, '2021-05-14 01:57:53.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login_admin', 2),
+(57, '2021-05-14 02:01:51.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login_admin', 2),
+(58, '2021-05-14 02:02:12.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login_admin', 2),
+(59, '2021-05-14 02:13:48.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login_admin', 2),
+(60, '2021-05-14 02:16:44.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login_admin', 2),
+(61, '2021-05-14 02:18:04.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login_admin', 2),
+(62, '2021-05-14 02:22:12.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login_admin', 2),
+(63, '2021-05-14 02:57:09.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login_admin', 2),
+(64, '2021-05-14 02:57:59.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login_admin', 2),
+(65, '2021-05-14 03:00:23.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login_admin', 2),
+(66, '2021-05-14 03:02:18.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login_admin', 2),
+(67, '2021-05-14 03:10:48.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login_admin', 2),
+(68, '2021-05-14 03:13:45.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login_admin', 2),
+(69, '2021-05-14 03:16:36.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login_admin', 2),
+(70, '2021-05-14 03:17:41.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login_admin', 2),
+(71, '2021-05-14 03:27:04.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login_admin', 2),
+(72, '2021-05-14 03:27:31.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login', 2),
+(73, '2021-05-14 03:28:32.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login', 2),
+(74, '2021-05-14 03:28:51.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login', 2),
+(75, '2021-05-14 03:29:54.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login_admin', 2),
+(76, '2021-05-14 03:31:45.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login_admin', 2),
+(77, '2021-05-14 03:32:48.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'createEvent', NULL),
+(78, '2021-05-14 03:41:00.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login_admin', 2),
+(79, '2021-05-14 03:42:46.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login_admin', 2),
+(80, '2021-05-14 03:52:03.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'register', NULL),
+(81, '2021-05-14 03:53:14.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login_admin', 2),
+(82, '2021-05-14 03:54:51.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login_admin', 2),
+(83, '2021-05-14 03:55:41.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login', 2),
+(84, '2021-05-14 03:58:43.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login_admin', 2),
+(85, '2021-05-14 03:59:41.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login_admin', 2),
+(86, '2021-05-14 03:59:53.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'createEvent', NULL),
+(87, '2021-05-14 04:04:53.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login_admin', 2),
+(88, '2021-05-14 04:05:25.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login_admin', 2),
+(89, '2021-05-17 00:59:20.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login', 1),
+(90, '2021-05-17 01:16:08.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login', 1),
+(91, '2021-05-17 02:30:44.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'register', NULL),
+(92, '2021-05-17 02:31:47.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'register', NULL),
+(93, '2021-05-17 02:32:02.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'register', NULL),
+(94, '2021-05-17 02:33:43.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login_admin', 2),
+(95, '2021-05-17 02:41:11.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login_admin', 2),
+(96, '2021-05-17 02:46:40.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', '::1', 'login_admin', 2);
 
 -- --------------------------------------------------------
 
@@ -129,7 +177,7 @@ CREATE TABLE IF NOT EXISTS `events` (
   `eventDate` char(15) NOT NULL,
   `eventTime` char(10) NOT NULL,
   PRIMARY KEY (`eventID`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `events`
@@ -141,7 +189,9 @@ INSERT INTO `events` (`eventID`, `eventName`, `eventDescription`, `eventCategory
 (16, 'Fish and Chips', 'fhjdhfhj', 'Food & Drink', 'djkfjfkjk', 'brisbane', '27 Oct', '2:00PM'),
 (19, 'Sunset Watch', 'Come join for...', 'Family', 'Mt Gravatt', 'Brisbane', 'Apr 29, 2021', '04:00 PM'),
 (40, 'Eat Street', 'Loksjfkjfk', 'Food & Drink', 'Eat Street', 'Brisbane', 'May 14, 2021', '06:00 PM'),
-(44, 'Admin Event', 'djskdjkjd', 'Business', 'kjdjkjd', 'jkjd', 'kjdj', 'kjdk');
+(44, 'Admin Event', 'djskdjkjd', 'Business', 'kjdjkjd', 'jkjd', 'kjdj', 'kjdk'),
+(45, 'kfldfk', 'lklfkl', 'Auto', 'k', 'llfk', 'flkfl', 'klfk'),
+(46, 'dklskd', 'kld', 'Business', 'kdkl', 'kdll', 'kk', 'lkdl');
 
 -- --------------------------------------------------------
 
@@ -159,7 +209,7 @@ CREATE TABLE IF NOT EXISTS `users2` (
   `UserPassword` varchar(255) NOT NULL,
   `AccessRights` char(200) NOT NULL,
   PRIMARY KEY (`UserID`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users2`
@@ -167,7 +217,8 @@ CREATE TABLE IF NOT EXISTS `users2` (
 
 INSERT INTO `users2` (`UserID`, `FullName`, `PhoneNumber`, `DateOfBirth`, `Email`, `UserPassword`, `AccessRights`) VALUES
 (1, 'Kira Black', '0404040404', 'Apr 22, 2021', 'kirablack@email.com', 'blah', 'User'),
-(2, 'Blaire Carsen', '0457898887', 'Apr 14, 1995', 'blaire@admin.com', 'admin', 'Admin');
+(2, 'Blaire Carsen', '0457898887', 'Apr 14, 1995', 'blaire@admin.com', 'admin', 'Admin'),
+(9, 'Derek Hall', '045888987', 'May 17, 1984', 'derek@email.com', '$2y$10$0yizmFvf2jfnGB9YmmOwN.uKHapnpGYLAA/iEMICHIYraSDUPa0Ia', 'Admin');
 
 --
 -- Constraints for dumped tables

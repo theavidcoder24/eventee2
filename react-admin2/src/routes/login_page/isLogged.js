@@ -1,6 +1,5 @@
 /* - is logged in Fetch - */
-
-export default function isLogged() {
+export default function IsLogged(props) {
     fetch('http://localhost/eventee2/api/ws.php?action=is_logged_in',
         {
             method: 'GET',
@@ -9,6 +8,7 @@ export default function isLogged() {
         .then(function (response) {
             if (response.status === 202) {
                 console.log('Logged in!');
+                // props.setCount("Logged In");
             }
             if (response.status === 429) {
                 console.log('Rate limit exceeded');

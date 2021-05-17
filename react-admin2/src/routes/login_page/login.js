@@ -1,5 +1,5 @@
 import React from 'react';
-import isLogged from './isLogged';
+// import IsLogged from './isLogged';
 // import { Link } from 'react-router-dom';
 // import { useAuth0 } from "@auth0/auth0-react";
 // import { createUseStyles } from 'react-jss';
@@ -55,7 +55,7 @@ function Login(props) {
 
     return (
         <div>
-            <button onClick={isLogged}></button>
+            <button onClick={Login}></button>
             <form>
                 <i className="material-icons prefix">email</i>
                 <input id="log_email" name="log_email" type="text" className="validate" placeholder="Email" required></input>
