@@ -9,7 +9,6 @@ export default function isLogged() {
         .then(function (response) {
             if (response.status === 202) {
                 console.log('Logged in!');
-
             }
             if (response.status === 429) {
                 console.log('Rate limit exceeded');

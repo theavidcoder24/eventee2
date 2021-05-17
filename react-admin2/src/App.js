@@ -139,7 +139,6 @@ function App() {
   function Dashboard() {
     return (
       <div>
-        <h2>SH</h2>
         {/* <DashboardComponent /> */}
       </div>
     )

@@ -13,18 +13,6 @@ class sessObj
         } else {
             return false;
         }
-        // if ("login" == true) {
-        //     if (!isset($_SESSION['login']) == true) {
-        //         // echo "Welcome " . $_SESSION['LoginEmail'];
-        //         return true;
-        //         // if (isset($_SESSION['access_rights'])) {
-        //         //     if ($_SESSION['access_rights'] == 'Admin') {
-        //         //     }
-        //         // }
-        //     }
-        // } elseif ("login" == false) {
-        //     return false;
-        // }
     }
 
     public function userid()
