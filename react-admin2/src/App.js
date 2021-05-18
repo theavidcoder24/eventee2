@@ -100,7 +100,7 @@ function ProcessAdmin(props) {
       </div>
     );
   }
-  else if (props.count === "Not Logged In") {
+  else {
     document.body.style.backgroundColor = "lavender";
     return (
       <div>
