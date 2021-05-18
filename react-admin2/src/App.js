@@ -1,5 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from "react";
+// import M from "materialize-css";
+// import "materialize-css/dist/css/materialize.min.css";
 // import ReactDOM from 'react-dom';
 // require('dotenv').config();
 // import env from "react-dotenv";
@@ -98,12 +100,11 @@ function ProcessAdmin(props) {
       </div>
     );
   }
-  else {
-    // document.body.style.backgroundColor = "black";
+  else if (props.count === "Not Logged In") {
+    document.body.style.backgroundColor = "lavender";
     return (
       <div>
         <Login setCount={props.setCount} />
-        <h2>Not Logged in</h2>
       </div>
     );
   }
@@ -122,45 +123,44 @@ function App() {
 
   useEffect(() => {
     IsLogged(loginSuccess, loginFailed);
-
   }, []);
 
   return <ProcessAdmin count={count} setCount={setCount} />;
 
-  function Home() {
-    return (
-      <Login />
-      // <>
-      //   <LoginButton />
-      //   <LogoutButton />
-      // </>
-    )
-  }
+  // function Home() {
+  //   return (
+  //     <Login />
+  //     // <>
+  //     //   <LoginButton />
+  //     //   <LogoutButton />
+  //     // </>
+  //   )
+  // }
 
-  function Dashboard() {
-    return (
-      <div>
-        {/* <DashboardComponent /> */}
-      </div>
-    )
-  }
+  // function Dashboard() {
+  //   return (
+  //     <div>
+  //       {/* <DashboardComponent /> */}
+  //     </div>
+  //   )
+  // }
 
-  function Display() {
-    return (
-      <div>
-        <DisplayEvents />
-      </div>
-    )
-  }
+  // function Display() {
+  //   return (
+  //     <div>
+  //       <DisplayEvents />
+  //     </div>
+  //   )
+  // }
 
-  function UserProfile() {
-    return (
-      <div>
-        <h2>View Profile</h2>
-        {/* <Profile /> */}
-      </div>
-    )
-  }
+  // function UserProfile() {
+  //   return (
+  //     <div>
+  //       <h2>View Profile</h2>
+  //       {/* <Profile /> */}
+  //     </div>
+  //   )
+  // }
 }
 
 export default App;

@@ -1,8 +1,24 @@
 // import React, { useEffect } from 'react';
 import React from 'react';
+import { useForm } from "react-hook-form";
+import M from "materialize-css";
+// import "materialize-css/dist/css/materialize.min.css";
 
 /* - Create Events - */
 function CreateEvents() {
+    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const onSubmit = data => console.log(data);
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var options = {
+            defaultDate: new Date(),
+            setDefaultDate: true
+        };
+        var elems = document.querySelectorAll('.datepicker');
+        var instances = M.Datepicker.init(elems, options);
+        instances.setDate(new Date());
+    });
+
     function addEvent() {
         // var errStr = "";
         // if (event_name.checkValidity() === false) {
@@ -97,10 +113,12 @@ function CreateEvents() {
     return (
         <div>
             <h4>Create Event</h4>
-            <form>
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="input-field col s12">
                     <i className="material-icons prefix">title</i>
-                    <input id="event_name" type="text" className="validate" placeholder="Event Name"></input>
+                    <input id="event_name" type="text" className="validate" placeholder="Event Name" {...register("eventname", { required: true })}></input>
+                    {/* errors will return when field validation fails  */}
+                    {errors.eventname && <span>This field is required</span>}
                     <span className="helper-text" data-error="Please enter a valid name" data-success="Correct"></span>
                 </div>
                 <div className="input-field col s12">
@@ -111,7 +129,7 @@ function CreateEvents() {
                 </div>
                 <div className="input-field col s12">
                     <i className="material-icons prefix">category</i>
-                    <select className="icons" id="event_cat">
+                    <select {...register("eventcat")} className="icons" id="event_cat">
                         <option value="" selected disabled>Choose your Category</option>
                         <option value="Auto" data-icon="src/images/icons/round_drive_eta_black_48dp.png">
                             Auto</option>

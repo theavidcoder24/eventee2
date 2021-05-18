@@ -21,10 +21,6 @@ export default function UserLogout(props) {
       if (response.status === 429) {
         console.log('Rate limit exceeded');
       }
-      else {
-        console.log("Na Logout")
-        //   errormessage("Error - Internal Server error not logged out");
-      }
     })
     .catch(function (err) {
       // console.log("Connection unavailable");

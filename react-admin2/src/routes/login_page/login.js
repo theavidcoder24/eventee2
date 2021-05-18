@@ -53,9 +53,11 @@ function Login(props) {
 
     // const classes = useStyles();
 
+    // if (props.count === "Not Logged In") {
+
     return (
         <div>
-            <button onClick={Login}></button>
+            {/* <button onClick={Login}></button> */}
             <form>
                 <i className="material-icons prefix">email</i>
                 <input id="log_email" name="log_email" type="text" className="validate" placeholder="Email" required></input>
@@ -71,6 +73,7 @@ function Login(props) {
             </form>
         </div>
     );
+    // }
 }
 
 export default Login;
