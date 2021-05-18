@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 // import { createUseStyles } from 'react-jss';
 // import CreateEvents from './routes/create_page/createEvents.js';
-import DeleteRemoveEvent from './deleteEvent.js';
-import fillUpdate from './updateEvent.js';
-import updateEvent from './updateEvent.js';
-import isLogged from '../login_page/isLogged';
+// import DeleteRemoveEvent from './deleteEvent.js';
+// import fillUpdate from './updateEvent.js';
+// import updateEvent from './updateEvent.js';
+import IsLogged from '../login_page/isLogged';
 
 
 /* - Display Events - */
@@ -34,7 +34,6 @@ function DisplayEvents() {
 
   return (
     <div>
-      <button onClick={isLogged}></button>
       <h2>Events List</h2>
       {/* <button onClick={pullEvents()}>Display Events</button> */}
       <div className="content">

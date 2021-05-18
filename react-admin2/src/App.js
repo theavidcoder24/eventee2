@@ -33,6 +33,8 @@ import {
 function ProcessAdmin(props) {
 
   if (props.count === "Logged In") {
+    document.body.style.backgroundColor = "white";
+
 
     // const { isLoading } = useAuth0();
 
@@ -48,10 +50,6 @@ function ProcessAdmin(props) {
     //     console.log(fullname + email + phone + dob + password);
     // }
 
-    // if (!token) {
-    //   return <Login setToken={setToken} />
-    // }
-
     return (
       <div className="App">
         <Router>
@@ -59,8 +57,11 @@ function ProcessAdmin(props) {
             <nav>
               <ul>
                 <li>
-                  <Link to="/">Dashboard</Link>
+                  <Link to="/"></Link>
                   {/* Change to dashboard on login  */}
+                </li>
+                <li>
+                  <Link to="/dashboard">Dashboard</Link>
                 </li>
                 <li>
                   <Link to="/display">Display</Link>
@@ -79,6 +80,9 @@ function ProcessAdmin(props) {
             {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
             <Switch>
+              <Route path="/dashboard">
+                <h3>Dashboard Section</h3>
+              </Route>
               <Route path="/display">
                 <DisplayEvents />
               </Route>
@@ -91,7 +95,6 @@ function ProcessAdmin(props) {
                 <PostRegFetch />
               </Route>
               <Route exact path="/">
-                <DisplayEvents />
               </Route>
             </Switch>
           </div>

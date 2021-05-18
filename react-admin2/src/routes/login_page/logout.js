@@ -1,7 +1,6 @@
-
 /* - User Logout - */
 export default function UserLogout(props) {
-  fetch('api/ws.php?action=logout', {
+  fetch('http://localhost/eventee2/api/ws.php?action=logout', {
     method: 'GET'
   })
     .then(function (response) {

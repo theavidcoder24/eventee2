@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 // import { Link } from 'react-router-dom';
 // import { useAuth0 } from "@auth0/auth0-react";
 // import { createUseStyles } from 'react-jss';
@@ -13,7 +14,18 @@ import React from 'react';
 
 function Login(props) {
 
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const history = useHistory();
+    useEffect(() => {
+        if (localStorage.getItem('user-info')) {
+            history.push("/add")
+        }
+    }, [])
+
     function processLogin() {
+        console.log(email, password);
         var log_email = document.getElementById("log_email");
         var log_pass = document.getElementById("log_pass");
         var login_admin = document.getElementById("login_admin");
@@ -60,10 +72,10 @@ function Login(props) {
             {/* <button onClick={Login}></button> */}
             <form>
                 <i className="material-icons prefix">email</i>
-                <input id="log_email" name="log_email" type="text" className="validate" placeholder="Email" required></input>
+                <input id="log_email" name="log_email" type="text" className="validate" placeholder="Email" onChange={(e) => setEmail(e.target.value)} required></input>
                 <i className="material-icons prefix">vpn_key</i>
                 <input id="log_pass" name="log_pass" type="password" className="validate"
-                    pattern="[a-zA-Z0-9_.!@#$%^&*()]{2,}" placeholder="Password"></input>
+                    pattern="[a-zA-Z0-9_.!@#$%^&*()]{2,}" placeholder="Password" onChange={(e) => setPassword(e.target.value)}></input>
                 <a href="#">Forgot password?</a>
                 <br></br>
                 <input type="hidden" name="action" value="login_admin" id="login_admin"></input>
