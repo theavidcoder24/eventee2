@@ -8,10 +8,9 @@ export default function IsLogged() {
         .then(function (response) {
             if (response.status === 202) {
                 console.log('Logged in!');
-        localStorage.setItem('login', "true");
-
+                localStorage.setItem('login', "true");
             }
-           else if (response.status === 429) {
+            else if (response.status === 429) {
                 console.log('Rate limit exceeded');
             }
             else {

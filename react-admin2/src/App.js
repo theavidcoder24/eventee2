@@ -57,12 +57,12 @@ function ProcessAdmin(props) {
             <nav>
               <ul>
                 <li>
-                  <Link to="/"></Link>
+                  <Link to="/">Dashboard</Link>
                   {/* Change to dashboard on login  */}
                 </li>
-                <li>
+                {/* <li>
                   <Link to="/dashboard">Dashboard</Link>
-                </li>
+                </li> */}
                 <li>
                   <Link to="/display">Display</Link>
                 </li>
@@ -80,9 +80,9 @@ function ProcessAdmin(props) {
             {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
             <Switch>
-              <Route path="/dashboard">
+              {/* <Route path="/dashboard">
                 <h3>Dashboard Section</h3>
-              </Route>
+              </Route> */}
               <Route path="/display">
                 <DisplayEvents />
               </Route>
@@ -95,6 +95,7 @@ function ProcessAdmin(props) {
                 <PostRegFetch />
               </Route>
               <Route exact path="/">
+                <h3>Dashboard Section</h3>
               </Route>
             </Switch>
           </div>
@@ -130,40 +131,6 @@ function App() {
 
   return <ProcessAdmin count={count} setCount={setCount} />;
 
-  // function Home() {
-  //   return (
-  //     <Login />
-  //     // <>
-  //     //   <LoginButton />
-  //     //   <LogoutButton />
-  //     // </>
-  //   )
-  // }
-
-  // function Dashboard() {
-  //   return (
-  //     <div>
-  //       {/* <DashboardComponent /> */}
-  //     </div>
-  //   )
-  // }
-
-  // function Display() {
-  //   return (
-  //     <div>
-  //       <DisplayEvents />
-  //     </div>
-  //   )
-  // }
-
-  // function UserProfile() {
-  //   return (
-  //     <div>
-  //       <h2>View Profile</h2>
-  //       {/* <Profile /> */}
-  //     </div>
-  //   )
-  // }
 }
 
 export default App;

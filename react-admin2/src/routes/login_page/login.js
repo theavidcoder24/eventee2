@@ -17,12 +17,12 @@ function Login(props) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const history = useHistory();
-    useEffect(() => {
-        if (localStorage.getItem('user-info')) {
-            history.push("/add")
-        }
-    }, [])
+    // const history = useHistory();
+    // useEffect(() => {
+    //     if (localStorage.getItem('user-info')) {
+    //         history.push("/add")
+    //     }
+    // }, [])
 
     function processLogin() {
         console.log(email, password);

@@ -128,7 +128,7 @@ class dbObj
             $this->dbconn->beginTransaction();
             $stmt = $this->dbconn->prepare("SELECT * FROM users2 WHERE AccessRights = 'Admin'");
             $stmt->bindValue(':log_email', $log_email);
-            $stmt->bindValue(':log_pass', $log_pass);
+            // $stmt->bindValue(':log_pass', $log_pass);
             $stmt->execute();
             $row = $stmt->fetch();
 
@@ -151,12 +151,10 @@ class dbObj
                 if ($row['AccessRights'] == ("Admin")) {
                     $_SESSION["login"] = 'true';
                     $_SESSION['UserID'] = $row['UserID'];
-                    // $_SESSION['AdminEmail'] = $row['Email'];
+                    $_SESSION['AdminEmail'] = $row['Email'];
                     $_SESSION["access_rights"] = $row["AccessRights"];
                     $_SESSION['time_start_login'] = time();
-                    // time('H:i:s');
-                    $stmt->execute();
-                    $this->dbconn->commit();
+                    time('H:i:s');
 
                     return true;
                 } else {
@@ -167,7 +165,8 @@ class dbObj
                 return false;
             }
         } catch (PDOException $ex) {
-            return false;
+            $this->dbconn->rollback();
+            throw $ex;
         }
     }
 
