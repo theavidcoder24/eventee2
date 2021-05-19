@@ -1,5 +1,5 @@
 /* - is logged in Fetch - */
-export default function IsLogged() {
+export default function IsLogged(successCb, errorCb) {
     fetch('http://localhost/eventee2/api/ws.php?action=is_logged_in',
         {
             method: 'GET',
@@ -7,14 +7,16 @@ export default function IsLogged() {
         })
         .then(function (response) {
             if (response.status === 202) {
-                console.log('Logged in!');
-                localStorage.setItem('login', "true");
+                console.log('Is Logged in!');
+                successCb();
             }
             else if (response.status === 429) {
                 console.log('Rate limit exceeded');
+                errorCb();
             }
             else {
                 console.log('Not logged in failed');
+                errorCb();
             }
         })
 }

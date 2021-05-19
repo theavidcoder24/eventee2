@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React from 'react';
+// import React, { useEffect, useState } from 'react';
+// import { useHistory } from 'react-router-dom';
 // import { Link } from 'react-router-dom';
 // import { useAuth0 } from "@auth0/auth0-react";
 // import { createUseStyles } from 'react-jss';
@@ -14,8 +15,8 @@ import { useHistory } from 'react-router-dom';
 
 function Login(props) {
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    // const [email, setEmail] = useState("");
+    // const [password, setPassword] = useState("");
 
     // const history = useHistory();
     // useEffect(() => {
@@ -25,7 +26,7 @@ function Login(props) {
     // }, [])
 
     function processLogin() {
-        console.log(email, password);
+        // console.log(email, password);
         var log_email = document.getElementById("log_email");
         var log_pass = document.getElementById("log_pass");
         var login_admin = document.getElementById("login_admin");
@@ -42,13 +43,14 @@ function Login(props) {
         })
             .then(function (response) {
                 // Force error into console
-                // response.text().then(function (text) {
-                //     console.log(text);
-                // });
+                response.text().then(function (text) {
+                    console.log(text);
+                });
                 // HTTP Response Codes
                 if (response.status === 202) {
                     props.setCount("Logged In");
                     console.log('Login Successful');
+                    // localStorage.setItem('login', "true");
                 }
                 if (response.status === 401) {
                     console.log('Not permitted');
@@ -69,13 +71,12 @@ function Login(props) {
 
     return (
         <div>
-            {/* <button onClick={Login}></button> */}
             <form>
                 <i className="material-icons prefix">email</i>
-                <input id="log_email" name="log_email" type="text" className="validate" placeholder="Email" onChange={(e) => setEmail(e.target.value)} required></input>
+                <input id="log_email" name="log_email" type="text" className="validate" placeholder="Email" required></input>
                 <i className="material-icons prefix">vpn_key</i>
                 <input id="log_pass" name="log_pass" type="password" className="validate"
-                    pattern="[a-zA-Z0-9_.!@#$%^&*()]{2,}" placeholder="Password" onChange={(e) => setPassword(e.target.value)}></input>
+                    pattern="[a-zA-Z0-9_.!@#$%^&*()]{2,}" placeholder="Password"></input>
                 <a href="#">Forgot password?</a>
                 <br></br>
                 <input type="hidden" name="action" value="login_admin" id="login_admin"></input>

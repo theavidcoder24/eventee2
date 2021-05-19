@@ -10,7 +10,6 @@ import { useEffect, useState } from "react";
 // import LoginButton from './routes/login_page/LoginButton';
 // import LogoutButton from './routes/login_page/LogoutButton';
 // import Profile from './routes/login_page/UserProfile';
-// plugin that converts state into localstorage 
 /* --------- Normal Admin --------- */
 import './App.css';
 import Login from './routes/login_page/login.js';
@@ -34,7 +33,7 @@ function ProcessAdmin(props) {
 
   if (props.count === "Logged In") {
     document.body.style.backgroundColor = "white";
-
+    console.log("I'm logged in");
 
     // const { isLoading } = useAuth0();
 
@@ -58,7 +57,6 @@ function ProcessAdmin(props) {
               <ul>
                 <li>
                   <Link to="/">Dashboard</Link>
-                  {/* Change to dashboard on login  */}
                 </li>
                 {/* <li>
                   <Link to="/dashboard">Dashboard</Link>
@@ -73,7 +71,7 @@ function ProcessAdmin(props) {
                   <Link to="/profile">Profile</Link>
                 </li>
                 <li>
-                  <Link onClick={UserLogout}>Logout</Link>
+                  <UserLogout />
                 </li>
               </ul>
             </nav>
@@ -106,6 +104,7 @@ function ProcessAdmin(props) {
   }
   else {
     document.body.style.backgroundColor = "lavender";
+    console.log("Not logged in hehe");
     return (
       <div>
         <Login setCount={props.setCount} />
@@ -115,6 +114,7 @@ function ProcessAdmin(props) {
 }
 
 function App() {
+
   const [count, setCount] = useState();
 
   const loginSuccess = () => {
@@ -128,6 +128,7 @@ function App() {
   useEffect(() => {
     IsLogged(loginSuccess, loginFailed);
   }, []);
+
 
   return <ProcessAdmin count={count} setCount={setCount} />;
 

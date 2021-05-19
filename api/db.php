@@ -122,13 +122,13 @@ class dbObj
     }
 
     // Login Admin function
-    function adminLogin($log_email, $log_pass, $date, $browser, $ip, $action_type, $UserID)
+    public function adminLogin($log_email, $log_pass, $date, $browser, $ip, $action_type, $UserID)
     {
+        db_connection();
         try {
             $this->dbconn->beginTransaction();
-            $stmt = $this->dbconn->prepare("SELECT * FROM users2 WHERE AccessRights = 'Admin'");
+            $stmt = $this->dbconn->prepare("SELECT UserID, FullName, PhoneNumber, DateOfBirth, Email, UserPassword, AccessRights FROM users2 WHERE AccessRights = 'Admin'");
             $stmt->bindValue(':log_email', $log_email);
-            // $stmt->bindValue(':log_pass', $log_pass);
             $stmt->execute();
             $row = $stmt->fetch();
 
@@ -144,10 +144,10 @@ class dbObj
             $stmt->bindValue(':action_type', $action_type);
             $stmt->bindValue(':UserID', $UserID);
             $stmt->execute();
-
             $this->dbconn->commit();
 
             if (password_verify($log_pass, $row['UserPassword'])) {
+                /* Set the session variables for the admin user that logs in to also record what they will interact with */
                 if ($row['AccessRights'] == ("Admin")) {
                     $_SESSION["login"] = 'true';
                     $_SESSION['UserID'] = $row['UserID'];
@@ -155,6 +155,8 @@ class dbObj
                     $_SESSION["access_rights"] = $row["AccessRights"];
                     $_SESSION['time_start_login'] = time();
                     time('H:i:s');
+
+                    $UserID = $_SESSION["UserID"];
 
                     return true;
                 } else {
@@ -223,16 +225,16 @@ class dbObj
     }
 
     // Check if more than 5 checked
-    function checkAttendance($evid)
-    {
-        db_connection();
-        $stmt = $this->dbconn->prepare("SELECT * FROM attendance INNER JOIN events on attendance.UserID = events.UserID WHERE events.EventID =:eid");
-        // $stmt->bindValue(':', $);
-        $stmt->bindValue(":eid", $evid);
-        $stmt->execute();
-        $result = $stmt->fetchAll();
-        return $result;
-    }
+    // function checkAttendance($evid)
+    // {
+    //     db_connection();
+    //     $stmt = $this->dbconn->prepare("SELECT * FROM attendance INNER JOIN events on attendance.UserID = events.UserID WHERE events.EventID =:eid");
+    //     // $stmt->bindValue(':', $);
+    //     $stmt->bindValue(":eid", $evid);
+    //     $stmt->execute();
+    //     $result = $stmt->fetchAll();
+    //     return $result;
+    // }
 
     // public function updateAttend($evid, $answer)
     // {
