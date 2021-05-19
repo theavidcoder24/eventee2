@@ -1,10 +1,10 @@
 import React from 'react';
 // import React, { useEffect, useState } from 'react';
 // import { useHistory } from 'react-router-dom';
+// import { Link } from React;
 // import { Link } from 'react-router-dom';
 // import { useAuth0 } from "@auth0/auth0-react";
 // import { createUseStyles } from 'react-jss';
-// import { Link } from React;
 // import IsLogged from './isLogged';
 
 // const useStyles = createUseStyles({
@@ -13,7 +13,7 @@ import React from 'react';
 //     }
 // });
 
-function Login(props) {
+export default function Login(props) {
 
     // const [email, setEmail] = useState("");
     // const [password, setPassword] = useState("");
@@ -25,7 +25,7 @@ function Login(props) {
     //     }
     // }, [])
 
-    function processLogin() {
+    const handleLogin = () => {
         // console.log(email, password);
         var log_email = document.getElementById("log_email");
         var log_pass = document.getElementById("log_pass");
@@ -37,20 +37,19 @@ function Login(props) {
         admin_details.append('login_admin', login_admin.value);
         // each form element goes into the login_details object ^
         fetch('http://localhost/eventee2/api/ws.php?action=adminLogin', {
-            method: "POST",
+            method: 'POST',
             body: admin_details,
-            credentials: 'include',
+            credentials: 'include'
         })
             .then(function (response) {
                 // Force error into console
-                response.text().then(function (text) {
-                    console.log(text);
-                });
+                // response.text().then(function (text) {
+                //     console.log(text);
+                // });
                 // HTTP Response Codes
                 if (response.status === 202) {
                     props.setCount("Logged In");
                     console.log('Login Successful');
-                    // localStorage.setItem('login', "true");
                 }
                 if (response.status === 401) {
                     console.log('Not permitted');
@@ -59,10 +58,10 @@ function Login(props) {
                     console.log('Not implemented');
                 }
             })
-            .catch(function (err) {
-                console.log("Connection unavailable");
-                console.log(err);
-            });
+        // .catch(function (err) {
+        //     console.log("Connection unavailable");
+        //     console.log(err);
+        // });
     }
 
     // const classes = useStyles();
@@ -80,7 +79,7 @@ function Login(props) {
                 <a href="#">Forgot password?</a>
                 <br></br>
                 <input type="hidden" name="action" value="login_admin" id="login_admin"></input>
-                <a id="login_admin" className="btn indigo waves-effect waves-light" type="submit" name="login_admin" onClick={processLogin}>Login</a>
+                <a id="login_admin" className="btn indigo waves-effect waves-light" type="submit" name="login_admin" onClick={handleLogin}>Login</a>
                 <br></br>
                 <a>Don't have an account? Register</a>
             </form>
@@ -89,4 +88,4 @@ function Login(props) {
     // }
 }
 
-export default Login;
+// export default Login;

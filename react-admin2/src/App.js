@@ -33,7 +33,7 @@ function ProcessAdmin(props) {
 
   if (props.count === "Logged In") {
     document.body.style.backgroundColor = "white";
-    console.log("I'm logged in");
+    console.log("Im logged in");
 
     // const { isLoading } = useAuth0();
 
@@ -71,7 +71,7 @@ function ProcessAdmin(props) {
                   <Link to="/profile">Profile</Link>
                 </li>
                 <li>
-                  <UserLogout />
+                  <UserLogout setCount={props.setCount} />
                 </li>
               </ul>
             </nav>
@@ -106,15 +106,12 @@ function ProcessAdmin(props) {
     document.body.style.backgroundColor = "lavender";
     console.log("Not logged in hehe");
     return (
-      <div>
-        <Login setCount={props.setCount} />
-      </div>
+      <Login setCount={props.setCount} />
     );
   }
 }
 
 function App() {
-
   const [count, setCount] = useState();
 
   const loginSuccess = () => {
@@ -129,9 +126,7 @@ function App() {
     IsLogged(loginSuccess, loginFailed);
   }, []);
 
-
   return <ProcessAdmin count={count} setCount={setCount} />;
-
 }
 
 export default App;

@@ -9,8 +9,8 @@ export function UserLogout(props) {
       .then(function (response) {
         // HTTP Response Codes
         if (response.status === 202) {
-          console.log("Logout Success");
           props.setCount("Not Logged In");
+          console.log("Logout Success");
         }
         // if (response.status === 401) {
         //   console.log("Not permitted");
@@ -33,4 +33,4 @@ export function UserLogout(props) {
   )
 }
 
-export default UserLogout;
+export default UserLogout
