@@ -10,10 +10,10 @@ export default function IsLogged(successCb, errorCb) {
                 console.log('Is Logged in!');
                 successCb();
             }
-            else if (response.status === 429) {
-                console.log('Rate limit exceeded');
-                errorCb();
-            }
+            // else if (response.status === 429) {
+            //     console.log('Rate limit exceeded');
+            //     errorCb();
+            // }
             else {
                 console.log('Not logged in failed');
                 errorCb();

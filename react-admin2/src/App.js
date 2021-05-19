@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 /* --------- Normal Admin --------- */
 import './App.css';
 import Login from './routes/login_page/login.js';
-import IsLogged from './routes/login_page/isLogged';
+import IsLogged from './routes/login_page/IsLogged';
 import UserLogout from './routes/login_page/logout';
 import PostRegFetch from './routes/login_page/register';
 import DisplayEvents from './routes/display_page/displayEvents';
@@ -106,7 +106,7 @@ function ProcessAdmin(props) {
     document.body.style.backgroundColor = "lavender";
     console.log("Not logged in hehe");
     return (
-      <Login setCount={props.setCount} />
+      <Login setCount={props.setCount}/>
     );
   }
 }

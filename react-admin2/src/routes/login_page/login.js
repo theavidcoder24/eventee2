@@ -1,11 +1,10 @@
 import React from 'react';
-// import React, { useEffect, useState } from 'react';
+// import React, { useState } from 'react';
 // import { useHistory } from 'react-router-dom';
 // import { Link } from React;
 // import { Link } from 'react-router-dom';
 // import { useAuth0 } from "@auth0/auth0-react";
 // import { createUseStyles } from 'react-jss';
-// import IsLogged from './isLogged';
 
 // const useStyles = createUseStyles({
 //     form: {
@@ -75,13 +74,13 @@ export default function Login(props) {
                 <input id="log_email" name="log_email" type="text" className="validate" placeholder="Email" required></input>
                 <i className="material-icons prefix">vpn_key</i>
                 <input id="log_pass" name="log_pass" type="password" className="validate"
-                    pattern="[a-zA-Z0-9_.!@#$%^&*()]{2,}" placeholder="Password"></input>
+                    pattern="[a-zA-Z0-9_.!@#$%^&*()]{2,}" placeholder="Password" required></input>
                 <a href="#">Forgot password?</a>
                 <br></br>
                 <input type="hidden" name="action" value="login_admin" id="login_admin"></input>
                 <a id="login_admin" className="btn indigo waves-effect waves-light" type="submit" name="login_admin" onClick={handleLogin}>Login</a>
                 <br></br>
-                <a>Don't have an account? Register</a>
+                <a href="/register">Don't have an account? Register</a>
             </form>
         </div>
     );
