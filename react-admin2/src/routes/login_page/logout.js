@@ -33,4 +33,4 @@ export function UserLogout(props) {
   )
 }
 
-export default UserLogout
+export default UserLogout;

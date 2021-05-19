@@ -12,7 +12,7 @@ import React from 'react';
 //     }
 // });
 
-export default function Login(props) {
+export default function Login() {
 
     // const [email, setEmail] = useState("");
     // const [password, setPassword] = useState("");
@@ -24,7 +24,7 @@ export default function Login(props) {
     //     }
     // }, [])
 
-    const handleLogin = () => {
+    const handleLogin = (props) => {
         // console.log(email, password);
         var log_email = document.getElementById("log_email");
         var log_pass = document.getElementById("log_pass");

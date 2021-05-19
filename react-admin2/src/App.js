@@ -78,9 +78,6 @@ function ProcessAdmin(props) {
             {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
             <Switch>
-              {/* <Route path="/dashboard">
-                <h3>Dashboard Section</h3>
-              </Route> */}
               <Route path="/display">
                 <DisplayEvents />
               </Route>
@@ -106,7 +103,7 @@ function ProcessAdmin(props) {
     document.body.style.backgroundColor = "lavender";
     console.log("Not logged in hehe");
     return (
-      <Login setCount={props.setCount}/>
+      <Login setCount={props.setCount} />
     );
   }
 }
