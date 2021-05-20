@@ -87,7 +87,7 @@ function App() {
                     ) :
                       (
                         <>
-                          <Redirect to="/"/>
+                          <Redirect to="/" />
                           <Link to="/login">Login</Link>
 
                           {/* // <li> <Link to="/signup">
