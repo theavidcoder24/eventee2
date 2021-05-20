@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 // import DeleteRemoveEvent from './deleteEvent.js';
 // import fillUpdate from './updateEvent.js';
 // import updateEvent from './updateEvent.js';
-import IsLogged from '../login_page/IsLogged';
+// import IsLogged from '../login_page/IsLogged';
 
 
 /* - Display Events - */

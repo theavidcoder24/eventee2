@@ -1,5 +1,5 @@
 import React from 'react';
-import { useEffect, useState } from "react";
+import { useState } from "react";
 // import M from "materialize-css";
 // import "materialize-css/dist/css/materialize.min.css";
 // import ReactDOM from 'react-dom';
@@ -12,8 +12,9 @@ import { useEffect, useState } from "react";
 // import Profile from './routes/login_page/UserProfile';
 /* --------- Normal Admin --------- */
 import './App.css';
+import { AppContext } from "./libs/contextLib";
 import Login from './routes/login_page/login.js';
-import IsLogged from './routes/login_page/IsLogged';
+// import IsLogged from './routes/login_page/IsLogged';
 import UserLogout from './routes/login_page/logout';
 import PostRegFetch from './routes/login_page/register';
 import DisplayEvents from './routes/display_page/displayEvents';
@@ -29,35 +30,57 @@ import {
 } from "react-router-dom";
 
 
-function ProcessAdmin(props) {
+// function ProcessAdmin(props) {
+function App() {
+  const [isAuthenticated, userHasAuthenticated] = useState(false);
+  // if (props.count === "Logged In") {
+  //   document.body.style.backgroundColor = "white";
+  //   console.log("Im logged in");
 
-  if (props.count === "Logged In") {
-    document.body.style.backgroundColor = "white";
-    console.log("Im logged in");
+  // const { isLoading } = useAuth0();
 
-    // const { isLoading } = useAuth0();
+  // if (isLoading) return <div>Loading...</div>
 
-    // if (isLoading) return <div>Loading...</div>
+  // const [fullname, setFullName] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [phone, setPhone] = useState("");
+  // const [dob, setDob] = useState("");
+  // const [password, setPassword] = useState("");
 
-    // const [fullname, setFullName] = useState("");
-    // const [email, setEmail] = useState("");
-    // const [phone, setPhone] = useState("");
-    // const [dob, setDob] = useState("");
-    // const [password, setPassword] = useState("");
+  // const displayInfo = () => {
+  //     console.log(fullname + email + phone + dob + password);
+  // }
 
-    // const displayInfo = () => {
-    //     console.log(fullname + email + phone + dob + password);
-    // }
+  function handleLogout() {
+    userHasAuthenticated(false);
+  }
 
-    return (
-      <div className="App">
+  return (
+    <div className="App">
+      <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
         <Router>
           <div>
             <nav>
               <ul>
                 <li>
-                  <Link to="/">Dashboard</Link>
+                  {isAuthenticated ? (
+                    <Link onClick={handleLogout}>Logout</Link>
+                  ) :
+                    (
+                      <>
+                        <Link to="/login">Login</Link>
+                        {/* // <li> <Link to="/signup">
+                      //   <Link>Signup</Link>
+                      // </Link></li>
+                      // <li>
+                      // <Link to="/login">
+                      //   <Link>Login</Link>
+                      // </Link></li> */}
+                      </>
+                    )
+                  }
                 </li>
+                <Link to="/">Dashboard</Link>
                 {/* <li>
                   <Link to="/dashboard">Dashboard</Link>
                 </li> */}
@@ -70,14 +93,17 @@ function ProcessAdmin(props) {
                 <li>
                   <Link to="/profile">Profile</Link>
                 </li>
-                <li>
+                {/* <li>
                   <UserLogout setCount={props.setCount} />
-                </li>
+                </li> */}
               </ul>
             </nav>
             {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
             <Switch>
+              <Route exact path="/login">
+                <Login />
+              </Route>
               <Route path="/display">
                 <DisplayEvents />
               </Route>
@@ -95,35 +121,36 @@ function ProcessAdmin(props) {
             </Switch>
           </div>
         </Router>
-        {/* <header className="App-header"></header> */}
-      </div>
-    );
-  }
-  else {
-    document.body.style.backgroundColor = "lavender";
-    console.log("Not logged in hehe");
-    return (
-      <Login setCount={props.setCount} />
-    );
-  }
-}
+      </AppContext.Provider>
+      {/* <header className="App-header"></header> */}
+    </div>
+  );
+  // }
+  // else {
+  //   document.body.style.backgroundColor = "lavender";
+  //   console.log("Not logged in hehe");
+  //   return (
+  //     <Login setCount={props.setCount} />
+  //   );
+  // }
+  // }
 
-function App() {
-  const [count, setCount] = useState();
 
-  const loginSuccess = () => {
-    setCount("Logged In");
-  }
+  // const [count, setCount] = useState();
 
-  const loginFailed = () => {
-    setCount("Not Logged In");
-  }
+  // const loginSuccess = () => {
+  //   setCount("Logged In");
+  // }
 
-  useEffect(() => {
-    IsLogged(loginSuccess, loginFailed);
-  }, []);
+  // const loginFailed = () => {
+  //   setCount("Not Logged In");
+  // }
 
-  return <ProcessAdmin count={count} setCount={setCount} />;
+  // useEffect(() => {
+  //   IsLogged(loginSuccess, loginFailed);
+  // }, []);
+
+  // return <ProcessAdmin count={count} setCount={setCount} />;
 }
 
 export default App;
