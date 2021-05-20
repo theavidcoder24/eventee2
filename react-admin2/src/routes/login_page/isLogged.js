@@ -1,5 +1,5 @@
 /* - is logged in Fetch - */
-export function IsLogged(successCb, errorCb) {
+export function IsLogged() {
     fetch('http://localhost/eventee2/api/ws.php?action=is_logged_in',
         {
             method: 'GET',
@@ -7,9 +7,9 @@ export function IsLogged(successCb, errorCb) {
         })
         .then(function (response) {
             if (response.status === 202) {
-                successCb();
+                console.log('Is Logged In!!');
             } else {
-                errorCb();
+                console.log('Not logged in failed');
             }
         })
 }

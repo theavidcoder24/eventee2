@@ -1,5 +1,6 @@
-import React from 'react';
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Redirect } from 'react-router-dom';
+import { Link, withRouter } from "react-router-dom";
 // import M from "materialize-css";
 // import "materialize-css/dist/css/materialize.min.css";
 // import ReactDOM from 'react-dom';
@@ -14,7 +15,7 @@ import { useState } from "react";
 import './App.css';
 import { AppContext } from "./libs/contextLib";
 import Login from './routes/login_page/login.js';
-// import IsLogged from './routes/login_page/IsLogged';
+import IsLogged from './routes/login_page/IsLogged';
 import UserLogout from './routes/login_page/logout';
 import PostRegFetch from './routes/login_page/register';
 import DisplayEvents from './routes/display_page/displayEvents';
@@ -26,16 +27,37 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
 } from "react-router-dom";
 
-
-// function ProcessAdmin(props) {
 function App() {
+  const [isAuthenticating, setIsAuthenticating] = useState(true);
   const [isAuthenticated, userHasAuthenticated] = useState(false);
-  // if (props.count === "Logged In") {
-  //   document.body.style.backgroundColor = "white";
-  //   console.log("Im logged in");
+  // const history = useHistory();
+
+  useEffect(() => {
+    onLoad();
+  }, []);
+
+  async function onLoad() {
+    try {
+      IsLogged();
+      userHasAuthenticated(true);
+    }
+    catch (e) {
+      if (e !== 'No current user') {
+        alert(e);
+      }
+    }
+
+    setIsAuthenticating(false);
+  }
+
+
+  function HandleLogout() {
+    UserLogout();
+    userHasAuthenticated(false);
+    // history.push("/login");
+  }
 
   // const { isLoading } = useAuth0();
 
@@ -51,106 +73,78 @@ function App() {
   //     console.log(fullname + email + phone + dob + password);
   // }
 
-  function handleLogout() {
-    userHasAuthenticated(false);
-  }
-
   return (
-    <div className="App">
-      <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
-        <Router>
-          <div>
-            <nav>
-              <ul>
-                <li>
-                  {isAuthenticated ? (
-                    <Link onClick={handleLogout}>Logout</Link>
-                  ) :
-                    (
-                      <>
-                        <Link to="/login">Login</Link>
-                        {/* // <li> <Link to="/signup">
+    !isAuthenticating && (
+      <div className="App">
+        <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
+          <Router>
+            <div>
+              <nav>
+                <ul>
+                  <li>
+                    {isAuthenticated ? (
+                      <Link onClick={HandleLogout}>Logout</Link>
+                    ) :
+                      (
+                        <>
+                          <Redirect to="/"/>
+                          <Link to="/login">Login</Link>
+
+                          {/* // <li> <Link to="/signup">
                       //   <Link>Signup</Link>
                       // </Link></li>
                       // <li>
                       // <Link to="/login">
                       //   <Link>Login</Link>
                       // </Link></li> */}
-                      </>
-                    )
-                  }
-                </li>
-                <Link to="/">Dashboard</Link>
-                {/* <li>
-                  <Link to="/dashboard">Dashboard</Link>
-                </li> */}
-                <li>
-                  <Link to="/display">Display</Link>
-                </li>
-                <li>
-                  <Link to="/create">Create</Link>
-                </li>
-                <li>
-                  <Link to="/profile">Profile</Link>
-                </li>
-                {/* <li>
-                  <UserLogout setCount={props.setCount} />
-                </li> */}
-              </ul>
-            </nav>
-            {/* A <Switch> looks through its children <Route>s and
+                        </>
+                      )
+                    }
+                  </li>
+                  <li>
+                    {isAuthenticated ? (
+                      <Link to="/dashboard">Dashboard</Link>,
+                      <Link to="/display">Display</Link>,
+                      <Link to="/create">Create</Link>,
+                      <Link to="/profile">Profile</Link>
+                    ) :
+                      (
+                        <>
+                        </>
+                      )
+                    }
+                    {/* <Link to="/dashboard">Dashboard</Link> */}
+                  </li>
+                </ul>
+              </nav>
+              {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
-            <Switch>
-              <Route exact path="/login">
-                <Login />
-              </Route>
-              <Route path="/display">
-                <DisplayEvents />
-              </Route>
-              <Route path="/create">
-                <CreateEvents />
-              </Route>
-              <Route path="/profile">
-              </Route>
-              <Route path="/register">
-                <PostRegFetch />
-              </Route>
-              <Route exact path="/">
-                <h3>Dashboard Section</h3>
-              </Route>
-            </Switch>
-          </div>
-        </Router>
-      </AppContext.Provider>
-      {/* <header className="App-header"></header> */}
-    </div>
+              <Switch>
+                <Route exact path="/login">
+                  <Login />
+                </Route>
+                <Route path="/display">
+                  <DisplayEvents />
+                </Route>
+                <Route path="/create">
+                  <CreateEvents />
+                </Route>
+                <Route path="/profile">
+                </Route>
+                <Route path="/register">
+                  <PostRegFetch />
+                </Route>
+                <Route exact path="/dashboard">
+                  <h3>Dashboard Section</h3>
+                </Route>
+              </Switch>
+            </div>
+          </Router>
+        </AppContext.Provider>
+        {/* <header className="App-header"></header> */}
+      </div>
+    )
   );
-  // }
-  // else {
-  //   document.body.style.backgroundColor = "lavender";
-  //   console.log("Not logged in hehe");
-  //   return (
-  //     <Login setCount={props.setCount} />
-  //   );
-  // }
-  // }
-
-
-  // const [count, setCount] = useState();
-
-  // const loginSuccess = () => {
-  //   setCount("Logged In");
-  // }
-
-  // const loginFailed = () => {
-  //   setCount("Not Logged In");
-  // }
-
-  // useEffect(() => {
-  //   IsLogged(loginSuccess, loginFailed);
-  // }, []);
-
-  // return <ProcessAdmin count={count} setCount={setCount} />;
 }
 
 export default App;
