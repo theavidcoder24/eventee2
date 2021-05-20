@@ -8,7 +8,8 @@ export function UserLogout() {
       // HTTP Response Codes
       if (response.status === 202) {
         console.log("Logout Success");
-        sessionStorage.clear();
+        localStorage.setItem('login', "false");
+        // sessionStorage.clear();
         // session_destroy();
         // session_unset();
         return;
