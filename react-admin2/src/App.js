@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from 'react-router-dom';
-import { Link, withRouter } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 // import M from "materialize-css";
 // import "materialize-css/dist/css/materialize.min.css";
 // import ReactDOM from 'react-dom';
@@ -27,6 +27,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
+  Link
 } from "react-router-dom";
 
 function App() {

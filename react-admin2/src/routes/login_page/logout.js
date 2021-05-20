@@ -9,6 +9,8 @@ export function UserLogout() {
       if (response.status === 202) {
         console.log("Logout Success");
         sessionStorage.clear();
+        // session_destroy();
+        // session_unset();
         return;
       }
       if (response.status === 401) {
