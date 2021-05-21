@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Redirect } from 'react-router-dom';
-// import { useHistory } from "react-router-dom";
 // import M from "materialize-css";
 // import "materialize-css/dist/css/materialize.min.css";
 // import ReactDOM from 'react-dom';
@@ -13,9 +11,9 @@ import { Redirect } from 'react-router-dom';
 // import Profile from './routes/login_page/UserProfile';
 /* --------- Normal Admin --------- */
 import './App.css';
-import { AppContext } from "./libs/contextLib";
+// import { AppContext } from "./libs/contextLib";
 import Login from './routes/login_page/login.js';
-import IsLogged from './routes/login_page/IsLogged';
+// import IsLogged from './routes/login_page/IsLogged';
 import UserLogout from './routes/login_page/logout';
 import PostRegFetch from './routes/login_page/register';
 import DisplayEvents from './routes/display_page/displayEvents';
@@ -31,120 +29,78 @@ import {
 } from "react-router-dom";
 
 function App() {
-  const [isAuthenticating, setIsAuthenticating] = useState(true);
-  const [isAuthenticated, userHasAuthenticated] = useState(false);
-  // const history = useHistory();
+
+  const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
-    onLoad();
+    if (localStorage.getItem('login') == 'true') {
+      setLoggedIn(true);
+    } else {
+      setLoggedIn(false);
+    }
   }, []);
 
-  async function onLoad() {
-    try {
-      IsLogged();
-      userHasAuthenticated(true);
-    }
-    catch (e) {
-      if (e !== 'No current user') {
-        alert(e);
-      }
-    }
-
-    setIsAuthenticating(false);
-  }
-
-
-  function HandleLogout() {
-    UserLogout();
-    userHasAuthenticated(false);
-    // history.push("/login");
-  }
-
-  // const { isLoading } = useAuth0();
-
-  // if (isLoading) return <div>Loading...</div>
-
-  // const [fullname, setFullName] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [phone, setPhone] = useState("");
-  // const [dob, setDob] = useState("");
-  // const [password, setPassword] = useState("");
-
-  // const displayInfo = () => {
-  //     console.log(fullname + email + phone + dob + password);
-  // }
-
   return (
-    !isAuthenticating && (
-      <div className="App">
-        <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
-          <Router>
-            <div>
-              <nav>
-                <ul>
+    <div className="App">
+      <Router>
+        <div>
+          <nav>
+            <ul>
+              {loggedIn ?
+                <>
                   <li>
-                    {isAuthenticated ? (
-                      <Link onClick={HandleLogout}>Logout</Link>
-                    ) :
-                      (
-                        <>
-                          <Redirect to="/" />
-                          <Link to="/login">Login</Link>
-
-                          {/* // <li> <Link to="/signup">
-                      //   <Link>Signup</Link>
-                      // </Link></li>
-                      // <li>
-                      // <Link to="/login">
-                      //   <Link>Login</Link>
-                      // </Link></li> */}
-                        </>
-                      )
-                    }
+                    <a onClick={() => { UserLogout(setLoggedIn) }}>Logout</a>
                   </li>
                   <li>
-                    {isAuthenticated ? (
-                      <Link to="/dashboard">Dashboard</Link>,
-                      <Link to="/display">Display</Link>,
-                      <Link to="/create">Create</Link>,
-                      <Link to="/profile">Profile</Link>
-                    ) :
-                      (
-                        <>
-                        </>
-                      )
-                    }
-                    {/* <Link to="/dashboard">Dashboard</Link> */}
+                    <Link to="/dashboard">Dashboard</Link>
                   </li>
-                </ul>
-              </nav>
-              {/* A <Switch> looks through its children <Route>s and
+                  <li>
+                    <Link to="/display">Display</Link>
+                  </li>
+                  <li>
+                    <Link to="/create">Create</Link>
+                  </li>
+                  <li>
+                    <Link to="/profile">Profile</Link>
+                  </li>
+                </>
+                :
+                <>
+                  <li>
+                    <Link to="/login">Login</Link>
+                  </li>
+                </>
+              }
+            </ul>
+          </nav>
+          {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
-              <Switch>
-                <Route path="/login">
-                  <Login />
-                </Route>
-                <Route path="/display">
-                  <DisplayEvents />
-                </Route>
-                <Route path="/create">
-                  <CreateEvents />
-                </Route>
-                <Route path="/profile">
-                </Route>
-                <Route path="/register">
-                  <PostRegFetch />
-                </Route>
-                <Route exact path="/dashboard">
-                  <h3>Dashboard Section</h3>
-                </Route>
-              </Switch>
-            </div>
-          </Router>
-        </AppContext.Provider>
-        {/* <header className="App-header"></header> */}
-      </div>
-    )
+          <Switch>
+            <Route path="/login">
+              <Login setLoggedIn={setLoggedIn} />
+            </Route>
+
+
+            <Route path="/display">
+              <DisplayEvents />
+            </Route>
+
+            <Route path="/create">
+              <CreateEvents />
+            </Route>
+            <Route path="/profile">
+            </Route>
+            <Route path="/register">
+              <PostRegFetch />
+            </Route>
+            <Route exact path="/dashboard">
+              <h3>Dashboard Section</h3>
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+      {/* <header className="App-header"></header> */}
+    </div>
   );
 }
 

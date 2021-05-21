@@ -1,5 +1,7 @@
+// import { set } from "react-hook-form";
+
 /* - User Logout - */
-export function UserLogout() {
+export function UserLogout(setLoggedIn) {
   fetch('http://localhost/eventee2/api/ws.php?action=logout', {
     method: 'GET',
     credentials: 'include'
@@ -8,10 +10,8 @@ export function UserLogout() {
       // HTTP Response Codes
       if (response.status === 202) {
         console.log("Logout Success");
+        setLoggedIn(false);
         localStorage.setItem('login', "false");
-        // sessionStorage.clear();
-        // session_destroy();
-        // session_unset();
         return;
       }
       if (response.status === 401) {

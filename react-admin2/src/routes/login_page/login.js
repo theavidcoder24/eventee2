@@ -1,9 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { useAppContext } from "../../libs/contextLib";
-// import { Link } from React;
-// import { Link } from 'react-router-dom';
+// import { useState } from 'react';
 // import { useAuth0 } from "@auth0/auth0-react";
 // import { createUseStyles } from 'react-jss';
 
@@ -13,20 +9,7 @@ import { useAppContext } from "../../libs/contextLib";
 //     }
 // });
 
-export default function Login() {
-    const { userHasAuthenticated } = useAppContext();
-    const history = useHistory();
-
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-
-    // function validateForm() {
-    //     return email.length > 0 && password.length > 0;
-    // }
-
-    function handleSubmit(event) {
-        event.preventDefault();
-    }
+export default function Login(props) {
 
     const handleLogin = () => {
         var log_email = document.getElementById("log_email");
@@ -52,14 +35,18 @@ export default function Login() {
                 if (response.status === 202) {
                     // props.setCount("Logged In");
                     console.log('Login Successful');
-                    userHasAuthenticated(true);
-                    history.push("/dashboard");
+                    props.setLoggedIn(true);
+                    localStorage.setItem('login', "true");
                 }
                 if (response.status === 401) {
                     console.log('Not permitted');
+                    props.setLoggedIn(false);
+                    localStorage.setItem('login', "false");
                 }
                 if (response.status === 501) {
                     console.log('Not implemented');
+                    props.setLoggedIn(false);
+                    localStorage.setItem('login', "false");
                 }
             })
     }
@@ -68,14 +55,12 @@ export default function Login() {
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
+            <form>
                 <i className="material-icons prefix">email</i>
-                <input id="log_email" name="log_email" type="email" className="validate" placeholder="Email" value={email}
-                    onChange={(e) => setEmail(e.target.value)} required></input>
+                <input id="log_email" name="log_email" type="email" className="validate" placeholder="Email" required></input>
                 <i className="material-icons prefix">vpn_key</i>
                 <input id="log_pass" name="log_pass" type="password" className="validate"
-                    pattern="[a-zA-Z0-9_.!@#$%^&*()]{2,}" placeholder="Password" value={password}
-                    onChange={(e) => setPassword(e.target.value)} required></input>
+                    pattern="[a-zA-Z0-9_.!@#$%^&*()]{2,}" placeholder="Password" required></input>
                 <a href="#">Forgot password?</a>
                 <br></br>
                 <input type="hidden" name="action" value="login_admin" id="login_admin"></input>
