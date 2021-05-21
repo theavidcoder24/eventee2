@@ -29,10 +29,6 @@ export default function Login(props) {
             credentials: 'include'
         })
             .then(function (response) {
-                // Force error into console
-                // response.text().then(function (text) {
-                //     console.log(text);
-                // });
                 // HTTP Response Codes
                 if (response.status === 202) {
                     // props.setCount("Logged In");

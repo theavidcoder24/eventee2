@@ -1,5 +1,3 @@
-// import { set } from "react-hook-form";
-
 /* - User Logout - */
 export function UserLogout(setLoggedIn) {
   fetch('http://localhost/eventee2/api/ws.php?action=logout', {
