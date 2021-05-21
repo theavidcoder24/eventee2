@@ -22,6 +22,17 @@ $db = new dbObj;
 // Include the session php file for session object related
 require('session.php');
 
+// Checks that the referer matches the IP defined if it's not then end
+// if ($_SERVER['HTTP_REFERER'] == "http://localhost/eventee2/" || $_SERVER['HTTP_REFERER'] == "http://172.30.212.23/" || $_SERVER['HTTP_REFERER'] == "http://localhost:3000/" || $_SERVER['HTTP_REFERER'] == "http://localhost/eventee2/admin-panel2/") {
+// } else {
+//     http_response_code(502);
+//     die();
+// }
+// // IP Whitelist Server
+// if ($_SERVER['REMOTE_ADDR'] != "[::1]:80") {
+//     http_response_code(501);
+// }
+
 // Starts the session
 // session_start();
 

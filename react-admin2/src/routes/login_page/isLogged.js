@@ -13,7 +13,6 @@ export function IsLogged() {
             } else {
                 console.log('Not logged in failed');
                 localStorage.setItem('login', "false");
-
             }
         })
 }
