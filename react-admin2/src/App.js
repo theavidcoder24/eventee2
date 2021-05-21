@@ -79,23 +79,28 @@ function App() {
             <Route path="/login">
               <Login setLoggedIn={setLoggedIn} />
             </Route>
-
-
             <Route path="/display">
               <DisplayEvents />
             </Route>
-
+            {loggedIn ? <>
             <Route path="/create">
               <CreateEvents />
             </Route>
+
             <Route path="/profile">
             </Route>
+
             <Route path="/register">
               <PostRegFetch />
             </Route>
+
             <Route exact path="/dashboard">
               <h3>Dashboard Section</h3>
             </Route>
+            </>
+            :
+            <></>
+            }
           </Switch>
         </div>
       </Router>

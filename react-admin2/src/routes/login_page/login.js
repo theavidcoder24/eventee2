@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from "react-router-dom";
 // import { useState } from 'react';
 // import { useAuth0 } from "@auth0/auth0-react";
 // import { createUseStyles } from 'react-jss';
@@ -10,6 +11,7 @@ import React from 'react';
 // });
 
 export default function Login(props) {
+    let history = useHistory();
 
     const handleLogin = () => {
         var log_email = document.getElementById("log_email");
@@ -37,6 +39,7 @@ export default function Login(props) {
                     console.log('Login Successful');
                     props.setLoggedIn(true);
                     localStorage.setItem('login', "true");
+                    history.push("/dashboard");
                 }
                 if (response.status === 401) {
                     console.log('Not permitted');
