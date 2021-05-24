@@ -4,11 +4,6 @@ import React, { useState, useEffect } from "react";
 // import "materialize-css/dist/css/materialize.min.css";
 // require('dotenv').config();
 // import env from "react-dotenv";
-/* --------- Auth0 Componenets --------- */
-// import { useAuth0 } from '@auth0/auth0-react';
-// import LoginButton from './routes/login_page/LoginButton';
-// import LogoutButton from './routes/login_page/LogoutButton';
-// import Profile from './routes/login_page/UserProfile';
 /* --------- Normal Admin --------- */
 import './App.css';
 import Login from './routes/login_page/login.js';
@@ -76,9 +71,11 @@ function App() {
             <Route path="/login">
               <Login setLoggedIn={setLoggedIn} />
             </Route>
-            <Route path="/display">
-              <DisplayEvents />
+
+            <Route path="/register">
+              <PostRegFetch />
             </Route>
+
             {loggedIn ? <>
               <Route path="/create">
                 <CreateEvents />
@@ -87,8 +84,8 @@ function App() {
               <Route path="/profile">
               </Route>
 
-              <Route path="/register">
-                <PostRegFetch />
+              <Route path="/display">
+                <DisplayEvents />
               </Route>
 
               <Route exact path="/dashboard">

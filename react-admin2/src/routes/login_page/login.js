@@ -1,7 +1,8 @@
 import React from 'react';
 import { useHistory } from "react-router-dom";
+import { useForm } from "react-hook-form";
+// import M from "materialize-css";
 // import { useState } from 'react';
-// import { useAuth0 } from "@auth0/auth0-react";
 // import { createUseStyles } from 'react-jss';
 
 // const useStyles = createUseStyles({
@@ -11,6 +12,11 @@ import { useHistory } from "react-router-dom";
 // });
 
 export default function Login(props) {
+    const { register, handleSubmit, formState: { errors } } = useForm(); // insert watch const if watching value
+    const onSubmit = data => console.log(data);
+
+    // console.log(watch("logemail")); // watch input value by passing the name of it
+
     let history = useHistory();
 
     const handleLogin = () => {
@@ -54,16 +60,27 @@ export default function Login(props) {
 
     return (
         <div>
-            <form>
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <i className="material-icons prefix">email</i>
-                <input id="log_email" name="log_email" type="email" className="validate" placeholder="Email" required></input>
+                <input id="log_email" name="log_email" type="email" className="validate" placeholder="Email" {...register("logemail", { required: true })}></input>
+                {/* errors will return when field validation fails  */}
+                {errors.logemail && <span>This field is required</span>}
+                <span className="helper-text" data-error="Please enter a valid email" data-success="Correct"></span>
                 <i className="material-icons prefix">vpn_key</i>
                 <input id="log_pass" name="log_pass" type="password" className="validate"
-                    pattern="[a-zA-Z0-9_.!@#$%^&*()]{2,}" placeholder="Password" required></input>
+                    placeholder="Password" {...register("logpass", { required: true, pattern: /[A-Za-z]{3}/ })}></input>
+                {/* errors will return when field validation fails  */}
+                {errors.logpass && <span>This field is required</span>}
+                <span className="helper-text"
+                    data-error="Must have at least one number, one uppercase letter, and at least 3 or more characters"
+                    data-success="Correct"></span>
+                <br></br>
                 <a href="#">Forgot password?</a>
                 <br></br>
+                <br></br>
                 <input type="hidden" name="action" value="login_admin" id="login_admin"></input>
-                <a id="login_admin" className="btn indigo waves-effect waves-light" type="submit" name="login_admin" onClick={handleLogin}>Login</a>
+                <button type="submit" id="login_admin" className="btn indigo waves-effect waves-light" name="login_admin" onClick={handleLogin}>Login</button>
+                <br></br>
                 <br></br>
                 <a href="/register">Don't have an account? Register</a>
             </form>

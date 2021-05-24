@@ -9,8 +9,8 @@
 SECURE
 add event ✅
 event list ✅
-logout
+logout ✅
 
 PUBLIC
 login ✅
-register
+register ✅

@@ -1,25 +1,24 @@
-// import React, { useEffect } from 'react';
 import React from 'react';
 import { useForm } from "react-hook-form";
-import M from "materialize-css";
+// import M from "materialize-css";
 // import "materialize-css/dist/css/materialize.min.css";
 
 /* - Create Events - */
 function CreateEvents() {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data => console.log(data);
 
-    document.addEventListener('DOMContentLoaded', function () {
-        var options = {
-            defaultDate: new Date(),
-            setDefaultDate: true
-        };
-        var elems = document.querySelectorAll('.datepicker');
-        var instances = M.Datepicker.init(elems, options);
-        instances.setDate(new Date());
-    });
+    // document.addEventListener('DOMContentLoaded', function () {
+    //     var options = {
+    //         defaultDate: new Date(),
+    //         setDefaultDate: true
+    //     };
+    //     var elems = document.querySelectorAll('.datepicker');
+    //     var instances = M.Datepicker.init(elems, options);
+    //     instances.setDate(new Date());
+    // });
 
-    function addEvent() {
+    const addEvent = () => {
         // var errStr = "";
         // if (event_name.checkValidity() === false) {
         //   errStr += "Please type a valid name ";
@@ -83,9 +82,6 @@ function CreateEvents() {
         })
             // Force error into console
             .then(function (response) {
-                // response.text().then(function (text) {
-                //     console.log(text);
-                // });
                 // HTTP Response Codes
                 if (response.status === 202) {
                     console.log('Creation Successful');
@@ -116,16 +112,16 @@ function CreateEvents() {
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="input-field col s12">
                     <i className="material-icons prefix">title</i>
-                    <input id="event_name" type="text" className="validate" placeholder="Event Name" {...register("eventname", { required: true })}></input>
+                    <input id="event_name" type="text" className="validate" placeholder="Event Name" {...register("eventname", { required: true, minLength: 1 })}></input>
                     {/* errors will return when field validation fails  */}
                     {errors.eventname && <span>This field is required</span>}
-                    <span className="helper-text" data-error="Please enter a valid name" data-success="Correct"></span>
+                    <span className="helper-text" data-error="Please enter a valid name with more than 1 character" data-success="Correct"></span>
                 </div>
                 <div className="input-field col s12">
                     <i className="material-icons prefix">notes</i>
                     <textarea name="event_desc" id="event_desc" className="materialize-textarea" placeholder="Event Description"
-                        cols="30" rows="10"></textarea>
-                    <span className="helper-text" data-error="Please enter a valid email" data-success="Correct"></span>
+                        cols="30" rows="10" {...register("eventdesc", { required: true, maxLength: 500 })}></textarea>
+                    <span className="helper-text" data-error="Please enter a valid description with max length of 200 characters" data-success="Correct"></span>
                 </div>
                 <div className="input-field col s12">
                     <i className="material-icons prefix">category</i>
@@ -151,30 +147,36 @@ function CreateEvents() {
                 </div>
                 <div className="input-field col s12">
                     <i className="material-icons prefix">map</i>
-                    <input id="event_address" type="text" className="validate" placeholder="Event Address"></input>
-                    <span className="helper-text" data-error="Please enter a valid password" data-success="Correct"
+                    <input id="event_address" type="text" className="validate" placeholder="Event Address" {...register("eventaddress", { required: true, maxLength: 200 })}></input>
+                    {/* errors will return when field validation fails  */}
+                    {errors.eventaddress && <span>This field is required</span>}
+                    <span className="helper-text" data-error="Please enter a valid address" data-success="Correct"
                         max="20"></span>
                 </div>
                 <div className="input-field col s12">
                     <i className="material-icons prefix">flag</i>
-                    <input id="event_loc" type="text" className="validate" placeholder="Event Location"></input>
-                    <span className="helper-text" data-error="Please enter a valid password" data-success="Correct"
+                    <input id="event_loc" type="text" className="validate" placeholder="Event Location" {...register("eventloc", { required: true, maxLength: 50 })}></input>
+                    {/* errors will return when field validation fails  */}
+                    {errors.eventloc && <span>This field is required</span>}
+                    <span className="helper-text" data-error="Please enter a valid location" data-success="Correct"
                         max="20"></span>
                 </div>
                 <div className="input-field col s12">
                     <i className="material-icons prefix">date_range</i>
-                    <input type="text" className="datepicker autoClose" id="event_date" placeholder="Event Date"></input>
+                    <input type="text" className="datepicker autoClose" id="event_date" placeholder="Event Date" {...register("eventdate", { required: true, maxLength: 20 })}></input>
+                    {/* errors will return when field validation fails  */}
+                    {errors.eventdate && <span>This field is required</span>}
                     <span className="helper-text" data-error="Please enter a valid date" data-success="Correct" max="20"></span>
                 </div>
                 <div className="input-field col s12">
                     <i className="material-icons prefix">schedule</i>
-                    <input type="text" className="timepicker autoClose" id="event_time" placeholder="Event Time"></input>
+                    <input type="text" className="timepicker autoClose" id="event_time" placeholder="Event Time" {...register("eventtime", { required: true, maxLength: 10 })}></input>
+                    {/* errors will return when field validation fails  */}
+                    {errors.eventtime && <span>This field is required</span>}
                     <span className="helper-text" data-error="Please enter a valid time" data-success="Correct" max="20"></span>
                 </div>
                 <input type="hidden" name="action" value="createEvent" id="createEvent"></input>
-                <a id="createEvent" className="btn indigo waves-effect waves-light modal-trigger" type="submit" name="createEvent"
-                    onClick={addEvent}>Create
-                Event<i className="material-icons right">send</i></a>
+                <button type="submit" id="createEvent" className="btn indigo waves-effect waves-light modal-trigger" name="createEvent" onClick={addEvent}>Create Event<i className="material-icons right">send</i></button>
                 <div id="event_success" className="modal bottom-sheet">
                     <div className="modal-content">
                         <h4>You've successfully created an Event!</h4>

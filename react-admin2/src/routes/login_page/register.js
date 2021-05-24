@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 /* - Register - */
-function PostRegFetch() {
+export default function PostRegFetch() {
     const handleRegister = () => {
         // var errStr = "";
         // if (reg_name.checkValidity() === false) {
@@ -83,7 +83,7 @@ function PostRegFetch() {
     return (
         <div>
             <h2 className="center">User Details</h2>
-            <form action="api/ws.php" method="POST" novalidate>
+            <form>
                 <div className="row">
                     <div className="input-field col s12">
                         <i className="material-icons prefix">badge</i>
@@ -154,11 +154,9 @@ function PostRegFetch() {
                     </div>
                 </div>
                 <input type="hidden" name="action" value="register" id="register_user"></input>
-                <a className="btn indigo waves-effect waves-light" onClick={handleRegister} type="submit" name="register"
-                >Join</a>
+                <button className="btn indigo waves-effect waves-light" onClick={handleRegister} type="submit" name="register"
+                >Join</button>
             </form>
         </div>
     )
 }
-
-export default PostRegFetch;
