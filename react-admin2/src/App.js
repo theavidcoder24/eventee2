@@ -36,7 +36,7 @@ function App() {
     <div className="App">
       <Router>
         <div>
-          <nav>
+          <nav className="deep-purple darken-3">
             <ul>
               {loggedIn ?
                 <>
@@ -51,9 +51,6 @@ function App() {
                   </li>
                   <li>
                     <Link to="/create">Create</Link>
-                  </li>
-                  <li>
-                    <Link to="/profile">Profile</Link>
                   </li>
                 </>
                 :
@@ -81,9 +78,6 @@ function App() {
                 <CreateEvents />
               </Route>
 
-              <Route path="/profile">
-              </Route>
-
               <Route path="/display">
                 <DisplayEvents />
               </Route>
@@ -98,7 +92,9 @@ function App() {
           </Switch>
         </div>
       </Router>
-      {/* <header className="App-header"></header> */}
+      <header className="App-header">
+        {/* <FeedbackMessage /> */}
+      </header>
     </div>
   );
 }

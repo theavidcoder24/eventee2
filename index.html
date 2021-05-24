@@ -50,7 +50,7 @@
 <body>
     <header>
         <!--- Navigation --->
-        <nav class="indigo">
+        <nav class="indigo darken-2">
             <a data-target="slide-out" class="sidenav-trigger"><i id="menu_icon"
                     class="material-icons white-text">menu</i></a>
             <a href="#home" onclick="hideAll(); loadPage()"><img src="src/images/eventee_logo.png" alt="Eventee Logo"
@@ -313,18 +313,20 @@
                             <i class="material-icons prefix">email</i>
                             <input id="log_email" name="log_email" type="email" class="validate"
                                 pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="Email" minlength="5"
-                                maxlength="30">
+                                maxlength="30" required>
                             <span class="helper-text" data-error="Please enter a valid email with at least 2 characters"
                                 data-success="Correct"></span>
+                            <span id="errorMsg"></span>
                         </div>
                         <div class="input-field col s12">
                             <i class="material-icons prefix">vpn_key</i>
                             <input id="log_pass" name="log_pass" type="password" class="validate"
                                 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{3,}" placeholder="Password" minlength="3"
-                                maxlength="30">
+                                maxlength="30" required>
                             <span class="helper-text"
                                 data-error="Must contain at least one number, one uppercase letter, and at least 3 or more characters"
                                 data-success="Correct" max="20"></span>
+                            <span id="errorMsg"></span>
                         </div>
                     </form>
                 </div>
@@ -356,8 +358,7 @@
                         Guest</a>
                 </div>
                 <br>
-                <input type="hidden" name="action" value="login" id="login_user">
-                <br>
+                <input type="hidden" name="action" value="login_user" id="login_user">
                 <button class="btn indigo waves-effect waves-light" type="submit" name="login"
                     onclick="postLoginFetch(); displayUserInfo(); hideAll()">Login</button>
                 </form>

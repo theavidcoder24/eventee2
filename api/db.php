@@ -127,7 +127,7 @@ class dbObj
         db_connection();
         try {
             $this->dbconn->beginTransaction();
-            $stmt = $this->dbconn->prepare("SELECT UserID, FullName, PhoneNumber, DateOfBirth, Email, UserPassword, AccessRights FROM users2 WHERE AccessRights = 'Admin'");
+            $stmt = $this->dbconn->prepare("SELECT UserID, FullName, PhoneNumber, DateOfBirth, Email, UserPassword, AccessRights FROM users2 WHERE Email = :log_email AND AccessRights = 'Admin'");
             $stmt->bindValue(':log_email', $log_email);
             $stmt->execute();
             $row = $stmt->fetch();
@@ -152,7 +152,7 @@ class dbObj
                     $_SESSION["login"] = 'true';
                     $_SESSION['UserID'] = $row['UserID'];
                     $_SESSION['AdminEmail'] = $row['Email'];
-                    $_SESSION["access_rights"] = $row["AccessRights"];
+                    $_SESSION["AccessRights"] = $row["AccessRights"];
                     $_SESSION['time_start_login'] = time();
                     time('H:i:s');
 

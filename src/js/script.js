@@ -342,7 +342,7 @@ function postLoginFetch() {
   // var log_email = document.getElementById("log_email");
   // var log_pass = document.getElementById("log_pass");
   var login_details = new FormData();
-  login_details.set('action', 'login');
+  login_details.set('action', 'login_user');
   login_details.set('log_email', log_email.value);
   login_details.set('log_pass', log_pass.value);
   login_details.set('login_user', login_user.value);
@@ -358,6 +358,9 @@ function postLoginFetch() {
       //   console.log(text);
       // });
       // HTTP Response Codes
+      if (response.status === 200) {
+        errormessage("Type a vaild email and password");
+      }
       if (response.status === 202) {
         localStorage.setItem('login', "true");
         successmessage('Yay Successfully Logged in!');

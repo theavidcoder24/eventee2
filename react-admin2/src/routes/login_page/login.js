@@ -61,19 +61,23 @@ export default function Login(props) {
     return (
         <div>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <i className="material-icons prefix">email</i>
-                <input id="log_email" name="log_email" type="email" className="validate" placeholder="Email" {...register("logemail", { required: true })}></input>
-                {/* errors will return when field validation fails  */}
-                {errors.logemail && <span>This field is required</span>}
-                <span className="helper-text" data-error="Please enter a valid email" data-success="Correct"></span>
-                <i className="material-icons prefix">vpn_key</i>
-                <input id="log_pass" name="log_pass" type="password" className="validate"
-                    placeholder="Password" {...register("logpass", { required: true, pattern: /[A-Za-z]{3}/ })}></input>
-                {/* errors will return when field validation fails  */}
-                {errors.logpass && <span>This field is required</span>}
-                <span className="helper-text"
-                    data-error="Must have at least one number, one uppercase letter, and at least 3 or more characters"
-                    data-success="Correct"></span>
+                <div className="input-field col s12">
+                    <i className="material-icons prefix">email</i>
+                    <input id="log_email" name="log_email" type="email" className="validate" placeholder="Email" {...register("logemail", { required: true })}></input>
+                    {/* errors will return when field validation fails  */}
+                    {errors.logemail && <span>This field is required</span>}
+                    <span className="helper-text" data-error="Please enter a valid email" data-success="Correct"></span>
+                </div>
+                <div className="input-field col s12">
+                    <i className="material-icons prefix">vpn_key</i>
+                    <input id="log_pass" name="log_pass" type="password" className="validate"
+                        placeholder="Password" {...register("logpass", { required: true, pattern: /[A-Za-z]{3}/ })}></input>
+                    {/* errors will return when field validation fails  */}
+                    {errors.logpass && <span>This field is required</span>}
+                    <span className="helper-text"
+                        data-error="Must have at least one number, one uppercase letter, and at least 3 or more characters"
+                        data-success="Correct"></span>
+                </div>
                 <br></br>
                 <a href="#">Forgot password?</a>
                 <br></br>

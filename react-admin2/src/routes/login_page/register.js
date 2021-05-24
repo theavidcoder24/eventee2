@@ -1,8 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useForm } from "react-hook-form";
 
 /* - Register - */
 export default function PostRegFetch() {
+
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const onSubmit = data => console.log(data);
+
     const handleRegister = () => {
         // var errStr = "";
         // if (reg_name.checkValidity() === false) {
@@ -82,8 +87,8 @@ export default function PostRegFetch() {
 
     return (
         <div>
-            <h2 className="center">User Details</h2>
-            <form>
+            <h3 className="center">User Details</h3>
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="row">
                     <div className="input-field col s12">
                         <i className="material-icons prefix">badge</i>
@@ -98,7 +103,9 @@ export default function PostRegFetch() {
                     <div className="input-field col s12">
                         <i className="material-icons prefix">account_circle</i>
                         <input id="reg_name" type="text" className="validate tooltipped" placeholder="Full Name"
-                            data-position="top" data-tooltip="Must be more than 2 characters"></input>
+                            data-position="top" data-tooltip="Must be more than 2 characters" {...register("fullname", { required: true, minLength: 1 })}></input>
+                        {/* errors will return when field validation fails  */}
+                        {errors.fullname && <span>This field is required</span>}
                         <span className="helper-text" data-error="Please enter a valid name"
                             data-success="Correct"></span>
                         <div className="errorMsg"></div>

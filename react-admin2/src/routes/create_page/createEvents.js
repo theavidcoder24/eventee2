@@ -19,6 +19,25 @@ function CreateEvents() {
     // });
 
     const addEvent = () => {
+        var event_name = document.getElementById("event_name");
+        var event_desc = document.getElementById("event_desc");
+        var event_cat = document.getElementById("event_cat");
+        var event_address = document.getElementById("event_address");
+        var event_loc = document.getElementById("event_loc");
+        var event_date = document.getElementById("event_date");
+        var event_date = document.getElementById("event_date");
+        var event_time = document.getElementById("event_time");
+        var createEvent = document.getElementById("createEvent");
+        var fd = new FormData();
+        fd.append('action', 'createEvent');
+        fd.append('event_name', event_name.value);
+        fd.append('event_desc', event_desc.value);
+        fd.append('event_cat', event_cat.value);
+        fd.append('event_address', event_address.value);
+        fd.append('event_loc', event_loc.value);
+        fd.append('event_date', event_date.value);
+        fd.append('event_time', event_time.value);
+        fd.append('createEvent', createEvent.value);
         // var errStr = "";
         // if (event_name.checkValidity() === false) {
         //   errStr += "Please type a valid name ";
@@ -55,25 +74,6 @@ function CreateEvents() {
         //   console.log("Error: Event Name");
         //   return;
         // }
-        var event_name = document.getElementById("event_name");
-        var event_desc = document.getElementById("event_desc");
-        var event_cat = document.getElementById("event_cat");
-        var event_address = document.getElementById("event_address");
-        var event_loc = document.getElementById("event_loc");
-        var event_date = document.getElementById("event_date");
-        var event_date = document.getElementById("event_date");
-        var event_time = document.getElementById("event_time");
-        var createEvent = document.getElementById("createEvent");
-        var fd = new FormData();
-        fd.append('action', 'createEvent');
-        fd.append('event_name', event_name.value);
-        fd.append('event_desc', event_desc.value);
-        fd.append('event_cat', event_cat.value);
-        fd.append('event_address', event_address.value);
-        fd.append('event_loc', event_loc.value);
-        fd.append('event_date', event_date.value);
-        fd.append('event_time', event_time.value);
-        fd.append('createEvent', createEvent.value);
         // each form element goes into the fd object ^
         fetch('http://localhost/eventee2/api/ws.php?action=createEvents', {
             method: 'POST',
@@ -108,11 +108,11 @@ function CreateEvents() {
 
     return (
         <div>
-            <h4>Create Event</h4>
+            <h3>Create Event</h3>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="input-field col s12">
                     <i className="material-icons prefix">title</i>
-                    <input id="event_name" type="text" className="validate" placeholder="Event Name" {...register("eventname", { required: true, minLength: 1 })}></input>
+                    <input id="event_name" type="text" className="validate" placeholder="Event Name" {...register("eventname", { required: true })} required></input>
                     {/* errors will return when field validation fails  */}
                     {errors.eventname && <span>This field is required</span>}
                     <span className="helper-text" data-error="Please enter a valid name with more than 1 character" data-success="Correct"></span>
