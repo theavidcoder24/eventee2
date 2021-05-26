@@ -72,7 +72,7 @@
                     <a href="#email"><span class="white-text email">john@email.com</span></a>
                 </div>
             </li>
-            <li id="admin_logo"><a href="http://localhost:3000/react-admin-dashboard" class="sidenav-close"><i
+            <li><a href="http://localhost:3000/react-admin-dashboard" class="sidenav-close"><i
                         class="material-icons">app_settings_alt</i>Admin
                     Panel</a></li>
             <li><a href="#home" onclick="hideAll(); loadPage()" class="sidenav-close"><i
@@ -401,7 +401,7 @@
                                     <i class="material-icons prefix">account_circle</i>
                                     <input id="reg_name" type="text" class="validate tooltipped" placeholder="Full Name"
                                         data-position="top" data-tooltip="Must be more than 2 characters">
-                                    <span class="helper-text" data-error="Please enter a valid name"
+                                    <span class=" helper-text" data-error="Please enter a valid name"
                                         data-success="Correct"></span>
                                     <div class="errorMsg"></div>
                                 </div>
@@ -414,7 +414,7 @@
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">email</i>
                                     <input id="reg_email" name="reg_email" type="email" class="validate"
-                                        placeholder="Email" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{3,}">
+                                        placeholder="Email">
                                     <span class="helper-text" data-error="Please enter a valid email"
                                         data-success="Correct"></span>
                                 </div>
@@ -428,7 +428,8 @@
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">vpn_key</i>
                                     <input id="reg_pass" name="reg_pass" type="password" class="validate"
-                                        placeholder="Password" minlength="3" maxlength="30">
+                                        placeholder="Password" minlength="3" maxlength="30"
+                                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{3,}">
                                     <span class="helper-text"
                                         data-error="Must contain at least one number, one uppercase letter, and at least 3 or more characters"
                                         data-success="Correct" max="20"></span>
@@ -617,7 +618,8 @@
                             <div class="row">
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">title</i>
-                                    <input id="event_name" type="text" class="validate" placeholder="Event Name">
+                                    <input id="event_name" type="text" class="validate" placeholder="Event Name"
+                                        pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}">
                                     <span class="helper-text" data-error="Please enter a valid name"
                                         data-success="Correct"></span>
                                 </div>
@@ -659,27 +661,29 @@
                                 </div>
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">map</i>
-                                    <input id="event_address" type="text" class="validate" placeholder="Event Address">
+                                    <input id="event_address" type="text" class="validate" placeholder="Event Address"
+                                        pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}">
                                     <span class="helper-text" data-error="Please enter a valid password"
                                         data-success="Correct" max="20"></span>
                                 </div>
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">flag</i>
-                                    <input id="event_loc" type="text" class="validate" placeholder="Event Location">
+                                    <input id="event_loc" type="text" class="validate" placeholder="Event Location"
+                                        pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}">
                                     <span class="helper-text" data-error="Please enter a valid password"
                                         data-success="Correct" max="20"></span>
                                 </div>
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">date_range</i>
                                     <input type="text" class="datepicker autoClose" id="event_date"
-                                        placeholder="Event Date">
+                                        placeholder="Event Date" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}">
                                     <span class="helper-text" data-error="Please enter a valid date"
                                         data-success="Correct" max="20"></span>
                                 </div>
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">schedule</i>
                                     <input type="text" class="timepicker autoClose" id="event_time"
-                                        placeholder="Event Time">
+                                        placeholder="Event Time" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}">
                                     <span class="helper-text" data-error="Please enter a valid time"
                                         data-success="Correct" max="20"></span>
                                 </div>
