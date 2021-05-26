@@ -78,7 +78,7 @@ function CreateEvents() {
         fetch('http://localhost/eventee2/api/ws.php?action=createEvents', {
             method: 'POST',
             body: fd,
-            credentials: 'include',
+            credentials: 'include'
         })
             // Force error into console
             .then(function (response) {
@@ -120,12 +120,14 @@ function CreateEvents() {
                 <div className="input-field col s12">
                     <i className="material-icons prefix">notes</i>
                     <textarea name="event_desc" id="event_desc" className="materialize-textarea" placeholder="Event Description"
-                        cols="30" rows="10" {...register("eventdesc", { required: true, maxLength: 500 })}></textarea>
-                    <span className="helper-text" data-error="Please enter a valid description with max length of 200 characters" data-success="Correct"></span>
+                        cols="30" rows="10" {...register("eventdesc", { required: true, maxLength: 500 })} required></textarea>
+                    {/* errors will return when field validation fails  */}
+                    {errors.eventdesc && <span>This field is required</span>}
+                    <span className="helper-text" data-error="Please enter a valid description with max length of 500 characters" data-success="Correct"></span>
                 </div>
                 <div className="input-field col s12">
                     <i className="material-icons prefix">category</i>
-                    <select {...register("eventcat")} className="icons" id="event_cat">
+                    <select {...register("eventcat", { required: true })} className="icons" id="event_cat" required>
                         <option value="" selected disabled>Choose your Category</option>
                         <option value="Auto" data-icon="src/images/icons/round_drive_eta_black_48dp.png">
                             Auto</option>
@@ -142,12 +144,14 @@ function CreateEvents() {
                             Food & Drink
                     </option>
                     </select>
+                    {/* errors will return when field validation fails  */}
+                    {errors.eventcat && <span>This field is required</span>}
                     <span className="helper-text" data-error="Please enter a valid category" data-success="Correct"
                         max="20"></span>
                 </div>
                 <div className="input-field col s12">
                     <i className="material-icons prefix">map</i>
-                    <input id="event_address" type="text" className="validate" placeholder="Event Address" {...register("eventaddress", { required: true, maxLength: 200 })}></input>
+                    <input id="event_address" type="text" className="validate" placeholder="Event Address" {...register("eventaddress", { required: true, maxLength: 200 })} required></input>
                     {/* errors will return when field validation fails  */}
                     {errors.eventaddress && <span>This field is required</span>}
                     <span className="helper-text" data-error="Please enter a valid address" data-success="Correct"
@@ -155,7 +159,7 @@ function CreateEvents() {
                 </div>
                 <div className="input-field col s12">
                     <i className="material-icons prefix">flag</i>
-                    <input id="event_loc" type="text" className="validate" placeholder="Event Location" {...register("eventloc", { required: true, maxLength: 50 })}></input>
+                    <input id="event_loc" type="text" className="validate" placeholder="Event Location" {...register("eventloc", { required: true, maxLength: 50 })} required></input>
                     {/* errors will return when field validation fails  */}
                     {errors.eventloc && <span>This field is required</span>}
                     <span className="helper-text" data-error="Please enter a valid location" data-success="Correct"
@@ -163,14 +167,14 @@ function CreateEvents() {
                 </div>
                 <div className="input-field col s12">
                     <i className="material-icons prefix">date_range</i>
-                    <input type="text" className="datepicker autoClose" id="event_date" placeholder="Event Date" {...register("eventdate", { required: true, maxLength: 20 })}></input>
+                    <input type="text" className="datepicker autoClose" id="event_date" placeholder="Event Date" {...register("eventdate", { required: true, maxLength: 20 })} required></input>
                     {/* errors will return when field validation fails  */}
                     {errors.eventdate && <span>This field is required</span>}
                     <span className="helper-text" data-error="Please enter a valid date" data-success="Correct" max="20"></span>
                 </div>
                 <div className="input-field col s12">
                     <i className="material-icons prefix">schedule</i>
-                    <input type="text" className="timepicker autoClose" id="event_time" placeholder="Event Time" {...register("eventtime", { required: true, maxLength: 10 })}></input>
+                    <input type="text" className="timepicker autoClose" id="event_time" placeholder="Event Time" {...register("eventtime", { required: true, maxLength: 10 })} required></input>
                     {/* errors will return when field validation fails  */}
                     {errors.eventtime && <span>This field is required</span>}
                     <span className="helper-text" data-error="Please enter a valid time" data-success="Correct" max="20"></span>
