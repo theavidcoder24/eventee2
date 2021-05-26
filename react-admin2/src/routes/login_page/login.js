@@ -30,6 +30,7 @@ export default function Login(props) {
         admin_details.append('login_admin', login_admin.value);
         // each form element goes into the login_details object ^
         fetch('http://localhost/eventee2/api/ws.php?action=adminLogin', {
+            // http://localhost/eventee2/api/ws.php?action=adminLogin
             method: 'POST',
             body: admin_details,
             credentials: 'include'
