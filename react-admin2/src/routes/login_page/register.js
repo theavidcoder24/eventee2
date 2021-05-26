@@ -54,7 +54,7 @@ export default function PostRegFetch() {
         // each form element goes into the fd object ^
         fetch('http://localhost/eventee2/api/ws.php?action=register', {
             method: 'POST',
-            // body: regdetails,
+            body: regdetails,
             credentials: 'include',
         })
             .then(function (response) {

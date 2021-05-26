@@ -19,9 +19,17 @@ deployScript.sh
 
 Install the client and api folders into a web server like MAMP or WAMP. The folders need to be installed into the www folder if you're using Wamp for example. Update the database connection settings found within the db.php file with the username and password needed to access the database.
 
-Emails & Passwords
-Email:
-Password:
+### Emails & Passwords
+
+User
+---
+Email: tracy@email.com
+Password: User1 
+
+Admin
+---
+Email: derek@email.com
+Password: admin123 
 
 You can view the project in the browser by using these addresses
 Local: http://localhost:3000

@@ -11,12 +11,12 @@ window.onload = function () {
   // if (localStorage.getItem('login') == 'false') {
   //   userLogout();
   // }
-  if (localStorage.getItem('access_rights') == 'Admin') {
-    document.getElementById("#admin_logo").style.display = 'block';
-  }
-  if (localStorage.getItem('access_rights') == 'User') {
-    document.getElementById("#admin_logo").style.display = 'none';
-  }
+  // if (localStorage.getItem('access_rights') == 'Admin') {
+  //   document.getElementById("#admin_logo").style.display = 'block';
+  // }
+  // if (localStorage.getItem('access_rights') == 'User') {
+  //   document.getElementById("#admin_logo").style.display = 'none';
+  // }
 }
 
 /* Prevent Form Redirect */
@@ -310,23 +310,23 @@ function postRegFetch() {
       // HTTP Response Codes
       if (response.status === 400) {
         console.log('Bad Request');
-        // errormessage("Bad Request");
+        errormessage("Bad Request");
         return;
       }
       if (response.status === 401) {
         console.log('Not permitted');
-        // errormessage("Not Permitted");
+        errormessage("Not Permitted");
         return;
       }
       if (response.status === 501) {
         console.log('Not implemented');
-        // errormessage("Server Error Try Again");
+        errormessage("Server Error Try Again");
         return;
       }
       if (response.status === 202) {
         // loadPage();
         console.log('Registration Successful');
-        // successmessage('Yay Successfully Registered!');
+        successmessage('Yay Successfully Registered!');
         return;
       }
     })
