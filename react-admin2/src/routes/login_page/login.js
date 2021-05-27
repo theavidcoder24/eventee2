@@ -2,7 +2,6 @@ import React from 'react';
 import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 // import M from "materialize-css";
-// import { useState } from 'react';
 // import { createUseStyles } from 'react-jss';
 
 // const useStyles = createUseStyles({
