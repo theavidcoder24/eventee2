@@ -1,7 +1,7 @@
 <?php
 // header('Access-Control-Allow-Origin: *');
-// header('Access-Control-Allow-Origin: http://localhost:3000');
-header('Access-Control-Allow-Origin: http://malloriecini.com/');
+header('Access-Control-Allow-Origin: http://localhost:3000');
+// header('Access-Control-Allow-Origin: http://malloriecini.com/');
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 
 // allow react admin localhost :0000 ^ 
