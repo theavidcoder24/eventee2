@@ -1,4 +1,4 @@
-// This code is used to register a service worker.
+// This code is used to register a service worker
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function () {
     navigator.serviceWorker.register('js/sw.js').then(function (registration) {
@@ -10,14 +10,16 @@ if ('serviceWorker' in navigator) {
     });
   });
 }
+// Set cache name
 var CACHE_NAME = 'Eventee Cache';
 // var CACHE_VERSION = 12;
 var filecache = [
-  'style.css',
   '/',
+  'style.css',
   'script.js',
   '../index.html'
 ];
+// install and return filecache
 self.addEventListener('install', function (event) {
   event.waitUntil(
     caches.open(CACHE_NAME)
@@ -30,7 +32,7 @@ self.addEventListener('fetch', function (event) {
   event.respondWith(
     caches.match(event.request)
       .then(function (response) {
-        // Cache reached return response
+        // Cache reached so return a response
         if (response) {
           return response;
         }
