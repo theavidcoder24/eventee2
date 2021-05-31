@@ -3,9 +3,9 @@
 !/bin/bash
 
 # create sql
-mysql -u root -e 'drop database eventee'
-mysql -u root -e 'create database eventee'
-mysql -u root eventee < api/sql/eventee.sql
+mysql -u root -e 'drop database eventee2'
+mysql -u root -e 'create database eventee2'
+mysql -u root eventee2 < api/sql/eventee2.sql
 
 # start server
 #php -S localhost:8080
