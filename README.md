@@ -3,41 +3,38 @@
 Eventee, an event planning web app that allows the user to search for events nearby using the user’s location and import events from Facebook.
 It uses inbuilt categories to separate events that will be imported from Facebook and see the current events around you in map view making it easier to navigate instead of seeing it in list view.
 
-Email:
-Password:
+### Emails & Passwords
+
+## User
+
+Email: tracy@email.com
+Password: User1
+
+## Admin
+
+Email: derek@email.com
+Password: admin123
 
 # Github Repository
 
-https://github.com/theavidcoder24/eventee
+https://github.com/theavidcoder24/eventee2
 
 # Project Installation
 
 Access Demo on https://malloriecini.com/
 
-In your database software create a new blank database then name it 'eventee' and import the SQL file located in API folder
+In your database software create a new blank database then name it 'eventee2' and import the SQL file located in API folder
 deployScript.sh
 
 Install the client and api folders into a web server like MAMP or WAMP. The folders need to be installed into the www folder if you're using Wamp for example. Update the database connection settings found within the db.php file with the username and password needed to access the database.
 
-### Emails & Passwords
-
-User
----
-Email: tracy@email.com
-Password: User1 
-
-Admin
----
-Email: derek@email.com
-Password: admin123 
-
 You can view the project in the browser by using these addresses
 Local: http://localhost:3000
-On Your Network: http://(Insert IP address):3000
+On Your Network: http://(Insert IP address):
 http://localhost:3000/dashboard
 
-  Local:            http://localhost:3000/react-admin-dashboard   
-  On Your Network:  http://192.168.43.2:3000/react-admin-dashboard
+Local: http://localhost:3000/react-admin2  
+ On Your Network: http://192.168.43.2:3000/react-admin2
 
 ## Admin Panel
 
