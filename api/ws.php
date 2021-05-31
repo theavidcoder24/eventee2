@@ -44,7 +44,7 @@ if (!isset($_SESSION['se'])) {
 
 // /* -- Rate Limit 24 Hour Check -- */
 // if ($_SESSION['se']->Rate24HourCheck() === false) {
-//     http_response_code(429); // Too Many Requests!
+//     http_response_code(429); // Too Many Requests!!
 //     die();
 // }
 

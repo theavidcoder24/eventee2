@@ -1,7 +1,7 @@
 {
   "name": "react-admin2",
   "version": "0.1.0",
-  "homepage": "https://malloriecini.com/react-admin2",
+  "homepage": "https://adminpanel.malloriecini.com",
   "private": true,
   "dependencies": {
     "@auth0/auth0-react": "^1.5.0",
