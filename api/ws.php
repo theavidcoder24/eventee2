@@ -1,7 +1,7 @@
 <?php
 // header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Origin: http://localhost:3000');
-// header('Access-Control-Allow-Origin: http://malloriecini.com/');
+// header('Access-Control-Allow-Origin: https://malloriecini.com/');
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 
 // allow react admin localhost :0000 ^ 
@@ -29,7 +29,7 @@ require('session.php');
 //     die();
 // }
 
-// // IP Whitelist Server
+// IP Whitelist Server
 // if ($_SERVER['REMOTE_ADDR'] != "[::1]:80") {
 //     http_response_code(501);
 // }
