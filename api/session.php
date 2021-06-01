@@ -7,21 +7,21 @@ class sessObj
     public $UserID;
 
     // Get limit + last time for rate limit
-    public $limit;
+    public $timeLimit;
     public $lastTime;
     // This records the the time of the last session request into the last time variable
     public function __construct()
     {
-        $this->limit = array("");
+        $this->timeLimit = array("");
         $_SESSION['last_session_request'] = time();
         $this->lastTime = $_SESSION['last_session_request'];
     }
 
-    function requestlimit()
+    function requestLimit()
     {
         $time = time();
-        array_push($this->limit, $time);
-        $limitCount = count($this->limit);
+        array_push($this->timeLimit, $time);
+        $limitCount = count($this->timeLimit);
         // 24 hours converts to 864000 seconds 
         // If the current request passes 1000 requests limit within 24 hours the application stops
         if (time() - $this->lastTime < 864000) {
@@ -43,7 +43,7 @@ class sessObj
         return true;
     }
 
-    function ratelimit()
+    function rateLimit()
     {
         date_default_timezone_set("Australia/Brisbane");
         // This if statement checks if the current session request is empty

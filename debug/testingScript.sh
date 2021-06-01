@@ -80,9 +80,9 @@ curl -i -X GET \
 # fillUpdate
 curl -i -X POST \
    -H "Content-Type:application/json" \
- 'http://localhost/eventee/api/ws.php?action=fillUpdate'
+ 'http://localhost/eventee2/api/ws.php?action=fillUpdate'
 
-# updateEvent
+# updateEvent post request
 curl -i -X POST \
    -H "Content-Type:application/json" \
  'http://localhost/eventee2/api/ws.php?action=updateEvent'
@@ -102,8 +102,8 @@ curl -i -X POST \
   --data-binary $'------WebKitFormBoundaryxwezypFK7ZBJqeBp\r\nContent-Disposition: form-data; name="action"\r\n\r\nupdateEvent\r\n------WebKitFormBoundaryxwezypFK7ZBJqeBp\r\nContent-Disposition: form-data; name="update_ev_name"\r\n\r\nFish and Chips\r\n------WebKitFormBoundaryxwezypFK7ZBJqeBp\r\nContent-Disposition: form-data; name="update_ev_desc"\r\n\r\nMeetup at Scoopys. Grab a coffee, gentle stroll along the broad walk to Bribie bridge and back or not. Lunch at one of the many Fish & Chips shops.\r\n------WebKitFormBoundaryxwezypFK7ZBJqeBp\r\nContent-Disposition: form-data; name="update_ev_cat"\r\n\r\nFood & Drink\r\n------WebKitFormBoundaryxwezypFK7ZBJqeBp\r\nContent-Disposition: form-data; name="update_ev_address"\r\n\r\n78 Cole Street\r\n------WebKitFormBoundaryxwezypFK7ZBJqeBp\r\nContent-Disposition: form-data; name="update_ev_loc"\r\n\r\nSouth Brisbane\r\n------WebKitFormBoundaryxwezypFK7ZBJqeBp\r\nContent-Disposition: form-data; name="update_ev_date"\r\n\r\nOct 08, 2020\r\n------WebKitFormBoundaryxwezypFK7ZBJqeBp\r\nContent-Disposition: form-data; name="update_ev_time"\r\n\r\n03:30 PM\r\n------WebKitFormBoundaryxwezypFK7ZBJqeBp--\r\n' \
   --compressed
 
-# remove
-curl 'http://localhost/eventee2/api/ws.php?action=remove' \
+# remove event request
+curl 'http://localhost/eventee2/api/ws.php?action=removeEvent' \
   -X 'DELETE' \
   -H 'Connection: keep-alive' \
   -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36' \

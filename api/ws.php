@@ -8,7 +8,6 @@ header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 header('Access-Control-Allow-Credentials: true');
 
 // All echo statements will be json_encoded
-// header("Access-Control-Allow-Headers", "content-type");
 header("Access-Control-Allow-Headers: origin, content-type, accept");
 header('Content-Type: application/json');
 
@@ -23,21 +22,31 @@ $db = new dbObj;
 require('session.php');
 
 // Checks that the referer matches the defined if it's not then end
-// if ($_SERVER['HTTP_REFERER'] == "http://localhost/eventee2/" || $_SERVER['HTTP_REFERER'] == "http://localhost/eventee2/admin-panel2/" || $_SERVER['HTTP_REFERER'] == "http://localhost:3000/") {
-// } else {
-//     http_response_code(502);
-//     die();
-// }
+if ($_SERVER['HTTP_REFERER'] == "http://localhost/eventee2" || $_SERVER['HTTP_REFERER'] == "http://localhost/eventee2/admin-panel2/" || $_SERVER['HTTP_REFERER'] == "http://localhost:3000/" || "http://localhost/") {
+} else {
+    http_response_code(502);
+    die();
+    // or it will 200 request 
+}
 
 // Starts the session
 // session_start();
+
+function testInput($data)
+{
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    $data = htmlentities($data);
+    return $data;
+}
 
 // Checks if session is set if it's not then creates new session
 if (!isset($_SESSION['se'])) {
     $_SESSION['se'] = new sessObj;
 }
 
-// if ($_SESSION['se']->ratelimit() == true && $_SESSION['se']->requestlimit() == true) {
+// if ($_SESSION['se']->rateLimit() == true && $_SESSION['se']->requestLimit() == true) {
 //     http_response_code(429); // Too Many Requests!!
 //     die();
 // }
@@ -53,15 +62,6 @@ if (!isset($_SESSION['se'])) {
 //     http_response_code(400);
 //     die();
 // }
-
-function testInput($data)
-{
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    $data = htmlentities($data);
-    return $data;
-}
 
 /* -- Base Case -- */
 /* The base case serves as the main section where the api actions will be referenced from the fetch statements in 'script.js'. As default the isset is defined as GET so that if a case is defined as a GET action it will run automatically as for POST actions it requires another extra line in order to be recognised as a POST */
@@ -330,4 +330,6 @@ if (isset($_GET["action"])) {
             // http_response_code(501);
             break;
     }
+} else if (!isset($_GET["action"])) {
+    die();
 }
