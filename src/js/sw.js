@@ -15,9 +15,9 @@ var CACHE_NAME = 'Eventee Cache';
 // var CACHE_VERSION = 12;
 var filecache = [
   '/',
-  '/css/style.css',
-  '/js/script.js',
-  '../index.html'
+  '../css/style.css',
+  'script.js',
+  '../../index.html'
 ];
 // install and return filecache
 self.addEventListener('install', function (event) {
