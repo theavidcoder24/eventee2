@@ -9,6 +9,7 @@ class sessObj
     // Get limit + last time for rate limit
     public $timeLimit;
     public $lastTime;
+    
     // This records the the time of the last session request into the last time variable
     public function __construct()
     {

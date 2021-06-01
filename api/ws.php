@@ -46,7 +46,7 @@ if (!isset($_SESSION['se'])) {
     $_SESSION['se'] = new sessObj;
 }
 
-// if ($_SESSION['se']->rateLimit() == true && $_SESSION['se']->requestLimit() == true) {
+// if ($_SESSION['se']->rateLimit() == false && $_SESSION['se']->requestLimit() == false) {
 //     http_response_code(429); // Too Many Requests!!
 //     die();
 // }
