@@ -23,9 +23,9 @@ $db = new dbObj;
 require('session.php');
 
 // Checks that the referer matches the defined if it's not then end
-// if ($_SERVER['HTTP_REFERER'] == "http://localhost/eventee2/" || $_SERVER['HTTP_REFERER'] == "http://localhost/eventee2/admin-panel2/") {
+// if ($_SERVER['HTTP_REFERER'] == "http://localhost/eventee2/" || $_SERVER['HTTP_REFERER'] == "http://localhost/eventee2/admin-panel2/" || $_SERVER['HTTP_REFERER'] == "http://localhost:3000/") {
 // } else {
-//     http_response_code(501);
+//     http_response_code(502);
 //     die();
 // }
 
@@ -36,6 +36,11 @@ require('session.php');
 if (!isset($_SESSION['se'])) {
     $_SESSION['se'] = new sessObj;
 }
+
+// if ($_SESSION['se']->ratelimit() == true && $_SESSION['se']->requestlimit() == true) {
+//     http_response_code(429); // Too Many Requests!!
+//     die();
+// }
 
 // /* -- Rate Limit 24 Hour Check -- */
 // if ($_SESSION['se']->Rate24HourCheck() === false) {
