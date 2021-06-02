@@ -5,7 +5,7 @@ if ('serviceWorker' in navigator) {
       // Registration success!
       console.log('ServiceWorker Registration successful with scope: ', registration.scope);
     }, function (err) {
-      // Registration Failed
+      // Registration failed
       console.log('Error during service worker registration: ', err);
     });
   });
@@ -14,6 +14,7 @@ if ('serviceWorker' in navigator) {
 // Set cache name
 var CACHE_NAME = 'Eventee Cache';
 // var CACHE_VERSION = 12;
+// Files to keep in cache storage
 var urlsToCache = [
   '/',
   'src/css/style.css',
@@ -33,6 +34,7 @@ self.addEventListener('install', function (event) {
   );
 });
 
+// Cache and return requests
 self.addEventListener('fetch', function (event) {
   event.respondWith(
     caches.match(event.request)
@@ -85,7 +87,7 @@ self.addEventListener('activate', function (event) {
   );
 });
 
-// Fetch cache storage
+// Fetch the cache storage
 self.addEventListener('fetch', function (event) {
   console.log(event.request.url);
 
