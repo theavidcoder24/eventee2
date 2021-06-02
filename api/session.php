@@ -1,5 +1,5 @@
 <?php
-// session_start();
+session_start();
 
 class sessObj
 {
@@ -30,9 +30,12 @@ class sessObj
                 die("Request exceeded within 24 hours");
                 return false;
             } else {
+                echo "Exceed";
                 return true;
             }
         } else {
+            // If request time is below 24 hours
+            echo "24 below";
             return true;
         }
     }
@@ -55,10 +58,12 @@ class sessObj
                 echo "Surpassed Rate limit";
             } else {
                 return true;
+                echo "not surpass";
             }
         } else {
             // if the request is empty the request time will be recorded into the session obj
             $_SESSION['last_session_request'] = time();
+            echo "request empty";
         }
     }
 
@@ -130,10 +135,5 @@ class sessObj
     //             $this->_requestCounter = 0;
     //         }
     //         return $this->_requestCounter;
-    //     }
-
-    //     public function is_referrer()
-    //     {
-    //         return true;
     //     }
 }

@@ -21,12 +21,17 @@ $db = new dbObj;
 // Include the session php file for session object related
 require('session.php');
 
-// Checks that the referer matches the defined if it's not then end
+// Checks that the referer matches the defined domain lock addresses if it's not then end
 if ($_SERVER['HTTP_REFERER'] == "http://localhost/eventee2" || $_SERVER['HTTP_REFERER'] == "http://localhost/eventee2/admin-panel2/" || $_SERVER['HTTP_REFERER'] == "http://localhost:3000/" || "http://localhost/") {
 } else {
     http_response_code(502);
     die();
     // or it will 200 request 
+}
+
+//Ip whitelist
+if ($_SERVER['REMOTE_ADDR'] != "[::1]:80") {
+    http_response_code(501);
 }
 
 // Starts the session
@@ -46,10 +51,10 @@ if (!isset($_SESSION['se'])) {
     $_SESSION['se'] = new sessObj;
 }
 
-// if ($_SESSION['se']->rateLimit() == false && $_SESSION['se']->requestLimit() == false) {
-//     http_response_code(429); // Too Many Requests!!
-//     die();
-// }
+if ($_SESSION['se']->rateLimit() == false && $_SESSION['se']->requestLimit() == false) {
+    http_response_code(429); // Too Many Requests!!
+    die();
+}
 
 // /* -- Rate Limit 24 Hour Check -- */
 // if ($_SESSION['se']->Rate24HourCheck() === false) {
@@ -57,11 +62,6 @@ if (!isset($_SESSION['se'])) {
 //     die();
 // }
 
-// /* -- Referrer -- */
-// if ($_SESSION['se']->is_referrer() == false) {
-//     http_response_code(400);
-//     die();
-// }
 
 /* -- Base Case -- */
 /* The base case serves as the main section where the api actions will be referenced from the fetch statements in 'script.js'. As default the isset is defined as GET so that if a case is defined as a GET action it will run automatically as for POST actions it requires another extra line in order to be recognised as a POST */
