@@ -1,5 +1,5 @@
 <?php
-// session_start();
+session_start();
 
 class sessObj
 {
@@ -28,11 +28,14 @@ class sessObj
         if (time() - $this->lastTime < 864000) {
             if ($limitCount > 1000) {
                 die("Request exceeded within 24 hours");
+                // http_response_code(429); // Too Many Requests!!
                 return false;
             } else {
                 return true;
             }
+            // return false;
         } else {
+            // If the request time is below 24 hours
             return true;
         }
     }
@@ -53,6 +56,8 @@ class sessObj
             if ($_SESSION['last_session_request'] >= time() - 1) {
                 die;
                 echo "Surpassed Rate limit";
+                // http_response_code(429); // Too Many Requests!!
+
             } else {
                 return true;
             }

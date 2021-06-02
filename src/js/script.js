@@ -324,7 +324,6 @@ function postRegFetch() {
         return;
       }
       if (response.status === 202) {
-        // loadPage();
         console.log('Registration Successful');
         successmessage('Yay Successfully Registered!');
         return;
@@ -354,12 +353,12 @@ function postLoginFetch() {
   })
     .then(function (response) {
       // Force error into console
-      // response.text().then(function (text) {
-      //   console.log(text);
-      // });
+      response.text().then(function (text) {
+        console.log(text);
+      });
       // HTTP Response Codes
       if (response.status === 200) {
-        errormessage("Type a vaild email and password");
+        errormessage("Try again");
       }
       if (response.status === 202) {
         localStorage.setItem('login', "true");
@@ -368,9 +367,13 @@ function postLoginFetch() {
         // sessionStorage.setItem("UserID", UserID);
         console.log('Login Successful');
       }
+      if (response.status === 429) {
+        console.log('Too Many Requests');
+        errormessage("Error: Too Many Requests");
+      }
       if (response.status === 401) {
         console.log('Not permitted');
-        errormessage("Error: Not implemented");
+        errormessage("Error: Not permitted");
         // localStorage.setItem('login', "false");
         // fetch('api/ws.php?action=logout', {
         //   method: 'GET'
@@ -379,10 +382,6 @@ function postLoginFetch() {
       if (response.status === 501) {
         console.log('Not implemented');
         errormessage("Error: Not implemented");
-        // localStorage.setItem('login', "false");
-        // fetch('api/ws.php?action=logout', {
-        //   method: 'GET'
-        // })
       }
     })
     .catch(function (err) {
