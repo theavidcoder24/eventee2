@@ -354,9 +354,9 @@ function postLoginFetch() {
   })
     .then(function (response) {
       // Force error into console
-      response.text().then(function (text) {
-        console.log(text);
-      });
+      // response.text().then(function (text) {
+      //   console.log(text);
+      // });
       // HTTP Response Codes
       if (response.status === 200) {
         errormessage("Type a vaild email and password");
