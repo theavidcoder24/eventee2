@@ -51,12 +51,12 @@ if (!isset($_SESSION['se'])) {
 //     die();
 // }
 
-if ($_SESSION['se']->rateLimit() == true) {
+if ($_SESSION['se']->rateLimit() == false) {
     http_response_code(429);
     die();
 }
 
-if ($_SESSION['se']->requestLimit() == true) {
+if ($_SESSION['se']->requestLimit() == false) {
     http_response_code(429);
     die();
 }
