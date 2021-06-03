@@ -23,6 +23,7 @@ require('session.php');
 
 // Checks that the referer matches the defined if it's not then end
 // if ($_SERVER['HTTP_REFERER'] == "http://localhost/eventee2" || $_SERVER['HTTP_REFERER'] == "http://localhost/eventee2/admin-panel2/" || $_SERVER['HTTP_REFERER'] == "http://localhost:3000/" || "http://localhost/") {
+// 192.168.43.2
 // } else {
 //     http_response_code(502);
 //     die("Not a valid IP");
@@ -34,9 +35,7 @@ require('session.php');
 //     http_response_code(501);
 // }
 
-// Starts the session
-// session_start();
-
+// Sanitise input
 function testInput($data)
 {
     $data = trim($data);
@@ -58,14 +57,9 @@ if ($_SESSION['se']->rateLimit() === true && $_SESSION['se']->requestLimit() ===
     $_SESSION['se']->lastSessionRequest();
 }
 
-// if ($_SESSION['se']->rateLimit() === true) {
-//     http_response_code(429);
-//     die();
-// }
-
-
 // $action_type = $_SERVER['QUERY_STRING'];
 // $db->changelog($date, $browser, $ip, $action_type, $UserID);
+
 /* -- Base Case -- */
 /* The base case serves as the main section where the api actions will be referenced from the fetch statements in 'script.js'. As default the isset is defined as GET so that if a case is defined as a GET action it will run automatically as for POST actions it requires another extra line in order to be recognised as a POST */
 if (isset($_GET["action"])) {
@@ -123,9 +117,6 @@ if (isset($_GET["action"])) {
             /* - User Login - */
         case "login":
             if (isset($_GET["action"])) {
-                // $UserID = $_GET['UserID'];
-                // echo $UserID;
-                // $_SESSION['UserID'] = $row['UserID'];
                 $log_email = $_POST['log_email'];
                 $log_pass = $_POST['log_pass'];
                 $date = date('Y-m-d H:i:s');
@@ -160,8 +151,6 @@ if (isset($_GET["action"])) {
             /* - Admin Login - */
         case "adminLogin":
             if (isset($_GET["action"])) {
-                // $UserID = $_GET['UserID'];
-                // echo $UserID;
                 $admin_email = $_POST['admin_email'];
                 $admin_pass = $_POST['admin_pass'];
                 $date = date('Y-m-d H:i:s');
