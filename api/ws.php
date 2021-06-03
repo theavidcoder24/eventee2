@@ -1,10 +1,8 @@
 <?php
-// header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Origin: http://localhost:3000');
+// allow react admin localhost :0000 ^ 
 // header('Access-Control-Allow-Origin: https://malloriecini.com/');
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
-
-// allow react admin localhost :0000 ^ 
 header('Access-Control-Allow-Credentials: true');
 
 // All echo statements will be json_encoded
@@ -26,7 +24,7 @@ require('session.php');
 // 192.168.43.2
 // } else {
 //     http_response_code(502);
-//     die("Not a valid IP");
+//     die("Not a valid IP Address");
 //     // or it will 200 request 
 // }
 
@@ -286,7 +284,7 @@ if (isset($_GET["action"])) {
                 }
             }
             break;
-            /* - Update the User Event - */
+            /* - Update the User's Event - */
         case "updateEvent":
             if (isset($_GET["action"])) {
                 $_SERVER['REQUEST_METHOD'] == 'POST';
@@ -305,7 +303,7 @@ if (isset($_GET["action"])) {
                 http_response_code(400);
             }
             break;
-            /* - Remove User Event - */
+            /* - Remove User's Event - */
         case "removeEvent":
             $evid = $_POST['eventid'];
             if (isset($_POST["action"])) {
