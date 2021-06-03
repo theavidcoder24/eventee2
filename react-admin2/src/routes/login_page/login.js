@@ -19,19 +19,21 @@ export default function Login(props) {
     let history = useHistory();
 
     const handleLogin = () => {
-        var log_email = document.getElementById("log_email");
-        var log_pass = document.getElementById("log_pass");
+        var admin_email = document.getElementById("admin_email");
+        var admin_pass = document.getElementById("admin_pass");
         var login_admin = document.getElementById("login_admin");
         var admin_details = new FormData();
         admin_details.append('action', 'login_admin');
-        admin_details.append('log_email', log_email.value);
-        admin_details.append('log_pass', log_pass.value);
+        admin_details.append('admin_email', admin_email.value);
+        admin_details.append('admin_pass', admin_pass.value);
         admin_details.append('login_admin', login_admin.value);
         // each form element goes into the login_details object ^
-        fetch('http://malloriecini.com/api/ws.php?action=adminLogin', {
+        fetch('http://localhost/eventee2/api/ws.php?action=adminLogin', {
             // http://localhost/eventee2/api/ws.php?action=adminLogin
+            // https://adminpanel.malloriecini.com/api/ws.php?action=adminLogin
             method: 'POST',
             body: admin_details,
+            // redirect: "error",
             credentials: 'include'
         })
             .then(function (response) {
@@ -63,14 +65,14 @@ export default function Login(props) {
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="input-field col s12">
                     <i className="material-icons prefix">email</i>
-                    <input id="log_email" name="log_email" type="email" className="validate" placeholder="Email" {...register("logemail", { required: true })}></input>
+                    <input id="admin_email" name="admin_email" type="email" className="validate" placeholder="Email" {...register("logemail", { required: true })}></input>
                     {/* errors will return when field validation fails  */}
                     {errors.logemail && <span>This field is required</span>}
                     <span className="helper-text" data-error="Please enter a valid email" data-success="Correct"></span>
                 </div>
                 <div className="input-field col s12">
                     <i className="material-icons prefix">vpn_key</i>
-                    <input id="log_pass" name="log_pass" type="password" className="validate"
+                    <input id="admin_pass" name="admin_pass" type="password" className="validate"
                         placeholder="Password" {...register("logpass", { required: true, pattern: /[A-Za-z]{3}/ })}></input>
                     {/* errors will return when field validation fails  */}
                     {errors.logpass && <span>This field is required</span>}

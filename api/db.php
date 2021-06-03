@@ -77,8 +77,6 @@ class dbObj
         db_connection();
         try {
             $this->dbconn->beginTransaction();
-            // $log_email = ($_POST['log_email']);
-            // $log_pass = ($_POST['log_pass']);
             $stmt = $this->dbconn->prepare("SELECT UserID, FullName, PhoneNumber, DateOfBirth, Email, UserPassword, AccessRights FROM users2 WHERE Email = :log_email");
             $stmt->bindValue(':log_email', $log_email);
             $stmt->execute();
@@ -122,13 +120,13 @@ class dbObj
     }
 
     // Login Admin function
-    public function adminLogin($log_email, $log_pass, $date, $browser, $ip, $action_type, $UserID)
+    public function adminLogin($admin_email, $admin_pass, $date, $browser, $ip, $action_type, $UserID)
     {
         db_connection();
         try {
             $this->dbconn->beginTransaction();
-            $stmt = $this->dbconn->prepare("SELECT UserID, FullName, PhoneNumber, DateOfBirth, Email, UserPassword, AccessRights FROM users2 WHERE Email = :log_email AND AccessRights = 'Admin'");
-            $stmt->bindValue(':log_email', $log_email);
+            $stmt = $this->dbconn->prepare("SELECT UserID, FullName, PhoneNumber, DateOfBirth, Email, UserPassword, AccessRights FROM users2 WHERE Email = :admin_email AND AccessRights = 'Admin'");
+            $stmt->bindValue(':admin_email', $admin_email);
             $stmt->execute();
             $row = $stmt->fetch();
 
@@ -146,9 +144,9 @@ class dbObj
             $stmt->execute();
             $this->dbconn->commit();
 
-            if (password_verify($log_pass, $row['UserPassword'])) {
-                /* Set the session variables for the admin user that logs in to also record what they will interact with */
-                if ($row['AccessRights'] == ("Admin")) {
+            if (password_verify($admin_pass, $row['UserPassword'])) {
+                if ($row["AccessRights"] = 'Admin') {
+                    /* Set the session variables for the admin user that logs in to also record what they will interact with */
                     $_SESSION["login"] = 'true';
                     $_SESSION['UserID'] = $row['UserID'];
                     $_SESSION['AdminEmail'] = $row['Email'];
@@ -156,11 +154,12 @@ class dbObj
                     $_SESSION['time_start_login'] = time();
                     time('H:i:s');
 
-                    $UserID = $_SESSION["UserID"];
+                    // $UserID = $_SESSION["UserID"];
 
                     return true;
-                } else {
+                } elseif ($row["AccessRights"] == null) {
                     // Not admin!
+                    echo "not admin";
                     return false;
                 }
             } else {

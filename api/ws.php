@@ -25,8 +25,13 @@ require('session.php');
 // if ($_SERVER['HTTP_REFERER'] == "http://localhost/eventee2" || $_SERVER['HTTP_REFERER'] == "http://localhost/eventee2/admin-panel2/" || $_SERVER['HTTP_REFERER'] == "http://localhost:3000/" || "http://localhost/") {
 // } else {
 //     http_response_code(502);
-//     die();
+//     die("Not a valid IP");
 //     // or it will 200 request 
+// }
+
+// IP Whitelist
+// if ($_SERVER['REMOTE_ADDR'] != "[::1]:80") {
+//     http_response_code(501);
 // }
 
 // Starts the session
@@ -46,30 +51,13 @@ if (!isset($_SESSION['se'])) {
     $_SESSION['se'] = new sessObj;
 }
 
-// if ($_SESSION['se']->rateLimit() == false && $_SESSION['se']->requestLimit() == false) {
-//     http_response_code(429); // Too Many Requests!!
+// if ($_SESSION['se']->rateLimit() === false) {
+//     http_response_code(429);
 //     die();
 // }
 
-if ($_SESSION['se']->rateLimit() == false) {
-    http_response_code(429);
-    die();
-}
-
-if ($_SESSION['se']->requestLimit() == false) {
-    http_response_code(429);
-    die();
-}
-
-// /* -- Rate Limit 24 Hour Check -- */
-// if ($_SESSION['se']->Rate24HourCheck() === false) {
-//     http_response_code(429); // Too Many Requests!!
-//     die();
-// }
-
-// /* -- Referrer -- */
-// if ($_SESSION['se']->is_referrer() == false) {
-//     http_response_code(400);
+// if ($_SESSION['se']->requestLimit() === false) {
+//     http_response_code(429);
 //     die();
 // }
 
@@ -169,30 +157,30 @@ if (isset($_GET["action"])) {
             if (isset($_GET["action"])) {
                 // $UserID = $_GET['UserID'];
                 // echo $UserID;
-                $log_email = $_POST['log_email'];
-                $log_pass = $_POST['log_pass'];
+                $admin_email = $_POST['admin_email'];
+                $admin_pass = $_POST['admin_pass'];
                 $date = date('Y-m-d H:i:s');
                 $browser = $_SERVER['HTTP_USER_AGENT'];
                 $ip = $_SERVER['REMOTE_ADDR'];
                 $action_type = $_POST['login_admin'];
                 /* - Server Validation - */
                 // Check if input field is empty
-                if ($log_email == "") {
+                if ($admin_email == "") {
                     $errorMsg = "Error: Email Field is Empty";
                     die;
                 }
                 // Check if email field is valid
-                elseif (!preg_match("/^[_\.0-9a-zA-Z-]+@([0-9a-zA-Z][0-9a-zA-Z-]+\.)+[a-zA-Z]{2,50}/i", $log_email)) {
+                elseif (!preg_match("/^[_\.0-9a-zA-Z-]+@([0-9a-zA-Z][0-9a-zA-Z-]+\.)+[a-zA-Z]{2,50}/i", $admin_email)) {
                     $errorMsg = 'Error : You did not enter a valid email.';
                     die;
                 }
                 // Check if input field is empty
-                if ($log_pass == "") {
+                if ($admin_pass == "") {
                     $errorMsg = "Error: Password Field is Empty";
                     die;
                 }
-                if (isset($log_email)) {
-                    $db->adminLogin($log_email, $log_pass, $date, $browser, $ip, $action_type, $UserID);
+                if (isset($admin_email)) {
+                    $db->adminLogin($admin_email, $admin_pass, $date, $browser, $ip, $action_type, $UserID);
                     http_response_code(202);
                     // echo "Welcome " . $_SESSION['UserID'];
                 } else {

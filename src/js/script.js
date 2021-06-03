@@ -367,10 +367,10 @@ function postLoginFetch() {
         // sessionStorage.setItem("UserID", UserID);
         console.log('Login Successful');
       }
-      if (response.status === 429) {
-        console.log('Too Many Requests');
-        errormessage("Error: Too Many Requests");
-      }
+      // if (response.status === 429) {
+      //   console.log('Too Many Requests');
+      //   errormessage("Error: Too Many Requests");
+      // }
       if (response.status === 401) {
         console.log('Not permitted');
         errormessage("Error: Not permitted");
@@ -389,48 +389,6 @@ function postLoginFetch() {
       console.log(err);
     });
 }
-
-// function postAdminLogin() {
-//   var log_email = document.getElementById("log_email");
-//   var log_pass = document.getElementById("log_pass");
-//   var access_rights = document.getElementById("access_rights");
-//   var admin_details = new FormData();
-//   admin_details.set('action', 'login_admin');
-//   admin_details.set('log_email', log_email.value);
-//   admin_details.set('log_pass', log_pass.value);
-//   admin_details.set('access_rights', access_rights.value);
-//   admin_details.set('login_admin', login_admin.value);
-//   // each form element goes into the admin_details object ^
-//   fetch('api/ws.php?action=adminLogin', {
-//     method: 'POST',
-//     body: admin_details,
-//     credentials: 'include',
-//   })
-//     .then(function (response) {
-//       // Force error into console
-//       response.text().then(function (text) {
-//         console.log(text);
-//       });
-//       // HTTP Response Codes
-//       if (response.status === 202) {
-//         localStorage.setItem('login', "true");
-//         successmessage('Yay Successfully Logged in!');
-//         console.log('Login Successful');
-//       }
-//       if (response.status === 401) {
-//         console.log('Not permitted');
-//         errormessage("Error: Not implemented");
-//         // localStorage.setItem('login', "false");
-//         // fetch('api/ws.php?action=logout', {
-//         //   method: 'GET'
-//         // })
-//       }
-//     })
-//     .catch(function (err) {
-//       console.log("Connection unavailable");
-//       console.log(err);
-//     });
-// }
 
 /* - is logged in Fetch - */
 function isLogged() {
@@ -502,9 +460,10 @@ function userLogout() {
       // HTTP Response Codes
       if (response.status === 202) {
         console.log("Logout Success");
-        successmessage("Success, You're Logged Out");
         localStorage.setItem('login', "false");
+        successmessage("Success, You're Logged Out");
         sessionStorage.clear();
+        hideAll();
         hideUserInfo();
       }
       if (response.status === 401) {
