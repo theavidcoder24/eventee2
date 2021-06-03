@@ -171,6 +171,20 @@ class dbObj
         }
     }
 
+    // public function changelog($date, $browser, $ip, $action_type, $UserID)
+    // {
+    //     $this->dbconn->beginTransaction();
+    //     /* - Changelog Table - */
+    //     $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type, UserID) VALUES (:date, :browser, :ip, :action_type, :UserID)");
+    //     $stmt->bindValue(':date', $date);
+    //     $stmt->bindValue(':browser', $browser);
+    //     $stmt->bindValue(':ip', $ip);
+    //     $stmt->bindValue(':action_type', $action_type);
+    //     $stmt->bindValue(':UserID', $UserID);
+    //     $stmt->execute();
+    //     $this->dbconn->commit();
+    // }
+
     /* -- Check if user account exists -- */
     // function checkUserAccount()
     // {

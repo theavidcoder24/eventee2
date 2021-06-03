@@ -28,9 +28,10 @@ class sessObj
         // 24 hours converts to 864000 seconds 
         // If the current request passes 1000 requests limit within 24 hours the application stops
         if (time() - $this->lastTime < 864000) {
-            if ($limitCount > 1000) {
+            // Switch limit count to 10 to see die error in action!
+            if ($limitCount > 10) {
                 die("Request exceeded within 24 hours");
-                // http_response_code(429); // Too Many Requests!!
+                http_response_code(429); // Too Many Requests!!
                 return false;
             } else {
                 return true;
@@ -59,7 +60,7 @@ class sessObj
             if ($_SESSION['last_session_request'] >= time() - 1) {
                 die;
                 echo "Surpassed Rate limit";
-                // http_response_code(429); // Too Many Requests!!
+                http_response_code(429); // Too Many Requests!!
 
             } else {
                 return true;

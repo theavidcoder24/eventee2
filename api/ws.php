@@ -51,16 +51,18 @@ if (!isset($_SESSION['se'])) {
     $_SESSION['se'] = new sessObj;
 }
 
-// if ($_SESSION['se']->rateLimit() === false) {
-//     http_response_code(429);
-//     die();
-// }
+if ($_SESSION['se']->rateLimit() === false) {
+    http_response_code(429);
+    die();
+}
 
-// if ($_SESSION['se']->requestLimit() === false) {
-//     http_response_code(429);
-//     die();
-// }
+if ($_SESSION['se']->requestLimit() === false) {
+    http_response_code(429);
+    die();
+}
 
+// $action_type = $_SERVER['QUERY_STRING'];
+// $db->changelog($date, $browser, $ip, $action_type, $UserID);
 /* -- Base Case -- */
 /* The base case serves as the main section where the api actions will be referenced from the fetch statements in 'script.js'. As default the isset is defined as GET so that if a case is defined as a GET action it will run automatically as for POST actions it requires another extra line in order to be recognised as a POST */
 if (isset($_GET["action"])) {

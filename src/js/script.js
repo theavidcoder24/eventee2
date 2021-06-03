@@ -357,9 +357,9 @@ function postLoginFetch() {
         console.log(text);
       });
       // HTTP Response Codes
-      if (response.status === 200) {
-        errormessage("Try again");
-      }
+      // if (response.status === 200) {
+      //   errormessage("Try again");
+      // }
       if (response.status === 202) {
         localStorage.setItem('login', "true");
         successmessage('Yay Successfully Logged in!');
@@ -367,10 +367,10 @@ function postLoginFetch() {
         // sessionStorage.setItem("UserID", UserID);
         console.log('Login Successful');
       }
-      // if (response.status === 429) {
-      //   console.log('Too Many Requests');
-      //   errormessage("Error: Too Many Requests");
-      // }
+      if (response.status === 429) {
+        console.log('Too Many Requests');
+        errormessage("Error: Too Many Requests");
+      }
       if (response.status === 401) {
         console.log('Not permitted');
         errormessage("Error: Not permitted");
