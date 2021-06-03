@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 // import { createUseStyles } from 'react-jss';
-// import CreateEvents from './routes/create_page/createEvents.js';
 // import DeleteRemoveEvent from './deleteEvent.js';
 // import fillUpdate from './updateEvent.js';
 // import updateEvent from './updateEvent.js';
