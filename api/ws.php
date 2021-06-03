@@ -51,15 +51,18 @@ if (!isset($_SESSION['se'])) {
     $_SESSION['se'] = new sessObj;
 }
 
-if ($_SESSION['se']->rateLimit() === false) {
-    http_response_code(429);
-    die();
+// Rate Limiter Activation
+if ($_SESSION['se']->rateLimit() === true && $_SESSION['se']->requestLimit() === true) {
+    // http_response_code(429);
+    // die();
+    $_SESSION['se']->lastSessionRequest();
 }
 
-if ($_SESSION['se']->requestLimit() === false) {
-    http_response_code(429);
-    die();
-}
+// if ($_SESSION['se']->rateLimit() === true) {
+//     http_response_code(429);
+//     die();
+// }
+
 
 // $action_type = $_SERVER['QUERY_STRING'];
 // $db->changelog($date, $browser, $ip, $action_type, $UserID);

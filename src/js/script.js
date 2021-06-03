@@ -374,10 +374,6 @@ function postLoginFetch() {
       if (response.status === 401) {
         console.log('Not permitted');
         errormessage("Error: Not permitted");
-        // localStorage.setItem('login', "false");
-        // fetch('api/ws.php?action=logout', {
-        //   method: 'GET'
-        // })
       }
       if (response.status === 501) {
         console.log('Not implemented');
