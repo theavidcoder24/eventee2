@@ -1,6 +1,7 @@
 /* - User Logout - */
 export function UserLogout(setLoggedIn) {
   fetch('http://localhost/eventee2/api/ws.php?action=logout', {
+    // http://localhost/eventee2/api/ws.php?action=adminLogin
     method: 'GET',
     credentials: 'include'
   })
