@@ -23,7 +23,7 @@ if (!isset($_SERVER['HTTP_REFERER'])) {
 require('session.php');
 
 // Checks that the referer matches the defined if it's not then end
-if ($_SERVER['HTTP_REFERER'] == "http://localhost/eventee2/" || $_SERVER['HTTP_REFERER'] == "http://localhost:3000/") {
+if ($_SERVER['HTTP_REFERER'] !== "http://localhost/eventee2/" || $_SERVER['HTTP_REFERER'] == "http://localhost:3000/") {
     // 192.168.43.225
     // https://malloriecini.com/
     echo "Valid address";
