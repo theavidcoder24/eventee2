@@ -50,7 +50,7 @@ if (!isset($_SESSION['se'])) {
 
 // Rate Limiter Activation
 //if ($_SESSION['se']->rateLimit() == true) {
-if ($_GET["action"] = "logout") {
+if ($_GET["action"] == "logout") {
 } else {
     if ($_SESSION['se']->requestLimit() == true) {
         http_response_code(429);
@@ -141,10 +141,8 @@ if (isset($_GET["action"])) {
                     $errorMsg = "Error: Password Field is Empty";
                     die;
                 }
-                if (isset($log_email)) {
-                    $db->login($log_email, $log_pass, $date, $browser, $ip, $action_type, $UserID);
+                if ($db->login($log_email, $log_pass, $date, $browser, $ip, $action_type, $UserID)) {
                     http_response_code(202);
-                    // echo "Welcome " . $_SESSION['UserID'];
                 } else {
                     http_response_code(501);
                 }
@@ -175,10 +173,8 @@ if (isset($_GET["action"])) {
                     $errorMsg = "Error: Password Field is Empty";
                     die;
                 }
-                if (isset($admin_email)) {
-                    $db->adminLogin($admin_email, $admin_pass, $date, $browser, $ip, $action_type, $UserID);
+                if ($db->adminLogin($admin_email, $admin_pass, $date, $browser, $ip, $action_type, $UserID)) {
                     http_response_code(202);
-                    // echo "Welcome " . $_SESSION['UserID'];
                 } else {
                     http_response_code(501);
                 }
@@ -321,7 +317,7 @@ if (isset($_GET["action"])) {
             break;
             /* As a default the default case is set to a 501 error so that it is catgetorised as a general error */
         default:
-            // http_response_code(501);
+            http_response_code(404);
             break;
     }
 } else if (!isset($_GET["action"])) {
