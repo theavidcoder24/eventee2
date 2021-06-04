@@ -22,6 +22,7 @@ require('session.php');
 // Checks that the referer matches the defined if it's not then end
 if ($_SERVER['HTTP_REFERER'] == "http://localhost/eventee2" || $_SERVER['HTTP_REFERER'] == "http://localhost/eventee2/admin-panel2/" || $_SERVER['HTTP_REFERER'] == "http://localhost:3000/" || "http://localhost/") {
     // 192.168.43.2
+    // https://malloriecini.com/
 } else {
     http_response_code(502);
     die("Not a valid IP Address");

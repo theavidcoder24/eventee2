@@ -333,7 +333,8 @@
                             <input id="log_email" name="log_email" type="email" class="validate"
                                 pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="Email" minlength="5"
                                 maxlength="30" required>
-                            <span class="helper-text" data-error="Please enter a valid email with at least 2 characters"
+                            <span class="helper-text"
+                                data-error="Please enter a valid email with at least 2 characters and contains an @"
                                 data-success="Correct"></span>
                             <span id="errorMsg"></span>
                         </div>
@@ -436,7 +437,7 @@
                                     <i class="material-icons prefix">email</i>
                                     <input id="reg_email" name="reg_email" type="email" class="validate"
                                         placeholder="Email">
-                                    <span class="helper-text" data-error="Please enter a valid email"
+                                    <span class="helper-text" data-error="Please enter a valid email with at least 2 characters and contains an @"
                                         data-success="Correct"></span>
                                 </div>
                                 <div class="input-field col s12">
@@ -529,14 +530,14 @@
                                     <i class="material-icons prefix">email</i>
                                     <input id="log_email_e" type="email" class="validate" placeholder="Email"
                                         onblur="saveEmail(this)">
-                                    <span class="helper-text" data-error="Please enter a valid email"
+                                    <span class="helper-text" data-error="Please enter a valid email with at least 2 characters and contains an @"
                                         data-success="Correct"></span>
                                 </div>
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">phone</i>
                                     <input id="log_phone_e" type="text" class="validate" placeholder="Phone Number"
                                         onblur="savePhone(this)">
-                                    <span class="helper-text" data-error="Please enter a valid email"
+                                    <span class="helper-text" data-error="Please enter a valid phone number"
                                         data-success="Correct"></span>
                                 </div>
                                 <div class="input-field col s12">
@@ -550,7 +551,8 @@
                                     <i class="material-icons prefix">vpn_key</i>
                                     <input id="log_pass_e" type="password" class="validate" placeholder="Password"
                                         onblur="savePass(this)">
-                                    <span class="helper-text" data-error="Please enter a valid password"
+                                    <span class="helper-text"
+                                        data-error="Must contain at least one number, one uppercase letter, and at least 3 or more characters"
                                         data-success="Correct" max="20"></span>
                                 </div>
                             </form>
