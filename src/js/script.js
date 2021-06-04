@@ -435,7 +435,7 @@ function isLogged() {
 }
 
 // function currentuserid() {
-//   return fetch('api/api.php?action=userid', {
+//   return fetch('api/ws.php?action=userid', {
 //     method: 'GET',
 //   })
 //     .then(function (response) {
@@ -993,7 +993,7 @@ var chip = {
 };
 
 
-/* Maps */
+/* Google Maps */
 
 // let map;
 

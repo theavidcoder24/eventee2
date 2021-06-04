@@ -14,20 +14,22 @@ function DisplayEvents() {
   }, []);
 
   function pullEvents() {
-    fetch('http://localhost/eventee2/api/ws.php?action=displayEvents', {
-      method: "GET",
-      credentials: "include",
-    }).then((res) => {
-      if (res.status === 202) {
-        res.json().then((data) => {
-          setEvent(data);
-          console.log(data);
-        });
-      }
-      if (res.status === 501) {
-        setEvent("no event");
-      }
-    })
+    fetch('http://localhost/eventee2/api/ws.php?action=displayEvents',
+      // https://adminpanel.malloriecini.com/api/ws.php?action=displayEvents
+      {
+        method: "GET",
+        credentials: "include",
+      }).then((res) => {
+        if (res.status === 202) {
+          res.json().then((data) => {
+            setEvent(data);
+            console.log(data);
+          });
+        }
+        if (res.status === 501) {
+          setEvent("no event");
+        }
+      })
   }
 
   return (

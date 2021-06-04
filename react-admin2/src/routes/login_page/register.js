@@ -53,6 +53,7 @@ export default function PostRegFetch() {
         regdetails.append('register_user', register_user.value);
         // each form element goes into the fd object ^
         fetch('http://localhost/eventee2/api/ws.php?action=register', {
+            // https://adminpanel.malloriecini.com/api/ws.php?action=register
             method: 'POST',
             body: regdetails,
             credentials: 'include',
@@ -103,37 +104,45 @@ export default function PostRegFetch() {
                     <div className="input-field col s12">
                         <i className="material-icons prefix">account_circle</i>
                         <input id="reg_name" type="text" className="validate tooltipped" placeholder="Full Name"
-                            data-position="top" data-tooltip="Must be more than 2 characters" {...register("fullname", { required: true, minLength: 1 })}></input>
+                            data-position="top" data-tooltip="Must be more than 2 characters" {...register("regname", { required: true, minLength: 2 })}></input>
                         {/* errors will return when field validation fails  */}
-                        {errors.fullname && <span>This field is required</span>}
+                        {errors.regname && <span>This field is required</span>}
                         <span className="helper-text" data-error="Please enter a valid name"
                             data-success="Correct"></span>
                         <div className="errorMsg"></div>
                     </div>
                     <div className="input-field col s12">
                         <i className="material-icons prefix">phone</i>
-                        <input id="reg_phone" type="tel" className="validate" placeholder="Phone Number"></input>
+                        <input id="reg_phone" type="tel" className="validate" placeholder="Phone Number" {...register("regphone", { required: true, minLength: 10 })}></input>
+                        {/* errors will return when field validation fails  */}
+                        {errors.regphone && <span>This field is required</span>}
                         <span className="helper-text" data-error="Please enter a valid phone number"
                             data-success="Correct"></span>
                     </div>
                     <div className="input-field col s12">
                         <i className="material-icons prefix">email</i>
                         <input id="reg_email" name="reg_email" type="email" className="validate"
-                            placeholder="Email"></input>
+                            placeholder="Email" {...register("regemail", { required: true, minLength: 2 })}></input>
+                        {/* errors will return when field validation fails  */}
+                        {errors.regemail && <span>This field is required</span>}
                         <span className="helper-text" data-error="Please enter a valid email"
                             data-success="Correct"></span>
                     </div>
                     <div className="input-field col s12">
                         <i className="material-icons prefix">cake</i>
                         <input type="text" id="reg_dob" className="datepicker validate"
-                            placeholder="Date of Birth *"></input>
+                            placeholder="Date of Birth *" {...register("regdob", { required: true, minLength: 2 })}></input>
+                        {/* errors will return when field validation fails  */}
+                        {errors.regdob && <span>This field is required</span>}
                         <span className="helper-text" data-error="Please enter a valid date of birth"
                             data-success="Correct" max="20"></span>
                     </div>
                     <div className="input-field col s12">
                         <i className="material-icons prefix">vpn_key</i>
                         <input id="reg_pass" name="reg_pass" type="password" className="validate"
-                            placeholder="Password"></input>
+                            placeholder="Password" {...register("regpass", { required: true, minLength: 2 })}></input>
+                        {/* errors will return when field validation fails  */}
+                        {errors.regpass && <span>This field is required</span>}
                         <span className="helper-text" data-error="Please enter a valid password"
                             data-success="Correct" max="20"></span>
                     </div>

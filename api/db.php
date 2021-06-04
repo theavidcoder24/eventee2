@@ -102,7 +102,7 @@ class dbObj
                 /* Assign the session variables */
                 $_SESSION["login"] = 'true';
                 $_SESSION['LoginEmail'] = $row['Email'];
-                $_SESSION["access_rights"] = $row["AccessRights"];
+                $_SESSION["AccessRights"] = $row["AccessRights"];
                 $_SESSION['time_start_login'] = time();
                 time('H:i:s');
 
@@ -110,7 +110,7 @@ class dbObj
 
                 return true;
             } else {
-                echo "Login credentials are incorrect";
+                // echo "Login credentials are incorrect";
                 return false;
             }
         } catch (PDOException $ex) {
@@ -154,10 +154,8 @@ class dbObj
                     $_SESSION['time_start_login'] = time();
                     time('H:i:s');
 
-                    // $UserID = $_SESSION["UserID"];
-
                     return true;
-                } elseif ($row["AccessRights"] == null) {
+                } elseif ($row["AccessRights"] == 'User') {
                     // Not admin!
                     echo "not admin";
                     return false;
@@ -192,7 +190,7 @@ class dbObj
     // }
 
     /* -- Create Events Function -- */
-    public function createEvents($event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time, $date, $browser, $ip, $action_type)
+    public function createEvents($event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time, $date, $browser, $ip, $action_type, $UserID)
     {
         db_connection();
         try {
@@ -208,14 +206,16 @@ class dbObj
             $stmt->bindValue(':event_time', $event_time);
             $stmt->execute();
 
+            $UserID = $_SESSION["UserID"];
+
             /* - Changelog Table - */
-            $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type) VALUES (:date, :browser, :ip, :action_type)");
+            $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type, UserID) VALUES (:date, :browser, :ip, :action_type, :UserID)");
             $stmt->bindValue(':date', $date);
             $stmt->bindValue(':browser', $browser);
             $stmt->bindValue(':ip', $ip);
             $stmt->bindValue(':action_type', $action_type);
+            $stmt->bindValue(':UserID', $UserID);
             $stmt->execute();
-
             $this->dbconn->commit();
         } catch (PDOException $ex) {
             $this->dbconn->rollBack();
@@ -278,7 +278,7 @@ class dbObj
     }
 
     /* -- Update Events Function -- */
-    public function updateEvent($evid, $update_ev_name, $update_ev_desc, $update_ev_cat, $update_ev_address, $update_ev_loc, $update_ev_date, $update_ev_time)
+    public function updateEvent($evid, $update_ev_name, $update_ev_desc, $update_ev_cat, $update_ev_address, $update_ev_loc, $update_ev_date, $update_ev_time, $date, $browser, $ip, $action_type, $UserID)
     {
         db_connection();
         try {
@@ -295,6 +295,17 @@ class dbObj
             $stmt->bindValue(':update_ev_date', $update_ev_date);
             $stmt->bindValue(':update_ev_time', $update_ev_time);
             // Execute the update statement
+            $stmt->execute();
+
+            $UserID = $_SESSION["UserID"];
+
+            /* - Changelog Table - */
+            $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type, UserID) VALUES (:date, :browser, :ip, :action_type, :UserID)");
+            $stmt->bindValue(':date', $date);
+            $stmt->bindValue(':browser', $browser);
+            $stmt->bindValue(':ip', $ip);
+            $stmt->bindValue(':action_type', $action_type);
+            $stmt->bindValue(':UserID', $UserID);
             $stmt->execute();
 
             // Commit changes here 

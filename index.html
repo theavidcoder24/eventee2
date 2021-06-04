@@ -419,14 +419,16 @@
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">account_circle</i>
                                     <input id="reg_name" type="text" class="validate tooltipped" placeholder="Full Name"
-                                        data-position="top" data-tooltip="Must be more than 2 characters">
+                                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" data-position="top"
+                                        data-tooltip="Must be more than 2 characters">
                                     <span class=" helper-text" data-error="Please enter a valid name"
                                         data-success="Correct"></span>
                                     <div class="errorMsg"></div>
                                 </div>
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">phone</i>
-                                    <input id="reg_phone" type="tel" class="validate" placeholder="Phone Number">
+                                    <input id="reg_phone" type="tel" class="validate" placeholder="Phone Number"
+                                        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
                                     <span class="helper-text" data-error="Please enter a valid phone number"
                                         data-success="Correct"></span>
                                 </div>
@@ -440,7 +442,7 @@
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">cake</i>
                                     <input type="text" id="reg_dob" class="datepicker validate"
-                                        placeholder="Date of Birth *">
+                                        placeholder="Date of Birth *" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
                                     <span class="helper-text" data-error="Please enter a valid date of birth"
                                         data-success="Correct" max="20"></span>
                                 </div>
@@ -639,7 +641,7 @@
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">title</i>
                                     <input id="event_name" type="text" class="validate" placeholder="Event Name"
-                                        pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}">
+                                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
                                     <span class="helper-text" data-error="Please enter a valid name"
                                         data-success="Correct"></span>
                                 </div>
@@ -682,28 +684,28 @@
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">map</i>
                                     <input id="event_address" type="text" class="validate" placeholder="Event Address"
-                                        pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}">
+                                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
                                     <span class="helper-text" data-error="Please enter a valid address"
                                         data-success="Correct" max="20"></span>
                                 </div>
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">flag</i>
                                     <input id="event_loc" type="text" class="validate" placeholder="Event Location"
-                                        pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}">
+                                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
                                     <span class="helper-text" data-error="Please enter a valid location"
                                         data-success="Correct" max="20"></span>
                                 </div>
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">date_range</i>
                                     <input type="text" class="datepicker autoClose" id="event_date"
-                                        placeholder="Event Date" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}">
+                                        placeholder="Event Date" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
                                     <span class="helper-text" data-error="Please enter a valid date"
                                         data-success="Correct" max="20"></span>
                                 </div>
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">schedule</i>
                                     <input type="text" class="timepicker autoClose" id="event_time"
-                                        placeholder="Event Time" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}">
+                                        placeholder="Event Time" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
                                     <span class="helper-text" data-error="Please enter a valid time"
                                         data-success="Correct" max="20"></span>
                                 </div>

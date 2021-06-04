@@ -28,15 +28,26 @@ class sessObj
         array_push($this->timeLimit, $time);
         $limitCount = count($this->timeLimit);
         // Switch limit count to 10 to see die error in action!
+        // PROJ2 limit counter = 1000 requests
         if ($limitCount > 1000) {
             return true;
             die("Request exceeded within 24 hours");
         } else {
             return false;
         }
+
+        // PROJ4 Edit limiter counter = 500 requests
+        // if ($limitCount > 1000) {
+        //     return true;
+        //     die("Request exceeded within 24 hours");
+        // } else {
+        //     return false;
+        // }
+
         // Gets rid of all the requests older than 24 hours
         // 24 hours converts to 864000 seconds 
         $this->last24hours = time() - 86400;
+        // Once user logs out the session is destroyed and rate limiting resets
         foreach ($this->timeLimit as $time) {
             if ($time < $this->last24hours) {
                 $key = array_search($time, $this->timeLimit);

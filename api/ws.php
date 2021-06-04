@@ -20,18 +20,18 @@ $db = new dbObj;
 require('session.php');
 
 // Checks that the referer matches the defined if it's not then end
-// if ($_SERVER['HTTP_REFERER'] == "http://localhost/eventee2" || $_SERVER['HTTP_REFERER'] == "http://localhost/eventee2/admin-panel2/" || $_SERVER['HTTP_REFERER'] == "http://localhost:3000/" || "http://localhost/") {
-//     // 192.168.43.2
-// } else {
-//     http_response_code(502);
-//     die("Not a valid IP Address");
-//     // or it will 200 request 
-// }
+if ($_SERVER['HTTP_REFERER'] == "http://localhost/eventee2" || $_SERVER['HTTP_REFERER'] == "http://localhost/eventee2/admin-panel2/" || $_SERVER['HTTP_REFERER'] == "http://localhost:3000/" || "http://localhost/") {
+    // 192.168.43.2
+} else {
+    http_response_code(502);
+    die("Not a valid IP Address");
+    // or it will 200 request 
+}
 
 // IP Whitelist
-// if ($_SERVER['REMOTE_ADDR'] != "[::1]:80") {
-//     http_response_code(501);
-// }
+if ($_SERVER['REMOTE_ADDR'] != "[::1]:80") {
+    http_response_code(501);
+}
 
 // Sanitise input
 function testInput($data)
@@ -54,7 +54,6 @@ if ($_GET["action"] == "logout") {
     if ($_SESSION['se']->requestLimit() == true || $_SESSION['se']->rateLimit() == true) {
         http_response_code(429);
         die();
-        // $_SESSION['se']->lastSessionRequest();
     }
 }
 
@@ -78,37 +77,36 @@ if (isset($_GET["action"])) {
                 $browser = $_SERVER['HTTP_USER_AGENT'];
                 $ip = $_SERVER['REMOTE_ADDR'];
                 $action_type = $_POST['register_user'];
-                // $UserID = $this->UserID;
                 /* - Server Validation - */
                 // Check if input field is empty
-                // if ($reg_name == "") {
-                //     $errorMsg = "Error: Full Name Field is Empty";
-                //     die;
-                // }
-                // if ($reg_phone == "") {
-                //     $errorMsg = "Error: Phone Number Field is Empty";
-                //     die;
-                // }
-                // // Check if the phone number field is numeric
-                // elseif (is_numeric(trim($reg_phone)) == false) {
-                //     $errorMsg = "Error: Please enter numeric value";
-                //     die;
-                // }
-                // if ($reg_dob == "") {
-                //     $errorMsg = "Error: Date of Birth Field is Empty";
-                //     die;
-                // }
-                // if ($reg_email == "") {
-                //     $errorMsg = "Error: Email Field is Empty";
-                //     die;
-                // } elseif (!preg_match("/^[_\.0-9a-zA-Z-]+@([0-9a-zA-Z][0-9a-zA-Z-]+\.)+[a-zA-Z]{2,50}/i", $reg_email)) {
-                //     $errorMsg = 'error : You did not enter a valid email.';
-                //     die;
-                // }
-                // if ($reg_pass == "") {
-                //     $errorMsg = "Error: Password Field is Empty";
-                //     die;
-                // }
+                if ($reg_name == "") {
+                    $errorMsg = "Error: Full Name Field is Empty";
+                    die;
+                }
+                if ($reg_phone == "") {
+                    $errorMsg = "Error: Phone Number Field is Empty";
+                    die;
+                }
+                // Check if the phone number field is numeric
+                elseif (is_numeric(trim($reg_phone)) == false) {
+                    $errorMsg = "Error: Please enter numeric value";
+                    die;
+                }
+                if ($reg_dob == "") {
+                    $errorMsg = "Error: Date of Birth Field is Empty";
+                    die;
+                }
+                if ($reg_email == "") {
+                    $errorMsg = "Error: Email Field is Empty";
+                    die;
+                } elseif (!preg_match("/^[_\.0-9a-zA-Z-]+@([0-9a-zA-Z][0-9a-zA-Z-]+\.)+[a-zA-Z]{2,50}/i", $reg_email)) {
+                    $errorMsg = 'error : You did not enter a valid email.';
+                    die;
+                }
+                if ($reg_pass == "") {
+                    $errorMsg = "Error: Password Field is Empty";
+                    die;
+                }
                 $db->register($reg_name, $reg_phone, $reg_email, $reg_dob, $reg_pass, $access_rights, $date, $browser, $ip, $action_type);
                 http_response_code(202);
             } else {
@@ -175,7 +173,8 @@ if (isset($_GET["action"])) {
                 if ($db->adminLogin($admin_email, $admin_pass, $date, $browser, $ip, $action_type, $UserID)) {
                     http_response_code(202);
                 } else {
-                    http_response_code(501);
+                    // Not authorised
+                    http_response_code(401);
                 }
             }
             break;
@@ -210,41 +209,36 @@ if (isset($_GET["action"])) {
                 $action_type = $_POST['createEvent'];
                 /* - Server Validation - */
                 // Check if input field is empty
-                // if ($event_name == "") {
-                //     $errorMsg = "Error: Event Name Field is Empty";
-                //     die;
-                // }
-                // if ($event_desc == "") {
-                //     $errorMsg = "Error: Event Description Field is Empty";
-                //     die;
-                // }
-                // if ($event_cat == "") {
-                //     $errorMsg = "Error: Event Category Field is Empty";
-                //     die;
-                // }
-                // if ($event_address == "") {
-                //     $errorMsg = "Error: Event Address Field is Empty";
-                //     die;
-                // }
-                // if ($event_loc == "") {
-                //     $errorMsg = "Error: Event Location Field is Empty";
-                //     die;
-                // }
-                // if ($event_date == "") {
-                //     $errorMsg = "Error: Event Name Field is Empty";
-                //     die;
-                // }
-                // if ($event_time == "") {
-                //     $errorMsg = "Error: Event Description Field is Empty";
-                //     die;
-                // }
-                // // Check if the phone number field is numeric
-                // elseif (is_numeric(trim($event_time)) == false) {
-                //     $errorMsg = "Error: Please enter numeric value";
-                //     die;
-                // }
+                if ($event_name == "") {
+                    $errorMsg = "Error: Event Name Field is Empty";
+                    die;
+                }
+                if ($event_desc == "") {
+                    $errorMsg = "Error: Event Description Field is Empty";
+                    die;
+                }
+                if ($event_cat == "") {
+                    $errorMsg = "Error: Event Category Field is Empty";
+                    die;
+                }
+                if ($event_address == "") {
+                    $errorMsg = "Error: Event Address Field is Empty";
+                    die;
+                }
+                if ($event_loc == "") {
+                    $errorMsg = "Error: Event Location Field is Empty";
+                    die;
+                }
+                if ($event_date == "") {
+                    $errorMsg = "Error: Event Name Field is Empty";
+                    die;
+                }
+                if ($event_time == "") {
+                    $errorMsg = "Error: Event Description Field is Empty";
+                    die;
+                }
                 // Call the function
-                $db->createEvents($event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time, $date, $browser, $ip, $action_type);
+                $db->createEvents($event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time, $date, $browser, $ip, $action_type, $UserID);
                 http_response_code(202);
             } else {
                 http_response_code(501);
@@ -296,7 +290,11 @@ if (isset($_GET["action"])) {
                 $update_ev_loc = testInput($objreg['update_ev_loc']);
                 $update_ev_date = testInput($objreg['update_ev_date']);
                 $update_ev_time = testInput($objreg['update_ev_time']);
-                $db->updateEvent($evid, $update_ev_name, $update_ev_desc, $update_ev_cat, $update_ev_address, $update_ev_loc, $update_ev_date, $update_ev_time);
+                $date = date('Y-m-d H:i:s');
+                $browser = $_SERVER['HTTP_USER_AGENT'];
+                $ip = $_SERVER['REMOTE_ADDR'];
+                $action_type = $_SERVER['QUERY_STRING'];
+                $db->updateEvent($evid, $update_ev_name, $update_ev_desc, $update_ev_cat, $update_ev_address, $update_ev_loc, $update_ev_date, $update_ev_time, $date, $browser, $ip, $action_type, $UserID);
                 http_response_code(202);
             } else {
                 http_response_code(400);
@@ -319,6 +317,7 @@ if (isset($_GET["action"])) {
             http_response_code(404);
             break;
     }
-} else if (!isset($_GET["action"])) {
-    die();
-}
+} 
+// else if (!isset($_GET["action"])) {
+//     die();
+// }
