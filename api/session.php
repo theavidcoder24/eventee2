@@ -30,7 +30,7 @@ class sessObj
         // If the current request passes 1000 requests limit within 24 hours the application stops
         if (time() - $this->lastTime < 864000) {
             // Switch limit count to 10 to see die error in action!
-            if ($limitCount > 100) {
+            if ($limitCount > 1000) {
                 http_response_code(429); // Too Many Requests!!
                 die("Request exceeded within 24 hours");
                 return false;
