@@ -37,7 +37,7 @@ class sessObj
         }
 
         // PROJ4 Edit limiter counter = 500 requests
-        // if ($limitCount > 1000) {
+        // if ($limitCount > 500) {
         //     return true;
         //     die("Request exceeded within 24 hours");
         // } else {

@@ -6,6 +6,8 @@ import React, { useState, useEffect } from "react";
 // import env from "react-dotenv";
 /* --------- Normal Admin --------- */
 import './App.css';
+// import FeedbackMessage from './components/FeedbackMessage.js';
+import infographic from './assets/infographic.jpg';
 import Login from './routes/login_page/login.js';
 import UserLogout from './routes/login_page/logout';
 import PostRegFetch from './routes/login_page/register';
@@ -36,7 +38,7 @@ function App() {
     <div className="App">
       <Router>
         <div>
-          <nav className="deep-purple darken-3">
+          <nav className="cyan darken-2">
             <ul>
               {loggedIn ?
                 <>
@@ -84,6 +86,7 @@ function App() {
 
               <Route exact path="/dashboard">
                 <h3>Dashboard Section</h3>
+                <img src={infographic}></img>
               </Route>
             </>
               :

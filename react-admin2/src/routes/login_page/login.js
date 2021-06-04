@@ -46,7 +46,7 @@ export default function Login(props) {
                     history.push("/dashboard");
                 }
                 if (response.status === 401) {
-                    console.log('Not permitted');
+                    console.log('Not authorised');
                     props.setLoggedIn(false);
                     localStorage.setItem('login', "false");
                 }
