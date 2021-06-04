@@ -11,6 +11,7 @@ class sessObj
     // Get limit + last time for rate limit
     public $timeLimit;
     public $lastTime;
+    public $last24hours;
 
     // This records the the time of the last session request into the last time variable
     public function __construct()
@@ -23,25 +24,33 @@ class sessObj
     /* - Rate Limiting - */
     function requestLimit()
     {
+
         $time = time();
         array_push($this->timeLimit, $time);
         $limitCount = count($this->timeLimit);
         // 24 hours converts to 864000 seconds 
         // If the current request passes 1000 requests limit within 24 hours the application stops
-        if (time() - $this->lastTime < 864000) {
+        //if (time() == $this->lastTime < 864000) {
             // Switch limit count to 10 to see die error in action!
             if ($limitCount > 1000) {
-                http_response_code(429); // Too Many Requests!!
-                die("Request exceeded within 24 hours");
-                return false;
-            } else {
+                //http_response_code(429); // Too Many Requests!!
                 return true;
+                die("Request exceeded within 24 hours");
+            } else {
+                return false;
+            }
+            $this->last24hours = time()-86400;
+            foreach($this->timeLimit as $time) {
+                if ($time < $this->last24hours) {
+                    $key = array_search($time, $this->timeLimit);
+                    array_splice($this->timeLimit, $key);
+                }
             }
             // return false;
-        } else {
+        //} else {
             // If the request time is below 24 hours
-            return true;
-        }
+        //    return false;
+        //}
     }
 
     // This function will save the time of the last request that was made
@@ -54,17 +63,16 @@ class sessObj
     /* The rate limiting function that is programmed into the project will check if there is a session set. It sets the start time and if it happens to be null the function will set the current time to the start time */
     function rateLimit()
     {
-        date_default_timezone_set("Australia/Brisbane");
+        // date_default_timezone_set("Australia/Brisbane");
         // This if statement checks if the current session request is empty
         if (isset($_SESSION['last_session_request'])) {
             // if the currengt request time is equal or more than the previous request time
-            if ($_SESSION['last_session_request'] >= time() - 1) {
-                die;
+            if ($_SESSION['last_session_request'] == time()) {
                 echo "Surpassed Rate limit";
                 http_response_code(429); // Too Many Requests!!
-
+                die;
             } else {
-                return true;
+                return false;
             }
         } else {
             // if the request is empty the request time will be recorded into the session obj

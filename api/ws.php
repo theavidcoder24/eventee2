@@ -49,10 +49,14 @@ if (!isset($_SESSION['se'])) {
 }
 
 // Rate Limiter Activation
-if ($_SESSION['se']->rateLimit() === true && $_SESSION['se']->requestLimit() === true) {
-    // http_response_code(429);
-    // die();
-    $_SESSION['se']->lastSessionRequest();
+//if ($_SESSION['se']->rateLimit() == true) {
+if ($_GET["action"] = "logout") {
+} else {
+    if ($_SESSION['se']->requestLimit() == true) {
+        http_response_code(429);
+        die();
+        // $_SESSION['se']->lastSessionRequest();
+    }
 }
 
 // $action_type = $_SERVER['QUERY_STRING'];
