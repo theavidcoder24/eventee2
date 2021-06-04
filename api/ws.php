@@ -56,7 +56,6 @@ if (!isset($_SESSION['se'])) {
 if ($_GET["action"] == "logout") {
 } else {
     if ($_SESSION['se']->requestLimit() == true || $_SESSION['se']->rateLimit() == true) {
-        // 
         http_response_code(429);
         die();
     }
