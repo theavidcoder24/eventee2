@@ -49,7 +49,6 @@ if (!isset($_SESSION['se'])) {
 }
 
 // Rate Limiter Activation
-//if ($_SESSION['se']->rateLimit() == true) {
 if ($_GET["action"] == "logout") {
 } else {
     if ($_SESSION['se']->requestLimit() == true || $_SESSION['se']->rateLimit() == true) {
