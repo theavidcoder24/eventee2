@@ -31,24 +31,24 @@ class sessObj
         // 24 hours converts to 864000 seconds 
         // If the current request passes 1000 requests limit within 24 hours the application stops
         //if (time() == $this->lastTime < 864000) {
-            // Switch limit count to 10 to see die error in action!
-            if ($limitCount > 1000) {
-                //http_response_code(429); // Too Many Requests!!
-                return true;
-                die("Request exceeded within 24 hours");
-            } else {
-                return false;
+        // Switch limit count to 10 to see die error in action!
+        if ($limitCount > 1000) {
+            //http_response_code(429); // Too Many Requests!!
+            return true;
+            die("Request exceeded within 24 hours");
+        } else {
+            return false;
+        }
+        $this->last24hours = time() - 86400;
+        foreach ($this->timeLimit as $time) {
+            if ($time < $this->last24hours) {
+                $key = array_search($time, $this->timeLimit);
+                array_splice($this->timeLimit, $key);
             }
-            $this->last24hours = time()-86400;
-            foreach($this->timeLimit as $time) {
-                if ($time < $this->last24hours) {
-                    $key = array_search($time, $this->timeLimit);
-                    array_splice($this->timeLimit, $key);
-                }
-            }
-            // return false;
+        }
+        // return false;
         //} else {
-            // If the request time is below 24 hours
+        // If the request time is below 24 hours
         //    return false;
         //}
     }
