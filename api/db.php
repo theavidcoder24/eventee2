@@ -96,6 +96,7 @@ class dbObj
             $stmt->execute();
             $this->dbconn->commit();
 
+            // Verify password
             if (password_verify($log_pass, $row['UserPassword'])) {
                 // echo 'Password is valid!';
                 /* Set the session variables for each user that logs in to also record what the users will interact with */
@@ -144,7 +145,9 @@ class dbObj
             $stmt->execute();
             $this->dbconn->commit();
 
+            // Verify password
             if (password_verify($admin_pass, $row['UserPassword'])) {
+                // Check if user access rights = Admin
                 if ($row["AccessRights"] = 'Admin') {
                     /* Set the session variables for the admin user that logs in to also record what they will interact with */
                     $_SESSION["login"] = 'true';
@@ -161,6 +164,7 @@ class dbObj
                     return false;
                 }
             } else {
+                // echo "Login credentials are incorrect";
                 return false;
             }
         } catch (PDOException $ex) {

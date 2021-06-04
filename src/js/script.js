@@ -420,14 +420,14 @@ function isLogged() {
         }
         return;
       }
-      if (response.status === 429) {
-        console.log('Rate limit exceeded');
-        localStorage.setItem('login', "false");
-        if (localStorage.getItem('login') == 'false') {
-          userLogout();
-          hideUserInfo();
-        }
-      }
+      // if (response.status === 429) {
+      //   console.log('Rate limit exceeded');
+      //   localStorage.setItem('login', "false");
+      //   if (localStorage.getItem('login') == 'false') {
+      //     userLogout();
+      //     hideUserInfo();
+      //   }
+      // }
     })
     .catch(function (err) {
       console.log(err);
