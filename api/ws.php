@@ -23,18 +23,18 @@ if (!isset($_SERVER['HTTP_REFERER'])) {
 require('session.php');
 
 // Checks that the referer matches the defined if it's not then end
-if ($_SERVER['HTTP_REFERER'] == "http://localhost/eventee2" || $_SERVER['HTTP_REFERER'] == "http://localhost/eventee2/admin-panel2/" || $_SERVER['HTTP_REFERER'] == "http://localhost:3000/" || "http://localhost/") {
+if ($_SERVER['HTTP_REFERER'] !== "http://localhost/eventee2/" || $_SERVER['HTTP_REFERER'] == "http://localhost:3000/") {
     // 192.168.43.225
     // https://malloriecini.com/
+    echo "Valid address";
 } else {
     http_response_code(502);
     die("Not a valid IP Address");
-    // or it will 200 request 
 }
 
 // IP Whitelist
 if ($_SERVER['REMOTE_ADDR'] != "[::1]:80") {
-    http_response_code(501);
+    http_response_code(502);
 }
 
 // Sanitise input

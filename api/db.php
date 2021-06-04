@@ -160,7 +160,7 @@ class dbObj
                     return true;
                 } elseif ($row["AccessRights"] == 'User') {
                     // Not admin!
-                    echo "not admin";
+                    // echo "not admin";
                     return false;
                 }
             } else {

@@ -29,20 +29,20 @@ class sessObj
         $limitCount = count($this->timeLimit);
         // Switch limit count to 10 to see die error in action!
         // PROJ2 limit counter = 1000 requests
-        if ($limitCount > 1000) {
-            return true;
-            die("Request exceeded within 24 hours");
-        } else {
-            return false;
-        }
-
-        // PROJ4 Edit limiter counter = 500 requests
-        // if ($limitCount > 500) {
+        // if ($limitCount > 1000) {
         //     return true;
         //     die("Request exceeded within 24 hours");
         // } else {
         //     return false;
         // }
+
+        // PROJ4 Edit limiter counter = 500 requests
+        if ($limitCount > 500) {
+            return true;
+            die("Request exceeded within 24 hours");
+        } else {
+            return false;
+        }
 
         // Gets rid of all the requests older than 24 hours
         // 24 hours converts to 864000 seconds 
