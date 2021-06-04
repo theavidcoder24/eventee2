@@ -49,7 +49,8 @@ class sessObj
         $this->last24hours = time() - 86400;
         // Once user logs out the session is destroyed and rate limiting resets
         foreach ($this->timeLimit as $time) {
-            if ($time < $this->last24hours) {
+            // - 0.5 added for PROJ4
+            if ($time < $this->last24hours - 0.5) {
                 $key = array_search($time, $this->timeLimit);
                 array_splice($this->timeLimit, $key);
             }
@@ -69,8 +70,8 @@ class sessObj
         // This if statement checks if the current session request is empty
         if (isset($_SESSION['last_session_request'])) {
             // if the currennt request time is equal to the request time
-            if ($_SESSION['last_session_request'] == time()) {
-                echo "Surpassed Rate limit";
+            if ($_SESSION['last_session_request'] == time() - 1) {
+                echo "Above Rate limit!";
                 http_response_code(429); // Too Many Requests!!
                 die;
             } else {
