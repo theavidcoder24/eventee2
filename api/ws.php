@@ -27,7 +27,7 @@ if ($_SERVER['HTTP_REFERER'] == "http://localhost/eventee2/" || $_SERVER['HTTP_R
     // For debugging purposes and checking address use !== instead 
     // 192.168.43.225
     // https://malloriecini.com/
-    echo "Valid address";
+    // echo "Valid address";
 } else {
     http_response_code(502);
     die("Not a valid IP Address");

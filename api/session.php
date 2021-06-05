@@ -82,6 +82,7 @@ class sessObj
             $_SESSION['last_session_request'] = time();
         }
     }
+    
 
     /* This session function checks if the user is logged in by refering to the session variable login whether it's set to true or false based on the sesssion array */
     function is_logged_in()

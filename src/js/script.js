@@ -580,7 +580,7 @@ function displayEvents() {
     credentials: "include",
   })
     .then(function (response) {
-      loadPage();
+      // loadPage();
       response.json().then(function (data) {
         localStorage.setItem("events", JSON.stringify(data));
         // console.log(data);
