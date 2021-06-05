@@ -759,20 +759,22 @@ function postUpdateEvent() {
       });
       // HTTP Response Codes
       if (response.status === 200) {
-        // loadPage();
         console.log(eventid.value);
       }
       if (response.status === 202) {
         console.log('Update Successful');
+        successmessage('Success: Update Event Successful');
       }
       if (response.status === 400) {
         errormessage('Error: Bad Request');
         console.log('Bad Request');
+        errormessage('Error: Bad Request');
         // console.log(eventid.value);
         return;
       }
       if (response.status === 401) {
         console.log('Not permitted');
+        errormessage('Error: Not Permitted');
         return;
       }
       if (response.status === 501) {
