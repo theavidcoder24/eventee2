@@ -1,10 +1,24 @@
 # Talend API Tester Scripts
 
 # register action request
+# simple
 curl -i -X POST \
    -H "Content-Type:application/json" \
  'http://localhost/eventee2/api/ws.php?action=register'
 
+#detailed
+curl -i -X POST \
+   -H "Content-Type:application/json" \
+   -d "action=register" \
+   -d "reg_fullname=Derek Hall" \
+   -d "reg_ph=045888987" \
+   -d "reg_dob=May 17, 1984" \
+   -d "reg_email=derek@email.com" \
+   -d "reg_pass=admin123" \
+   -d "registerUser=registerUser" \
+ 'http://localhost/eventee2/api/ws.php?action=register'
+
+#etc
  curl 'http://localhost/eventee2/api/ws.php?action=register' \
   -H 'Connection: keep-alive' \
   -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36' \
@@ -21,10 +35,24 @@ curl -i -X POST \
   --compressed
 
 # login action request
+# simple
 curl -i -X POST \
    -H "Content-Type:application/json" \
  'http://localhost/eventee2/api/ws.php?action=login'
 
+# detailed
+   curl -i -X POST \
+   -H "Content-Type:application/json" \
+   -d "action=login" \
+   -d "reg_fullname=Derek Hall" \
+   -d "reg_ph=045888987" \
+   -d "reg_dob=May 17, 1984" \
+   -d "reg_email=derek@email.com" \
+   -d "reg_pass=admin123" \
+   -d "registerUser=login_user" \
+ 'http://localhost/eventee2/api/ws.php?action=login'
+
+#etc
  curl 'http://localhost/eventee2/api/ws.php?action=login' \
   -H 'Connection: keep-alive' \
   -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36' \
@@ -39,6 +67,19 @@ curl -i -X POST \
   -H 'Cookie: PHPSESSID=hqcj429g2k92mg41ser3k4e833' \
   --data-binary $'------WebKitFormBoundarygpAHHCNlSuA0j5b5\r\nContent-Disposition: form-data; name="action"\r\n\r\nlogin\r\n------WebKitFormBoundarygpAHHCNlSuA0j5b5\r\nContent-Disposition: form-data; name="log_email"\r\n\r\n\r\n------WebKitFormBoundarygpAHHCNlSuA0j5b5\r\nContent-Disposition: form-data; name="log_pass"\r\n\r\n\r\n------WebKitFormBoundarygpAHHCNlSuA0j5b5--\r\n' \
   --compressed
+
+
+ # Admin Login
+ curl -i -X POST \
+   -H "Content-Type:application/json" \
+   -d "action=login_admin" \
+   -d "reg_fullname=Derek Hall" \
+   -d "reg_ph=045888987" \
+   -d "reg_dob=May 17, 1984" \
+   -d "reg_email=derek@email.com" \
+   -d "reg_pass=admin123" \
+   -d "login_admin=login_admin" \
+ 'http://localhost/eventee2/api/ws.php?action=adminLogin'
 
 # is_logged_in
 curl 'http://localhost/eventee2/api/ws.php?action=is_logged_in' \
@@ -62,6 +103,20 @@ curl -i -X GET \
 # createEvents 
 curl -i -X GET \
  'http://localhost/eventee2/api/ws.php?action=createEvents'
+
+  # detailed
+ curl -i -X POST \
+   -H "Content-Type:application/json" \
+   -d "action=createEvent" \
+   -d "eventName=Queens Street Meetup" \
+   -d "eventDescription=Lorem dhsjjshdshjhdjs" \
+   -d "eventCategory=Food & Drink" \
+   -d "eventAddress=Queens Street" \
+   -d "eventLocation=Queens Street" \
+   -d "eventDate=Mar 26, 2021" \
+   -d "eventTime=01:00 PM" \
+   -d "createEvent=createEvent" \
+ 'http://localhost/eventee2/api/ws.php?action=creatEvents'
  
 # displayEvents action request
 curl -i -X GET \
