@@ -37,7 +37,7 @@ class dbObj
     }
 
     /* -- New User Function -- */
-    public function register($reg_name, $reg_phone, $reg_email, $reg_dob, $reg_pass, $access_rights, $date, $browser, $ip, $action_type)
+    public function register($reg_name, $reg_phone, $reg_email, $reg_dob, $reg_pass, $access_rights, $date, $browser, $ip, $action_type, $UserID)
     {
         db_connection();
         try {
@@ -54,14 +54,17 @@ class dbObj
             $row = $stmt->fetch();
             $stmt->execute();
 
-            // $lastuserID = $this->dbconn->lastInsertID();
+            $_SESSION['UserID'] = $row['UserID'];
+
+            $UserID = $_SESSION["UserID"];
 
             /* - Changelog Table - */
-            $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type) VALUES (:date, :browser, :ip, :action_type)");
+            $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type, UserID) VALUES (:date, :browser, :ip, :action_type, :UserID)");
             $stmt->bindValue(':date', $date);
             $stmt->bindValue(':browser', $browser);
             $stmt->bindValue(':ip', $ip);
             $stmt->bindValue(':action_type', $action_type);
+            $stmt->bindValue(':UserID', $UserID);
             $stmt->execute();
 
             $this->dbconn->commit();
