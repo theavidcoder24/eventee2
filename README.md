@@ -21,7 +21,8 @@ https://github.com/theavidcoder24/eventee2
 
 # Project Installation
 
-Access Demo on https://malloriecini.com/
+Access Web App Demo on https://malloriecini.com/
+Admin Demo: https://adminpanel.malloriecini.com/
 
 In your database software create a new blank database then name it 'eventee2' and import the SQL file located in API folder
 deployScript.sh
@@ -59,10 +60,6 @@ Directs user to the right folder to install dependencies
 #### npm test
 
     Starts the test runner
-
-#### npm run eject
-
-    Removes this tool and copies build dependencies, configuration files and scripts into the app diretory. If you do this, you can't go back!
 
 # Technology used in whole project
 
