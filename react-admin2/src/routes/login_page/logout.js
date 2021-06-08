@@ -2,6 +2,7 @@
 export function UserLogout(setLoggedIn) {
   fetch('http://localhost/eventee2/api/ws.php?action=logout', {
     // https://adminpanel.malloriecini.com/api/ws.php?action=logout
+    // http://localhost/eventee2/api/ws.php?
     method: 'GET',
     credentials: 'include'
   })

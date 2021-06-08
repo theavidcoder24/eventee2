@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 // import DeleteRemoveEvent from './deleteEvent.js';
 // import fillUpdate from './updateEvent.js';
 // import updateEvent from './updateEvent.js';
+// import filterEvents from './filterEvents';
 
 
 /* - Display Events - */
@@ -16,6 +17,7 @@ function DisplayEvents() {
   function pullEvents() {
     fetch('http://localhost/eventee2/api/ws.php?action=displayEvents',
       // https://adminpanel.malloriecini.com/api/ws.php?action=displayEvents
+      // http://localhost/eventee2/api/ws.php?
       {
         method: "GET",
         credentials: "include",
@@ -27,7 +29,7 @@ function DisplayEvents() {
           });
         }
         if (res.status === 501) {
-          setEvent("no event");
+          setEvent([]);
         }
       })
   }
@@ -35,7 +37,7 @@ function DisplayEvents() {
   return (
     <div>
       <h3>Events List</h3>
-      {/* <button onClick={pullEvents()}>Display Events</button> */}
+      {/* <button>Display Events from South Bank</button> */}
       <div className="content">
         <table className="striped">
           <th>Event ID</th>

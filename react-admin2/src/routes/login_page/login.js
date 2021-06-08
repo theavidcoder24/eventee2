@@ -88,7 +88,7 @@ export default function Login(props) {
                 <button type="submit" id="login_admin" className="btn indigo waves-effect waves-light" name="login_admin" onClick={handleLogin}>Login</button>
                 <br></br>
                 <br></br>
-                <a href="/register">Don't have an account? Register</a>
+                {/* <Link to="/register">Don't have an account? Register</Link> */}
             </form>
         </div>
     );

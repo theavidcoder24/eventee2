@@ -136,7 +136,7 @@ class dbObj
 
             $_SESSION['UserID'] = $row['UserID'];
 
-            $UserID = $_SESSION["UserID"];
+            $UserID = $_SESSION['UserID'];
 
             /* - Changelog Table - */
             $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type, UserID) VALUES (:date, :browser, :ip, :action_type, :UserID)");
@@ -176,6 +176,22 @@ class dbObj
         }
     }
 
+    /* -- Display Events Function -- */
+    function displayUser()
+    {
+        try {
+            $mysql = "SELECT FullName, PhoneNumber, DateOfBirth, Email FROM users2 WHERE UserID = :UserID";
+            $stmt = $this->dbconn->prepare($mysql);
+            $stmt->bindValue(':UserID', $_SESSION['UserID']);
+            $stmt->execute();
+            $result = $stmt->fetchAll();
+            return $result;
+            http_response_code(503);
+            die();
+        } catch (PDOException $ex) {
+            throw $ex;
+        }
+    }
     // public function changelog($date, $browser, $ip, $action_type, $UserID)
     // {
     //     $this->dbconn->beginTransaction();
@@ -243,6 +259,14 @@ class dbObj
             throw $ex;
         }
     }
+
+    // function filterEventByLocation()
+    // {
+    //     $this->dbconn->beginTransaction();
+    //     $stmt = $this->dbconn->prepare("SELECT eventID, eventName, eventDescription, eventCategory, eventAddress, eventLocation, eventDate, eventTime FROM events WHERE eventLocation = 'South Bank'");
+    //     $stmt->execute();
+    //     $row = $stmt->fetch();
+    // }
 
     // Check if more than 5 checked
     // function checkAttendance($evid)

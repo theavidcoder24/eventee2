@@ -198,6 +198,20 @@ if (isset($_GET["action"])) {
             session_destroy();
             http_response_code(202);
             break;
+            /* - Display User - */
+        case "displayUser":
+            if ($_SESSION['se']->is_logged_in()) {
+                $result = $db->displayUser();
+                if ($result == false) {
+                    http_response_code(501);
+                } else {
+                    http_response_code(202);
+                    echo json_encode($result);
+                }
+            } else {
+                http_response_code(401);
+            }
+            break;
             /* - Create Events - */
         case "createEvents":
             if (isset($_POST["action"])) {
@@ -263,6 +277,19 @@ if (isset($_GET["action"])) {
                 http_response_code(401);
             }
             break;
+        // case "filterEventByLocation":
+        //     if ($_SESSION['se']->is_logged_in()) {
+        //         $result = $db->filterEventByLocation();
+        //         if ($result == false) {
+        //             http_response_code(501);
+        //         } else {
+        //             $db->displayEvents();
+        //             http_response_code(202);
+        //             echo json_encode($result);
+        //         }
+        //     } else {
+        //         http_response_code(401);
+        //     }
             // case "attendEvent":
 
             //     break;

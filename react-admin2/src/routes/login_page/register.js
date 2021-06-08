@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 
 /* - Register - */
-export default function PostRegFetch() {
+function PostRegFetch() {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data => console.log(data);
@@ -53,6 +53,7 @@ export default function PostRegFetch() {
         regdetails.append('register_user', register_user.value);
         // each form element goes into the fd object ^
         fetch('http://localhost/eventee2/api/ws.php?action=register', {
+            // http://localhost/eventee2/api/ws.php?action=register
             // https://adminpanel.malloriecini.com/api/ws.php?action=register
             method: 'POST',
             body: regdetails,
@@ -165,14 +166,15 @@ export default function PostRegFetch() {
                         </div>
                     </div>
                     <div className="center">
-                        <span className="center">Already a member?<Link to="/">
+                        <span className="center">Already a member?<Link to="/login">
                             Login</Link></span>
                     </div>
                 </div>
                 <input type="hidden" name="action" value="register" id="register_user"></input>
-                <button className="btn indigo waves-effect waves-light" onClick={handleRegister} type="submit" name="register"
-                >Join</button>
+                <button id="register_user" className="btn indigo waves-effect waves-light" onClick={handleRegister} type="submit" name="register_user">Join</button>
             </form>
         </div>
     )
 }
+
+export default PostRegFetch;

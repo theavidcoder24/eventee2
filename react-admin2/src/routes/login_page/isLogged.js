@@ -1,6 +1,8 @@
 /* - is logged in Fetch - */
 export function IsLogged() {
     fetch('http://localhost/eventee2/api/ws.php?action=is_logged_in',
+    // https://adminpanel.malloriecini.com/api/ws.php?action=is_logged_in
+    // http://localhost/eventee2/api/ws.php?action=is_logged_in
         {
             method: 'GET',
             credentials: 'include'
