@@ -203,7 +203,6 @@ if (isset($_GET["action"])) {
             http_response_code(202);
             break;
 
-
             /* - Display All Users - */
         case "displayAllUsers":
             if ($_SESSION['se']->is_logged_in()) {
@@ -219,7 +218,7 @@ if (isset($_GET["action"])) {
             }
             break;
 
-            /* - Display User - */
+            /* - Display Current User by ID - */
         case "displayUser":
             if ($_SESSION['se']->is_logged_in()) {
                 $result = $db->displayUser();
@@ -244,11 +243,11 @@ if (isset($_GET["action"])) {
                 $update_user_dob = testInput($objreg['update_user_dob']);
                 $update_user_email = testInput($objreg['update_user_email']);
                 $update_access_rights = testInput($objreg['update_access_rights']);
-                // $date = date('Y-m-d H:i:s');
-                // $browser = $_SERVER['HTTP_USER_AGENT'];
-                // $ip = $_SERVER['REMOTE_ADDR'];
-                // $action_type = $_SERVER['QUERY_STRING'];
-                $db->updateUser($update_user_name, $update_user_phone, $update_user_dob, $update_user_email, $update_access_rights);
+                $date = date('Y-m-d H:i:s');
+                $browser = $_SERVER['HTTP_USER_AGENT'];
+                $ip = $_SERVER['REMOTE_ADDR'];
+                $action_type = $_SERVER['QUERY_STRING'];
+                $db->updateUser($update_user_name, $update_user_phone, $update_user_dob, $update_user_email, $update_access_rights, $date, $browser, $ip, $action_type, $UserID);
                 http_response_code(202);
             } else {
                 http_response_code(400);

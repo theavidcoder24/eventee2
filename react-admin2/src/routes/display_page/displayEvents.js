@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 // import { createUseStyles } from 'react-jss';
-// import DeleteRemoveEvent from './deleteEvent.js';
+// import DeleteRemoveEvent from './deleteEvent';
 // import fillUpdate from './updateEvent.js';
 // import updateEvent from './updateEvent.js';
 
@@ -15,7 +15,7 @@ function DisplayEvents() {
   function pullEvents() {
     fetch('http://localhost/eventee2/api/ws.php?action=displayEvents',
       // https://adminpanel.malloriecini.com/api/ws.php?action=displayEvents
-      // http://localhost/eventee2/api/ws.php?
+      // http://localhost/eventee2/api/ws.php?action=displayEvents
       {
         method: "GET",
         credentials: "include",
@@ -30,6 +30,56 @@ function DisplayEvents() {
           setEvent([]);
         }
       })
+  }
+
+  /* Delete Events */
+  function DeleteRemoveEvent(eventid) {
+    console.log("Delete event with id " + eventid);
+
+    // events = JSON.parse(localStorage.getItem("events"));
+
+    // selectedEvent = events.filter(event => event[0] == eventid)[0];
+
+    // if (selectedEvent != null) {
+    //   console.log(selectedEvent);
+    //   document.getElementById("update_ev_name").value = selectedEvent[1];
+    //   document.getElementById("update_ev_desc").value = selectedEvent[2];
+    //   document.getElementById("update_ev_cat").value = selectedEvent[3];
+    //   document.getElementById("update_ev_address").value = selectedEvent[4];
+    //   document.getElementById("update_ev_loc").value = selectedEvent[5];
+    //   document.getElementById("update_ev_date").value = selectedEvent[6];
+    //   document.getElementById("update_ev_time").value = selectedEvent[7];
+    // }
+
+    var removefd = new FormData();
+    removefd.append('action', 'DeleteRemoveEvent');
+    removefd.append('eventid', eventid);
+
+    fetch('http://localhost/eventee2/api/ws.php?action=removeEvent', {
+      method: 'POST',
+      body: removefd,
+      credentials: 'include'
+    })
+      .then(async function (response) {
+        // Force error into console
+        response.text().then(function (text) {
+          console.log(text);
+        });
+        // HTTP Response Codes
+        if (response.status == 202) {
+          // successmessage("Success: Removal Successful");
+        }
+        if (response.status === 400) {
+          console.log('Bad Request');
+          // errormessage('Error: Bad Request');
+          return;
+        }
+        if (response.status === 401) {
+          console.log('Not permitted');
+          // errormessage('Error: Not Permitted');
+          return;
+        }
+      });
   }
 
   return (
@@ -55,52 +105,8 @@ function DisplayEvents() {
               <td>{event.eventLocation}</td>
               <td>{event.eventDate}</td>
               <td>{event.eventTime}</td>
-              <button href="#update_events" class="modal-trigger" value="' + row.eventID + '"><i class="material-icons">edit</i></button>
-              {/* onClick={fillUpdate(' + row.eventID + ')} */}
-              <div id="update_events" class="modal">
-                <h5 class="modal-close right" onclick="closeModal()">&#10005;</h5>
-                <div class="modal-content">
-                  <h4>Update Events</h4>
-                  <form action="api/ws.php" method="POST" onclick="return preventDefault()" novalidate>
-                    <div class="input-field">
-                      <i class="material-icons prefix">title</i>
-                      <input id="update_ev_name" name="update_ev_name" placeholder="Event Name" type="text"></input>
-                    </div>
-                    <div class="input-field">
-                      <i class="material-icons prefix">notes</i>
-                      <textarea id="update_ev_desc" name="update_ev_desc" class="materialize-textarea"
-                        placeholder="Event Description"></textarea>
-                    </div>
-                    <div class="input-field">
-                      <i class="material-icons prefix">category</i>
-                      <input type="text" id="update_ev_cat" name="update_ev_cat" placeholder="Enter Your Event Type"></input>
-                    </div>
-                    <div class="input-field col s6">
-                      <i class="material-icons prefix">map</i>
-                      <input type="text" id="update_ev_address" name="update_ev_address" placeholder="Enter Your Address"></input>
-                    </div>
-                    <div class="input-field col s6">
-                      <i class="material-icons prefix">flag</i>
-                      <input type="text" id="update_ev_loc" name="update_ev_loc" placeholder="Event Location"></input>
-                    </div>
-                    <div class="input-field col s6">
-                      <i class="material-icons prefix">date_range</i>
-                      <input type="text" id="update_ev_date" class="datepicker" placeholder="Event Date"></input>
-                    </div>
-                    <div class="input-field col s6">
-                      <i class="material-icons prefix">schedule</i>
-                      <input type="text" id="update_ev_time" class="timepicker" placeholder="Event Time"></input>
-                    </div>
-                    <input type="hidden" name="eventid" value="`+ row.eventID + `" id="eventid"></input>
-                    <input type="hidden" name="action" value="update" id="updateEvent"></input>
-                    {/* <button class="btn waves-effect waves-light" type="submit" onClick={updateEvent()}>Update
-                        Event</button> */}
-                  </form>
-                </div>
-
-              </div>
-              <button value="' + row.eventID + '"><i class="material-icons">delete</i></button>
-              {/* onClick={DeleteRemoveEvent(' + row.eventID + ')}  */}
+              <input type="hidden" name="eventid" value="`+ row.eventID + `" id="eventid"></input>
+              <button value="' + row.eventID + '" type="submit" onClick={DeleteRemoveEvent}><i class="material-icons">delete</i></button>
             </tr>
           ))}
         </table>

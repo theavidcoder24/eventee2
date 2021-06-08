@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from "react-hook-form";
 
-/* - Display User - */
+/* - Display User who's logged in - */
 function DisplayUser() {
     const { register, handleSubmit, formState: { errors } } = useForm(); // insert watch const if watching value
     const onSubmit = data => console.log(data);
@@ -12,6 +12,7 @@ function DisplayUser() {
         pullUser();
     }, []);
 
+    // Pull the user by User ID and display the details
     function pullUser() {
         fetch('http://localhost/eventee2/api/ws.php?action=displayUser',
             // https://adminpanel.malloriecini.com/api/ws.php?action=displayEvents
@@ -32,6 +33,7 @@ function DisplayUser() {
             })
     }
 
+    // Update the user details
     function editUser() {
         // var userid = document.getElementById("userid").value;
         // console.log("Update user with id " + userid);
@@ -56,26 +58,23 @@ function DisplayUser() {
                     console.log(text);
                 });
                 // HTTP Response Codes
-                if (response.status === 200) {
-                    // console.log(userid.value);
-                }
                 if (response.status === 202) {
                     console.log('Update Successful');
-                    //   successmessage('Success: Update Event Successful');
+                    document.getElementById("successmessage").innerHTML = "Success: Update User Successful";
                 }
                 if (response.status === 400) {
                     console.log('Bad Request');
-                    //   errormessage('Error: Bad Request');
+                    document.getElementById("errormessage").innerHTML = "Error: Bad Request";
                     return;
                 }
                 if (response.status === 401) {
                     console.log('Not permitted');
-                    //   errormessage('Error: Not Permitted');
+                    document.getElementById("errormessage").innerHTML = "Error: Not Permitted";
                     return;
                 }
                 if (response.status === 501) {
                     console.log('Not implemented :(');
-                    // errormessage('Error: Not implemented');
+                    document.getElementById("errormessage").innerHTML = "Error: Not implemented";
                     return;
                 }
             });
@@ -106,6 +105,8 @@ function DisplayUser() {
             </div>
             <br></br>
             <div>
+                <p id="successmessage" className="green"></p>
+                <p id="errormessage" className="red"></p>
                 <h4>Edit User Profile</h4>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="row">
@@ -160,8 +161,6 @@ function DisplayUser() {
                     <input type="hidden" name="action" value="admin_update" id="admin_update"></input>
                     <button id="admin_update" className="btn indigo waves-effect waves-light" value="' + row.UserID + '" onClick={editUser} type="submit" name="admin_update">Update User</button>
                 </form>
-                <p id="successmessage" className="green"></p>
-                <p id="errormessage" className="red"></p>
             </div>
         </div>
     )

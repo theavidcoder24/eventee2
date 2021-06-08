@@ -176,7 +176,7 @@ class dbObj
         }
     }
 
-    /* - Display Users Table - */
+    /* - Display All Users Table - */
     public function displayAllUsers()
     {
         try {
@@ -207,11 +207,12 @@ class dbObj
     }
 
     /* -- Update Events Function -- */
-    public function updateUser($update_user_name, $update_user_phone, $update_user_dob, $update_user_email, $update_access_rights)
+    public function updateUser($update_user_name, $update_user_phone, $update_user_dob, $update_user_email, $update_access_rights, $date, $browser, $ip, $action_type, $UserID)
     {
         db_connection();
         try {
             $this->dbconn->beginTransaction();
+            // Update current user by ID
             $stmt = $this->dbconn->prepare("UPDATE users2 SET FullName = :update_user_name, PhoneNumber = :update_user_phone, DateOfBirth = :update_user_dob, Email = :update_user_email, AccessRights = :update_access_rights WHERE UserID = :UserID");
             // bind values
             $stmt->bindValue(':UserID', $_SESSION['UserID']);
@@ -222,6 +223,16 @@ class dbObj
             $stmt->bindValue(':update_access_rights', $update_access_rights);
             $stmt->execute();
 
+            $UserID = $_SESSION["UserID"];
+
+            /* - Changelog Table - */
+            $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type, UserID) VALUES (:date, :browser, :ip, :action_type, :UserID)");
+            $stmt->bindValue(':date', $date);
+            $stmt->bindValue(':browser', $browser);
+            $stmt->bindValue(':ip', $ip);
+            $stmt->bindValue(':action_type', $action_type);
+            $stmt->bindValue(':UserID', $UserID);
+            $stmt->execute();
 
             // Commit changes here 
             $this->dbconn->commit();

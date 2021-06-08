@@ -22,7 +22,7 @@
 //     removefd.append('action', 'DeleteRemoveEvent');
 //     removefd.append('eventid', eventid);
 
-//     fetch('api/ws.php?action=removeEvent', {
+//     fetch('http://localhost/eventee2/api/ws.php?action=removeEvent', {
 //         method: 'POST',
 //         body: removefd,
 //     })
@@ -33,17 +33,16 @@
 //             });
 //             // HTTP Response Codes
 //             if (response.status == 202) {
-//                 loadPage();
-//                 successmessage("Success: Removal Successful");
+//                 // successmessage("Success: Removal Successful");
 //             }
 //             if (response.status === 400) {
 //                 console.log('Bad Request');
-//                 errormessage('Error: Bad Request');
+//                 // errormessage('Error: Bad Request');
 //                 return;
 //             }
 //             if (response.status === 401) {
 //                 console.log('Not permitted');
-//                 errormessage('Error: Not Permitted');
+//                 // errormessage('Error: Not Permitted');
 //                 return;
 //             }
 //         });
