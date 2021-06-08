@@ -180,7 +180,7 @@ class dbObj
     function displayUser()
     {
         try {
-            $mysql = "SELECT FullName, PhoneNumber, DateOfBirth, Email FROM users2 WHERE UserID = :UserID";
+            $mysql = "SELECT UserID, FullName, PhoneNumber, DateOfBirth, Email, AccessRights FROM users2 WHERE UserID = :UserID";
             $stmt = $this->dbconn->prepare($mysql);
             $stmt->bindValue(':UserID', $_SESSION['UserID']);
             $stmt->execute();
@@ -192,25 +192,45 @@ class dbObj
             throw $ex;
         }
     }
-    // public function changelog($date, $browser, $ip, $action_type, $UserID)
-    // {
-    //     $this->dbconn->beginTransaction();
-    //     /* - Changelog Table - */
-    //     $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type, UserID) VALUES (:date, :browser, :ip, :action_type, :UserID)");
-    //     $stmt->bindValue(':date', $date);
-    //     $stmt->bindValue(':browser', $browser);
-    //     $stmt->bindValue(':ip', $ip);
-    //     $stmt->bindValue(':action_type', $action_type);
-    //     $stmt->bindValue(':UserID', $UserID);
-    //     $stmt->execute();
-    //     $this->dbconn->commit();
-    // }
 
-    /* -- Check if user account exists -- */
-    // function checkUserAccount()
-    // {
-    //     return "['account': 'exists']";
-    // }
+    /* -- Update Events Function -- */
+    public function updateUser($update_user_name, $update_user_phone, $update_user_dob, $update_user_email, $update_access_rights)
+    {
+        db_connection();
+        try {
+            $this->dbconn->beginTransaction();
+            $stmt = $this->dbconn->prepare("UPDATE users2 SET FullName = :update_user_name, PhoneNumber = :update_user_phone, DateOfBirth = :update_user_dob, Email = :update_user_email, AccessRights = :update_access_rights WHERE UserID = :UserID");
+            // bind values
+            $stmt->bindValue(':UserID', $_SESSION['UserID']);
+            $stmt->bindValue(':update_user_name', $update_user_name);
+            $stmt->bindValue(':update_user_phone', $update_user_phone);
+            $stmt->bindValue(':update_user_dob', $update_user_dob);
+            $stmt->bindValue(':update_user_email', $update_user_email);
+            $stmt->bindValue(':update_access_rights', $update_access_rights);
+            $stmt->execute();
+
+            // $UserID = $_SESSION["UserID"];
+
+            // Commit changes here 
+            $this->dbconn->commit();
+        } catch (PDOException $ex) {
+            $ex->getMessage();
+            exit();
+        }
+    }
+
+    /* - Display Changelog Table - */
+    public function displayChangelog()
+    {
+        try {
+            $stmt = $this->dbconn->prepare('SELECT date, browser, ip, action_type, UserID FROM changelog');
+            $stmt->execute();
+            $result = $stmt->fetchAll();
+            return $result;
+        } catch (PDOException $ex) {
+            throw $ex;
+        }
+    }
 
     /* -- Create Events Function -- */
     public function createEvents($event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time, $date, $browser, $ip, $action_type, $UserID)
@@ -259,14 +279,6 @@ class dbObj
             throw $ex;
         }
     }
-
-    // function filterEventByLocation()
-    // {
-    //     $this->dbconn->beginTransaction();
-    //     $stmt = $this->dbconn->prepare("SELECT eventID, eventName, eventDescription, eventCategory, eventAddress, eventLocation, eventDate, eventTime FROM events WHERE eventLocation = 'South Bank'");
-    //     $stmt->execute();
-    //     $row = $stmt->fetch();
-    // }
 
     // Check if more than 5 checked
     // function checkAttendance($evid)

@@ -6,11 +6,11 @@ import React, { useState, useEffect } from "react";
 // import env from "react-dotenv";
 /* --------- Normal Admin --------- */
 import './App.css';
-// import FeedbackMessage from './components/FeedbackMessage.js';
 import infographic from './assets/infographic.jpg';
 import Login from './routes/login_page/login.js';
 import UserLogout from './routes/login_page/logout';
 import PostRegFetch from './routes/login_page/register';
+import DisplayChangelog from './routes/changelog/displayChangelog';
 import DisplayUser from './routes/login_page/displayUser';
 import DisplayEvents from './routes/display_page/displayEvents';
 import CreateEvents from './routes/create_page/createEvents.js';
@@ -39,7 +39,7 @@ function App() {
     <div className="App">
       <Router>
         <div>
-          <nav className="cyan darken-2">
+          <nav className="cyan darken-3">
             <ul>
               {loggedIn ?
                 <>
@@ -50,10 +50,13 @@ function App() {
                     <Link to="/dashboard">Dashboard</Link>
                   </li>
                   <li>
-                    <Link to="/display">Display</Link>
+                    <Link to="/changelog">Changelog</Link>
                   </li>
                   <li>
-                    <Link to="/create">Create</Link>
+                    <Link to="/display">Events</Link>
+                  </li>
+                  <li>
+                    <Link to="/create">Create Event</Link>
                   </li>
                   <li>
                     <Link to="/profile">Profile</Link>
@@ -93,6 +96,10 @@ function App() {
 
               <Route path="/profile">
                 <DisplayUser />
+              </Route>
+
+              <Route path="/changelog">
+                <DisplayChangelog />
               </Route>
 
               <Route exact path="/dashboard">

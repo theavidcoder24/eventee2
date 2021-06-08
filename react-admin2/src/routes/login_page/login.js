@@ -1,6 +1,7 @@
 import React from 'react';
 import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import '../../App.css';
 // import M from "materialize-css";
 // import { createUseStyles } from 'react-jss';
 
@@ -39,7 +40,6 @@ export default function Login(props) {
             .then(function (response) {
                 // HTTP Response Codes
                 if (response.status === 202) {
-                    // props.setCount("Logged In");
                     console.log('Login Successful');
                     props.setLoggedIn(true);
                     localStorage.setItem('login', "true");
@@ -49,11 +49,13 @@ export default function Login(props) {
                     console.log('Not authorised');
                     props.setLoggedIn(false);
                     localStorage.setItem('login', "false");
+                    document.getElementById("errormessage").innerHTML = "Error: Not authorised";
                 }
                 if (response.status === 501) {
                     console.log('Not implemented');
                     props.setLoggedIn(false);
                     localStorage.setItem('login', "false");
+                    document.getElementById("errormessage").innerHTML = "Error: Not implemented";
                 }
             })
     }
@@ -88,6 +90,8 @@ export default function Login(props) {
                 <button type="submit" id="login_admin" className="btn indigo waves-effect waves-light" name="login_admin" onClick={handleLogin}>Login</button>
                 <br></br>
                 <br></br>
+                <p id="successmessage" className="green"></p>
+                <p id="errormessage" className="red"></p>
                 {/* <Link to="/register">Don't have an account? Register</Link> */}
             </form>
         </div>

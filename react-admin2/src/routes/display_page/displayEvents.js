@@ -3,8 +3,6 @@ import React, { useEffect, useState } from 'react';
 // import DeleteRemoveEvent from './deleteEvent.js';
 // import fillUpdate from './updateEvent.js';
 // import updateEvent from './updateEvent.js';
-// import filterEvents from './filterEvents';
-
 
 /* - Display Events - */
 function DisplayEvents() {
@@ -37,7 +35,6 @@ function DisplayEvents() {
   return (
     <div>
       <h3>Events List</h3>
-      {/* <button>Display Events from South Bank</button> */}
       <div className="content">
         <table className="striped">
           <th>Event ID</th>
@@ -48,8 +45,6 @@ function DisplayEvents() {
           <th>Event Location</th>
           <th>Event Date</th>
           <th>Event Time</th>
-          {/* <table id="eventsTable" className="striped">
-          </table> */}
           {event.map((event, index) => (
             <tr>
               <td>{event.eventID}</td>

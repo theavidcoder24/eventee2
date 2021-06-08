@@ -212,6 +212,44 @@ if (isset($_GET["action"])) {
                 http_response_code(401);
             }
             break;
+
+            /* - Update User's Profile - */
+        case "updateUser":
+            if (isset($_GET["action"])) {
+                // $_SERVER['REQUEST_METHOD'] == 'POST';
+                $objreg = json_decode(file_get_contents("php://input"), true);
+                $UserID = testInput($objreg['UserID']);
+                $update_user_name = testInput($objreg['update_user_name']);
+                $update_user_phone = testInput($objreg['update_user_phone']);
+                $update_user_dob = testInput($objreg['update_user_dob']);
+                $update_user_email = testInput($objreg['update_user_email']);
+                $update_access_rights = testInput($objreg['update_access_rights']);
+                // $date = date('Y-m-d H:i:s');
+                // $browser = $_SERVER['HTTP_USER_AGENT'];
+                // $ip = $_SERVER['REMOTE_ADDR'];
+                // $action_type = $_SERVER['QUERY_STRING'];
+                $db->updateUser($update_user_name, $update_user_phone, $update_user_dob, $update_user_email, $update_access_rights);
+                http_response_code(202);
+            } else {
+                http_response_code(400);
+            }
+            break;
+
+            /* - Display Changelog - */
+        case "displayChangelog":
+            if ($_SESSION['se']->is_logged_in()) {
+                $result = $db->displayChangelog();
+                if ($result == false) {
+                    http_response_code(501);
+                } else {
+                    http_response_code(202);
+                    echo json_encode($result);
+                }
+            } else {
+                http_response_code(401);
+            }
+            break;
+
             /* - Create Events - */
         case "createEvents":
             if (isset($_POST["action"])) {
@@ -263,6 +301,7 @@ if (isset($_GET["action"])) {
                 http_response_code(501);
             }
             break;
+
             /* - Display User Events - */
         case "displayEvents":
             if ($_SESSION['se']->is_logged_in()) {
@@ -277,22 +316,25 @@ if (isset($_GET["action"])) {
                 http_response_code(401);
             }
             break;
-        // case "filterEventByLocation":
-        //     if ($_SESSION['se']->is_logged_in()) {
-        //         $result = $db->filterEventByLocation();
-        //         if ($result == false) {
-        //             http_response_code(501);
-        //         } else {
-        //             $db->displayEvents();
-        //             http_response_code(202);
-        //             echo json_encode($result);
-        //         }
-        //     } else {
-        //         http_response_code(401);
-        //     }
+
+        case "displayChangelog":
+            if ($_SESSION['se']->is_logged_in()) {
+                $result = $db->displayChangelog();
+                if ($result == false) {
+                    http_response_code(501);
+                } else {
+                    http_response_code(202);
+                    echo json_encode($result);
+                }
+            } else {
+                http_response_code(401);
+            }
+            break;
+
             // case "attendEvent":
 
             //     break;
+
             /* - Autofill the update form - */
         case "fillUpdate":
             if (isset($_POST["action"])) {
@@ -309,6 +351,7 @@ if (isset($_GET["action"])) {
                 }
             }
             break;
+
             /* - Update the User's Event - */
         case "updateEvent":
             if (isset($_GET["action"])) {
@@ -332,6 +375,7 @@ if (isset($_GET["action"])) {
                 http_response_code(400);
             }
             break;
+
             /* - Remove User's Event - */
         case "removeEvent":
             $evid = $_POST['eventid'];

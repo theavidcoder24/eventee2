@@ -76,7 +76,7 @@ function CreateEvents() {
         // }
         // each form element goes into the fd object ^
         fetch('http://localhost/eventee2/api/ws.php?action=createEvents', {
-             // https://adminpanel.malloriecini.com/api/ws.php?action=createEvents
+            // https://adminpanel.malloriecini.com/api/ws.php?action=createEvents
             method: 'POST',
             body: fd,
             credentials: 'include'
@@ -86,22 +86,22 @@ function CreateEvents() {
                 // HTTP Response Codes
                 if (response.status === 202) {
                     console.log('Creation Successful');
-                    // successmessage("Success: Event Created!");
+                    document.getElementById("successmessage").innerHTML = "Creation Successful";
                     return;
                 }
                 if (response.status === 400) {
                     console.log('Bad Request');
-                    // errormessage('Error: Bad Request');
+                    document.getElementById("errormessage").innerHTML = "Error: Bad Request";
                     return;
                 }
                 if (response.status === 401) {
                     console.log('Not permitted');
-                    // errormessage('Error: Not Permitted');
+                    document.getElementById("errormessage").innerHTML = "Error: Not permitted";
                     return;
                 }
                 if (response.status === 501) {
                     console.log('Not implemented :(');
-                    // errormessage('Error: Not Implemented');
+                    document.getElementById("errormessage").innerHTML = "Error: Not implemented";
                     return;
                 }
             });
@@ -130,20 +130,65 @@ function CreateEvents() {
                     <i className="material-icons prefix">category</i>
                     <select {...register("eventcat", { required: true })} className="icons" id="event_cat" required>
                         <option value="" selected disabled>Choose your Category</option>
-                        <option value="Auto" data-icon="src/images/icons/round_drive_eta_black_48dp.png">
+                        <option value="Auto"
+                            data-icon="src/images/icons/round_drive_eta_black_48dp.png">
                             Auto</option>
-                        <option value="Business" data-icon="src/images/icons/baseline_business_center_black_48dp.png">
+                        <option value="Business"
+                            data-icon="src/images/icons/baseline_business_center_black_48dp.png">
                             Business</option>
-                        <option value="Charity" data-icon="src/images/icons/round_payments_black_48dp.png">
+                        <option value="Charity"
+                            data-icon="src/images/icons/round_payments_black_48dp.png">
                             Charity
-                    </option>
-                        <option value="Family" data-icon="src/images/icons/round_family_restroom_black_48dp.png">Family
-                    </option>
-                        <option value="Fashion" data-icon="src/images/icons/round_shopping_cart_black_48dp.png">Fashion
-                    </option>
-                        <option value="Food & Drink" data-icon="src/images/icons/baseline_restaurant_black_48dp.png">
+                                        </option>
+                        <option value="Comedy"
+                            data-icon="src/images/icons/round_family_restroom_black_48dp.png">Comedy
+                                        </option>
+                        <option value="Family"
+                            data-icon="src/images/icons/round_family_restroom_black_48dp.png">Family
+                                        </option>
+                        <option value="Fashion"
+                            data-icon="src/images/icons/round_shopping_cart_black_48dp.png">Fashion
+                                        </option>
+                        <option value="Festivals & Fairs"
+                            data-icon="src/images/icons/baseline_restaurant_black_48dp.png">
+                            Festivals & Fairs
+                                        </option>
+                        <option value="Film & Media"
+                            data-icon="src/images/icons/baseline_restaurant_black_48dp.png">
+                            Film & Media
+                                        </option>
+                        <option value="Food & Drink"
+                            data-icon="src/images/icons/baseline_restaurant_black_48dp.png">
                             Food & Drink
-                    </option>
+                                        </option>
+                        <option value="Health & Beauty"
+                            data-icon="src/images/icons/baseline_restaurant_black_48dp.png">
+                            Health & Beauty
+                                        </option>
+                        <option value="Music"
+                            data-icon="src/images/icons/baseline_restaurant_black_48dp.png">
+                            Music
+                                        </option>
+                        <option value="Networking"
+                            data-icon="src/images/icons/baseline_restaurant_black_48dp.png">
+                            Networking
+                                        </option>
+                        <option value="Nightlife"
+                            data-icon="src/images/icons/baseline_restaurant_black_48dp.png">
+                            Nightlife
+                                        </option>
+                        <option value="Performance"
+                            data-icon="src/images/icons/baseline_restaurant_black_48dp.png">
+                            Performance
+                                        </option>
+                        <option value="Politics"
+                            data-icon="src/images/icons/baseline_restaurant_black_48dp.png">
+                            Politics
+                                        </option>
+                        <option value="Sports"
+                            data-icon="src/images/icons/baseline_restaurant_black_48dp.png">
+                            Sports
+                                        </option>
                     </select>
                     {/* errors will return when field validation fails  */}
                     {errors.eventcat && <span>This field is required</span>}
@@ -193,6 +238,8 @@ function CreateEvents() {
                     </div>
                 </div>
             </form>
+            <p id="successmessage" className="green"></p>
+            <p id="errormessage" className="red"></p>
         </div>
     )
 }

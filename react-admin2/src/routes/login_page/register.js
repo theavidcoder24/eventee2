@@ -67,18 +67,22 @@ function PostRegFetch() {
                 // HTTP Response Codes
                 if (response.status === 400) {
                     console.log('Bad Request');
+                    document.getElementById("errormessage").innerHTML = "Error: Bad Request";
                     return;
                 }
                 if (response.status === 401) {
                     console.log('Not permitted');
+                    document.getElementById("errormessage").innerHTML = "Error: Not permitted";
                     return;
                 }
                 if (response.status === 501) {
                     console.log('Not implemented');
+                    document.getElementById("errormessage").innerHTML = "Error: Not implemented";
                     return;
                 }
                 if (response.status === 202) {
                     console.log('Registration Successful');
+                    document.getElementById("successmessage").innerHTML = "Registration Successful";
                     return;
                 }
             })
@@ -173,6 +177,8 @@ function PostRegFetch() {
                 <input type="hidden" name="action" value="register" id="register_user"></input>
                 <button id="register_user" className="btn indigo waves-effect waves-light" onClick={handleRegister} type="submit" name="register_user">Join</button>
             </form>
+            <p id="successmessage" className="green"></p>
+            <p id="errormessage" className="red"></p>
         </div>
     )
 }
