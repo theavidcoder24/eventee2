@@ -176,6 +176,19 @@ class dbObj
         }
     }
 
+    /* - Display Users Table - */
+    public function displayAllUsers()
+    {
+        try {
+            $stmt = $this->dbconn->prepare("SELECT * FROM users2");
+            $stmt->execute();
+            $result = $stmt->fetchAll();
+            return $result;
+        } catch (PDOException $ex) {
+            throw $ex;
+        }
+    }
+
     /* -- Display Events Function -- */
     function displayUser()
     {
@@ -209,7 +222,6 @@ class dbObj
             $stmt->bindValue(':update_access_rights', $update_access_rights);
             $stmt->execute();
 
-            // $UserID = $_SESSION["UserID"];
 
             // Commit changes here 
             $this->dbconn->commit();

@@ -118,6 +118,7 @@ if (isset($_GET["action"])) {
                 http_response_code(501);
             }
             break;
+
             /* - User Login - */
         case "login":
             if (isset($_GET["action"])) {
@@ -150,6 +151,7 @@ if (isset($_GET["action"])) {
                 }
             }
             break;
+
             /* - Admin Login - */
         case "adminLogin":
             if (isset($_GET["action"])) {
@@ -183,6 +185,7 @@ if (isset($_GET["action"])) {
                 }
             }
             break;
+
             /* - Check if user is logged in/status of login - */
         case "is_logged_in":
             $result = $_SESSION['se']->is_logged_in();
@@ -193,11 +196,29 @@ if (isset($_GET["action"])) {
                 http_response_code(401);
             }
             break;
+
             /* - Log user out - */
         case "logout":
             session_destroy();
             http_response_code(202);
             break;
+
+
+            /* - Display All Users - */
+        case "displayAllUsers":
+            if ($_SESSION['se']->is_logged_in()) {
+                $result = $db->displayAllUsers();
+                if ($result == false) {
+                    http_response_code(501);
+                } else {
+                    http_response_code(202);
+                    echo json_encode($result);
+                }
+            } else {
+                http_response_code(401);
+            }
+            break;
+
             /* - Display User - */
         case "displayUser":
             if ($_SESSION['se']->is_logged_in()) {
@@ -216,7 +237,6 @@ if (isset($_GET["action"])) {
             /* - Update User's Profile - */
         case "updateUser":
             if (isset($_GET["action"])) {
-                // $_SERVER['REQUEST_METHOD'] == 'POST';
                 $objreg = json_decode(file_get_contents("php://input"), true);
                 $UserID = testInput($objreg['UserID']);
                 $update_user_name = testInput($objreg['update_user_name']);

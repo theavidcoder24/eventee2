@@ -12,6 +12,7 @@ import UserLogout from './routes/login_page/logout';
 import PostRegFetch from './routes/login_page/register';
 import DisplayChangelog from './routes/changelog/displayChangelog';
 import DisplayUser from './routes/login_page/displayUser';
+import DisplayAllUsers from './routes/display_page/displayAllUsers';
 import DisplayEvents from './routes/display_page/displayEvents';
 import CreateEvents from './routes/create_page/createEvents.js';
 // import DashboardComponent from './routes/dashboard/DashboardComponent';
@@ -53,10 +54,13 @@ function App() {
                     <Link to="/changelog">Changelog</Link>
                   </li>
                   <li>
-                    <Link to="/display">Events</Link>
+                    <Link to="/displayevents">Events</Link>
                   </li>
                   <li>
                     <Link to="/create">Create Event</Link>
+                  </li>
+                  <li>
+                    <Link to="/displayusers">Display Users</Link>
                   </li>
                   <li>
                     <Link to="/profile">Profile</Link>
@@ -90,8 +94,12 @@ function App() {
                 <CreateEvents />
               </Route>
 
-              <Route path="/display">
+              <Route path="/displayevents">
                 <DisplayEvents />
+              </Route>
+
+              <Route path="/displayusers">
+                <DisplayAllUsers />
               </Route>
 
               <Route path="/profile">

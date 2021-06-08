@@ -33,7 +33,6 @@ function DisplayUser() {
     }
 
     function editUser() {
-
         // var userid = document.getElementById("userid").value;
         // console.log("Update user with id " + userid);
 
