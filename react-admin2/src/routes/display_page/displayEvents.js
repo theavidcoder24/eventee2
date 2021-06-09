@@ -105,6 +105,7 @@ function DisplayEvents() {
               <td>{event.eventLocation}</td>
               <td>{event.eventDate}</td>
               <td>{event.eventTime}</td>
+              <button onClick={() => DeleteRemoveEvent(event.eventID)}><i class="material-icons">delete</i></button>
             </tr>
           ))}
         </table>
