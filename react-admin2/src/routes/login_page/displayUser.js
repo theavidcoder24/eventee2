@@ -14,9 +14,9 @@ function DisplayUser() {
 
     // Pull the user by User ID and display the details
     function pullUser() {
-        fetch('http://localhost/eventee2/api/ws.php?action=displayUser',
-            // https://adminpanel.malloriecini.com/api/ws.php?action=displayEvents
-            // http://localhost/eventee2/api/ws.php?
+        fetch('http://localhost/eventee2/api/ws.php??action=displayUser',
+            // https://adminpanel.malloriecini.com/api/ws.php?action=displayUser
+            // http://localhost/eventee2/api/ws.php??action=displayUser
             {
                 method: "GET",
                 credentials: "include",
@@ -48,6 +48,8 @@ function DisplayUser() {
         }
 
         fetch('http://localhost/eventee2/api/ws.php?action=updateUser', {
+            // http://localhost/eventee2/api/ws.php?action=updateUser
+            // https://adminpanel.malloriecini.com/api/ws.php?action=updateUser
             method: "POST",
             body: JSON.stringify(userProfUpdate),
             credentials: 'include',

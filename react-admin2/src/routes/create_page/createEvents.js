@@ -77,6 +77,7 @@ function CreateEvents() {
         // each form element goes into the fd object ^
         fetch('http://localhost/eventee2/api/ws.php?action=createEvents', {
             // https://adminpanel.malloriecini.com/api/ws.php?action=createEvents
+            // http://localhost/eventee2/api/ws.php?action=createEvents
             method: 'POST',
             body: fd,
             credentials: 'include'
