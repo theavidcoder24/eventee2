@@ -105,8 +105,6 @@ function DisplayEvents() {
               <td>{event.eventLocation}</td>
               <td>{event.eventDate}</td>
               <td>{event.eventTime}</td>
-              <input type="hidden" name="eventid" value="`+ row.eventID + `" id="eventid"></input>
-              <button value="' + row.eventID + '" type="submit" onClick={DeleteRemoveEvent}><i class="material-icons">delete</i></button>
             </tr>
           ))}
         </table>
