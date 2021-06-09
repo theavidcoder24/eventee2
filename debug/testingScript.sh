@@ -174,4 +174,19 @@ curl 'http://localhost/eventee2/api/ws.php?action=removeEvent' \
   -H 'Cookie: PHPSESSID=hqcj429g2k92mg41ser3k4e833' \
   --compressed
 
+# Display Changelog
+curl -i -X GET \
+ 'http://localhost/eventee2/api/ws.php?action=displayChangelog'
  
+# Display User by ID
+curl -i -X GET \
+ 'http://localhost/eventee2/api/ws.php?action=displayUser'
+
+# Update User by ID
+curl -i -X POST \
+   -H "Content-Type:application/json" \
+ 'http://localhost/eventee2/api/ws.php?action=updateUser'
+
+ # Display All Users
+ curl -i -X GET \
+ 'http://localhost/eventee2/api/ws.php?action=displayAllUsers'
