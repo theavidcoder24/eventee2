@@ -54,16 +54,16 @@ function DisplayEvents() {
         });
         // HTTP Response Codes
         if (response.status == 202) {
-          // successmessage("Success: Removal Successful");
+          document.getElementById("successmessage").innerHTML = "Success: Delete Event";
         }
         if (response.status === 400) {
           console.log('Bad Request');
-          // errormessage('Error: Bad Request');
+          document.getElementById("errormessage").innerHTML = "Error: Bad Request";
           return;
         }
         if (response.status === 401) {
           console.log('Not permitted');
-          // errormessage('Error: Not Permitted');
+          document.getElementById("errormessage").innerHTML = "Error: Not Permitted";
           return;
         }
       });
@@ -72,6 +72,8 @@ function DisplayEvents() {
   return (
     <div>
       <h3>Events List</h3>
+      <p id="successmessage" className="green"></p>
+      <p id="errormessage" className="red"></p>
       <div className="content">
         <table className="striped">
           <th>Event ID</th>

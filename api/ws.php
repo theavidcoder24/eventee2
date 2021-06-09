@@ -397,16 +397,21 @@ if (isset($_GET["action"])) {
 
             /* - Remove User's Event - */
         case "removeEvent":
-            $evid = $_POST['eventid'];
-            if (isset($_POST["action"])) {
-                if ($_POST["eventid"] == null) {
-                    http_response_code(401);
-                } else {
-                    $db->removeEvent($evid);
-                    http_response_code(202);
+            if ($_SESSION['se']->is_logged_in()) {
+                $evid = $_POST['eventid'];
+                if (isset($_POST["action"])) {
+                    if ($_POST["eventid"] == null) {
+                        http_response_code(401);
+                    } else {
+                        $db->removeEvent($evid);
+                        http_response_code(202);
+                    }
                 }
+            } else {
+                http_response_code(402);
             }
             break;
+
             /* As a default the default case is set to a 501 error so that it is catgetorised as a general error */
         default:
             http_response_code(404);
