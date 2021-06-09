@@ -39,7 +39,7 @@ Local: http://localhost:3000/react-admin2
 
 ## Admin Panel
 
-If installing on a new development environment be sure to run the command below if you don't see a node_modueles folder in the repo
+If installing on a new development environment be sure to run the command below if you don't see a node_modueles folder in the repo. Be sure to change the fetch requests to your own domain name instead of localhost and update the IP and HTTP Referer as your IP and domain names located in the ws.php file.
 
 #### cd react-admin
 
@@ -82,6 +82,7 @@ Directs user to the right folder to install dependencies
 - Facebook API – integrate Facebook events and invite friends from Facebook to sign up for events
 - Google Maps API – use the apis that are grouped by platform such as “Maps”, “Routes", “Places”
 - Material Design - used the icons
+- React Hook Forms for form validation on admin panel side
 - Fetch API - gives a method of fetching api resources to communicate with the server
 
 # Business Rules
@@ -112,11 +113,12 @@ Directs user to the right folder to install dependencies
 | Login          |        |      |        |        | \*      |
 | Logout         |        |      |        |        | \*      |
 | Log Event      | \*     |      | \*     |        | \*      |
+| Delete Event   |        |      |        |   \*   |         |
 
 ## Administration Panel
 
 |                       | CREATE | READ | UPDATE | DELETE | SESSION |
 | --------------------- | ------ | ---- | ------ | ------ | ------- |
-| Delete Event (Admin)  |        |      | \*     | \*     |         |
-| Manage Users (Admin)  | \*     | \*   | \*     | \*     |         |
-| Manage Events (Admin) | \*     | \*   | \*     | \*     |         |
+| Manage Users (Admin)  | \*     | \*   | \*     |        |         |
+| Manage Events (Admin) | \*     | \*   | \*     |        |         |
+| Show Changelog (Admin)|        | \*   |        |        |         |
