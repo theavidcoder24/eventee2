@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jun 09, 2021 at 03:29 AM
+-- Generation Time: Jun 13, 2021 at 03:14 AM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.3.12
 
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `changelog` (
   `UserID` int(10) UNSIGNED DEFAULT NULL,
   PRIMARY KEY (`changelogID`),
   KEY `UserID` (`UserID`)
-) ENGINE=InnoDB AUTO_INCREMENT=403 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=408 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `changelog`
@@ -402,7 +402,12 @@ INSERT INTO `changelog` (`changelogID`, `date`, `browser`, `ip`, `action_type`, 
 (399, '2021-06-09 03:27:05.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'login_admin', 9),
 (400, '2021-06-09 03:27:18.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'login_admin', 9),
 (401, '2021-06-09 03:27:23.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'login_admin', 9),
-(402, '2021-06-09 03:27:56.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'login_admin', 9);
+(402, '2021-06-09 03:27:56.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'login_admin', 9),
+(403, '2021-06-13 01:25:49.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'login_user', 9),
+(404, '2021-06-13 02:19:24.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'login_admin', 9),
+(405, '2021-06-13 02:20:45.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'login_admin', 9),
+(406, '2021-06-13 02:21:27.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'login_admin', 9),
+(407, '2021-06-13 02:29:10.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'login_admin', 9);
 
 -- --------------------------------------------------------
 
@@ -420,23 +425,25 @@ CREATE TABLE IF NOT EXISTS `events` (
   `eventLocation` char(200) NOT NULL,
   `eventDate` char(15) NOT NULL,
   `eventTime` char(10) NOT NULL,
-  PRIMARY KEY (`eventID`)
+  `UserID` int(10) UNSIGNED NOT NULL,
+  PRIMARY KEY (`eventID`),
+  KEY `UserID` (`UserID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `events`
 --
 
-INSERT INTO `events` (`eventID`, `eventName`, `eventDescription`, `eventCategory`, `eventAddress`, `eventLocation`, `eventDate`, `eventTime`) VALUES
-(1, 'Brisbane RnB Jam', 'The Brisbane RnB Jam has returned home to Press Club to bring you the biggest and best RnB jam night in South East Queensland!', 'Music', '339 Brunswick St, Fortitude Valley QLD 4006', 'South East Queensland', 'Dec 8, 2021', '11:20AM'),
-(7, 'Andy Bull - Its All Connected Brisbane', 'To celebrate his much-anticipated return from hiatus, Sydney&amp;amp;amp;amp;rsquo;s beloved producer performer wunderkind Andy Bull will be playing solo renditions of his alt-pop gems Baby I Am Nobody Now, Keep On Running, Talk Too Much, Dog, and more; including sneak peaks of his stunning upcoming album.', 'Music', '1/322 Brunswick St, Fortitude Valley QLD', 'Black Bear Lodge', 'June 11, 2021', '06:00 PM'),
-(16, 'Chess The Musical', 'Natalie Bassingthwaighte, Paulini, Rob Mills, Alexander Lewis and Mark Furze star in a gripping concert-style production of Chess The Musical touring Australia. Inspired by extraordinary real-life events, Chess The Musical tells a story of a complex love triangle combined with dramatic political intrigue, set against the background of the Cold War.', 'Performance', 'Melbourne Street, South Brisbane, Queensland', 'Queensland Performing Arts Centre (QPAC)', 'June 8 2021', '7:30PM'),
-(19, 'Sunset Watch', 'Spread over two palatial levels with two full-service cocktail bars, the YOT Club has been designed from the water as the ultimate 40-metre luxury lounge bar. Grab your crew to watch the world go by as you indulge in seasonal cocktails and mouth-watering food from our onboard executive chef. Let the smooth sounds of our resident set the mood as we cruise into a dreamy summer sunset.', 'Social', '147 Alice St, Brisbane City QLD', 'YOT Botanic Gardens', 'Apr 29, 2021', '04:00 PM'),
-(40, 'Eat Street', 'Eat Street Northshore plays host to aromatic international cuisines, vibrant textiles and enchanting sights and sounds of live performers.', 'Live Music', '221D MacArthur Ave, Hamilton QLD 4007', 'Eat Street Northshore', 'May 14, 2021', '06:00 PM'),
-(51, 'GABS Craft Beer Festival 2021', 'The moment you have been waiting for has arrived! The Great Australasian Beer SpecTAPular (GABS) is back and we can\'t wait to share our love for craft beer with you again!	', 'Sports', 'Glenelg St South Brisbane QLD', 'Brisbane Convention Exhibition Centre', '12 June 2021', '11:30 AM'),
-(54, 'Barrio Fiesta Brisbane', 'The team of volunteers bringing this annual event are raring to stage our culture. Our line up of performers are excited to connect with an audience. We also want to support Rocklea Showgrounds who has been good to us over many years.', 'Performance', 'Goburra St & Ipswich Road, Rocklea QLD', 'Rocklea Showgrounds', '12 June 2021', '9:00 AM'),
-(55, 'Kayak eco adventure', 'Bookings essential. When was the last time you escaped your daily routine to enjoy quality time with friends or family? Have fun paddling as a team in two seat...', 'Sports', 'Kookaburra Park - West, 11 Nalya Crescent, Karana Downs', 'Kookaburra Park', '12 June 2021', '10:30 AM'),
-(56, 'The Sound Society', 'Tune into the smooth vocals and unique sounds of Brisbaneâ€™s most celebrated up and coming artists, surrounded by panoramic parkland views every Friday and...', 'Music', 'South Bank Parklands, Brisbane City', 'South Bank Parkland', 'June 12, 2021', '2:00 PM');
+INSERT INTO `events` (`eventID`, `eventName`, `eventDescription`, `eventCategory`, `eventAddress`, `eventLocation`, `eventDate`, `eventTime`, `UserID`) VALUES
+(1, 'Brisbane RnB Jam', 'The Brisbane RnB Jam has returned home to Press Club to bring you the biggest and best RnB jam night in South East Queensland!', 'Music', '339 Brunswick St, Fortitude Valley QLD 4006', 'South East Queensland', 'Dec 8, 2021', '11:20AM', 9),
+(7, 'Andy Bull - Its All Connected Brisbane', 'To celebrate his much-anticipated return from hiatus, Sydney&amp;amp;amp;amp;rsquo;s beloved producer performer wunderkind Andy Bull will be playing solo renditions of his alt-pop gems Baby I Am Nobody Now, Keep On Running, Talk Too Much, Dog, and more; including sneak peaks of his stunning upcoming album.', 'Music', '1/322 Brunswick St, Fortitude Valley QLD', 'Black Bear Lodge', 'June 11, 2021', '06:00 PM', 11),
+(16, 'Chess The Musical', 'Natalie Bassingthwaighte, Paulini, Rob Mills, Alexander Lewis and Mark Furze star in a gripping concert-style production of Chess The Musical touring Australia. Inspired by extraordinary real-life events, Chess The Musical tells a story of a complex love triangle combined with dramatic political intrigue, set against the background of the Cold War.', 'Performance', 'Melbourne Street, South Brisbane, Queensland', 'Queensland Performing Arts Centre (QPAC)', 'June 8 2021', '7:30PM', 11),
+(19, 'Sunset Watch', 'Spread over two palatial levels with two full-service cocktail bars, the YOT Club has been designed from the water as the ultimate 40-metre luxury lounge bar. Grab your crew to watch the world go by as you indulge in seasonal cocktails and mouth-watering food from our onboard executive chef. Let the smooth sounds of our resident set the mood as we cruise into a dreamy summer sunset.', 'Social', '147 Alice St, Brisbane City QLD', 'YOT Botanic Gardens', 'Apr 29, 2021', '04:00 PM', 9),
+(40, 'Eat Street', 'Eat Street Northshore plays host to aromatic international cuisines, vibrant textiles and enchanting sights and sounds of live performers.', 'Live Music', '221D MacArthur Ave, Hamilton QLD 4007', 'Eat Street Northshore', 'May 14, 2021', '06:00 PM', 9),
+(51, 'GABS Craft Beer Festival 2021', 'The moment you have been waiting for has arrived! The Great Australasian Beer SpecTAPular (GABS) is back and we can\'t wait to share our love for craft beer with you again!	', 'Sports', 'Glenelg St South Brisbane QLD', 'Brisbane Convention Exhibition Centre', '12 June 2021', '11:30 AM', 9),
+(54, 'Barrio Fiesta Brisbane', 'The team of volunteers bringing this annual event are raring to stage our culture. Our line up of performers are excited to connect with an audience. We also want to support Rocklea Showgrounds who has been good to us over many years.', 'Performance', 'Goburra St & Ipswich Road, Rocklea QLD', 'Rocklea Showgrounds', '12 June 2021', '9:00 AM', 9),
+(55, 'Kayak eco adventure', 'Bookings essential. When was the last time you escaped your daily routine to enjoy quality time with friends or family? Have fun paddling as a team in two seat...', 'Sports', 'Kookaburra Park - West, 11 Nalya Crescent, Karana Downs', 'Kookaburra Park', '12 June 2021', '10:30 AM', 9),
+(56, 'The Sound Society', 'Tune into the smooth vocals and unique sounds of Brisbaneâ€™s most celebrated up and coming artists, surrounded by panoramic parkland views every Friday and...', 'Music', 'South Bank Parklands, Brisbane City', 'South Bank Parkland', 'June 12, 2021', '2:00 PM', 18);
 
 -- --------------------------------------------------------
 
@@ -477,6 +484,12 @@ INSERT INTO `users2` (`UserID`, `FullName`, `PhoneNumber`, `DateOfBirth`, `Email
 --
 ALTER TABLE `changelog`
   ADD CONSTRAINT `fk_logUser` FOREIGN KEY (`UserID`) REFERENCES `users2` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `events`
+--
+ALTER TABLE `events`
+  ADD CONSTRAINT `fk_eventuser` FOREIGN KEY (`UserID`) REFERENCES `users2` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

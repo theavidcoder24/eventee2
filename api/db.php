@@ -270,6 +270,7 @@ class dbObj
             $stmt->bindValue(':event_loc', $event_loc);
             $stmt->bindValue(':event_date', $event_date);
             $stmt->bindValue(':event_time', $event_time);
+            $stmt->bindValue(':UserID', $_SESSION['UserID']);
             $stmt->execute();
 
             $UserID = $_SESSION["UserID"];
@@ -282,6 +283,7 @@ class dbObj
             $stmt->bindValue(':action_type', $action_type);
             $stmt->bindValue(':UserID', $UserID);
             $stmt->execute();
+
             $this->dbconn->commit();
         } catch (PDOException $ex) {
             $this->dbconn->rollBack();
