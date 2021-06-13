@@ -34,7 +34,6 @@ export default function Login(props) {
             // https://adminpanel.malloriecini.com/api/ws.php?action=adminLogin
             method: 'POST',
             body: admin_details,
-            // redirect: "error",
             credentials: 'include'
         })
             .then(function (response) {

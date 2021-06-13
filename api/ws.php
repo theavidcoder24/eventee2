@@ -112,10 +112,12 @@ if (isset($_GET["action"])) {
                 //     $errorMsg = "Error: Password Field is Empty";
                 //     die;
                 // }
-                $db->register($reg_name, $reg_phone, $reg_email, $reg_dob, $reg_pass, $access_rights, $date, $browser, $ip, $action_type, $UserID);
-                http_response_code(202);
-            } else {
-                http_response_code(501);
+                if ($db->register($reg_name, $reg_phone, $reg_email, $reg_dob, $reg_pass, $access_rights, $date, $browser, $ip, $action_type, $UserID)) {
+                    http_response_code(202);
+                } else {
+                    // Not authorised
+                    http_response_code(401);
+                }
             }
             break;
 
@@ -416,12 +418,9 @@ if (isset($_GET["action"])) {
             }
             break;
 
-            /* As a default the default case is set to a 501 error so that it is catgetorised as a general error */
+            /* As a default the default case is set to a 404 error so that it is catgetorised as a general error */
         default:
             http_response_code(404);
             break;
     }
-} 
-// else if (!isset($_GET["action"])) {
-//     die();
-// }
+}

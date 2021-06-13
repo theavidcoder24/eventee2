@@ -103,12 +103,12 @@ function PostRegFetch() {
                             <option value="Admin">Admin</option>
                             <option value="User">User</option>
                         </select>
-                        <span className="helper-text" data-error="Please enter a valid category"
+                        <span className="helper-text" data-error="Please enter a valid access right"
                             data-success="Correct" max="20"></span>
                     </div>
                     <div className="input-field col s12">
                         <i className="material-icons prefix">account_circle</i>
-                        <input id="reg_name" type="text" className="validate tooltipped" placeholder="Full Name"
+                        <input id="reg_name" type="text" className="validate" placeholder="Full Name" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                             data-position="top" data-tooltip="Must be more than 2 characters" {...register("regname", { required: true, minLength: 2 })}></input>
                         {/* errors will return when field validation fails  */}
                         {errors.regname && <span>This field is required</span>}
@@ -118,10 +118,10 @@ function PostRegFetch() {
                     </div>
                     <div className="input-field col s12">
                         <i className="material-icons prefix">phone</i>
-                        <input id="reg_phone" type="tel" className="validate" placeholder="Phone Number" {...register("regphone", { required: true, minLength: 10 })}></input>
+                        <input id="reg_phone" type="tel" className="validate" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="Phone Number" {...register("regphone", { required: true, minLength: 10 })}></input>
                         {/* errors will return when field validation fails  */}
                         {errors.regphone && <span>This field is required</span>}
-                        <span className="helper-text" data-error="Please enter a valid phone number"
+                        <span className="helper-text" data-error="Please enter a valid phone number no less than 10 characters"
                             data-success="Correct"></span>
                     </div>
                     <div className="input-field col s12">
@@ -130,12 +130,12 @@ function PostRegFetch() {
                             placeholder="Email" {...register("regemail", { required: true, minLength: 2 })}></input>
                         {/* errors will return when field validation fails  */}
                         {errors.regemail && <span>This field is required</span>}
-                        <span className="helper-text" data-error="Please enter a valid email"
+                        <span className="helper-text" data-error="Please enter a valid email with at least 2 characters and contains an @"
                             data-success="Correct"></span>
                     </div>
                     <div className="input-field col s12">
                         <i className="material-icons prefix">cake</i>
-                        <input type="text" id="reg_dob" className="datepicker validate"
+                        <input type="text" id="reg_dob" className="datepicker validate" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                             placeholder="Date of Birth *" {...register("regdob", { required: true, minLength: 2 })}></input>
                         {/* errors will return when field validation fails  */}
                         {errors.regdob && <span>This field is required</span>}
@@ -144,30 +144,12 @@ function PostRegFetch() {
                     </div>
                     <div className="input-field col s12">
                         <i className="material-icons prefix">vpn_key</i>
-                        <input id="reg_pass" name="reg_pass" type="password" className="validate"
-                            placeholder="Password" {...register("regpass", { required: true, minLength: 2 })}></input>
+                        <input id="reg_pass" name="reg_pass" type="password" className="validate" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{3,}"
+                            placeholder="Password" {...register("regpass", { required: true, minLength: 3, pattern: /[A-Za-z]{3}/ })}></input>
                         {/* errors will return when field validation fails  */}
                         {errors.regpass && <span>This field is required</span>}
-                        <span className="helper-text" data-error="Please enter a valid password"
+                        <span className="helper-text" data-error="Must contain at least one number, one uppercase letter, and at least 3 or more characters"
                             data-success="Correct" max="20"></span>
-                    </div>
-                    <a className="waves-effect waves-light modal-trigger" href="#agree_terms"><i
-                        className="material-icons prefix">feed</i> Terms and conditions</a>
-                    <div id="agree_terms" className="modal">
-                        <div className="modal-content">
-                            <h4>Terms and Conditions</h4>
-                            <p>A bunch of text. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Nobis
-                                officia minima facilis quo? Voluptatum itaque, voluptatibus tempora odit
-                                ducimus
-                                neque consectetur consequuntur blanditiis facilis, nostrum sunt earum vero
-                                fugiat
-                                exercitationem?</p>
-                        </div>
-                        <div className="modal-footer">
-                            <a href="#!" className="modal-close waves-effect waves-green btn-flat">Disagree</a>
-                            <a href="#!" className="modal-close waves-effect waves-green btn-flat">Agree</a>
-                        </div>
                     </div>
                     <div className="center">
                         <span className="center">Already a member?<Link to="/login">
@@ -175,7 +157,7 @@ function PostRegFetch() {
                     </div>
                 </div>
                 <input type="hidden" name="action" value="register" id="register_user"></input>
-                <button id="register_user" className="btn indigo waves-effect waves-light" onClick={handleRegister} type="submit" name="register_user">Join</button>
+                <button id="register_user" type="submit" className="btn indigo waves-effect waves-light" onClick={handleRegister} name="register_user">Join</button>
             </form>
             <p id="successmessage" className="green"></p>
             <p id="errormessage" className="red"></p>
