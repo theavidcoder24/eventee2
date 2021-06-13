@@ -115,8 +115,7 @@ if (isset($_GET["action"])) {
                 if ($db->register($reg_name, $reg_phone, $reg_email, $reg_dob, $reg_pass, $access_rights, $date, $browser, $ip, $action_type, $UserID)) {
                     http_response_code(202);
                 } else {
-                    // Not authorised
-                    http_response_code(401);
+                    http_response_code(501);
                 }
             }
             break;
