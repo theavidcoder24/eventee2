@@ -262,7 +262,7 @@ class dbObj
         try {
             $this->dbconn->beginTransaction();
             /* - Events Table - */
-            $stmt = $this->dbconn->prepare("INSERT INTO events(eventName, eventDescription, eventCategory, eventAddress, eventLocation, eventDate, eventTime) VALUES(:event_name, :event_desc, :event_cat, :event_address, :event_loc, :event_date, :event_time)");
+            $stmt = $this->dbconn->prepare("INSERT INTO events(eventName, eventDescription, eventCategory, eventAddress, eventLocation, eventDate, eventTime, UserID) VALUES(:event_name, :event_desc, :event_cat, :event_address, :event_loc, :event_date, :event_time, :UserID)");
             $stmt->bindValue(':event_name', $event_name);
             $stmt->bindValue(':event_desc', $event_desc);
             $stmt->bindValue(':event_cat', $event_cat);
