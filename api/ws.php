@@ -286,34 +286,34 @@ if (isset($_GET["action"])) {
                     $action_type = $_POST['createEvent'];
                     /* - Server Validation - */
                     // Check if input field is empty
-                    // if ($event_name == "") {
-                    //     $errorMsg = "Error: Event Name Field is Empty";
-                    //     die;
-                    // }
-                    // if ($event_desc == "") {
-                    //     $errorMsg = "Error: Event Description Field is Empty";
-                    //     die;
-                    // }
-                    // if ($event_cat == "") {
-                    //     $errorMsg = "Error: Event Category Field is Empty";
-                    //     die;
-                    // }
-                    // if ($event_address == "") {
-                    //     $errorMsg = "Error: Event Address Field is Empty";
-                    //     die;
-                    // }
-                    // if ($event_loc == "") {
-                    //     $errorMsg = "Error: Event Location Field is Empty";
-                    //     die;
-                    // }
-                    // if ($event_date == "") {
-                    //     $errorMsg = "Error: Event Name Field is Empty";
-                    //     die;
-                    // }
-                    // if ($event_time == "") {
-                    //     $errorMsg = "Error: Event Description Field is Empty";
-                    //     die;
-                    // }
+                    if ($event_name == "") {
+                        $errorMsg = "Error: Event Name Field is Empty";
+                        die;
+                    }
+                    if ($event_desc == "") {
+                        $errorMsg = "Error: Event Description Field is Empty";
+                        die;
+                    }
+                    if ($event_cat == "") {
+                        $errorMsg = "Error: Event Category Field is Empty";
+                        die;
+                    }
+                    if ($event_address == "") {
+                        $errorMsg = "Error: Event Address Field is Empty";
+                        die;
+                    }
+                    if ($event_loc == "") {
+                        $errorMsg = "Error: Event Location Field is Empty";
+                        die;
+                    }
+                    if ($event_date == "") {
+                        $errorMsg = "Error: Event Name Field is Empty";
+                        die;
+                    }
+                    if ($event_time == "") {
+                        $errorMsg = "Error: Event Description Field is Empty";
+                        die;
+                    }
                     // Call the function
                     $db->createEvents($event_name, $event_desc, $event_cat, $event_address, $event_loc, $event_date, $event_time, $date, $browser, $ip, $action_type, $UserID);
                     http_response_code(202);

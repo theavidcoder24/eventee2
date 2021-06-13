@@ -362,6 +362,7 @@ class dbObj
             $stmt->bindValue(':update_ev_loc', $update_ev_loc);
             $stmt->bindValue(':update_ev_date', $update_ev_date);
             $stmt->bindValue(':update_ev_time', $update_ev_time);
+            $stmt->execute();
             // Execute the update statement
             $stmt->execute();
 

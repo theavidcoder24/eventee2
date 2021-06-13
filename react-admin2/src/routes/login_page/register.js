@@ -157,12 +157,12 @@ function PostRegFetch() {
                         <div className="modal-content">
                             <h4>Terms and Conditions</h4>
                             <p>A bunch of text. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                            Nobis
-                            officia minima facilis quo? Voluptatum itaque, voluptatibus tempora odit
-                            ducimus
-                            neque consectetur consequuntur blanditiis facilis, nostrum sunt earum vero
-                            fugiat
-                            exercitationem?</p>
+                                Nobis
+                                officia minima facilis quo? Voluptatum itaque, voluptatibus tempora odit
+                                ducimus
+                                neque consectetur consequuntur blanditiis facilis, nostrum sunt earum vero
+                                fugiat
+                                exercitationem?</p>
                         </div>
                         <div className="modal-footer">
                             <a href="#!" className="modal-close waves-effect waves-green btn-flat">Disagree</a>
