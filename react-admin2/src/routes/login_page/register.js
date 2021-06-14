@@ -26,7 +26,7 @@ function PostRegFetch() {
         regdetails.append('access_rights', access_rights.value);
         regdetails.append('register', register.value);
         // each form element goes into the fd object ^
-        fetch('http://localhost/eventee2/api/ws.php?action=register', {
+        fetch('https://adminpanel.malloriecini.com/api/ws.php?action=register', {
             // http://localhost/eventee2/api/ws.php?action=register
             // https://adminpanel.malloriecini.com/api/ws.php?action=register
             method: 'POST',
@@ -59,6 +59,11 @@ function PostRegFetch() {
                     document.getElementById("successmessage").innerHTML = "Registration Successful";
                     return;
                 }
+                if (response.status === 200) {
+                    console.log('Fill in empty input fields');
+                    document.getElementById("errormessage").innerHTML = "Fill in empty input fields";
+                    return;
+                }
             })
             .catch(function (err) {
                 console.log(err);
@@ -67,6 +72,8 @@ function PostRegFetch() {
 
     return (
         <div>
+            <p id="successmessage" className="green"></p>
+            <p id="errormessage" className="red"></p>
             <h3 className="center">User Details</h3>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="row">
@@ -109,7 +116,7 @@ function PostRegFetch() {
                     <div className="input-field col s12">
                         <i className="material-icons prefix">cake</i>
                         <input type="date" id="reg_dob" className="datepicker validate" min="1920-01-01" max="2003-01-01"
-                            placeholder="Date of Birth *" {...register("regdob", { required: true, minLength: 2 })}></input>
+                            placeholder="Date of Birth *" {...register("regdob", { required: true, minLength: 4 })}></input>
                         {/* errors will return when field validation fails  */}
                         {errors.regdob && <span>This field is required</span>}
                         <span className="helper-text" data-error="Please enter a valid date of birth"
@@ -132,8 +139,6 @@ function PostRegFetch() {
                 <input type="hidden" name="action" value="register" id="register"></input>
                 <button id="register" type="submit" className="btn indigo waves-effect waves-light" onClick={handleRegister} name="register">Join</button>
             </form>
-            <p id="successmessage" className="green"></p>
-            <p id="errormessage" className="red"></p>
         </div>
     )
 }

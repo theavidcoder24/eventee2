@@ -14,7 +14,7 @@ function DisplayUser() {
 
     // Pull the user by User ID and display the details
     function pullUser() {
-        fetch('http://localhost/eventee2/api/ws.php?action=displayUser',
+        fetch('https://adminpanel.malloriecini.com/api/ws.php?action=displayUser',
             // https://adminpanel.malloriecini.com/api/ws.php?action=displayUser
             // http://localhost/eventee2/api/ws.php??action=displayUser
             {
@@ -47,7 +47,7 @@ function DisplayUser() {
             'update_access_rights': document.getElementById("update_access_rights").value
         }
 
-        fetch('http://localhost/eventee2/api/ws.php?action=updateUser', {
+        fetch('https://adminpanel.malloriecini.com/api/ws.php?action=updateUser', {
             // http://localhost/eventee2/api/ws.php?action=updateUser
             // https://adminpanel.malloriecini.com/api/ws.php?action=updateUser
             method: "POST",

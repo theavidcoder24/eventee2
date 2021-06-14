@@ -9,7 +9,7 @@ function DisplayAllUsers() {
     }, []);
 
     function pullAllUsers() {
-        fetch('http://localhost/eventee2/api/ws.php?action=displayAllUsers',
+        fetch('https://adminpanel.malloriecini.com/api/ws.php?action=displayAllUsers',
             // https://adminpanel.malloriecini.com/api/ws.php?action=displayAllUsers
             // http://localhost/eventee2/api/ws.php?action=displayAllUsers
             {

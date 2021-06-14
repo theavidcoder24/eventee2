@@ -9,7 +9,7 @@ function DisplayChangelog() {
     }, []);
 
     function pullChangelog() {
-        fetch('http://localhost/eventee2/api/ws.php?action=displayChangelog',
+        fetch('https://adminpanel.malloriecini.com/api/ws.php?action=displayChangelog',
             // https://adminpanel.malloriecini.com/api/ws.php?action=displayChangelog
             // http://localhost/eventee2/api/ws.php?action=displayChangelog
             {

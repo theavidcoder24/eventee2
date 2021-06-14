@@ -29,7 +29,7 @@ export default function Login(props) {
         admin_details.append('admin_pass', admin_pass.value);
         admin_details.append('login_admin', login_admin.value);
         // each form element goes into the login_details object ^
-        fetch('http://localhost/eventee2/api/ws.php?action=adminLogin', {
+        fetch('https://adminpanel.malloriecini.com/api/ws.php?action=adminLogin', {
             // http://localhost/eventee2/api/ws.php?action=adminLogin
             // https://adminpanel.malloriecini.com/api/ws.php?action=adminLogin
             method: 'POST',
@@ -43,6 +43,11 @@ export default function Login(props) {
                     props.setLoggedIn(true);
                     localStorage.setItem('login', "true");
                     history.push("/dashboard");
+                }
+                if (response.status === 200) {
+                    console.log('Fill in empty input fields');
+                    document.getElementById("errormessage").innerHTML = "Fill in empty input fields";
+                    return;
                 }
                 if (response.status === 401) {
                     console.log('Not authorised');
@@ -63,6 +68,8 @@ export default function Login(props) {
 
     return (
         <div>
+            <p id="successmessage" className="green"></p>
+            <p id="errormessage" className="red"></p>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="input-field col s12">
                     <i className="material-icons prefix">email</i>
@@ -89,8 +96,6 @@ export default function Login(props) {
                 <button type="submit" id="login_admin" className="btn indigo waves-effect waves-light" name="login_admin" onClick={handleLogin}>Login</button>
                 <br></br>
                 <br></br>
-                <p id="successmessage" className="green"></p>
-                <p id="errormessage" className="red"></p>
                 {/* <Link to="/register">Don't have an account? Register</Link> */}
             </form>
         </div>

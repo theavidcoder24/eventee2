@@ -296,6 +296,11 @@ function postRegFetch() {
         successmessage('Yay Successfully Registered!');
         return;
       }
+      if (response.status === 200) {
+        console.log('Fill in empty input fields');
+        errormessage("Fill in empty input fields");
+        return;
+      }
     })
     .catch(function (err) {
       console.log("Connection unavailable");
@@ -347,6 +352,11 @@ function postLoginFetch() {
       if (response.status === 501) {
         console.log('Not implemented');
         errormessage("Error: Not implemented");
+      }
+      if (response.status === 200) {
+        console.log('Fill in empty input fields');
+        errormessage("Fill in empty input fields");
+        return;
       }
     })
     .catch(function (err) {
@@ -517,6 +527,11 @@ function postCreateEvents() {
       if (response.status === 202) {
         console.log('Creation Successful');
         successmessage("Success: Event Created!");
+        return;
+      }
+      if (response.status === 200) {
+        console.log('Fill in empty input fields');
+        errormessage("Fill in empty input fields");
         return;
       }
       if (response.status === 400) {
@@ -728,7 +743,9 @@ function postUpdateEvent() {
       });
       // HTTP Response Codes
       if (response.status === 200) {
-        console.log(eventid.value);
+        console.log('Fill in empty input fields');
+        errormessage("Fill in empty input fields");
+        return;
       }
       if (response.status === 202) {
         console.log('Update Successful');

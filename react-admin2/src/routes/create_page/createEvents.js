@@ -38,44 +38,8 @@ function CreateEvents() {
         fd.append('event_date', event_date.value);
         fd.append('event_time', event_time.value);
         fd.append('createEvent', createEvent.value);
-        // var errStr = "";
-        // if (event_name.checkValidity() === false) {
-        //   errStr += "Please type a valid name ";
-        //   console.log("Error: Event Name");
-        //   return;
-        // }
-        // if (event_desc.checkValidity() === false) {
-        //   errStr += "Please type a valid description ";
-        //   console.log("Error: Event Name");
-        //   return;
-        // }
-        // if (event_cat.checkValidity() === false) {
-        //   errStr += "Please type a valid category ";
-        //   console.log("Error: Event Name");
-        //   return;
-        // }
-        // if (event_address.checkValidity() === false) {
-        //   errStr += "Please type a valid address ";
-        //   console.log("Error: Event Name");
-        //   return;
-        // }
-        // if (event_loc.checkValidity() === false) {
-        //   errStr += "Please type a valid location ";
-        //   console.log("Error: Event Name");
-        //   return;
-        // }
-        // if (event_date.checkValidity() === false) {
-        //   errStr += "Please type a valid date ";
-        //   console.log("Error: Event Name");
-        //   return;
-        // }
-        // if (event_time.checkValidity() === false) {
-        //   errStr += "Please type a valid time ";
-        //   console.log("Error: Event Name");
-        //   return;
-        // }
         // each form element goes into the fd object ^
-        fetch('http://localhost/eventee2/api/ws.php?action=createEvents', {
+        fetch('https://adminpanel.malloriecini.com/api/ws.php?action=createEvents', {
             // https://adminpanel.malloriecini.com/api/ws.php?action=createEvents
             // http://localhost/eventee2/api/ws.php?action=createEvents
             method: 'POST',
@@ -88,6 +52,11 @@ function CreateEvents() {
                 if (response.status === 202) {
                     console.log('Creation Successful');
                     document.getElementById("successmessage").innerHTML = "Creation Successful";
+                    return;
+                }
+                if (response.status === 200) {
+                    console.log('Fill in empty input fields');
+                    document.getElementById("errormessage").innerHTML = "Fill in empty input fields";
                     return;
                 }
                 if (response.status === 400) {
@@ -111,6 +80,8 @@ function CreateEvents() {
     return (
         <div>
             <h3>Create Event</h3>
+            <p id="successmessage" className="green"></p>
+            <p id="errormessage" className="red"></p>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="input-field col s12">
                     <i className="material-icons prefix">title</i>
@@ -140,56 +111,56 @@ function CreateEvents() {
                         <option value="Charity"
                             data-icon="src/images/icons/round_payments_black_48dp.png">
                             Charity
-                                        </option>
+                        </option>
                         <option value="Comedy"
                             data-icon="src/images/icons/round_family_restroom_black_48dp.png">Comedy
-                                        </option>
+                        </option>
                         <option value="Family"
                             data-icon="src/images/icons/round_family_restroom_black_48dp.png">Family
-                                        </option>
+                        </option>
                         <option value="Fashion"
                             data-icon="src/images/icons/round_shopping_cart_black_48dp.png">Fashion
-                                        </option>
+                        </option>
                         <option value="Festivals & Fairs"
                             data-icon="src/images/icons/baseline_restaurant_black_48dp.png">
                             Festivals & Fairs
-                                        </option>
+                        </option>
                         <option value="Film & Media"
                             data-icon="src/images/icons/baseline_restaurant_black_48dp.png">
                             Film & Media
-                                        </option>
+                        </option>
                         <option value="Food & Drink"
                             data-icon="src/images/icons/baseline_restaurant_black_48dp.png">
                             Food & Drink
-                                        </option>
+                        </option>
                         <option value="Health & Beauty"
                             data-icon="src/images/icons/baseline_restaurant_black_48dp.png">
                             Health & Beauty
-                                        </option>
+                        </option>
                         <option value="Music"
                             data-icon="src/images/icons/baseline_restaurant_black_48dp.png">
                             Music
-                                        </option>
+                        </option>
                         <option value="Networking"
                             data-icon="src/images/icons/baseline_restaurant_black_48dp.png">
                             Networking
-                                        </option>
+                        </option>
                         <option value="Nightlife"
                             data-icon="src/images/icons/baseline_restaurant_black_48dp.png">
                             Nightlife
-                                        </option>
+                        </option>
                         <option value="Performance"
                             data-icon="src/images/icons/baseline_restaurant_black_48dp.png">
                             Performance
-                                        </option>
+                        </option>
                         <option value="Politics"
                             data-icon="src/images/icons/baseline_restaurant_black_48dp.png">
                             Politics
-                                        </option>
+                        </option>
                         <option value="Sports"
                             data-icon="src/images/icons/baseline_restaurant_black_48dp.png">
                             Sports
-                                        </option>
+                        </option>
                     </select>
                     {/* errors will return when field validation fails  */}
                     {errors.eventcat && <span>This field is required</span>}
@@ -214,7 +185,7 @@ function CreateEvents() {
                 </div>
                 <div className="input-field col s12">
                     <i className="material-icons prefix">date_range</i>
-                    <input type="text" className="datepicker autoClose" id="event_date" placeholder="Event Date" {...register("eventdate", { required: true, maxLength: 20 })} required></input>
+                    <input type="date" className="datepicker autoClose" id="event_date" min="2021-01-01" placeholder="Event Date" {...register("eventdate", { required: true, minLength: 4 })} required></input>
                     {/* errors will return when field validation fails  */}
                     {errors.eventdate && <span>This field is required</span>}
                     <span className="helper-text" data-error="Please enter a valid date" data-success="Correct" max="20"></span>
@@ -239,8 +210,6 @@ function CreateEvents() {
                     </div>
                 </div>
             </form>
-            <p id="successmessage" className="green"></p>
-            <p id="errormessage" className="red"></p>
         </div>
     )
 }
