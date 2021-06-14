@@ -115,7 +115,7 @@ function DisplayUser() {
                                 <div className="input-field col s12">
                                     <i className="material-icons prefix">badge</i>
                                     <select className="icons" id="update_access_rights">
-                                        <option value="" disabled selected>Access Rights</option>
+                                        <option defaultValue="" disabled selected>Access Rights</option>
                                         <option defaultValue="Admin">Admin</option>
                                         <option defaultValue="User">User</option>
                                     </select>

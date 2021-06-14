@@ -37,9 +37,8 @@ class dbObj
     }
 
     /* -- New User Function -- */
-    public function register($reg_name, $reg_phone, $reg_email, $reg_dob, $reg_pass, $access_rights, $date, $browser, $ip, $action_type)
+    public function register($reg_name, $reg_phone, $reg_email, $reg_dob, $reg_pass, $access_rights, $date, $browser, $ip, $action_type, $UserID)
     {
-        // db_connection();
         try {
             $this->dbconn->beginTransaction();
             // hashing the password with PASSWORD_HASH()
@@ -53,9 +52,7 @@ class dbObj
             $stmt->bindValue(':access_rights', $access_rights);
             $stmt->execute();
 
-            // $_SESSION['UserID'] = $row['UserID'];
-
-            // $UserID = $_SESSION["UserID"];
+            $UserID = $_SESSION["UserID"];
 
             /* - Changelog Table - */
             $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type, UserID) VALUES (:date, :browser, :ip, :action_type, :UserID)");
@@ -63,8 +60,7 @@ class dbObj
             $stmt->bindValue(':browser', $browser);
             $stmt->bindValue(':ip', $ip);
             $stmt->bindValue(':action_type', $action_type);
-            $stmt->bindValue(':UserID', $_SESSION['UserID']);
-            // $stmt->bindValue(':UserID', $UserID);
+            $stmt->bindValue(':UserID', $UserID);
             $stmt->execute();
 
             $this->dbconn->commit();

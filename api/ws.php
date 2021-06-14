@@ -105,7 +105,7 @@ if (isset($_GET["action"])) {
                     die;
                 }
                 if (isset($reg_email)) {
-                    $db->register($reg_name, $reg_phone, $reg_email, $reg_dob, $reg_pass, $access_rights, $date, $browser, $ip, $action_type);
+                    $db->register($reg_name, $reg_phone, $reg_email, $reg_dob, $reg_pass, $access_rights, $date, $browser, $ip, $action_type, $UserID);
                     http_response_code(202);
                 } else {
                     http_response_code(401);
