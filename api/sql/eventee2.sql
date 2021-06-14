@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jun 13, 2021 at 03:14 AM
+-- Generation Time: Jun 14, 2021 at 12:21 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.3.12
 
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `changelog` (
   `UserID` int(10) UNSIGNED DEFAULT NULL,
   PRIMARY KEY (`changelogID`),
   KEY `UserID` (`UserID`)
-) ENGINE=InnoDB AUTO_INCREMENT=408 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=468 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `changelog`
@@ -407,7 +407,67 @@ INSERT INTO `changelog` (`changelogID`, `date`, `browser`, `ip`, `action_type`, 
 (404, '2021-06-13 02:19:24.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'login_admin', 9),
 (405, '2021-06-13 02:20:45.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'login_admin', 9),
 (406, '2021-06-13 02:21:27.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'login_admin', 9),
-(407, '2021-06-13 02:29:10.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'login_admin', 9);
+(407, '2021-06-13 02:29:10.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'login_admin', 9),
+(408, '2021-06-13 07:23:51.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'login_admin', 9),
+(409, '2021-06-13 07:24:08.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'action=updateUser', 9),
+(410, '2021-06-13 07:24:56.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'action=updateUser', 9),
+(411, '2021-06-13 07:26:58.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(412, '2021-06-13 07:27:51.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(413, '2021-06-13 07:28:23.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(414, '2021-06-13 07:28:37.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(415, '2021-06-13 12:03:50.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0', '127.0.0.1', 'register', NULL),
+(416, '2021-06-13 12:04:29.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0', '127.0.0.1', 'register', NULL),
+(417, '2021-06-13 12:05:33.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(418, '2021-06-13 12:10:10.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(419, '2021-06-13 12:12:44.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(420, '2021-06-13 12:13:28.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(421, '2021-06-13 12:13:42.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(422, '2021-06-13 12:17:31.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(423, '2021-06-13 12:18:10.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(424, '2021-06-13 12:27:52.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(425, '2021-06-13 12:32:51.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(426, '2021-06-13 12:36:37.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(427, '2021-06-13 12:40:05.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(428, '2021-06-13 12:50:00.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(429, '2021-06-13 12:50:54.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(430, '2021-06-13 12:51:21.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(431, '2021-06-13 12:51:45.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(432, '2021-06-13 12:52:34.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(433, '2021-06-13 13:00:43.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(434, '2021-06-13 13:01:13.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(435, '2021-06-13 13:01:45.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(436, '2021-06-13 13:01:57.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(437, '2021-06-13 13:09:35.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(438, '2021-06-13 13:09:46.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(439, '2021-06-13 13:22:03.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(440, '2021-06-13 13:33:54.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(441, '2021-06-13 13:34:55.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(442, '2021-06-13 13:36:51.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(443, '2021-06-13 13:38:44.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(444, '2021-06-14 01:46:10.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'login_user', 9),
+(445, '2021-06-14 01:49:07.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(446, '2021-06-14 01:49:28.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(447, '2021-06-14 01:50:32.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(448, '2021-06-14 02:35:22.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(449, '2021-06-14 02:36:49.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(450, '2021-06-14 02:42:16.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(451, '2021-06-14 02:43:55.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(452, '2021-06-14 02:44:14.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(453, '2021-06-14 02:44:36.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(454, '2021-06-14 02:50:33.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(455, '2021-06-14 02:50:55.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(456, '2021-06-14 02:58:14.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(457, '2021-06-14 03:00:03.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(458, '2021-06-14 03:07:49.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(459, '2021-06-14 03:09:02.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(460, '2021-06-14 03:10:06.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(461, '2021-06-14 03:12:50.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(462, '2021-06-14 03:18:59.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(463, '2021-06-14 03:22:07.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'login_admin', 9),
+(464, '2021-06-14 03:22:17.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'createEvent', 9),
+(465, '2021-06-14 03:33:43.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'action=updateUser', 9),
+(466, '2021-06-14 12:19:22.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL),
+(467, '2021-06-14 12:20:16.000000', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', '::1', 'register', NULL);
 
 -- --------------------------------------------------------
 
@@ -428,7 +488,7 @@ CREATE TABLE IF NOT EXISTS `events` (
   `UserID` int(10) UNSIGNED NOT NULL,
   PRIMARY KEY (`eventID`),
   KEY `UserID` (`UserID`)
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `events`
@@ -455,13 +515,13 @@ DROP TABLE IF EXISTS `users2`;
 CREATE TABLE IF NOT EXISTS `users2` (
   `UserID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `FullName` char(200) NOT NULL,
-  `PhoneNumber` char(10) NOT NULL,
+  `PhoneNumber` char(11) NOT NULL,
   `DateOfBirth` char(15) NOT NULL,
   `Email` varchar(255) NOT NULL,
   `UserPassword` varchar(255) NOT NULL,
   `AccessRights` char(200) NOT NULL,
   PRIMARY KEY (`UserID`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users2`
@@ -469,7 +529,7 @@ CREATE TABLE IF NOT EXISTS `users2` (
 
 INSERT INTO `users2` (`UserID`, `FullName`, `PhoneNumber`, `DateOfBirth`, `Email`, `UserPassword`, `AccessRights`) VALUES
 (1, 'Kira Black', '0404040404', 'Apr 22, 2021', 'kirablack@email.com', 'blah', 'User'),
-(9, 'Derek Hall', '045888987', 'May 17, 1984', 'derek@email.com', '$2y$10$0yizmFvf2jfnGB9YmmOwN.uKHapnpGYLAA/iEMICHIYraSDUPa0Ia', 'Admin'),
+(9, 'Derek Hall', '0450887669', 'May 18, 1984', 'derek@email.com', '$2y$10$0yizmFvf2jfnGB9YmmOwN.uKHapnpGYLAA/iEMICHIYraSDUPa0Ia', 'Admin'),
 (11, 'Tracey Vance', '0405879871', 'May 16, 1991', 'tracy@email.com', '$2y$10$yWelAMp3KZMEp4uRAld/auxea54ONiYBMsC4VA85TcuVFTPDH4soK', 'User'),
 (14, 'Hannah Finn', '0457887889', 'May 02, 1991', 'hannah@email.com', '$2y$10$lI8jRp.MxXzDeZsqivjuK.FFW2xMqeR0q069csl88076.K6VGpQqS', 'Admin'),
 (18, 'Koko Reids', '0458744888', 'June 07, 1999', 'koko@email.com', '$2y$10$fcA91Ee4E3u0bZVQyEnj5ekS612UP0Bm1xHLNudzaPJKdmShO0y6W', 'Admin'),

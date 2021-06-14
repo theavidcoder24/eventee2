@@ -82,8 +82,7 @@ function PostRegFetch() {
                     </div>
                     <div className="input-field col s12">
                         <i className="material-icons prefix">account_circle</i>
-                        <input id="reg_name" type="text" className="validate" placeholder="Full Name" minlength="2" pattern="[A-Za-z]{2}"
-                            data-position="top" data-tooltip="Must be more than 2 characters" {...register("regname", { required: true, minLength: 2 })}></input>
+                        <input id="reg_name" type="text" className="validate" placeholder="Full Name" minlength="2" maxLength="30" data-position="top" data-tooltip="Must be more than 2 characters" {...register("regname", { required: true, minLength: 2 })}></input>
                         {/* errors will return when field validation fails  */}
                         {errors.regname && <span>This field is required</span>}
                         <span className="helper-text" data-error="Please enter a valid name"
