@@ -41,7 +41,7 @@ function PostRegFetch() {
         var reg_dob = document.getElementById("reg_dob");
         var reg_pass = document.getElementById("reg_pass");
         var access_rights = document.getElementById("access_rights");
-        var register_user = document.getElementById("register_user");
+        var register = document.getElementById("register");
         var regdetails = new FormData();
         regdetails.append('action', 'register');
         regdetails.append('reg_name', reg_name.value);
@@ -50,7 +50,7 @@ function PostRegFetch() {
         regdetails.append('reg_dob', reg_dob.value);
         regdetails.append('reg_pass', reg_pass.value);
         regdetails.append('access_rights', access_rights.value);
-        regdetails.append('register_user', register_user.value);
+        regdetails.append('register', register.value);
         // each form element goes into the fd object ^
         fetch('http://localhost/eventee2/api/ws.php?action=register', {
             // http://localhost/eventee2/api/ws.php?action=register
@@ -108,7 +108,7 @@ function PostRegFetch() {
                     </div>
                     <div className="input-field col s12">
                         <i className="material-icons prefix">account_circle</i>
-                        <input id="reg_name" type="text" className="validate" placeholder="Full Name" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                        <input id="reg_name" type="text" className="validate" placeholder="Full Name" minlength="2" pattern="[A-Za-z]{2}"
                             data-position="top" data-tooltip="Must be more than 2 characters" {...register("regname", { required: true, minLength: 2 })}></input>
                         {/* errors will return when field validation fails  */}
                         {errors.regname && <span>This field is required</span>}
@@ -118,7 +118,7 @@ function PostRegFetch() {
                     </div>
                     <div className="input-field col s12">
                         <i className="material-icons prefix">phone</i>
-                        <input id="reg_phone" type="tel" className="validate" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="Phone Number" {...register("regphone", { required: true, minLength: 10 })}></input>
+                        <input id="reg_phone" type="tel" className="validate" pattern="[0-9]{10}" placeholder="Phone Number" {...register("regphone", { required: true, minLength: 10 })}></input>
                         {/* errors will return when field validation fails  */}
                         {errors.regphone && <span>This field is required</span>}
                         <span className="helper-text" data-error="Please enter a valid phone number no less than 10 characters"
@@ -126,8 +126,8 @@ function PostRegFetch() {
                     </div>
                     <div className="input-field col s12">
                         <i className="material-icons prefix">email</i>
-                        <input id="reg_email" name="reg_email" type="email" className="validate"
-                            placeholder="Email" {...register("regemail", { required: true, minLength: 2 })}></input>
+                        <input id="reg_email" name="reg_email" type="email" className="validate" minlength="3"
+                            maxlength="40" placeholder="Email" {...register("regemail", { required: true, minLength: 2 })}></input>
                         {/* errors will return when field validation fails  */}
                         {errors.regemail && <span>This field is required</span>}
                         <span className="helper-text" data-error="Please enter a valid email with at least 2 characters and contains an @"
@@ -135,7 +135,7 @@ function PostRegFetch() {
                     </div>
                     <div className="input-field col s12">
                         <i className="material-icons prefix">cake</i>
-                        <input type="text" id="reg_dob" className="datepicker validate" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                        <input type="date" id="reg_dob" className="datepicker validate" min="1920-01-01" max="2003-01-01"
                             placeholder="Date of Birth *" {...register("regdob", { required: true, minLength: 2 })}></input>
                         {/* errors will return when field validation fails  */}
                         {errors.regdob && <span>This field is required</span>}
@@ -156,8 +156,8 @@ function PostRegFetch() {
                             Login</Link></span>
                     </div>
                 </div>
-                <input type="hidden" name="action" value="register" id="register_user"></input>
-                <button id="register_user" type="submit" className="btn indigo waves-effect waves-light" onClick={handleRegister} name="register_user">Join</button>
+                <input type="hidden" name="action" value="register" id="register"></input>
+                <button id="register" type="submit" className="btn indigo waves-effect waves-light" onClick={handleRegister} name="register">Join</button>
             </form>
             <p id="successmessage" className="green"></p>
             <p id="errormessage" className="red"></p>

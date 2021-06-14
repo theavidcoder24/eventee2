@@ -37,26 +37,25 @@ class dbObj
     }
 
     /* -- New User Function -- */
-    public function register($reg_name, $reg_phone, $reg_email, $reg_dob, $reg_pass, $access_rights, $date, $browser, $ip, $action_type, $UserID)
+    public function register($reg_name, $reg_phone, $reg_email, $reg_dob, $reg_pass, $access_rights, $date, $browser, $ip, $action_type)
     {
-        db_connection();
+        // db_connection();
         try {
             $this->dbconn->beginTransaction();
             // hashing the password with PASSWORD_HASH()
-            $reg_pass = password_hash($reg_pass, PASSWORD_DEFAULT);
             $stmt = $this->dbconn->prepare("INSERT INTO users2(FullName, PhoneNumber, DateOfBirth, Email, UserPassword, AccessRights) VALUES(:reg_name, :reg_phone, :reg_dob, :reg_email, :reg_pass, :access_rights)");
+            $reg_pass = password_hash($reg_pass, PASSWORD_DEFAULT);
             $stmt->bindValue(':reg_name', $reg_name);
             $stmt->bindValue(':reg_phone', $reg_phone);
             $stmt->bindValue(':reg_dob', $reg_dob);
             $stmt->bindValue(':reg_email', $reg_email);
             $stmt->bindValue(':reg_pass', $reg_pass);
             $stmt->bindValue(':access_rights', $access_rights);
-            $row = $stmt->fetch();
             $stmt->execute();
 
-            $_SESSION['UserID'] = $row['UserID'];
+            // $_SESSION['UserID'] = $row['UserID'];
 
-            $UserID = $_SESSION["UserID"];
+            // $UserID = $_SESSION["UserID"];
 
             /* - Changelog Table - */
             $stmt = $this->dbconn->prepare("INSERT INTO changelog(date, browser, ip, action_type, UserID) VALUES (:date, :browser, :ip, :action_type, :UserID)");
@@ -64,7 +63,8 @@ class dbObj
             $stmt->bindValue(':browser', $browser);
             $stmt->bindValue(':ip', $ip);
             $stmt->bindValue(':action_type', $action_type);
-            $stmt->bindValue(':UserID', $UserID);
+            $stmt->bindValue(':UserID', $_SESSION['UserID']);
+            // $stmt->bindValue(':UserID', $UserID);
             $stmt->execute();
 
             $this->dbconn->commit();

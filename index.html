@@ -39,7 +39,7 @@
     <!-- <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script> -->
 
     <!-- Import Service Worker File -->
-    <script defer src="sw.js"></script>
+    <!-- <script defer src="sw.js"></script> -->
 
     <!-- Import Font Family -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -447,8 +447,7 @@
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">account_circle</i>
                                     <input id="reg_name" type="text" class="validate tooltipped" placeholder="Full Name"
-                                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" data-position="top"
-                                        data-tooltip="Must be more than 2 characters">
+                                        minlength="2" data-position="top" data-tooltip="Must be more than 2 characters">
                                     <span class=" helper-text" data-error="Please enter a valid name"
                                         data-success="Correct"></span>
                                     <div class="errorMsg"></div>
@@ -456,15 +455,15 @@
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">phone</i>
                                     <input id="reg_phone" type="tel" class="validate" placeholder="Phone Number"
-                                        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+                                        minlength="10" pattern="[0-9]{10}">
                                     <span class="helper-text"
                                         data-error="Please enter a valid phone number no less than 10 characters"
                                         data-success="Correct"></span>
                                 </div>
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">email</i>
-                                    <input id="reg_email" name="reg_email" type="email" class="validate"
-                                        placeholder="Email">
+                                    <input id="reg_email" name="reg_email" type="email" class="validate" minlength="3"
+                                        maxlength="40" placeholder="Email">
                                     <span class="helper-text"
                                         data-error="Please enter a valid email with at least 2 characters and contains an @"
                                         data-success="Correct"></span>
@@ -472,7 +471,7 @@
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">cake</i>
                                     <input type="text" id="reg_dob" class="datepicker validate"
-                                        placeholder="Date of Birth *" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                                        placeholder="Date of Birth *">
                                     <span class="helper-text" data-error="Please enter a valid date of birth"
                                         data-success="Correct" max="20"></span>
                                 </div>
@@ -518,7 +517,7 @@
                                             Login</a></span>
                                 </div>
                             </div>
-                            <input type="hidden" name="action" value="register" id="register_user">
+                            <input type="hidden" name="action" value="register" id="register">
                             <button class="btn indigo waves-effect waves-light" type="submit" name="register"
                                 onclick="postRegFetch()">Join</button>
                         </form>

@@ -287,15 +287,15 @@ function postRegFetch() {
   var reg_dob = document.getElementById("reg_dob");
   var reg_pass = document.getElementById("reg_pass");
   var access_rights = document.getElementById("access_rights");
-  var register_user = document.getElementById("register_user");
-  fd.append('action', 'register');
-  fd.append('reg_name', reg_name.value);
-  fd.append('reg_phone', reg_phone.value);
-  fd.append('reg_email', reg_email.value);
-  fd.append('reg_dob', reg_dob.value);
-  fd.append('reg_pass', reg_pass.value);
-  fd.append('access_rights', access_rights.value);
-  fd.append('register_user', register_user.value);
+  var register = document.getElementById("register");
+  fd.set('action', 'register');
+  fd.set('reg_name', reg_name.value);
+  fd.set('reg_phone', reg_phone.value);
+  fd.set('reg_email', reg_email.value);
+  fd.set('reg_dob', reg_dob.value);
+  fd.set('reg_pass', reg_pass.value);
+  fd.set('access_rights', access_rights.value);
+  fd.set('register', register.value);
   // each form element goes into the fd object ^
   fetch('api/ws.php?action=register', {
     method: 'POST',
@@ -308,11 +308,6 @@ function postRegFetch() {
         console.log(text);
       });
       // HTTP Response Codes
-      if (response.status === 400) {
-        console.log('Bad Request');
-        errormessage("Bad Request");
-        return;
-      }
       if (response.status === 401) {
         console.log('Not permitted');
         errormessage("Not Permitted");
@@ -330,6 +325,7 @@ function postRegFetch() {
       }
     })
     .catch(function (err) {
+      console.log("Connection unavailable");
       console.log(err);
     });
 }
