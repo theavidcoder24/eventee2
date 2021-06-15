@@ -114,11 +114,15 @@ function DisplayUser() {
                             <div className="row">
                                 <div className="input-field col s12">
                                     <i className="material-icons prefix">badge</i>
-                                    <select className="icons" id="update_access_rights">
+                                    {/* <select className="icons" id="update_access_rights">
                                         <option defaultValue="" disabled selected>Access Rights</option>
                                         <option defaultValue="Admin">Admin</option>
                                         <option defaultValue="User">User</option>
-                                    </select>
+                                    </select> */}
+                                    <input id="update_access_rights" type="text" className="validate tooltipped" defaultValue={user.AccessRights} placeholder="AccessRights"
+                                        data-position="top" data-tooltip="Must be more than 2 characters" {...register("updateaccessrights", { required: true, minLength: 2 })}></input>
+                                    {/* errors will return when field validation fails  */}
+                                    {errors.updateaccessrights && <span>This field is required</span>}
                                     <span className="helper-text" data-error="Please enter a valid category"
                                         data-success="Correct" max="20"></span>
                                 </div>
