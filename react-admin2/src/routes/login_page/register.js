@@ -27,6 +27,7 @@ function PostRegFetch() {
         regdetails.append('register', register.value);
         // each form element goes into the fd object ^
         fetch('https://adminpanel.malloriecini.com/api/ws.php?action=register', {
+            // https://eventeeadmin.malloriecini.com/api/ws.php?action=register
             // http://localhost/eventee2/api/ws.php?action=register
             // https://adminpanel.malloriecini.com/api/ws.php?action=register
             method: 'POST',
