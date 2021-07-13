@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 // import "materialize-css/dist/css/materialize.min.css";
 // require('dotenv').config();
 // import env from "react-dotenv";
+
 /* --------- Normal Admin --------- */
 import './App.css';
 import infographic from './assets/infographic.jpg';
@@ -15,13 +16,14 @@ import DisplayUser from './routes/login_page/displayUser';
 import DisplayAllUsers from './routes/display_page/displayAllUsers';
 import DisplayEvents from './routes/display_page/displayEvents';
 import CreateEvents from './routes/create_page/createEvents.js';
-// import DashboardComponent from './routes/dashboard/DashboardComponent';
+import dashboardComponent from './components/dashboardComponent.js';
 
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  Redirect
 } from "react-router-dom";
 
 function App() {
@@ -81,6 +83,7 @@ function App() {
           {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
           <Switch>
+            <Redirect exact from="/" to="/login" />
             <Route path="/login">
               <Login setLoggedIn={setLoggedIn} />
             </Route>
@@ -112,6 +115,7 @@ function App() {
 
               <Route exact path="/dashboard">
                 <h3>Dashboard Section</h3>
+                <dashboardComponent />
                 <img src={infographic}></img>
               </Route>
             </>
