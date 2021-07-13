@@ -1,6 +1,6 @@
 /* - User Logout - */
 export function UserLogout(setLoggedIn) {
-  fetch('https://adminpanel.malloriecini.com/api/ws.php?action=logout', {
+  fetch('https://eventeeadmin.malloriecini.com/api/ws.php?action=logout', {
     // https://adminpanel.malloriecini.com/api/ws.php?action=logout
     // http://localhost/eventee2/api/ws.php?action=logout
     method: 'GET',

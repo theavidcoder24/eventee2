@@ -29,7 +29,7 @@ export default function Login(props) {
         admin_details.append('admin_pass', admin_pass.value);
         admin_details.append('login_admin', login_admin.value);
         // each form element goes into the login_details object ^
-        fetch('https://adminpanel.malloriecini.com/api/ws.php?action=adminLogin', {
+        fetch('https://eventeeadmin.malloriecini.com/api/ws.php?action=adminLogin', {
             // http://localhost/eventee2/api/ws.php?action=adminLogin
             // https://adminpanel.malloriecini.com/api/ws.php?action=adminLogin
             method: 'POST',

@@ -1,6 +1,6 @@
 /* - is logged in Fetch - */
 export function IsLogged() {
-    fetch('https://adminpanel.malloriecini.com/api/ws.php?action=is_logged_in',
+    fetch('https://eventeeadmin.malloriecini.com/api/ws.php?action=is_logged_in',
         // https://adminpanel.malloriecini.com/api/ws.php?action=is_logged_in
         // http://localhost/eventee2/api/ws.php?action=is_logged_in
         {

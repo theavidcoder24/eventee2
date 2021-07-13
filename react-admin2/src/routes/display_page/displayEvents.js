@@ -13,7 +13,7 @@ function DisplayEvents() {
   }, []);
 
   function pullEvents() {
-    fetch('https://adminpanel.malloriecini.com/api/ws.php?action=displayEvents',
+    fetch('https://eventeeadmin.malloriecini.com/api/ws.php?action=displayEvents',
       // https://adminpanel.malloriecini.com/api/ws.php?action=displayEvents
       // http://localhost/eventee2/api/ws.php?action=displayEvents
       {
@@ -40,7 +40,7 @@ function DisplayEvents() {
     removefd.append('action', 'DeleteRemoveEvent');
     removefd.append('eventid', eventid);
 
-    fetch('https://adminpanel.malloriecini.com/api/ws.php?action=removeEvent', {
+    fetch('https://eventeeadmin.malloriecini.com/api/ws.php?action=removeEvent', {
       // http://localhost/eventee2/api/ws.php?action=removeEvent
       // https://adminpanel.malloriecini.com/api/ws.php?action=removeEvent
       method: 'POST',

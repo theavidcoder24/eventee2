@@ -39,7 +39,7 @@ function CreateEvents() {
         fd.append('event_time', event_time.value);
         fd.append('createEvent', createEvent.value);
         // each form element goes into the fd object ^
-        fetch('https://adminpanel.malloriecini.com/api/ws.php?action=createEvents', {
+        fetch('https://eventeeadmin.malloriecini.com/api/ws.php?action=createEvents', {
             // https://adminpanel.malloriecini.com/api/ws.php?action=createEvents
             // http://localhost/eventee2/api/ws.php?action=createEvents
             method: 'POST',
