@@ -3,18 +3,6 @@
 Eventee, an event planning web app that allows the user to search for events nearby using the user’s location and import events from Facebook.
 It uses inbuilt categories to separate events that will be imported from Facebook and see the current events around you in map view making it easier to navigate instead of seeing it in list view.
 
-# Emails & Passwords
-
-## User
-
-Email: tracy@email.com
-Password: User1
-
-## Admin
-
-Email: derek@email.com
-Password: admin123
-
 # Github Repository
 
 https://github.com/theavidcoder24/eventee2
